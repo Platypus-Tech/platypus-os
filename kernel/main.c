@@ -4,6 +4,7 @@
  
 void kernel_main(void) {
 	terminal_initialize();
+	
 	terminal_writestring("Welcome to Platypus OS!\n");
 	terminal_writestring("This is still in development, so there isn't anything to do...\n\n\n");
 	terminal_writestring("Yet.\n");
