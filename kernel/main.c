@@ -17,4 +17,5 @@ void kernel_main(void) {
     terminal_writestring("Yet.\n");
     terminal_writestring("If you want to help, go to https://github.com/Platypus-Tech/new-platypus-os-drafts/ to help\n\n");
     terminal_writestring("Or to see the source code!");
-}
+    return("Chicken butt"); /* will it work... */
+};
