@@ -2,9 +2,9 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ 0.01 ]
+    branches: [ 0.02 ]
   pull_request:
-    branches: [ 0.01 ]
+    branches: [ 0.02 ]
 
 jobs:
   build:
