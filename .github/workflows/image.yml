@@ -1,4 +1,4 @@
-name: make/build thing
+name: make image thing
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: configure
-      run: ./../../config.sh
+      run: ../../config.sh
     - name: make
       run: make
     - name: make check
