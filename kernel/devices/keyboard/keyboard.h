@@ -5,6 +5,6 @@
 #include <stddef.h>
 
 struct keyboard{ /* I like the parenthesis up here :D */
-    void init(void); /* initialization */
-    void work(void); /* essentially "WORK!! JUST WORK!!" */
+    void (*init)(void); /* initialization */
+    void (*work)(void); /* essentially "WORK!! JUST WORK!!" */
 }
