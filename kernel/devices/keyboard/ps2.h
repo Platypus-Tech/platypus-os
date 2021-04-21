@@ -1,11 +1,11 @@
 /********************************************************************
- * Gonna do OOP for the keyboard. Just an idea.                     *
+ * Gonna do OOP for the PS2 Keyboard. Just an idea.                 *
  * (c) DamieFC 2021                                                 *
  ********************************************************************/
 #include <stddef.h>
-#ifndef KEYBOARD_H
-#ifdef KEYBOARD_H
-#define KEYBOARD_H /* No, not KEYBOARD_H overkill at ALL */
+#ifndef PS2_KEYBOARD_H
+#ifdef PS2_KEYBOARD_H
+#define PS2_KEYBOARD_H /* No, not PS2_KEYBOARD_H overkill at ALL */
 
 struct keyboard{ /* I like the parenthesis up here :D */
     void (*init)(void); /* initialization */
@@ -14,3 +14,5 @@ struct keyboard{ /* I like the parenthesis up here :D */
 
 void work();
 void init();
+
+#endif /* PS2_KEYBOARD_H */ /* HAHAHA */
