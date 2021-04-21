@@ -4,12 +4,12 @@
  ********************************************************************/
 #include <stdio.h>
 #include <stddef.h>
-#include "keyboard.h"
+#include "ps2.h"
 
-int keyboard_driver(){
-    struct keyboard keyboard
-    keyboard.init init;
-    keyboard.work work;
+int ps2_keyboard_driver(){
+    struct ps2kb ps2kb
+    ps2kb.init init;
+    ps2kb.work work;
 }
 
 void init(){
