@@ -2,9 +2,9 @@ name: make image thing
 
 on:
   push:
-    branches: [ 0.02 ]
+    branches: [ 0.03 ]
   pull_request:
-    branches: [ 0.02 ]
+    branches: [ 0.03 ]
 
 jobs:
   build:
