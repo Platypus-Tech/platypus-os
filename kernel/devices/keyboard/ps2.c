@@ -27,7 +27,7 @@ void init(){
 void work(){
     switch (keymap){
         case 0:
-            null
+            NULL
         case 1:
             printf("`");
         case 2:
@@ -42,7 +42,9 @@ void work(){
             printf("5");
         case 7:
             printf("6");
+        case 8:
+            printf("7");
         default:
-            null
+            NULL
     }
 }
