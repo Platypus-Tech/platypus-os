@@ -7,8 +7,10 @@
 #include <stdio.h>
 #ifdef LOG_H
 /* Why would there be another LOG_H? */
-printf("Error, LOG_H defined, for some reason. Overdefining...");
-#define LOG_H /* Will this overdefine it or something? */
+printf("Error, LOG_H defined, for some reason. undefining...\n");
+#undef LOG_H
+printf("LOG_H undefined and redifined.\n");
+#define LOG_H
 /*
  INFO is just general info
 
