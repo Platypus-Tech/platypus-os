@@ -5,4 +5,4 @@
 
 #include <stddef.h>
 
-void kernel_main(void){}
+void kernel_main(void);
