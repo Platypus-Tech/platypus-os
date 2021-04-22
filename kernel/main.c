@@ -1,8 +1,9 @@
 #include <stdio.h>
-
+#include <time.h>
 #include <kernel/tty.h>
 
 void kernel_main(void) {
+    int time_t;
     terminal_initialize();
     fptr = fopen("ascii-art.txt","r");
     char c;
@@ -12,6 +13,7 @@ void kernel_main(void) {
         c = fgetc(fptr);
     };
     fclose(fptr);
+    terminal_writestring("The time is %d", time_t);
     terminal_writestring("Welcome to Platypus OS!\n");
     terminal_writestring("This is still in development, so there isn't anything to do...\n\n\n");
     terminal_writestring("Yet.\n");
