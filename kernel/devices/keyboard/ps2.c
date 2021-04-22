@@ -14,12 +14,19 @@ int ps2_keyboard_driver(){
 }
 
 void init(){
-    char keymap[59/*?*/] = {
-        "esc","`","1","2","3","4","5","6","7","8","9","0","-","+","\b", /* 15 */
+    char keymap_keys[59/*?*/] = {
+        "esc","`","1","2","3","4","5","6","7","8","9","0","-","=","\b", /* 15 */
         "\t","q","w","e","r","t","y","u","i","o","p","[","]","\\", /* 14 */
         0,"a","s","d","f","g","h","j","k","l",";","'","\n", /* 13 */
         0,"z","x","c","v","b","n","m",",",".","/",0, /* 12 */
         0,0," ",0,0, /* 5 */    /* 15 + 14 + 13 + 12 + 5 is... 59? Then subtract one because it starts at 0, 58? No, 59. AAAA I'll just do 59. */
+    }
+    char keymap_keypad[20] = {
+        "NumLock","/","*","-",
+        7,8,9,"+",
+        4,5,6,"+",
+        1,2,3,"\n",
+        0,0,".","\n",
     }
     log(INFO, "Keyboard initialized!");
 }
@@ -44,6 +51,14 @@ void work(){
             printf("6");
         case 8:
             printf("7");
+        case 9:
+            printf("8");
+        case 10:
+            printf("9");
+        case 11:
+            printf("-");
+        case 12:
+            printf("=");
         default:
             NULL
     }
