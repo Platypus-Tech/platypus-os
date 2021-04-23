@@ -165,6 +165,36 @@ void work(){
             printf("-");
         case 5:
             printf("7");
+        case 6:
+            printf("8");
+        case 7:
+            printf("9");
+        case 8:
+            printf("+");
+        case 9:
+            printf("4");
+        case 10:
+            printf("5");
+        case 11:
+            printf("6");
+        case 12:
+            printf("+");
+        case 13:
+            printf("1");
+        case 14:
+            printf("2");
+        case 15:
+            printf("3");
+        case 16:
+            printf("\n");
+        case 17:
+            printf("0");
+        case 18:
+            printf("0");
+        case 19:
+            printf(".");
+        case 20:
+            printf("\n");
         default: NULL;
     }
 }
