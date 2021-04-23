@@ -7,6 +7,8 @@
 void kernel_main(void) {
     int time_t;
     terminal_initialize();
+    keyboard.init();
+    keyboard.work();
     //memset()
     fptr = fopen("ascii-art.txt","r");
     char c;
@@ -16,8 +18,6 @@ void kernel_main(void) {
         c = fgetc(fptr);
     };
     fclose(fptr);
-    keyboard.init();
-    keyboard.work();
     terminal_writestring("The time is %d", time_t);
     terminal_writestring("Welcome to Platypus OS!\n");
     terminal_writestring("This is still in development, so there isn't anything to do...\n\n\n");
