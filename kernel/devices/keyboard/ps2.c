@@ -11,6 +11,10 @@ int ps2_keyboard_driver(){
     struct ps2kb ps2kb
     ps2kb.init init;
     ps2kb.work work;
+    ps2kb.init();
+    while(1){
+        ps2kb.work();
+    }
 }
 
 void init(){
