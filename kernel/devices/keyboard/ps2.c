@@ -62,7 +62,33 @@ void work(){
         case 13:
             printf("\b");
         case 14:
-            printf("\t")
+            printf("\t");
+        case 15:
+            printf("q");
+        case 16:
+            printf("w");
+        case 17:
+            printf("e");
+        case 18:
+            printf("r");
+        case 19:
+            printf("t");
+        case 20:
+            printf("y");
+        case 21:
+            printf("u");
+        case 22:
+            printf("i");
+        case 23:
+            printf("o");
+        case 24:
+            printf("p");
+        case 25:
+            printf("[");
+        case 26:
+            printf("]");
+        case 27:
+            printf("\\");
         default:
             NULL
     }
