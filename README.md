@@ -1,7 +1,7 @@
 # New Platypus OS Drafts
 New OS drafts, I stopped the old one :(
 ## What this is for
-Currently, it has no input functions, only output functions, but I want it to be for:
+I think I have keyboard support, but really, there's only output functions, but I want it to be for:
 1. Programming
 2. Pentesting
 3. Playing video games
