@@ -119,6 +119,28 @@ void work(){
             printf("'");
         case 40:
             printf("\n");
+        case 41:
+            NULL;
+        case 42:
+            printf("z");
+        case 43:
+            printf("x");
+        case 44:
+            printf("c");
+        case 45:
+            printf("v");
+        case 46:
+            printf("b");
+        case 47:
+            printf("n");
+        case 48:
+            printf("m");
+        case 49:
+            printf(",");
+        case 50:
+            printf("/");
+        case 51:
+            NULL
         default:
             NULL
     }
