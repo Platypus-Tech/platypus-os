@@ -140,8 +140,18 @@ void work(){
         case 50:
             printf("/");
         case 51:
-            NULL
+            NULL;
+        case 52:
+            NULL;
+        case 53:
+            NULL;
+        case 54:
+            printf(" ");
+        case 55:
+            NULL;
+        case 56:
+            NULL;
         default:
-            NULL
+            NULL;
     }
 }
