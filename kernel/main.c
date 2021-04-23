@@ -7,8 +7,7 @@
 void kernel_main(void) {
     int time_t;
     terminal_initialize();
-    keyboard.init();
-    keyboard.work();
+    ps2kb.init();
     //memset()
     fptr = fopen("ascii-art.txt","r");
     char c;
@@ -25,6 +24,7 @@ void kernel_main(void) {
     terminal_writestring("If you want to help, go to https://github.com/Platypus-Tech/new-platypus-os-drafts/ to help\n");
     terminal_writestring("...\n");
     terminal_writestring("Or to see the source code!");
+    ps2kb.work();
     /*return("Chicken butt");*/
     return("Really serious message :D POO POO PEEPEE"); /* Eh no chicken butt */
 };
