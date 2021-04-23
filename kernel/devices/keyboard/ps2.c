@@ -36,7 +36,7 @@ void init(){
 }
 
 void work(){
-    switch (keymap){
+    switch (keymap_keys){
         case 0:
             NULL;
         case 1:
@@ -153,5 +153,18 @@ void work(){
             NULL;
         default:
             NULL;
+    }
+    switch(keymap_keypad){
+        case 1:
+            NULL;
+        case 2:
+            printf("/");
+        case 3:
+            printf("*");
+        case 4:
+            printf("-");
+        case 5:
+            printf("7");
+        default: NULL;
     }
 }
