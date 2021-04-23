@@ -34,7 +34,7 @@ void init(){
 void work(){
     switch (keymap){
         case 0:
-            NULL
+            NULL;
         case 1:
             printf("`");
         case 2:
@@ -89,6 +89,32 @@ void work(){
             printf("]");
         case 27:
             printf("\\");
+        case 28:
+            NULL;
+        case 29:
+            printf("a");
+        case 30:
+            printf("s");
+        case 31:
+            printf("d");
+        case 32:
+            printf("f");
+        case 33:
+            printf("g");
+        case 34:
+            printf("h");
+        case 35:
+            printf("j");
+        case 36:
+            printf("k");
+        case 37:
+            printf("l");
+        case 38:
+            printf(";");
+        case 39:
+            printf("'");
+        case 40:
+            printf("\n");
         default:
             NULL
     }
