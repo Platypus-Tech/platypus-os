@@ -59,6 +59,10 @@ void work(){
             printf("-");
         case 12:
             printf("=");
+        case 13:
+            printf("\b");
+        case 14:
+            printf("\t")
         default:
             NULL
     }
