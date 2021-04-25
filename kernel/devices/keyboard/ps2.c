@@ -7,7 +7,7 @@
 #include <log/log.h>
 #include "ps2.h"
 
-int ps2_keyboard_driver(){
+void ps2_keyboard_driver(){
     struct ps2kb ps2kb
     ps2kb.init init;
     ps2kb.work work;
