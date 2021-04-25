@@ -7,3 +7,5 @@ I think I have keyboard support, but really, there's only output functions, but 
 3. Playing video games
 
 Seems like an odd combination, but that's what I like to do: program, pentest, and play video games.
+
+## Please test on QEMU!
