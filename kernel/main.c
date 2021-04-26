@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <time.h>
 #include <kernel/tty.h>
-#include <string.h>
 #include "devices/keyboard/keyboard.h"
 
 void *kernel_main(void) {
     int time_t;
     terminal_initialize();
     ps2kb.init();
-    //memset()
     fptr = fopen("ascii-art.txt","r");
     char c;
     c = fgetc(fptr);
