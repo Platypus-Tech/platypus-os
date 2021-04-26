@@ -25,6 +25,6 @@ void kernel_main(void) {
     terminal_writestring("...\n");
     terminal_writestring("Or to see the source code!");
     ps2kb.work();
-    /*return("Chicken butt");*/
-    return("Really serious message :D POO POO PEEPEE"); /* Eh no chicken butt */
+    /*return("Chicken butt");*/ /* Eh no chicken butt */
+    return("Really serious message :D POO POO PEEPEE"); /* Yeah, REALLY serious */
 };
