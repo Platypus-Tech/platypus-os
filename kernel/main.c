@@ -4,7 +4,7 @@
 #include <string.h>
 #include "devices/keyboard/keyboard.h"
 
-void kernel_main(void) {
+void *kernel_main(void) {
     int time_t;
     terminal_initialize();
     ps2kb.init();
