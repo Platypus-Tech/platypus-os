@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <time.h>
 #include <kernel/tty.h>
-#include "devices/keyboard/keyboard.h"
+//#include "devices/keyboard/keyboard.h"
 
 void *kernel_main(void) {
     int time_t;
     terminal_initialize();
-    ps2kb.init();
+    //ps2kb.init();
     fptr = fopen("ascii-art.txt","r");
     char c;
     c = fgetc(fptr);
@@ -22,7 +22,7 @@ void *kernel_main(void) {
     terminal_writestring("If you want to help, go to https://github.com/Platypus-Tech/new-platypus-os-drafts/ to help\n");
     terminal_writestring("...\n");
     terminal_writestring("Or to see the source code!");
-    ps2kb.work();
+    //ps2kb.work();
     /*return("Chicken butt");*/ /* Eh no chicken butt */
     return("Really serious message :D POO POO PEEPEE"); /* Yeah, REALLY serious */
 };
