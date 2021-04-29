@@ -1,5 +1,5 @@
 #include <string.h>
-#include <stdio.h>
+#include <kernel/stdlibio.h>
 #include <stddef.h>
 #include "../main.h"
 *void mset(){
