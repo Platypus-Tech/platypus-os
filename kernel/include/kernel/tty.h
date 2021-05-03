@@ -1,11 +1,11 @@
-#ifndef _KERNEL_TTY_H
-#define _KERNEL_TTY_H
- 
+#ifndef _KERNEL_TEXT_H
+#define _KERNEL_TEXT_H
+
 #include <stddef.h>
- 
+
 void terminal_initialize(void);
-void terminal_putchar(char c);
-void terminal_write(const char* data, size_t size);
-void terminal_writestring(const char* data);
- 
+void putchar(char c);
+void write(const char* data, size_t size);
+void writestring(const char* data);
+
 #endif
