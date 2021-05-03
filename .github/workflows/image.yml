@@ -2,9 +2,9 @@ name: make image thing
 
 on:
   push:
-    branches: [ 0.04 ]
+    branches: [ 0.05 ]
   pull_request:
-    branches: [ 0.04 ]
+    branches: [ 0.05 ]
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: configure
-      run: ../../config.sh
+      run: ./../../config.sh
     - name: make
       run: make
     - name: make check
