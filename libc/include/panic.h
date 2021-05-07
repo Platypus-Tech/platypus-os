@@ -7,6 +7,6 @@
 #undef PANIC_H
 #define PANIC_H
 
-void panic(const char s);
+void kpanic(const char panicmessage);
 
 #endif PANIC_H
