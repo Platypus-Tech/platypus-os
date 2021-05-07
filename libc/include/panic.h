@@ -7,6 +7,6 @@
 #undef PANIC_H
 #define PANIC_H
 
-void panic(void);
+void panic(const char s);
 
 #endif PANIC_H
