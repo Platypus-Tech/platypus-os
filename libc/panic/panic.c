@@ -2,6 +2,6 @@
 #include <log/log.h>
 
 void kpanic(const char panicmessage){
-    asm(cli);
+    asm("cls");
     printf("Kernel panic: %s", panicmessage);
 }
