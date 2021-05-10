@@ -13,8 +13,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: change_directory_first
+      run: cd ..
+    - name: change_directory_second
+      run: cd ..
     - name: configure
-      run: ./../../config.sh
+      run: ./config.sh
     - name: make
       run: make
     - name: make check
