@@ -17,6 +17,8 @@ jobs:
       run: cd ..
     - name: change_directory_second
       run: cd ..
+    - name: chmod shell files
+      run: chmod +x config.sh
     - name: configure
       run: ./config.sh
     - name: make
