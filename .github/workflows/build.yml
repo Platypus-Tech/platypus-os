@@ -25,6 +25,8 @@ jobs:
       run: cd kernel
     - name: make kernel
       run: make
+    - name: check directory
+      run: pwd
     - name: change to libc directory
       run: ../libc/
     - name: make check
