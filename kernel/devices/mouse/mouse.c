@@ -8,4 +8,7 @@ void mouse_driver(){
 void init_mouse(){
     int x_mouse_pos;
     int y_mouse_pos;
+    int left_butt_pressed = 0; // I did that on purpose xD
+    int middle_butt_pressed = 0;
+    int right_butt_pressed = 0;
 }
