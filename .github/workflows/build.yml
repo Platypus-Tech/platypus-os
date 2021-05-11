@@ -21,8 +21,12 @@ jobs:
       run: chmod +x config.sh
     - name: configure
       run: ./config.sh
-    - name: make
+    - name: change to kernel directory
+      run: cd kernel
+    - name: make kernel
       run: make
+    - name: change to libc directory
+      run: ../libc/
     - name: make check
       run: make check
     - name: make image
