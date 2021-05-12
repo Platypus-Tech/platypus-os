@@ -17,7 +17,6 @@ PREFIX?=/usr/local
 EXEC_PREFIX?=$(PREFIX)
 BOOTDIR?=$(EXEC_PREFIX)/boot
 INCLUDEDIR?=$(PREFIX)/include
-ECHFSDIR=$(PREFIX)/echfs
 
 CFLAGS:=$(CFLAGS) -ffreestanding -Wall -Wextra
 CPPFLAGS:=$(CPPFLAGS) -D__is_kernel -Iinclude
@@ -36,10 +35,6 @@ LIBS:=$(LIBS) $(KERNEL_ARCH_LIBS)
 KERNEL_OBJS=\
 $(KERNEL_ARCH_OBJS) \
 kernel/main.o \
-
-ECHFS_OBJS=\
-$(ECHFSDIR) \
-echfs/mkfs.echfs.o
 
 OBJS=\
 $(ARCHDIR)/crti.o \
