@@ -3,8 +3,9 @@
 #include <asm/io.h>
 
 void mouse_driver(){
-    mouse_drvr_platypusos.init_mouse();
-    mouse_drvr_platypusos.work_mouse();
+    struct mouse_drvr_platypusos mouse;
+    mouse.init_mouse();
+    mouse.work_mouse();
 }
 
 void init_mouse(){
