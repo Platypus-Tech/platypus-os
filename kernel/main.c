@@ -2,11 +2,13 @@
 #include <time.h>
 #include <kernel/text.h>
 //#include "devices/keyboard/keyboard.h"
+#include "devices/mouse/mouse.h"
 
 void *kernel_main(void) {
     int time_t;
     terminal_initialize();
     //ps2kb.init();
+    mouse.init()
     fptr = fopen("ascii-art.txt","r");
     char c;
     c = fgetc(fptr);
@@ -23,6 +25,7 @@ void *kernel_main(void) {
     writestring("...\n");
     writestring("Or to see the source code!");
     //ps2kb.work();
+    mouse.work()
     /*return("Chicken butt");*/ /* Eh no chicken butt */
     return("Really serious message :D POO POO PEEPEE"); /* Yeah, REALLY serious */
 };
