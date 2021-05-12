@@ -1,11 +1,9 @@
 #include <stdio.h>
-#include <time.h>
 #include <kernel/text.h>
 //#include "devices/keyboard/keyboard.h"
 #include "devices/mouse/mouse.h"
 
 void *kernel_main(void) {
-    int time_t;
     terminal_initialize();
     //ps2kb.init();
     mouse.init()
@@ -17,7 +15,6 @@ void *kernel_main(void) {
         c = fgetc(fptr);
     };
     fclose(fptr);
-    writestring("The time is %d", time_t);
     writestring("Welcome to Platypus OS!\n");
     writestring("This is still in development, so there isn't anything to do...\n\n\n");
     writestring("Yet.\n");
