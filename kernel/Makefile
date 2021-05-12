@@ -1,6 +1,6 @@
 NAME=If you use this tell me how bad it sucks # release name
 RELNUM=0.05 # release number
-RC=1 # -rc, if there.
+RC= # -rc, if there.
 
 
 DEFAULT_HOST!=../default-host.sh
