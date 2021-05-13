@@ -14,5 +14,9 @@ void print(const char *textthing);
 void print(const char *textthing){
     writestring("%s", textthing);
 }
+void cls(void);
+void cls(void){
+    
+}
 
 #endif PKERNEL_H /* My hand hurts :( */
