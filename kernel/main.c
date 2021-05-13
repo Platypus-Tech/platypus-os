@@ -2,7 +2,7 @@
 #include <kernel/text.h>
 //#include "devices/keyboard/keyboard.h"
 #include "devices/mouse/mouse.h"
-#include "../libc/include/log.h
+#include "../libc/include/log.h"
 
 void *kernel_main(void) {
     terminal_initialize();
