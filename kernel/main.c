@@ -3,6 +3,7 @@
 //#include "devices/keyboard/keyboard.h"
 #include "devices/mouse/mouse.h"
 #include "../libc/include/log.h"
+#include <kernel/weird_numbers.h>
 
 void *kernel_main(void) {
     terminal_initialize();
@@ -18,6 +19,7 @@ void *kernel_main(void) {
         c = fgetc(fptr);
     };
     fclose(fptr);
+    writestring("The square root of pi times e is %f", M_1_SQRTPI*M_E);
     writestring("Welcome to Platypus OS!\n");
     writestring("This is still in development, so there isn't anything to do...\n\n\n");
     writestring("Yet.\n");
