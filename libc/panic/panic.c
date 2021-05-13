@@ -1,7 +1,8 @@
 #include <panic.h>
 #include <log/log.h>
+#include <stdlib.h>
 
 void kpanic(const char panicmessage){
-    asm("cls");
+    system("clear");
     printf("Kernel panic: %s", panicmessage);
 }
