@@ -17,6 +17,8 @@ PREFIX?=/usr/local
 EXEC_PREFIX?=$(PREFIX)
 BOOTDIR?=$(EXEC_PREFIX)/boot
 INCLUDEDIR?=$(PREFIX)/kernel/include
+INTERRUPTS?=$(PREFIX)/kernel/interrupts
+DRIVERDIR?=$(PREFIX)/kernel/devices
 
 CFLAGS:=$(CFLAGS) -ffreestanding -Wall -Wextra
 CPPFLAGS:=$(CPPFLAGS) -D__is_kernel -Iinclude
@@ -35,6 +37,16 @@ LIBS:=$(LIBS) $(KERNEL_ARCH_LIBS)
 KERNEL_OBJS=\
 $(KERNEL_ARCH_OBJS) \
 kernel/main.o \
+
+INTERRUPT_OBJS=\
+$(INTERRUPTS)/nmi.o
+
+DRIVER_OBJS=\
+$(DRIVERDIR)/mouse/ps2mouse.o
+$(DRIVERDIR)/keyboard/ps2.o
+$(DRIVERDIR)/keyboard/atkbd.o
+$(DRIVERDIR)/keyboard/keyboard.o
+$(DRIVERDIR)/rtc/rtc.o
 
 OBJS=\
 $(ARCHDIR)/crti.o \
