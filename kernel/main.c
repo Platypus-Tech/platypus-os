@@ -1,15 +1,20 @@
 #include <stdio.h>
 #include <kernel/text.h>
 //#include "devices/keyboard/keyboard.h"
-#include "devices/mouse/mouse.h"
+#include "devices/mouse/ps2mouse.h"
+#include "devices/rtc/rtc.h"
 #include "../libc/include/log.h"
 #include <kernel/weird_numbers.h>
 
 void *kernel_main(void) {
+    struct mouse_drvr_platypusos mouse;
+    struct rtc_drvr_platypusos rtc;
+    
     terminal_initialize();
-    log(INFO, "Terminal thing initialized!")
+    log(INFO, "Terminal thing initialized!");
     //ps2kb.init();
     mouse.init();
+    rtc.init();
     log(INFO, "Mouse initialized");
     fptr = fopen("ascii-art.txt","r");
     char c;
@@ -28,6 +33,7 @@ void *kernel_main(void) {
     writestring("Or to see the source code!");
     //ps2kb.work();
     mouse.work();
+    rtc.work();
     /*return("Chicken butt");*/ /* Eh no chicken butt */
-    return("Really serious message :D POO POO PEEPEE"); /* Yeah, REALLY serious */
+    return("Really serious message :D POO POO PEE PEE"); /* Yeah, REALLY serious */
 };
