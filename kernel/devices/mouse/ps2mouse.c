@@ -1,4 +1,4 @@
-#include "mouse.h"
+#include "ps2mouse.h"
 #include <log/log.h>
 #include <asm/io.h>
 
