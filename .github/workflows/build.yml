@@ -17,11 +17,11 @@ jobs:
       run: cd ..
     - name: change_directory_second
       run: cd ..
-    - name: pwd for debug
-      run: pwd
     - name: chmod shell files
       run: chmod +x scripts/*.sh
     - name: cd to scripts
       run: cd scripts
+    - name: pwd for debug
+      run: pwd
     - name: configure
       run: ./config.sh
