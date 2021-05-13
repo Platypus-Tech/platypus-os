@@ -1,9 +1,9 @@
-#ifdef MATH_H
-#undef MATH_H
-#define MATH_H
+#ifdef WEIRD_NUMBERS_H
+#undef WEIRD_NUMBERS_H
+#define WEIRD_NUMBERS_H
 #else
-#ifndef MATH_H
-#define MATH_H
+#ifndef WEIRD_NUMBERS_H
+#define WEIRD_NUMBERS_H
 
 #define M_E         2.71828182845904523536
 #define M_LOG2E     1.44269504088896340736
@@ -20,4 +20,4 @@
 #define M_SQRT2     1.41421356237309504880
 #define M_SQRT_2    0.707106781186547524401
 
-#endif MATH_H /* HA HA HA! */
+#endif WEIRD_NUMBERS_H /* HA HA HA! */
