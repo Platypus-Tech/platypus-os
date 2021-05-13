@@ -12,5 +12,8 @@ void rtc_driver(void){
 
 void init(void){
     nmi_disable();
+}
+
+void work(void){
     inb(0x70); // heck idk
 }
