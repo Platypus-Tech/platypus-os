@@ -18,6 +18,6 @@ jobs:
     - name: change_directory_second
       run: cd ..
     - name: chmod shell files
-      run: chmod +x *.sh
+      run: chmod +x scripts/*.sh
     - name: configure
       run: ./config.sh
