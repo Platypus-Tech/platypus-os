@@ -3,9 +3,9 @@ RELNUM=0.05 # release number
 RC= # -rc, if there.
 
 
-DEFAULT_HOST!=../scripts/default-host.sh
+DEFAULT_HOST!=scripts/default-host.sh
 HOST?=DEFAULT_HOST
-HOSTARCH!=../scripts/target-triplet-to-arch.sh $(HOST)
+HOSTARCH!=scripts/target-triplet-to-arch.sh $(HOST)
 
 CFLAGS?=-O2 -g
 CPPFLAGS?=
@@ -16,14 +16,14 @@ DESTDIR?=
 PREFIX?=/usr/local
 EXEC_PREFIX?=$(PREFIX)
 BOOTDIR?=$(EXEC_PREFIX)/boot
-INCLUDEDIR?=$(PREFIX)/include
+INCLUDEDIR?=$(PREFIX)/kernel/include
 
 CFLAGS:=$(CFLAGS) -ffreestanding -Wall -Wextra
 CPPFLAGS:=$(CPPFLAGS) -D__is_kernel -Iinclude
 LDFLAGS:=$(LDFLAGS)
 LIBS:=$(LIBS) -nostdlib -lk -lgcc
 
-ARCHDIR=arch/$(HOSTARCH)
+ARCHDIR=kernel/arch/$(HOSTARCH)
 
 include $(ARCHDIR)/make.config
 
