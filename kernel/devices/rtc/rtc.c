@@ -7,11 +7,12 @@ struct rtc_drvr_platypusos rtc;
 
 void rtc_driver(void){
     rtc.init();
-    rtc.work();
 }
 
 void init(void){
     nmi_disable();
+    log(INFO, "RTC initialized!");
+    rtc.work();
 }
 
 void work(void){
