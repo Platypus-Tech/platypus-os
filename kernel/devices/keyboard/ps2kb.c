@@ -28,12 +28,14 @@ void init(){
         1,2,3,"\n",
         0,0,".","\n",
     }
-    int response = outb(0xF5, 0x60);
+    outb(0xF5, 0x60);
+    int response = inb(0x60);
     if(response = 0xFA){
-        int second_response = outb(0xF2, 0x60);
+        outb(0xF2, 0x60);
+        int second_response = inb(0x60)
         if(second_response = 0xFA){
             int third_response = inb(0x60);
-            int fourth_response;
+            int fourth_response = inb(0x60);
         }
     }
     log(INFO, "Keyboard initialized!");
