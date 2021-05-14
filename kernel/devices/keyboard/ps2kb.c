@@ -35,6 +35,12 @@ void init(){
         if(second_response = 0xFA){
             int third_response = inb(0x60);
             int fourth_response = inb(0x60);
+            if(third_reponse = NULL){
+                #define KEYBOARD = "Ancient AT keyboard";
+            }
+            else if(third_reponse = 0xAB || 0x83){
+                #define KEYBOARD = "MF2 Keyboard";
+            }
         }
     }
     log(INFO, "Keyboard initialized!");
