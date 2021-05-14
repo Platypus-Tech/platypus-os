@@ -9,7 +9,7 @@
 void *kernel_main(void) {
     struct mouse_drvr_platypusos mouse;
     struct rtc_drvr_platypusos rtc;
-    //struct;
+    struct ps2kb_drvr_platypusos ps2kb;
     
     terminal_initialize();
     log(INFO, "Terminal thing initialized!");
@@ -33,7 +33,8 @@ void *kernel_main(void) {
     writestring("If you want to help, go to https://github.com/Platypus-Tech/new-platypus-os-drafts/ to help\n");
     writestring("...\n");
     writestring("Or to see the source code!");
-    //ps2kb.work();
+    ps2kb.work();
+    log(INFO, "PS/2 Keyboard working!");
     mouse.work();
     log(INFO, "Mouse working!");
     rtc.work();
