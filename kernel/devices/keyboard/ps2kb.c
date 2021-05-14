@@ -10,7 +10,6 @@
 void ps2_keyboard_driver(){
     struct ps2kb_drvr_platypusos ps2kb;
     ps2kb.init();
-    ps2kb.work();
 }
 
 void init(){
@@ -39,6 +38,7 @@ void init(){
         }
     }
     log(INFO, "Keyboard initialized!");
+    ps2kb.work()
 }
 
 void work(){
