@@ -8,9 +8,7 @@
 #include "ps2kb.h"
 
 void ps2_keyboard_driver(){
-    struct ps2kb ps2kb
-    ps2kb.init init;
-    ps2kb.work work;
+    struct ps2kb ps2kb;
     ps2kb.init();
     ps2kb.work();
 }
@@ -33,6 +31,10 @@ void init(){
     int response = outb(0xF5, 0x60);
     if(response = 0xFA){
         int second_response = outb(0xF2, 0x60);
+        if(second_response = 0xFA){
+            int third_response = inb(0x60);
+            int fourth_response;
+        }
     }
     log(INFO, "Keyboard initialized!");
 }
