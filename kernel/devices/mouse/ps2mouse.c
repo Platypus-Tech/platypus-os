@@ -5,7 +5,6 @@
 void mouse_driver(){
     struct mouse_drvr_platypusos mouse;
     mouse.init_mouse();
-    mouse.work_mouse();
 }
 
 void init_mouse(){
@@ -15,6 +14,7 @@ void init_mouse(){
     int middle_butt_pressed = 0;
     int right_butt_pressed = 0;
     log(INFO, "Mouse initialized!");
+    mouse.work_mouse();
 }
 
 void work_mouse(){
