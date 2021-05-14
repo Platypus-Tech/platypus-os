@@ -33,7 +33,6 @@ void *kernel_main(void) {
     writestring("If you want to help, go to https://github.com/Platypus-Tech/new-platypus-os-drafts/ to help\n");
     writestring("...\n");
     writestring("Or to see the source code!");
-    ps2kb.work();
     log(INFO, "PS/2 Keyboard working!");
     mouse.work();
     log(INFO, "Mouse working!");
