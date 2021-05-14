@@ -25,15 +25,18 @@ void *kernel_main(void) {
     };
     fclose(fptr);
     writestring("The square root of pi times e is %f", M_1_SQRTPI*M_E);
+    writestring("The year is %d", YEAR);
     writestring("Welcome to Platypus OS!\n");
-    writestring("This is still in development, so there isn't anything to do...\n\n\n");
+    writestring("This is still in development, so there isn't anything to do...\n...\n...\n");
     writestring("Yet.\n");
     writestring("If you want to help, go to https://github.com/Platypus-Tech/new-platypus-os-drafts/ to help\n");
     writestring("...\n");
     writestring("Or to see the source code!");
     //ps2kb.work();
     mouse.work();
+    log(INFO, "Mouse working!");
     rtc.work();
+    log(INFO, "RTC working!");
     /*return("Chicken butt");*/ /* Eh no chicken butt */
     return("Really serious message :D POO POO PEE PEE"); /* Yeah, REALLY serious */
 };
