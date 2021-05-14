@@ -38,7 +38,7 @@ void init(){
         }
     }
     log(INFO, "Keyboard initialized!");
-    ps2kb.work()
+    ps2kb.work();
 }
 
 void work(){
