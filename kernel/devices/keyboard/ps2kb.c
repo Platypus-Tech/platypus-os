@@ -5,7 +5,7 @@
 #include <stddef.h>
 #include <log/log.h>
 #include <asm/io.h>
-#include "ps2.h"
+#include "ps2kb.h"
 
 void ps2_keyboard_driver(){
     struct ps2kb ps2kb
