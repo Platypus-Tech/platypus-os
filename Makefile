@@ -1,6 +1,6 @@
 NAME=If you use this tell me how bad it sucks # release name
-RELNUM=0.05 # release number
-RC= # -rc, if there.
+RELNUM=0.06 # release number
+RC=1 # -rc, if there.
 
 
 DEFAULT_HOST!=scripts/default-host.sh
