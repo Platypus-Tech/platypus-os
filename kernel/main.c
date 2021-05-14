@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <kernel/text.h>
-//#include "devices/keyboard/keyboard.h"
+#include "devices/keyboard/keyboard.h"
 #include "devices/mouse/ps2mouse.h"
 #include "devices/rtc/rtc.h"
 #include "../libc/include/log.h"
@@ -9,10 +9,11 @@
 void *kernel_main(void) {
     struct mouse_drvr_platypusos mouse;
     struct rtc_drvr_platypusos rtc;
+    //struct;
     
     terminal_initialize();
     log(INFO, "Terminal thing initialized!");
-    //ps2kb.init();
+    ps2kb.init();
     mouse.init();
     rtc.init();
     log(INFO, "Mouse initialized");
