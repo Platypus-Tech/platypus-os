@@ -1,10 +1,10 @@
 /********************************************************************
  * Keyboard stuff :D                                                *
  * (c) DamieFC                                                      *
- ********************************************************************//*
-#include <stdio.h>
+ ********************************************************************/
 #include <stddef.h>
 #include <log/log.h>
+#include <asm/io.h>
 #include "ps2.h"
 
 void ps2_keyboard_driver(){
@@ -12,18 +12,16 @@ void ps2_keyboard_driver(){
     ps2kb.init init;
     ps2kb.work work;
     ps2kb.init();
-    while(1){
-        ps2kb.work();
-    }
+    ps2kb.work();
 }
 
 void init(){
-    char keymap_keys[59/*?*/] = {/*
-        "esc","`","1","2","3","4","5","6","7","8","9","0","-","=","\b", /* 15 *//*
-        "\t","q","w","e","r","t","y","u","i","o","p","[","]","\\", /* 14 *//*
-        0,"a","s","d","f","g","h","j","k","l",";","'","\n", /* 13 *//*
-        0,"z","x","c","v","b","n","m",",",".","/",0, /* 12 *//*
-        0,0," ",0,0, /* 5 */    /* 15 + 14 + 13 + 12 + 5 is... 59? Then subtract one because it starts at 0, 58? No, 59. AAAA I'll just do 59. *//*
+    char keymap_keys[59/*?*/] = {
+        "esc","`","1","2","3","4","5","6","7","8","9","0","-","=","\b", /* 15 */
+        "\t","q","w","e","r","t","y","u","i","o","p","[","]","\\", /* 14 */
+        0,"a","s","d","f","g","h","j","k","l",";","'","\n", /* 13 */
+        0,"z","x","c","v","b","n","m",",",".","/",0, /* 12 */
+        0,0," ",0,0, /* 5 */    /* 15 + 14 + 13 + 12 + 5 is... 59? Then subtract one because it starts at 0, 58? No, 59. AAAA I'll just do 59. */
     }
     char keymap_keypad[20] = {
         "NumLock","/","*","-",
@@ -31,6 +29,10 @@ void init(){
         4,5,6,"+",
         1,2,3,"\n",
         0,0,".","\n",
+    }
+    int response = outb(0xF5, 0x60);
+    if(response = 0xFA){
+        int second_response = outb(0xF2, 0x60);
     }
     log(INFO, "Keyboard initialized!");
 }
