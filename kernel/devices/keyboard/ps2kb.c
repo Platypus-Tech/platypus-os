@@ -8,7 +8,7 @@
 #include "ps2kb.h"
 
 void ps2_keyboard_driver(){
-    struct ps2kb ps2kb;
+    struct ps2kb_drvr_platypusos ps2kb;
     ps2kb.init();
     ps2kb.work();
 }
