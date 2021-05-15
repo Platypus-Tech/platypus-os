@@ -19,9 +19,5 @@ jobs:
       run: cd ..
     - name: chmod shell files
       run: chmod +x scripts/*.sh
-    - name: cd to scripts
-      run: cd scripts/
-    - name: pwd for debug
-      run: pwd
-    - name: configure
-      run: ./config.sh
+    - name: configure if config.sh exists
+      run: cd scripts/ && ./config.sh
