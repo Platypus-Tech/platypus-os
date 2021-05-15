@@ -33,10 +33,10 @@ void serial_init(){ /* This code was not mine. It came from osdev.org, with my m
     serial.serial.work();
 }
 
-int serial_received(void) {
-    return inb(PORT + 5) & 1;
+void read_serial(void) {
+    return inb(COM1);
 }
 
-char read_serial() {
-    inb(COM1);
+char write_serial(char serial_out, port){
+    
 }
