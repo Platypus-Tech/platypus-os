@@ -12,5 +12,5 @@
 struct serial_drvr_platypusos{
     void serial_init(void);
     void serial_read(void);
-    char serial_write(char[] value, port);
+    char serial_write(char serial_out, port);
 }
