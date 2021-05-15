@@ -21,14 +21,13 @@ void serial_init(){ /* This code was not mine. It came from osdev.org, with my m
 
     /* Check if serial is faulty (i.e: not same byte as sent) */
     if(inb(COM1 + 0) != 0xAE) {
-        return 1;
         log(ERROR, "Serial faulty.");
+        return 1;
     }
 
     /* If serial is not faulty set it in normal operation mode */
     /* (not-loopback with IRQs enabled and OUT#1 and OUT#2 bits enabled) */
     outb(PORT + 4, 0x0F);
-    return 0;
     log(INFO, "Serial working");
     log(INFO, "Serial initialized!");
     serial.serial.work();
