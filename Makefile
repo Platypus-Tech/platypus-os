@@ -3,7 +3,7 @@ RELNUM=0.06 # release number
 RC=1 # -rc, if there.
 
 
-DEFAULT_HOST!=scripts/default-host.sh
+DEFAULT_HOST=i686
 HOST?=DEFAULT_HOST
 HOSTARCH!=scripts/target-triplet-to-arch.sh $(HOST)
 
@@ -25,7 +25,8 @@ CPPFLAGS:=$(CPPFLAGS) -D__is_kernel -Iinclude
 LDFLAGS:=$(LDFLAGS)
 LIBS:=$(LIBS) -nostdlib -lk -lgcc
 
-ARCHDIR=kernel/arch/$(HOSTARCH)
+# HOSTARCH won't work here
+ARCHDIR=kernel/arch/i686
 
 include $(ARCHDIR)/make.config
 
@@ -42,11 +43,11 @@ INTERRUPT_OBJS=\
 $(INTERRUPTS)/nmi.o
 
 DRIVER_OBJS=\
-$(DRIVERDIR)/mouse/ps2mouse.o
-$(DRIVERDIR)/keyboard/ps2.o
-$(DRIVERDIR)/keyboard/atkbd.o
-$(DRIVERDIR)/keyboard/keyboard.o
-$(DRIVERDIR)/rtc/rtc.o
+$(DRIVERDIR)/mouse/ps2mouse.o \
+$(DRIVERDIR)/keyboard/ps2.o \
+$(DRIVERDIR)/keyboard/atkbd.o \
+$(DRIVERDIR)/keyboard/keyboard.o \
+$(DRIVERDIR)/rtc/rtc.o \
 
 OBJS=\
 $(ARCHDIR)/crti.o \
