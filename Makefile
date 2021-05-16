@@ -7,10 +7,10 @@ DEFAULT_HOST=i686
 HOST?=DEFAULT_HOST
 HOSTARCH!=scripts/target-triplet-to-arch.sh $(HOST)
 
-CFLAGS?=-O2 -g
-CPPFLAGS?=
+CFLAGS?= -O2 -g -ffreestanding -Wall -Wextra
+CPPFLAGS?= -D__is_kernel -Iinclude
 LDFLAGS?=
-LIBS?=
+LIBS?= -nostdlib -lk -lgcc
 
 DESTDIR?=
 PREFIX?=/usr/local
@@ -18,15 +18,9 @@ EXEC_PREFIX?=$(PREFIX)
 BOOTDIR?=$(EXEC_PREFIX)/boot
 INCLUDEDIR?=$(PREFIX)/kernel/include
 INTERRUPTS?=$(PREFIX)/kernel/interrupts
-DRIVERDIR?=$(PREFIX)/kernel/devices
+DRIVERDIR?=$(PREFIX)/kernel/devices 
 
-CFLAGS:=$(CFLAGS) -ffreestanding -Wall -Wextra
-CPPFLAGS:=$(CPPFLAGS) -D__is_kernel -Iinclude
-LDFLAGS:=$(LDFLAGS)
-LIBS:=$(LIBS) -nostdlib -lk -lgcc
-
-# HOSTARCH won't work here
-ARCHDIR=kernel/arch/i686
+ARCHDIR=kernel/arch/$(DEFAULT_HOST)
 
 include $(ARCHDIR)/make.config
 
