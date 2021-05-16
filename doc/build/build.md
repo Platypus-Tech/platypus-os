@@ -1,6 +1,12 @@
 # Building
-<!--I think the following will do:
+I think the following will do:
 ```shell
-make
-make image
-```-->
+git clone https://https://github.com/Platypus-Tech/new-platypus-os-drafts/
+cd new-platypus-os-drafts
+cd scripts
+./configure.sh
+./clean.sh
+./headers.sh
+./iso.sh
+./qemu.sh
+```
