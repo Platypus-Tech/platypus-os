@@ -5,18 +5,24 @@
 #include "devices/rtc/rtc.h"
 #include "../libc/include/log.h"
 #include <kernel/weird_numbers.h>
+#include "devices/serial/serial.h"
 
 void *kernel_main(void) {
     struct mouse_drvr_platypusos mouse;
     struct rtc_drvr_platypusos rtc;
     struct ps2kb_drvr_platypusos ps2kb;
+    struct serial_drvr_platypusos serial;
     
     terminal_initialize();
     log(INFO, "Terminal thing initialized!");
     ps2kb.init();
+    log(INFO, "PS/2 Keyboard initialized!");
     mouse.init();
-    rtc.init();
     log(INFO, "Mouse initialized");
+    rtc.init();
+    log(INFO, "RTC initialized!");
+    serial.init();
+    log(INFO, "Serial initialized!");
     fptr = fopen("ascii-art.txt","r");
     char c;
     c = fgetc(fptr);
