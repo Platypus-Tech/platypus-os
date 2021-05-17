@@ -1,12 +1,12 @@
-#ifdef PIT_H
-#undef PIT_H
-#define PIT_H
+#ifdef _PIT_H
+#undef _PIT_H
+#define _PIT_H
 #else
-#ifndef PIT_H
-#define PIT_H
+#ifndef _PIT_H
+#define _PIT_H
 
-void pit_init(void);
+void pit_init();
 void start_timer(int timer_sec);
-void stop_timer(void);
+void stop_timer();
 
-#endif PIT_H
+#endif //_PIT_H
