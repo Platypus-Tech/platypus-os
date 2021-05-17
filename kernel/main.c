@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <kernel/text.h>
+#include "cpu/gdt.h"
 #include "devices/keyboard/keyboard.h"
 #include "devices/mouse/ps2mouse.h"
 #include "devices/rtc/rtc.h"
@@ -8,6 +9,7 @@
 #include "devices/serial/serial.h"
 
 void kernel_main() {
+    gdt_init();
     terminal_initialize();
     log(INFO, "Starting System!");
     ps2kb.init();
