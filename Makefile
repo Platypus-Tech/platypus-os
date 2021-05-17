@@ -39,7 +39,6 @@ $(INTERRUPTS)/nmi.o
 DRIVER_OBJS=\
 $(DRIVERDIR)/mouse/ps2mouse.o \
 $(DRIVERDIR)/keyboard/ps2.o \
-$(DRIVERDIR)/keyboard/atkbd.o \
 $(DRIVERDIR)/keyboard/keyboard.o \
 $(DRIVERDIR)/rtc/rtc.o \
 
