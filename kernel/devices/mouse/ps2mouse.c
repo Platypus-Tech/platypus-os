@@ -2,7 +2,7 @@
 #include <log/log.h>
 #include <asm/io.h>
 
-void work_mouse() {
+void work_mouse(void) {
     outb(0xD4, 0x64);                    // tell the controller to address the mouse
     outb(0xF3, 0x60);                    // write the mouse command code to the controller's data port
     while(!(inb(0x64) & 1) asm("pause"); // wait until we can read
@@ -13,7 +13,7 @@ void work_mouse() {
     ack = inb(0x60);                     // read back acknowledge. This should be 0xFA
 }
           
-void init_mouse() {
+void init_mouse(void) {
     mouse_driver->left_btn_pressed = 0;
     mouse_driver->middle_btn_pressed = 0;
     mouse_driver->right_btn_pressed = 0;
@@ -21,6 +21,6 @@ void init_mouse() {
     work_mouse();
 }
 
-void mouse_driver() {
+void mouse_driver(void) {
     init_mouse();
 }
