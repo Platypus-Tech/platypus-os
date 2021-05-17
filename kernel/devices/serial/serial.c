@@ -2,13 +2,7 @@
 #include <asm/io.h>
 #include <log/log.h>
 
-struct serial_drvr_platypusos serial;
-
-void serial_driver_platypusos(void){
-    serial.serial_init();
-}
-
-void serial_init(){ /* This code was not mine. It came from osdev.org, with my modifications */
+void serial_init() { /* This code was not mine. It came from osdev.org, with my modifications */
     outb(COM1 + 1, 0x00);    /* Disable all interrupts */
     outb(COM1 + 3, 0x80);    /* Enable DLAB (set baud rate divisor) */
     outb(COM1 + 0, 0x03);    /* Set divisor to 3 (lo byte) 38400 baud */
@@ -28,15 +22,18 @@ void serial_init(){ /* This code was not mine. It came from osdev.org, with my m
     /* If serial is not faulty set it in normal operation mode */
     /* (not-loopback with IRQs enabled and OUT#1 and OUT#2 bits enabled) */
     outb(PORT + 4, 0x0F);
-    log(INFO, "Serial working");
-    log(INFO, "Serial initialized!");
-    serial.serial.work();
+    log(INFO, "Serial Working");
+    log(INFO, "Serial Initialized");
 }
 
-void read_serial(void) {
+void serial_read() {
     return inb(COM1);
 }
 
-char write_serial(char serial_out, port){
-    
+void serial_driver() {
+    serial_init();
 }
+
+/* char write_serial(char serial_out, port) {
+    
+} */
