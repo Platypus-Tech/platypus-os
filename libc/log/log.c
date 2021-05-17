@@ -5,8 +5,10 @@
  **************************************************/
 
 #include "log.h"
+#include <stdio.h>
 
 char *current_module = "";
+
 void log(int status, char *format, ...)
 {
     char *string;
@@ -27,5 +29,6 @@ void log(int status, char *format, ...)
     default:
         string = " string";
     };
+    
     printf(string, current_module, " ");
 };
