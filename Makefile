@@ -16,7 +16,7 @@ DESTDIR?=
 PREFIX?=/usr/local
 EXEC_PREFIX?=$(PREFIX)
 BOOTDIR?=$(EXEC_PREFIX)/boot
-INCLUDEDIR?=$(PREFIX)/kernel/include
+INCLUDEDIR?=$(PREFIX)/include
 INTERRUPTS?=$(PREFIX)/kernel/interrupts
 DRIVERDIR?=$(PREFIX)/kernel/devices 
 
