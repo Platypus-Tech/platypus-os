@@ -9,7 +9,7 @@
 #include "devices/serial/serial.h"
 
 void kernel_main() {
-    gdt_init();
+    init_gdt();
     terminal_initialize();
     log(INFO, "Starting System!");
     ps2kb.init();
