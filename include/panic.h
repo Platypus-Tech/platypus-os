@@ -3,8 +3,7 @@
  * (c) Copyleft DamieFC                                                       *
  ******************************************************************************/
 
-#ifdef _PANIC_H
-#undef _PANIC_H
+#ifndef _PANIC_H
 #define _PANIC_H
 
 void kpanic(const char panicmessage);
