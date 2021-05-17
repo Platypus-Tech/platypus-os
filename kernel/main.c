@@ -8,6 +8,7 @@
 #include "devices/serial/serial.h"
 
 void kernel_main() {
+    terminal_initialize();
     log(INFO, "Starting System!");
     ps2kb.init();
     log(INFO, "PS/2 Keyboard Initialized");
