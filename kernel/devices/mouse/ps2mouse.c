@@ -14,11 +14,9 @@ void work_mouse() {
 }
           
 void init_mouse() {
-    int x_mouse_pos;
-    int y_mouse_pos;
-    int left_btn_pressed = 0;
-    int middle_btn_pressed = 0;
-    int right_btn_pressed = 0;
+    mouse_driver->left_btn_pressed = 0;
+    mouse_driver->middle_btn_pressed = 0;
+    mouse_driver->right_btn_pressed = 0;
     log(INFO, "Mouse Initialized");
     work_mouse();
 }
