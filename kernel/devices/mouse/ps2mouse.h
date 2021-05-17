@@ -2,16 +2,18 @@
  * IDK computer mouse driver                                  *
  * (c) Copyleft 2021 DamieFC                                  *
  **************************************************************/
-#ifdef PS2MOUSE_H
-#undef PS2MOUSE_H
-#define PS2MOUSE_H
-#else
-#ifndef PS2MOUSE_H
-#define PS2MOUSE_H // Must be sure :D
+#ifndef _PS2MOUSE_H
+#define _PS2MOUSE_H // Must be sure :D
 
-struct mouse_drvr_platypusos{
-    void init_mouse();
-    void work_mouse();
+struct mouse_driver {
+  int x_mouse_pos;
+  int y_mouse_pos;
+  int left_btn_pressed;
+  int middle_btn_pressed;
+  int right_btn_pressed;
 }
 
-#endif PS2MOUSE_H
+void init_mouse();
+void work_mouse();
+
+#endif _PS2MOUSE_H

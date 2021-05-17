@@ -8,16 +8,13 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: change_directory_first
-      run: cd ..
-    - name: change_directory_second
-      run: cd ..
-    - name: chmod shell files
+      
+    - name: Make the shell files executable
       run: chmod +x scripts/*.sh
-    - name: configure if config.sh exists
+      
+    - name: Configure
       run: cd scripts/ && ./config.sh

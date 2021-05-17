@@ -2,17 +2,15 @@
  * Kernel functions.                                        *
  * (c) Copyleft DamieFC                                     *
  ************************************************************/
-#ifdef PKERNEL_H
-#undef PKERNEL_H
-#define PKERNEL_H
-#else
-#ifndef PKERNEL_H
-#define PKERNEL_H
+
+#ifndef _PKERNEL_H
+#define _PKERNEL_H
+
 #include <kernel/text.h>
 #include <stdio.h>
 
 void print(const char *textthing);
-void print(const char *textthing){
+void print(const char *textthing) {
     writestring("%s", textthing);
 }
 
@@ -23,4 +21,4 @@ void cls(void){
     }
 }
 
-#endif PKERNEL_H /* My hand hurts :( */
+#endif //_PKERNEL_H /* My hand hurts :( */

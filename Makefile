@@ -3,14 +3,14 @@ RELNUM=0.06 # release number
 RC=1 # -rc, if there.
 
 
-DEFAULT_HOST!=scripts/default-host.sh
+DEFAULT_HOST=i686
 HOST?=DEFAULT_HOST
 HOSTARCH!=scripts/target-triplet-to-arch.sh $(HOST)
 
-CFLAGS?=-O2 -g
-CPPFLAGS?=
+CFLAGS?= -O2 -g -ffreestanding -Wall -Wextra
+CPPFLAGS?= -D__is_kernel -Iinclude
 LDFLAGS?=
-LIBS?=
+LIBS?= -nostdlib -lk -lgcc
 
 DESTDIR?=
 PREFIX?=/usr/local
@@ -18,14 +18,9 @@ EXEC_PREFIX?=$(PREFIX)
 BOOTDIR?=$(EXEC_PREFIX)/boot
 INCLUDEDIR?=$(PREFIX)/kernel/include
 INTERRUPTS?=$(PREFIX)/kernel/interrupts
-DRIVERDIR?=$(PREFIX)/kernel/devices
+DRIVERDIR?=$(PREFIX)/kernel/devices 
 
-CFLAGS:=$(CFLAGS) -ffreestanding -Wall -Wextra
-CPPFLAGS:=$(CPPFLAGS) -D__is_kernel -Iinclude
-LDFLAGS:=$(LDFLAGS)
-LIBS:=$(LIBS) -nostdlib -lk -lgcc
-
-ARCHDIR=kernel/arch/$(HOSTARCH)
+ARCHDIR=kernel/arch/$(DEFAULT_HOST)
 
 include $(ARCHDIR)/make.config
 
@@ -42,11 +37,11 @@ INTERRUPT_OBJS=\
 $(INTERRUPTS)/nmi.o
 
 DRIVER_OBJS=\
-$(DRIVERDIR)/mouse/ps2mouse.o
-$(DRIVERDIR)/keyboard/ps2.o
-$(DRIVERDIR)/keyboard/atkbd.o
-$(DRIVERDIR)/keyboard/keyboard.o
-$(DRIVERDIR)/rtc/rtc.o
+$(DRIVERDIR)/mouse/ps2mouse.o \
+$(DRIVERDIR)/keyboard/ps2.o \
+$(DRIVERDIR)/keyboard/atkbd.o \
+$(DRIVERDIR)/keyboard/keyboard.o \
+$(DRIVERDIR)/rtc/rtc.o \
 
 OBJS=\
 $(ARCHDIR)/crti.o \
@@ -77,10 +72,10 @@ $(ARCHDIR)/crtbegin.o $(ARCHDIR)/crtend.o:
 	OBJ=`$(CC) $(CFLAGS) $(LDFLAGS) -print-file-name=$(@F)` && cp "$$OBJ" $@
 
 .c.o:
-	$(CC) -MD -c $< -o $@ -std=gnu11 $(CFLAGS) $(CPPFLAGS)
+	$(CC) -MD -m32 -c $< -o $@ -std=gnu11 $(CFLAGS) $(CPPFLAGS)
 
 .S.o:
-	$(CC) -MD -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
+	$(CC) -MD -m32 -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
 
 clean:
 	rm -f platypusos.kernel

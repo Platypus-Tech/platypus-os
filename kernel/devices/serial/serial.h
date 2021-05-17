@@ -2,15 +2,12 @@
  * Serial driver for Platypus OS                                              *
  * (c) DamieFC 2021                                                           *
  ******************************************************************************/
+#ifndef _KERNEL_DEVICES_SERIAL_H
+#define _KERNEL_DEVICES_SERIAL_H
 
-#ifdef SERIAL_H
-    #undef SERIAL_H
-    #define SERIAL_H
-#else
-    #ifndef SERIAL_H
-    #define SERIAL_H
-struct serial_drvr_platypusos{
-    void serial_init(void);
-    void serial_read(void);
-    char serial_write(char serial_out, port);
-}
+void serial_init();
+void serial_read();
+void serial_driver();
+/* char serial_write(char serial_out, port); */
+
+#endif //_KERNEL_DEVICES_SERIAL_H

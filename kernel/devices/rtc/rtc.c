@@ -3,18 +3,16 @@
 #include <log/log.h>
 #include "../../interrupts/nmi.h"
 
-struct rtc_drvr_platypusos rtc;
-
-void rtc_driver(void){
-    rtc.init();
-}
-
-void init(void){
-    nmi_disable();
-    log(INFO, "RTC initialized!");
-    rtc.work();
-}
-
-void work(void){
+void rtc_work() { 
     inb(0x70); // heck idk
+}
+
+void rtc_init() {
+    nmi_disable();
+    log(INFO, "RTC Initialized");
+    rtc_work();
+}
+
+void rtc_driver() {
+    rtc_init();
 }
