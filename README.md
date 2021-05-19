@@ -8,7 +8,5 @@ I'm using Linux drivers right now for keyboard support and working on adding nee
 
 Seems like an odd combination, but that's what I like to do: program, pentest, and play video games.
 
-## Please test on QEMU!
-
 ## Note:
 This project will be going through a rewrite, so don't expect much stuff happening until rewrite is finished.
