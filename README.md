@@ -1,5 +1,8 @@
 # New Platypus OS Drafts
+***This project will be going through a rewrite, so don't expect much stuff happening until rewrite is finished.***.
+
 New OS drafts, I stopped the old one :(
+
 ## What this is for
 I want it to be for:
 1. Programming
@@ -8,7 +11,5 @@ I want it to be for:
 
 Seems like an odd combination, but that's what I like to do: program, pentest, and play video games.
 
-## Please test on QEMU!
-
-## Note:
-This project will be going through a rewrite, so don't expect much stuff happening until rewrite is finished.
+# License
+This project is licensed under GPL v2. See the [`LICENSE`](https://github.com/Platypus-Tech/new-platypus-os-drafts/blob/0.06/LICENSE) file for more info.
