@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-uint8_t port_byte_in(unsigned short port);
-void port_byte_out(unsigned short port, unsigned char data);
+uint8_t inp(unsigned short port);
+void outp(unsigned short port, unsigned char data);
 
 #endif //_KERNEL_PORTS_H
