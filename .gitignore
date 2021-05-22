@@ -1,4 +1,5 @@
-*.iso
-isodir
-sysroot
 .github/*.*
+*.iso
+*.o
+isodir/
+sysroot/

@@ -1,9 +1,6 @@
-name: build
-
+name: GitHub CI
 on:
   push:
-    branches: [ 0.06 ]
-  pull_request:
     branches: [ 0.06 ]
 
 jobs:
@@ -11,10 +8,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-      
-    - name: Make the shell files executable
-      run: chmod +x scripts/*.sh
-      
-    - name: Configure
-      run: cd scripts/ && ./config.sh
+     - name: Checkout
+       uses: actions/checkout@v2
+
+     - name: Cache Toolchain
+       uses: actions/cache@v2
+       env:
+         cache-name: cache-toolchain
+       with:
+         path: |
+           **/toolchain
+         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/build_toolchain.sh') }}
+         restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/build_toolchain.sh') }}
+
+     - name: Build i686-elf-gcc Toolchain
+       run: |
+         cd ./toolchain/
+         chmod +x ./build_toolchain.sh
+         ./build_toolchain.sh
+     
+     - name: Build PlatypusOS
+       run: |
+         chmod +x ./build.sh
+         ./build.sh
+         
+     - name: Upload Build Artifact
+       uses: actions/upload-artifact@v2.2.2
+       with:
+         name: PlatypusOS-Build.bin
+         path: PlatypusOS.bin
