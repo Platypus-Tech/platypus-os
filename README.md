@@ -1,6 +1,4 @@
 # New Platypus OS Drafts
-***This project will be going through a rewrite, so don't expect much stuff happening until rewrite is finished.***.
-
 New OS drafts, I stopped the old one :(
 
 ## What this is for
