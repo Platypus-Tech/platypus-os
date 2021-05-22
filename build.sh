@@ -11,4 +11,4 @@ i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/vga/vga.c -o vga.o
 
 i686-elf-gcc -I./kernel/drivers/vga/ -I./kernel/include/ -c ./init/init.c -o init.o
 
-i686-elf-gcc -T linker.ld -o PlatypusOS.bin -ffreestanding -O2 -nostdlib boot.o vga.o init.o
+i686-elf-gcc -T ./kernel/arch/i386/linker.ld -o PlatypusOS.bin -ffreestanding -O2 -nostdlib boot.o vga.o init.o

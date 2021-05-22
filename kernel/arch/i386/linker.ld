@@ -1,28 +1,32 @@
-ENTRY(start)
-memory_address = 0x00100000;
+ENTRY(_start)
 
 SECTIONS
 {
-  .text memory_address : AT(memory_address) {
-    code = .;
-    *(.text)
-    *(.rodata)
-    . = ALIGN(4096);
-  }
+	. = 1M;
+ 
+	.text BLOCK(4K) : ALIGN(4K)
+	{
+		*(.multiboot)
+		*(.text)
+	}
+ 
+	
+	.rodata BLOCK(4K) : ALIGN(4K)
+	{
+		*(.rodata)
+	}
+ 
+	
+	.data BLOCK(4K) : ALIGN(4K)
+	{
+		*(.data)
+	}
+ 
 
-  .data : AT(memory_address + (data - code))
-  {
-    data = .;
-    *(.data)
-    . = ALIGN(4096);
-  }
-
-  .bss : AT(memory_address + (bss - code))
-  {
-    bss = .;
-    *(.bss)
-    . = ALIGN(4096);
-  }
-
-  end = .;
+	.bss BLOCK(4K) : ALIGN(4K)
+	{
+		*(COMMON)
+		*(.bss)
+	}
+ 
 }
