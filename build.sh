@@ -3,7 +3,7 @@
 # Change the PATH to the path where you have installed the i686-elf-gcc compiler
 # Do not forget to add the :$PATH at the end!
 
-export PATH="$HOME/cross/bin:$PATH"
+export PATH="./toolchain/compiler/bin:$PATH"
 
 i686-elf-as ./kernel/arch/i386/boot.S -o boot.o
 
