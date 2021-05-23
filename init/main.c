@@ -5,7 +5,7 @@
 #include <isr.h>
 #include <irq.h>
 
-void kernel_init() {
+void kernel_main() {
     /* Initialize the Terminal */
      terminal_initialize();
      writestr("Welcome to PlatypusOS!");
