@@ -8,7 +8,7 @@ else
 fi
 
 sudo apt-get update
-sudo apt install make gcc bison flex libgmp3-dev libmpc-dev libmpfr-dev texinfo libisl-dev tar xorriso mtools
+sudo apt install make nasm gcc bison flex libgmp3-dev libmpc-dev libmpfr-dev texinfo libisl-dev tar xorriso mtools
 
 export PREFIX="$PWD/compiler"
 export TARGET=i686-elf

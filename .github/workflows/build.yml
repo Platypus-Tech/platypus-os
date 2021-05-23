@@ -35,5 +35,5 @@ jobs:
      - name: Upload Build Artifact
        uses: actions/upload-artifact@v2.2.2
        with:
-         name: PlatypusOS-Build.bin
-         path: PlatypusOS.bin
+         name: PlatypusOS-Build.iso
+         path: PlatypusOS.iso
