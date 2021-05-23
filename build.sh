@@ -1,5 +1,8 @@
 #!/bin/sh
 
+sudo apt-get update
+sudo apt-get install nasm mtools
+
 # Change the PATH to the path where you have installed the i686-elf-gcc compiler
 # Do not forget to add the :$PATH at the end!
 
