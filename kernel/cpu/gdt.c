@@ -1,6 +1,5 @@
 #include "gdt.h"
 #include <stdint.h>
-#include <vga/vga.h>
 
 struct entry_gdt {
   uint16_t low_limit;
@@ -45,6 +44,4 @@ void init_gdt() {
   set_gate_gdt(2, 0, 0xFFFFFFFF, 0x92, 0xCF);
 
   gdt_load();
-
-  writestr("Loaded GDT\n");
 }
