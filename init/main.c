@@ -8,7 +8,7 @@
 void kernel_main() {
     /* Initialize the Terminal */
      terminal_initialize();
-     writestr("Welcome to PlatypusOS!");
+     writestr("Welcome to PlatypusOS!\n");
 
     /* Load GDT, IDT, ISR and IRQ */
      init_gdt();
