@@ -9,7 +9,7 @@ sudo apt-get install nasm mtools
 export PATH="./toolchain/compiler/bin:$PATH"
 
 # Compile the OS
-nasm -f elf32 ./arch/i386/boot.asm -o boot.o
+nasm -f elf32 ./kernel/arch/i386/boot.asm -o boot.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/vga/vga.c -o vga.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/ports/ports.c -o ports.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -I./kernel/cpu/ -c ./kernel/drivers/keyboard/keyboard.c -o keyboard.o
