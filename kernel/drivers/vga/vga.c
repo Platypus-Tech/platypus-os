@@ -1,71 +1,133 @@
+#include <kernel/ports.h>
 #include "vga.h"
 #include <stdint.h>
 #include <stddef.h>
  
-static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) {
-	return fg | bg << 4;
+void *memcpy(void *dest, const void *src, size_t count) {
+    const char *sp = (const char *)src;
+    char *dp = (char *)dest;
+    for(; count != 0; count--) *dp++ = *sp++;
+    return dest;
 }
- 
-static inline uint16_t vga_entry(unsigned char uc, uint8_t color) {
-	return (uint16_t) uc | (uint16_t) color << 8;
-}
- 
-size_t strlen(const char* str) {
-	size_t len = 0;
 
-	while (str[len]) {
-		len++;
+unsigned short *memsetw(unsigned short *dest, unsigned short val, size_t count) {
+    unsigned short *temp = (unsigned short *)dest;
+    for( ; count != 0; count--) *temp++ = val;
+    return dest;
+}
+
+size_t strlen(const char *string) {
+     size_t length = 0;
+
+     while (string[length]) {
+           length++;
+     }
+
+     return length;
+}
+
+unsigned short *textmemptr;
+int attrib = 0x0F;
+int csr_x = 0, csr_y = 0;
+
+
+void scroll() {
+    unsigned blank, temp;
+
+    blank = 0x20 | (attrib << 8);
+
+    if(csr_y >= 25) {
+        temp = csr_y - 25 + 1;
+        memcpy(textmemptr, textmemptr + temp * 80, (25 - temp) * 80 * 2);
+        memsetw(textmemptr + (25 - temp) * 80, blank, 80);
+        csr_y = 25 - 1;
+    }
+}
+
+
+void move_csr() {
+    unsigned temp;
+
+    temp = csr_y * 80 + csr_x;
+
+    outp(0x3D4, 14);
+    outp(0x3D5, temp >> 8);
+    outp(0x3D4, 15);
+    outp(0x3D5, temp);
+}
+
+
+void cls() {
+    unsigned blank;
+    int i;
+
+    blank = 0x20 | (attrib << 8);
+
+    for(i = 0; i < 25; i++) {
+        memsetw(textmemptr + i * 80, blank, 80);
     }
 
-	return len;
+    csr_x = 0;
+    csr_y = 0;
+    move_csr();
 }
- 
-static const size_t VGA_WIDTH = 80;
-static const size_t VGA_HEIGHT = 25;
- 
-size_t terminal_row;
-size_t terminal_column;
-uint8_t terminal_color;
-uint16_t* terminal_buffer;
- 
+
+
+void putch(unsigned char c) {
+    unsigned short *where;
+    unsigned att = attrib << 8;
+
+    
+    if(c == 0x08) {
+        if(csr_x != 0) {
+            csr_x--;
+        }
+    }
+    
+    else if(c == 0x09) {
+        csr_x = (csr_x + 8) & ~(8 - 1);
+    }
+   
+    else if(c == '\r') {
+        csr_x = 0;
+    }
+    
+    else if(c == '\n') {
+        csr_x = 0;
+        csr_y++;
+    }
+  
+    else if(c >= ' ') {
+        where = textmemptr + (csr_y * 80 + csr_x);
+        *where = c | att;
+        csr_x++;
+    }
+
+
+    if(csr_x >= 80) {
+        csr_x = 0;
+        csr_y++;
+    }
+
+    scroll();
+    move_csr();
+}
+
+void writestr(unsigned char *text) {
+    int i;
+
+    for (i = 0; i < strlen(text); i++) {
+        putch(text[i]);
+    }
+}
+
+
+void settextcolor(unsigned char forecolor, unsigned char backcolor) {
+    attrib = (backcolor << 4) | (forecolor & 0x0F);
+}
+
+
 void terminal_initialize() {
-	terminal_row = 0;
-	terminal_column = 0;
-	terminal_color = vga_entry_color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
-	terminal_buffer = (uint16_t*) 0xB8000;
-	for (size_t y = 0; y < VGA_HEIGHT; y++) {
-		for (size_t x = 0; x < VGA_WIDTH; x++) {
-			const size_t index = y * VGA_WIDTH + x;
-			terminal_buffer[index] = vga_entry(' ', terminal_color);
-		}
-	}
-}
- 
-void setcolor(uint8_t color) {
-	terminal_color = color;
-}
- 
-void terminal_putentry(char c, uint8_t color, size_t x, size_t y) {
-	const size_t index = y * VGA_WIDTH + x;
-	terminal_buffer[index] = vga_entry(c, color);
-}
- 
-void terminal_putchar(char c) {
-	terminal_putentry(c, terminal_color, terminal_column, terminal_row);
-	if (++terminal_column == VGA_WIDTH) {
-		terminal_column = 0;
-		if (++terminal_row == VGA_HEIGHT) {
-			terminal_row = 0;
-		}
-	}
-}
- 
-void write(const char *string, size_t size) {
-	for (size_t i = 0; i < size; i++) {
-		terminal_putchar(string[i]);
-    }
-}
- 
-void writestr(const char *string) {
-	write(string, strlen(string));
+    textmemptr = (unsigned short *)0xB8000;
+    cls();
 }
