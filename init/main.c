@@ -18,4 +18,6 @@ void kernel_main() {
     
     /* Load Drivers */
      init_keyboard();
+    
+    __asm__ volatile("sti");
 }
