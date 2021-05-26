@@ -1,8 +1,8 @@
 #include "panic.h"
-#include "../drivers/vga/vga.h"
+#include <vga/vga.h>
 
-void panic(const char panicmessage) {
+void panic(const char *panicmessage) {
     cls();
-    writestr("PANIC: %s", panicmessage);
-    writestr("That's all we know");
+    writestr("Kernel Panic: %s", panicmessage);
+    __asm__ volatile("hlt");
 }
