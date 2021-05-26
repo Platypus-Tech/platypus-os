@@ -1,7 +1,7 @@
 name: GitHub CI
 on:
   push:
-    branches: [ 0.06 ]
+    branches: [ 0.07 ]
 
 jobs:
   build:
