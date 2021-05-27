@@ -113,11 +113,11 @@ void putch(unsigned char c) {
     move_csr();
 }
 
-void writestr(unsigned char *text) {
+void writestr(const char *string) {
     int i;
 
-    for (i = 0; i < strlen(text); i++) {
-        putch(text[i]);
+    for (i = 0; i < strlen(string); i++) {
+        putch(string[i]);
     }
 }
 

@@ -5,7 +5,7 @@ void scroll();
 void move_csr();
 void cls();
 void putch(unsigned char c);
-void writestr(unsigned char *text);
+void writestr(const char *string);
 void settextcolor(unsigned char forecolor, unsigned char backcolor);
 void terminal_initialize();
 
