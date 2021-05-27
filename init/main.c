@@ -35,5 +35,6 @@ void kernel_main() {
     /* sysfetch like result */
     print("\033[1;34mOS: \033[1;37mPlatypusOS x86_32 x86_64 \n");
     print("\033[1;34mKernel: \033[1;37mPlatypus\n");
+    print("\033[1;34mVersion: \033[1;37m@\033[1;34m0.07\n");
     print("\033[1;34muser\033[1;37m@\033[1;34mkernel\n");
 }
