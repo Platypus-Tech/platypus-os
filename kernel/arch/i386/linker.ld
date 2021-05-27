@@ -26,5 +26,6 @@ SECTIONS
   }
 
   end = .;
+  __kernel_end = .;
 
 }
