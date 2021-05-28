@@ -38,6 +38,6 @@ void kernel_main() {
     print("\033[1;34mVersion: \033[1;37m0.07\n");
     
     settextcolor(COLOR_WHITE, COLOR_BLACK);
-    writestr("Hi! There's not much to do yet, but come back later for more stuff!");
+    writestr("Hi! There's not much to do yet, but come back later for more stuff!\n");
     writestr("user@kernel: ");
 }
