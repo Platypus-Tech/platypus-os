@@ -12,5 +12,8 @@ Seems like an odd combination, but that's what I like to do: program, pentest, a
 # Screenshots
 ![Image](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.07/screenshots/Screenshot-0.07-dev-5393599a26aa924f71877a5c4f62cb7571434ea3.png)
 
+# Other Projects
+- [vtconsole](https://github.com/sleepy-monax/vtconsole)
+
 # License
 This project is licensed under GPL v2. See the [`LICENSE`](https://github.com/Platypus-Tech/new-platypus-os-drafts/blob/0.06/LICENSE) file for more info.
