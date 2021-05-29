@@ -1,13 +1,13 @@
 #ifndef _SYSTEM_VTCONSOLE_H
 #define _SYSTEM_VTCONSOLE_H
 
+#define true 1
+#define false 0
+
 #define VTC_DEFAULT_FOREGROUND VTCOLOR_GREY
 #define VTC_DEFAULT_BACKGROUND VTCOLOR_BLACK
 #define VTC_DEFAULT_ATTR (vtattr_t){ false, VTC_DEFAULT_FOREGROUND, VTC_DEFAULT_BACKGROUND }
 #define VTC_ANSI_PARSER_STACK_SIZE 8
-
-#define true 1
-#define false 0
 
 #define VGA_FRAME_BUFFER 0XB8000
 
@@ -85,11 +85,10 @@ typedef struct {
     int y;
 } vtcursor_t;
 
-typedef void  (*vtc_paint_handler_t)(struct vtconsole* vtc, vtcell_t* cell, int x, int y);
-typedef void (*vtc_cursor_handler_t)(struct vtconsole* vtc, vtcursor_t* cur);
+typedef void(*vtc_paint_handler_t)(struct vtconsole* vtc, vtcell_t* cell, int x, int y);
+typedef void(*vtc_cursor_handler_t)(struct vtconsole* vtc, vtcursor_t* cur);
 
 typedef struct vtconsole {
-
     int width;
     int height;
     vtattr_t attr;

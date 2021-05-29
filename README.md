@@ -10,7 +10,7 @@ I want it to be for:
 Seems like an odd combination, but that's what I like to do: program, pentest, and play video games.
 
 # Screenshots
-![Image](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.07/screenshots/Screenshot-0.07-dev-5393599a26aa924f71877a5c4f62cb7571434ea3.png)
+![Image](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.07/screenshots/Platypus-OS-0.07-dev-new.png)
 
 # Other Projects
 - [vtconsole](https://github.com/sleepy-monax/vtconsole)
