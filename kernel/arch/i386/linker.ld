@@ -1,5 +1,4 @@
 ENTRY(start)
-
 memory_address = 0x00100000;
 
 SECTIONS
@@ -27,5 +26,4 @@ SECTIONS
 
   end = .;
   __kernel_end = .;
-
 }
