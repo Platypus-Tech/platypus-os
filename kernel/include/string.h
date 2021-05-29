@@ -6,7 +6,7 @@
 int strcmp(const char *str1, const char *str2);
 char *strcpy(char *str1, char *str2);
 char *strcat(char *str1, char *str2);
-char *strlen(const char *str);
+size_t *strlen(const char *string);
 char *strerror(int err_code);
 void *memcpy(void *str1, const void *str2, size_t n);
 void *memmove(void *str1, const void *str2, size_t n);
