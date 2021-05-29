@@ -1,6 +1,7 @@
 #include <vga/vga.h>
 #include <keyboard/keyboard.h>
 #include <system/vtconsole.h>
+#include <pit/pit.h>
 #include <vfs.h>
 #include <gdt.h>
 #include <idt.h>
@@ -25,6 +26,8 @@ void kernel_main() {
      writestr("[OK] Load ISR\n");
      init_irq();
      writestr("[OK] Load IRQ\n");
+     writestr("[OK] Load PIT\n");
+     init_timer(50);
     
     /* Load Drivers */
      init_keyboard();
