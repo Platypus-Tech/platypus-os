@@ -4,11 +4,11 @@
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.06    | :white_check_mark: |
-| 0.05    | :white_check_mark: |
-| 0.04    | :x:                |
-| 0.03    | :x:                |
-| 0.02 and others   | :x:                |
+| 0.08    | :white_check_mark  |
+| 0.07    | :white_check_mark: |                
+| 0.06    | :x:                |
+| 0.05    | :x:                |
+| 0.04 and others    | :x:                |
 
 Key:
 | Thing | Meaning |
