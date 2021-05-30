@@ -38,7 +38,7 @@ void kernel_main() {
     
     vtc = vtconsole(VGA_SCREEN_WIDTH, VGA_SCREEN_HEIGHT, paint_callback, cursor_move_callback);
     
-    /* sysfetch like result */
+    /* neofetch like result */
     print("\033[1;34mOS: \033[1;37mPlatypusOS x86_32 x86_64 \n");
     print("\033[1;34mKernel: \033[1;37mPlatypus\n");
     print("\033[1;34mVersion: \033[1;37m0.08-dev\n");
