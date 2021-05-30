@@ -18,7 +18,7 @@ void kernel_main() {
     /* Initialize VFS */
      init_vfs();
 
-    /* Load GDT, IDT, ISR and IRQ */
+    /* Load GDT, IDT, ISR, IRQ and PIT */
      init_gdt();
      writestr("[OK] Load GDT\n");
      init_idt();
@@ -27,8 +27,8 @@ void kernel_main() {
      writestr("[OK] Load ISR\n");
      init_irq();
      writestr("[OK] Load IRQ\n");
-     writestr("[OK] Load PIT\n");
      init_timer(50);
+     writestr("[OK] Load PIT\n");
     
     /* Load Drivers */
      init_keyboard();
