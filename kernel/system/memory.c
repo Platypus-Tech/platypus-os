@@ -1,5 +1,6 @@
 #include "memory.h"
 #include <stdint.h>
+#include <stddef.h>
 
 /* This file contains memory management functions for the kernel and userspace.
  * The kmalloc() and kfree() should be used in the kernel.
