@@ -3,6 +3,8 @@
 
 void panic(const char *panicmessage) {
     cls();
+    settextcolor(COLOR_RED, COLOR_BLACK);
+    
     writestr("Kernel Panic: ");
     writestr(panicmessage);
    
