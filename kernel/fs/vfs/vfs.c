@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <errno.h>
 #include <vga/vga.h>
 #include "vfs.h" 
 
@@ -9,7 +10,8 @@ uint32_t read_vfs(vfs_node_t *node, uint32_t offset, uint32_t size, uint8_t *buf
         return node->read(node, offset, size, buf);
     }
     else {
-       return 0;
+        /* No such file or directory */
+       return -ENOENT;
     }
 }
 
@@ -18,25 +20,25 @@ uint32_t write_vfs(vfs_node_t *node, uint32_t offset, uint32_t size, uint8_t *bu
         return node->write(node, offset, size, buf);
     }
     else {
-        return 0;
+        return -ENOENT;
     }
 }
 
 void open_vfs(vfs_node_t *node, uint8_t read, uint8_t write) {
-    if (node->read != 0) {
+    if (node->open != 0) {
         return node->open(node);
     }
     else {
-        
+        return -ENOENT;
     }
 }
 
 void close_vfs(vfs_node_t *node) {
-    if (node->read != 0) {
+    if (node->close != 0) {
         return node->close(node);
     }
     else {
-        
+        return -ENOENT;
     }
 }
 
@@ -56,6 +58,7 @@ vfs_node_t *finddir_vfs(vfs_node_t *node, char *name) {
     }
     else {
         writestr("VFS: no such directory");
+        return 0;
     }
 }
 

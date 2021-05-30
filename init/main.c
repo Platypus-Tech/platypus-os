@@ -15,9 +15,10 @@ extern void cursor_move_callback(vtconsole_t *vtc, vtcursor_t *cur);
 void kernel_main() {
     /* Initialize the Terminal */
      terminal_initialize();
+    /* Initialize VFS */
      init_vfs();
 
-    /* Load GDT, IDT, ISR and IRQ */
+    /* Load GDT, IDT, ISR, IRQ and PIT */
      init_gdt();
      writestr("[OK] Load GDT\n");
      init_idt();
@@ -26,8 +27,8 @@ void kernel_main() {
      writestr("[OK] Load ISR\n");
      init_irq();
      writestr("[OK] Load IRQ\n");
-     writestr("[OK] Load PIT\n");
      init_timer(50);
+     writestr("[OK] Load PIT\n");
     
     /* Load Drivers */
      init_keyboard();
@@ -37,10 +38,10 @@ void kernel_main() {
     
     vtc = vtconsole(VGA_SCREEN_WIDTH, VGA_SCREEN_HEIGHT, paint_callback, cursor_move_callback);
     
-    /* sysfetch like result */
+    /* neofetch like result */
     print("\033[1;34mOS: \033[1;37mPlatypusOS x86_32 x86_64 \n");
     print("\033[1;34mKernel: \033[1;37mPlatypus\n");
-    print("\033[1;34mVersion: \033[1;37m0.08\n");
+    print("\033[1;34mVersion: \033[1;37m0.08-dev\n");
     
     settextcolor(COLOR_WHITE, COLOR_BLACK);
     writestr("Hi! There's not much to do yet, but come back later for more stuff!\n");

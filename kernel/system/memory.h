@@ -3,6 +3,18 @@
 
 #include <stdint.h>
 
+typedef long align;
+
+union block_header {
+  struct {
+    union block_header *ptr;
+    unsigned block_size;
+  } s;
+  align x;
+};
+
+typedef union block_header blk_hdr;
+
 void *malloc(uint32_t size);
 void free(void *addr);
 
