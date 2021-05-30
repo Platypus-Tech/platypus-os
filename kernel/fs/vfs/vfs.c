@@ -23,7 +23,7 @@ uint32_t write_vfs(vfs_node_t *node, uint32_t offset, uint32_t size, uint8_t *bu
 }
 
 void open_vfs(vfs_node_t *node, uint8_t read, uint8_t write) {
-    if (node->read != 0) {
+    if (node->open != 0) {
         return node->open(node);
     }
     else {
@@ -32,7 +32,7 @@ void open_vfs(vfs_node_t *node, uint8_t read, uint8_t write) {
 }
 
 void close_vfs(vfs_node_t *node) {
-    if (node->read != 0) {
+    if (node->close != 0) {
         return node->close(node);
     }
     else {
