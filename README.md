@@ -17,3 +17,5 @@ Seems like an odd combination, but that's what I like to do: program, pentest, a
 
 # License
 This project is licensed under GPL v2. See the [`LICENSE`](https://github.com/Platypus-Tech/new-platypus-os-drafts/blob/0.06/LICENSE) file for more info.
+
+Chat about development on [Discord](https://discord.gg/t6keJw974q)! If link doesn't work, here: https://discord.gg/t6keJw974q.
