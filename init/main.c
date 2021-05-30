@@ -15,6 +15,7 @@ extern void cursor_move_callback(vtconsole_t *vtc, vtcursor_t *cur);
 void kernel_main() {
     /* Initialize the Terminal */
      terminal_initialize();
+    /* Initialize VFS */
      init_vfs();
 
     /* Load GDT, IDT, ISR and IRQ */
