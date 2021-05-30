@@ -10,6 +10,7 @@ union block_header {
     union block_header *ptr;
     unsigned block_size;
   } s;
+  align x;
 };
 
 typedef union block_header blk_hdr;
