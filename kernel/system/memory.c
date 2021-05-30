@@ -27,7 +27,7 @@ void kfree(void *addr) {
     // Do nothing
 }
 
-/* We need sbrk() for this
+/* We need sbrk() for this 
 void *malloc(unsigned int size) {
     blk_hdr *p, *prev_p;
     blk_hdr *mcore(unsigned);
@@ -59,8 +59,9 @@ void *malloc(unsigned int size) {
             return NULL;
         }
     }
-}
+} */
 
+/* sbrk required
 static blk_hdr *mcore(unsigned units) {
     char *cp, *sbrk(int);
     blk_hdr *up;
@@ -71,7 +72,6 @@ static blk_hdr *mcore(unsigned units) {
     
     cp = sbrk(units * sizeof(blk_hdr));
     
-    /* No space left */
     if (cp == (char*) -1) {
         return NULL);
     }
