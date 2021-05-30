@@ -40,7 +40,7 @@ void kernel_main() {
     /* sysfetch like result */
     print("\033[1;34mOS: \033[1;37mPlatypusOS x86_32 x86_64 \n");
     print("\033[1;34mKernel: \033[1;37mPlatypus\n");
-    print("\033[1;34mVersion: \033[1;37m0.08\n");
+    print("\033[1;34mVersion: \033[1;37m0.08-dev\n");
     
     settextcolor(COLOR_WHITE, COLOR_BLACK);
     writestr("Hi! There's not much to do yet, but come back later for more stuff!\n");
