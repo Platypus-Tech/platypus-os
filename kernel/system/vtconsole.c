@@ -72,7 +72,7 @@ int isdigit(int c) {
 /* --- Constructor/Destructor ----------------------------------------------- */
 
 vtconsole_t *vtconsole(int width, int height, vtc_paint_handler_t on_paint, vtc_cursor_handler_t on_move) {
-    vtconsole_t *vtc = malloc(sizeof(vtconsole_t));
+    vtconsole_t *vtc = kmalloc(sizeof(vtconsole_t));
 
     vtc->width = width;
     vtc->height = height;
@@ -80,7 +80,7 @@ vtconsole_t *vtconsole(int width, int height, vtc_paint_handler_t on_paint, vtc_
     vtc->ansiparser = (vtansi_parser_t){VTSTATE_ESC, {{0, 0}}, 0};
     vtc->attr = VTC_DEFAULT_ATTR;
 
-    vtc->buffer = malloc(width * height * sizeof(vtcell_t));
+    vtc->buffer = kmalloc(width * height * sizeof(vtcell_t));
 
     vtc->cursor = (vtcursor_t){0, 0};
 
@@ -93,8 +93,8 @@ vtconsole_t *vtconsole(int width, int height, vtc_paint_handler_t on_paint, vtc_
 }
 
 void vtconsole_delete(vtconsole_t *vtc) {
-    free(vtc->buffer);
-    free(vtc);
+    kfree(vtc->buffer);
+    kfree(vtc);
 }
 
 /* --- Internal methodes ---------------------------------------------------- */
