@@ -7,6 +7,7 @@
 #include <idt.h>
 #include <isr.h>
 #include <irq.h>
+#include <nmi.h>
 
 extern *vtc;
 extern void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y);
@@ -27,6 +28,8 @@ void kernel_main() {
      writestr("[OK] Load ISR\n");
      init_irq();
      writestr("[OK] Load IRQ\n");
+     nmi_enable();
+     writestr("[OK] NMI Enabled\n");
      init_timer(50);
      writestr("[OK] Load PIT\n");
     
