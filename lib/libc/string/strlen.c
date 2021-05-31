@@ -1,11 +1,36 @@
+/* strlen( const char * )
+
+   This file is part of the Public Domain C Library (PDCLib).
+   Permission is granted to use, modify, and / or redistribute at will.
+*/
+
 #include <string.h>
 
-size_t strlen(const char *string) {
-     size_t length = 0;
+#ifndef REGTEST
 
-     while (string[length]) {
-           length++;
-     }
+size_t strlen( const char * s )
+{
+    size_t rc = 0;
 
-     return length;
+    while ( s[rc] )
+    {
+        ++rc;
+    }
+
+    return rc;
 }
+
+#endif
+
+#ifdef TEST
+
+#include "_PDCLIB_test.h"
+
+int main( void )
+{
+    TESTCASE( strlen( abcde ) == 5 );
+    TESTCASE( strlen( "" ) == 0 );
+    return TEST_RESULTS;
+}
+
+#endif
