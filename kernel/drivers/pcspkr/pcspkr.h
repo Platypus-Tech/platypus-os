@@ -6,3 +6,4 @@
 
 void pcspkr_init(void);
 void beep(size_t frequency);
+void stop_sound(void);
