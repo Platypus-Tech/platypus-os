@@ -29,7 +29,7 @@ void open_vfs(vfs_node_t *node, uint8_t read, uint8_t write) {
         return node->open(node);
     }
     else {
-        return -ENOENT;
+
     }
 }
 
@@ -38,7 +38,7 @@ void close_vfs(vfs_node_t *node) {
         return node->close(node);
     }
     else {
-        return -ENOENT;
+
     }
 }
 
