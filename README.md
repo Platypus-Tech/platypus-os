@@ -1,7 +1,7 @@
 # New Platypus OS Drafts
 New OS drafts, I stopped the old one :(
 <br/><br/>
-Chat about development on [Discord](https://discord.gg/t6keJw974q)!.
+Chat about development on [Discord](https://discord.gg/t6keJw974q)!
 
 # What this is for
 I want it to be for:
