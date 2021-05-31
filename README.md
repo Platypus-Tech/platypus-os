@@ -9,6 +9,9 @@ I want it to be for:
 
 Seems like an odd combination, but that's what I like to do: program, pentest, and play video games.
 
+# Building
+To build the OS, read the ![build guide](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.08/docs/Building.md)
+
 # Screenshots
 ![Image](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.08/screenshots/Screenshot-0.08-dev.png)
 
