@@ -8,7 +8,13 @@ sudo apt-get install nasm mtools
 
 export PATH="./toolchain/compiler/bin:$PATH"
 
+# Build the libc
+cd ./lib/libc/
+sh build.sh
+
 # Compile the OS
+cd ..
+cd ..
 nasm -f elf32 ./kernel/arch/i386/boot.asm -o boot.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/vga/vga.c -o vga.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/ports/ports.c -o ports.o
@@ -29,7 +35,7 @@ i686-elf-gcc -I./kernel/drivers/ -I./kernel/system/ -I./kernel/include/ -c ./ker
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -c ./kernel/fs/vfs/vfs.c -o vfs.o
 
 
-i686-elf-gcc -T ./kernel/arch/i386/linker.ld -o PlatypusOS.bin -ffreestanding -O2 -nostdlib boot.o vga.o keyboard.o ports.o gdt.o load_gdt.o idt.o load_idt.o isr.o load_isr.o irq.o load_irq.o pit.o panic.o memory.o vtconsole.o vfs.o main.o
+i686-elf-gcc -T ./kernel/arch/i386/linker.ld -o PlatypusOS.bin -ffreestanding -O2 -nostdlib boot.o vga.o keyboard.o ports.o gdt.o load_gdt.o idt.o load_idt.o isr.o load_isr.o irq.o load_irq.o pit.o panic.o memory.o vtconsole.o vfs.o main.o ./lib/libc/libpdclib.a
 
 # After linking everything, remove the object files
 rm *.o
