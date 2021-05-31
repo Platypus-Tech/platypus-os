@@ -5,3 +5,7 @@
 void pcspkr_init() {
     
 }
+
+void beep(size_t frequency){
+    
+}
