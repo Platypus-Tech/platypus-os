@@ -34,8 +34,7 @@ jobs:
      
      - name: Build PlatypusOS
        run: |
-         chmod +x ./build.sh
-         ./build.sh
+         make all
          
      - name: Upload Build Artifact
        uses: actions/upload-artifact@v2.2.3
