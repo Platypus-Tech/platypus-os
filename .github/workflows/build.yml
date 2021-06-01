@@ -33,7 +33,8 @@ jobs:
          ./build.sh
          
      - name: Upload Build Artifact
-       uses: actions/upload-artifact@v2.2.2
+       uses: actions/upload-artifact@v2.2.3
        with:
-         name: PlatypusOS-Build.iso
-         path: PlatypusOS.iso
+         name: PlatypusOS-Kernel-Build.bin
+         path: kernel.bin
+         if-no-files-found: error
