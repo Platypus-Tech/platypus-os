@@ -26,6 +26,9 @@ jobs:
          cd ./toolchain/
          chmod +x ./build_toolchain.sh
          ./build_toolchain.sh
+         
+     - name: export PATH variable
+       run: export PATH="$PWD/toolchain/compiler/bin:$PATH"
      
      - name: Build PlatypusOS
        run: |
@@ -33,7 +36,8 @@ jobs:
          ./build.sh
          
      - name: Upload Build Artifact
-       uses: actions/upload-artifact@v2.2.2
+       uses: actions/upload-artifact@v2.2.3
        with:
-         name: PlatypusOS-Build.iso
-         path: PlatypusOS.iso
+         name: PlatypusOS-Kernel-Build.bin
+         path: kernel.bin
+         if-no-files-found: error

@@ -1,7 +1,5 @@
 #!/bin/sh
 
-export PATH="../../toolchain/compiler/bin:$PATH"
-
 if [ ! -d build ]; then
    mkdir build
 fi
