@@ -30,7 +30,7 @@ void kernel_main() {
      writestr("[OK] Load IRQ\n");
      nmi_enable();
      writestr("[OK] Enable NMI\n");
-     init_timer(50);
+     init_timer(100);
      writestr("[OK] Load PIT\n");
     
     /* Load Drivers */
