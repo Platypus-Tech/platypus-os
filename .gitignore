@@ -1,5 +1,6 @@
 .github/*.*
 *.iso
 *.o
+*.a
+*.bin
 isodir/
-sysroot/
