@@ -6,8 +6,6 @@ sudo apt-get install nasm mtools
 # Change the PATH to the path where you have installed the i686-elf-gcc compiler
 # Do not forget to add the :$PATH at the end!
 
-export PATH="./toolchain/compiler/bin:$PATH"
-
 # Build the libc
 cd ./lib/libc/
 sh build_libc.sh
