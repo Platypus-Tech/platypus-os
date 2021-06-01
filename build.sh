@@ -10,7 +10,7 @@ export PATH="./toolchain/compiler/bin:$PATH"
 
 # Build the libc
 cd ./lib/libc/
-sh build.sh
+sh build_libc.sh
 
 # Compile the OS
 cd ..
