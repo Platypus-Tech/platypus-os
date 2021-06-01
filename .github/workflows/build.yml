@@ -26,6 +26,9 @@ jobs:
          cd ./toolchain/
          chmod +x ./build_toolchain.sh
          ./build_toolchain.sh
+         
+     - name: export PATH variable
+       run: export PATH="$PWD/toolchain/compiler/bin:$PATH"
      
      - name: Build PlatypusOS
        run: |
