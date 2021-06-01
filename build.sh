@@ -36,7 +36,7 @@ i686-elf-gcc -I./kernel/drivers/ -I./kernel/kernel/ -I./kernel/include/ -c ./ker
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -c ./kernel/fs/vfs/vfs.c -o vfs.o
 
 
-i686-elf-gcc -T ./kernel/arch/i386/linker.ld -o PlatypusOS.bin -ffreestanding -O2 -nostdlib boot.o vga.o keyboard.o ports.o gdt.o load_gdt.o idt.o load_idt.o isr.o load_isr.o irq.o load_irq.o pit.o panic.o memory.o nmi.o vtconsole.o vfs.o main.o ./lib/libc/libpdclib.a
+i686-elf-gcc -T ./kernel/arch/i386/linker.ld -o kernel -ffreestanding -O2 -nostdlib boot.o vga.o keyboard.o ports.o gdt.o load_gdt.o idt.o load_idt.o isr.o load_isr.o irq.o load_irq.o pit.o panic.o memory.o nmi.o vtconsole.o vfs.o main.o ./lib/libc/libpdclib.a
 
 # After linking everything, remove the object files
 rm *.o
@@ -44,5 +44,5 @@ rm *.o
 # Now generate the ISO file
 mkdir -p isodir/boot/grub
 cp grub.cfg isodir/boot/grub/
-cp PlatypusOS.bin isodir/boot/
+cp kernel isodir/boot/
 grub-mkrescue -o PlatypusOS.iso isodir
