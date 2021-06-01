@@ -2,12 +2,12 @@
 #include <keyboard/keyboard.h>
 #include <system/vtconsole.h>
 #include <pit/pit.h>
-#include <vfs.h>
-#include <gdt.h>
-#include <idt.h>
-#include <isr.h>
-#include <irq.h>
-#include <nmi.h>
+#include <vfs/vfs.h>
+#include <cpu/gdt.h>
+#include <cpu/idt.h>
+#include <cpu/isr.h>
+#include <cpu/irq.h>
+#include <kernel/nmi.h>
 
 extern *vtc;
 extern void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y);
@@ -29,7 +29,7 @@ void kernel_main() {
      init_irq();
      writestr("[OK] Load IRQ\n");
      nmi_enable();
-     writestr("[OK] NMI Enabled\n");
+     writestr("[OK] Enable NMI\n");
      init_timer(50);
      writestr("[OK] Load PIT\n");
     

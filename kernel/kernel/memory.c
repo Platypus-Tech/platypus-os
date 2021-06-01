@@ -17,7 +17,7 @@ unsigned int heap;
 static blk_hdr base;
 static blk_hdr *free_p = NULL;
 
-void kmalloc(uint32_t size) {
+void *kmalloc(uint32_t size) {
     uint32_t ptr = __kernel_end + heap;
     heap += size;
     

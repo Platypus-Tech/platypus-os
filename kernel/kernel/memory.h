@@ -15,7 +15,9 @@ union block_header {
 
 typedef union block_header blk_hdr;
 
-void *malloc(uint32_t size);
-void free(void *addr);
+void *kmalloc(uint32_t size);
+void kfree(void *addr);
+void *malloc(unsigned int size);
+static blk_hdr *mcore(unsigned units);
 
 #endif //_SYSTEM_MEMORY_H
