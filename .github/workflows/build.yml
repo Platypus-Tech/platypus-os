@@ -27,10 +27,11 @@ jobs:
          chmod +x ./build_toolchain.sh
          ./build_toolchain.sh
          
-     - name: export PATH variable
+     - name: export PATH variable and find i686-elf-gcc
        run: |
          export PATH="./toolchain/compiler/bin:$PATH"
          echo $PATH
+         whereis i686-elf-gcc
      
      - name: Build PlatypusOS
        run: |
