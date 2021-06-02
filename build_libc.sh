@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cd ./lib/libc/
+
 if [ ! -d build ]; then
    mkdir build
 fi

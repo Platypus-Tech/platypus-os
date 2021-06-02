@@ -26,11 +26,6 @@ jobs:
          cd ./toolchain/
          chmod +x ./build_toolchain.sh
          ./build_toolchain.sh
-         
-     - name: export PATH variable
-       run: |
-         export PATH="$PWD/toolchain/compiler/bin:$PATH"
-         echo $PATH
      
      - name: Build PlatypusOS
        run: |
@@ -41,4 +36,4 @@ jobs:
        with:
          name: PlatypusOS-Kernel-Build.bin
          path: kernel.bin
-         if-no-files-found: error
+         if-no-files-found: warn
