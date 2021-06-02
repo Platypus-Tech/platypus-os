@@ -29,7 +29,7 @@ jobs:
          
      - name: export PATH variable
        run: |
-         export PATH="$PWD/toolchain/compiler/bin:$PATH"
+         export PATH="./toolchain/compiler/bin:$PATH"
          echo $PATH
      
      - name: Build PlatypusOS
