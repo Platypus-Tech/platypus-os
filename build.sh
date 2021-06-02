@@ -6,13 +6,9 @@ sudo apt-get install nasm mtools
 export PATH="./toolchain/compiler/bin:$PATH"
 
 # Compile the libc
-cd ./lib/libc/
 sh ./build_libc.sh
 
 # Compile the OS
-cd ..
-cd ..
-
 nasm -f elf32 ./kernel/arch/i386/boot.asm -o boot.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/vga/vga.c -o vga.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/ports/ports.c -o ports.o
