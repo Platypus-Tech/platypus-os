@@ -41,4 +41,4 @@ jobs:
        with:
          name: PlatypusOS-Kernel-Build.bin
          path: kernel.bin
-         if-no-files-found: error
+         if-no-files-found: warn
