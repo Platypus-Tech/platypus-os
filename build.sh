@@ -3,6 +3,8 @@
 sudo apt-get update
 sudo apt-get install nasm mtools
 
+export PATH="./toolchain/compiler/bin:$PATH"
+
 # Compile the OS
 nasm -f elf32 ./kernel/arch/i386/boot.asm -o boot.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/vga/vga.c -o vga.o
