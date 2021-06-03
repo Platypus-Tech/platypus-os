@@ -17,7 +17,8 @@ To build the OS, read the [build guide](https://github.com/kushagra765/new-platy
 # Screenshots
 ![Image](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.08/screenshots/Screenshot-0.08-dev.png)
 
-# Other Projects
+# Acknowledgments
+## Projects
 - [vtconsole](https://github.com/sleepy-monax/vtconsole)
 - [pdclib](https://github.com/DevSolar/pdclib)
 
