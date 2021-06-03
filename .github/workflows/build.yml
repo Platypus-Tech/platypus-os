@@ -34,6 +34,6 @@ jobs:
      - name: Upload Build Artifact
        uses: actions/upload-artifact@v2.2.3
        with:
-         name: PlatypusOS-Kernel-Build.bin
-         path: kernel.bin
+         name: PlatypusOS-Build.iso
+         path: PlatypusOS.iso
          if-no-files-found: warn
