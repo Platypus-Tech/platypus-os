@@ -25,12 +25,13 @@ i686-elf-gcc -I./kernel/include/ -c ./kernel/cpu/irq.c -o irq.o
 i686-elf-gcc -I./kernel/ -I./kernel/include/ -c ./kernel/drivers/pit/pit.c -o pit.o
 i686-elf-gcc -I./kernel/drivers/ -c ./kernel/kernel/panic.c -o panic.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -c ./kernel/kernel/memory.c -o memory.o
+i686-elf-gcc -I./kernel/ -I./kernel/include/ -I./kernel/drivers/ -c ./kernel/kernel/paging.c -o paging.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -c ./kernel/kernel/nmi.c -o nmi.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/kernel/ -I./kernel/include/ -c ./kernel/system/vtconsole.c -o vtconsole.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -c ./kernel/fs/vfs/vfs.c -o vfs.o
 
 
-i686-elf-gcc -T ./kernel/arch/i386/linker.ld -o kernel.bin -ffreestanding -O2 -nostdlib boot.o vga.o keyboard.o ports.o gdt.o load_gdt.o idt.o load_idt.o isr.o load_isr.o irq.o load_irq.o pit.o panic.o memory.o nmi.o vtconsole.o vfs.o main.o ./lib/libc/libpdclib.a
+i686-elf-gcc -T ./kernel/arch/i386/linker.ld -o kernel.bin -ffreestanding -O2 -nostdlib boot.o vga.o keyboard.o ports.o gdt.o load_gdt.o idt.o load_idt.o isr.o load_isr.o irq.o load_irq.o pit.o panic.o memory.o paging.o nmi.o vtconsole.o vfs.o main.o ./lib/libc/libpdclib.a
 
 # After linking everything, remove the object files
 rm *.o
@@ -39,6 +40,4 @@ rm *.o
 mkdir -p isodir/boot/grub
 cp grub.cfg isodir/boot/grub/
 cp kernel.bin isodir/boot/
-tar -xf kernel.old/kernel-0.07.tar.gz
-cp kernel-0.07.bin isodir/boot/
 grub-mkrescue -o PlatypusOS.iso isodir

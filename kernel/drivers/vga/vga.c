@@ -2,6 +2,7 @@
 #include "vga.h"
 #include <stdint.h>
 #include <stddef.h>
+#include <stdarg.h>
  
 void *memcpy(void *dest, const void *src, size_t count) {
     const char *sp = (const char *)src;
@@ -113,11 +114,33 @@ void putch(unsigned char c) {
     move_csr();
 }
 
-void writestr(const char *string) {
-    int i;
+void writestr(char *fmt, ...) {
+    va_list ap;
+    char *p, *sval;
+    int ival;
 
-    for (i = 0; i < strlen(string); i++) {
-        putch(string[i]);
+    va_start(ap, fmt);
+
+    for (p = fmt; *p; p++) {
+        if (*p != '%') {
+            putch(*p);
+            continue;
+        }
+
+        switch (*++p) {
+            case 'd':
+                ival = va_arg(ap, int);
+                putch(ival);
+                break;
+            case 's':
+                for (sval = va_arg(ap, char*); *sval; sval++) {
+                    putch(*sval);
+                }
+                break;
+            default:
+                putch(*p);
+                break;
+        }
     }
 }
 
