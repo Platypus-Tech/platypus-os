@@ -23,4 +23,4 @@ To build the OS, read the [build guide](https://github.com/kushagra765/new-platy
 - [pdclib](https://github.com/DevSolar/pdclib)
 
 # License
-This project is licensed under GPL v2. See the [`LICENSE`](https://github.com/Platypus-Tech/new-platypus-os-drafts/blob/0.06/LICENSE) file for more info.
+This project is licensed under GPL v2. See the [`LICENSE`](https://github.com/Platypus-Tech/new-platypus-os-drafts/blob/0.08/LICENSE) file for more info.
