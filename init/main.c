@@ -34,7 +34,7 @@ void kernel_main() {
      init_timer(100);
      writestr("[OK] Load PIT\n");
      /* Halt the kernel here because running init_paging()
-      * causes a triple fault. This will be fixed */
+      * causes a triple fault. This will be fixed, issue #54 */
      __asm__ volatile("hlt");
      init_paging();
      writestr("[OK] Paging Initialized");
