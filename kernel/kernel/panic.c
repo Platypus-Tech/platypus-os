@@ -5,8 +5,7 @@ void panic(const char *panicmessage) {
     cls();
     settextcolor(COLOR_RED, COLOR_BLACK);
     
-    writestr("Kernel Panic: ");
-    writestr(panicmessage);
+    writestr("Kernel Panic: %s", panicmessage);
    
    /* Disable the interrupts */
     __asm__ volatile("cli");

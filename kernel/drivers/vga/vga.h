@@ -22,7 +22,7 @@ void scroll();
 void move_csr();
 void cls();
 void putch(unsigned char c);
-void writestr(const char *string);
+void writestr(char *fmt, ...);
 void settextcolor(unsigned char forecolor, unsigned char backcolor);
 void terminal_initialize();
 

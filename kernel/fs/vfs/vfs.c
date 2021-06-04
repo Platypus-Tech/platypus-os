@@ -57,7 +57,7 @@ vfs_node_t *finddir_vfs(vfs_node_t *node, char *name) {
         return node->finddir(node, name);
     }
     else {
-        writestr("VFS: no such directory");
+        writestr("VFS: %s : no such directory", name);
         return 0;
     }
 }
