@@ -1,6 +1,7 @@
 #include <vga/vga.h>
 #include <keyboard/keyboard.h>
 #include <system/vtconsole.h>
+#include <kernel/paging.h>
 #include <pit/pit.h>
 #include <vfs/vfs.h>
 #include <cpu/gdt.h>
@@ -32,6 +33,11 @@ void kernel_main() {
      writestr("[OK] Enable NMI\n");
      init_timer(100);
      writestr("[OK] Load PIT\n");
+     /* Halt the kernel here because running init_paging()
+      * causes a triple fault. This will be fixed */
+     __asm__ volatile("hlt");
+     init_paging();
+     writestr("[OK] Paging Initialized");
     
     /* Load Drivers */
      init_keyboard();
