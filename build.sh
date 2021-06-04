@@ -39,6 +39,4 @@ rm *.o
 mkdir -p isodir/boot/grub
 cp grub.cfg isodir/boot/grub/
 cp kernel.bin isodir/boot/
-tar -xf kernel.old/kernel-0.07.tar.gz
-cp kernel-0.07.bin isodir/boot/
 grub-mkrescue -o PlatypusOS.iso isodir
