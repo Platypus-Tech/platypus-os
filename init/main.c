@@ -35,7 +35,6 @@ void kernel_main() {
      writestr("[OK] Enable NMI\n");
      init_timer(100);
      writestr("[OK] Load PIT\n");
-     __asm__ volatile("hlt");
     
     /* Load Drivers */
      init_keyboard();
