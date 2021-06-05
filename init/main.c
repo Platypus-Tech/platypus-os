@@ -1,6 +1,7 @@
 #include <vga/vga.h>
 #include <keyboard/keyboard.h>
 #include <system/vtconsole.h>
+#include <system/terminal.h>
 #include <pit/pit.h>
 #include <vfs/vfs.h>
 #include <cpu/gdt.h>
@@ -48,5 +49,6 @@ void kernel_main() {
     
     settextcolor(COLOR_WHITE, COLOR_BLACK);
     writestr("Hi! There's not much to do yet, but come back later for more stuff!\n");
-    writestr("user@kernel: ");
+    writestr("user@kernel");
+    init_terminal();
 }
