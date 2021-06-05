@@ -1,10 +1,11 @@
 #include "terminal.h"
 #include <vga/vga.h>
+
 void putPrompt(void){
     writestr("you@platypusOS:-# ");
 }
 
-void checkCommand(void){
+/*void checkCommand(void){
     int i;
         for (i=0; i < TOTAL_COMMANDS; i++) {  
             if (input == commands[i]) { 
@@ -12,6 +13,9 @@ void checkCommand(void){
             } 
             else { 
                 writestr("%s : command not found!", input); 
-            }
+        }
     }
+}*/
+init_terminal(void){
+    putPrompt();
 }
