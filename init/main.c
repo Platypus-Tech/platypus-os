@@ -1,7 +1,6 @@
 #include <vga/vga.h>
 #include <keyboard/keyboard.h>
 #include <system/vtconsole.h>
-#include <kernel/paging.h>
 #include <pit/pit.h>
 #include <vfs/vfs.h>
 #include <cpu/gdt.h>
@@ -29,8 +28,6 @@ void kernel_main() {
      writestr("[OK] Load ISR\n");
      init_irq();
      writestr("[OK] Load IRQ\n");
-     init_paging();
-     writestr("[OK] Paging Initialized\n");
      nmi_enable();
      writestr("[OK] Enable NMI\n");
      init_timer(100);
