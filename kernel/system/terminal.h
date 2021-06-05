@@ -9,8 +9,9 @@
 
 void putPrompt(void);
 void checkCmd(void);
+void init_terminal(void);
+
 char *commands[] = {
     "version", "help", "uname";
 }
-
 #endif _TERMINAL_H
