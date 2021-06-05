@@ -29,15 +29,13 @@ void kernel_main() {
      writestr("[OK] Load ISR\n");
      init_irq();
      writestr("[OK] Load IRQ\n");
+     init_paging();
+     writestr("[OK] Paging Initialized\n");
      nmi_enable();
      writestr("[OK] Enable NMI\n");
      init_timer(100);
      writestr("[OK] Load PIT\n");
-     /* Halt the kernel here because running init_paging()
-      * causes a triple fault. This will be fixed, issue #54 */
      __asm__ volatile("hlt");
-     init_paging();
-     writestr("[OK] Paging Initialized");
     
     /* Load Drivers */
      init_keyboard();
