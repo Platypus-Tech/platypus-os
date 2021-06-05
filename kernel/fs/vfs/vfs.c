@@ -64,5 +64,5 @@ vfs_node_t *finddir_vfs(vfs_node_t *node, char *name) {
 
 void init_vfs() {
     vfs_node_t *fs_root = 0;
-    writestr("[OK] Mount VFS");
+    writestr("[OK] Mount VFS\n");
 }

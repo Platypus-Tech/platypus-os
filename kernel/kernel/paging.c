@@ -11,26 +11,10 @@
 uint32_t *frames;
 uint32_t total_frames;
 
-extern __kernel_end;
+extern uint32_t __kernel_end;
 
 #define INDEX_BIT(a) (a/(8*4))
 #define OFFSET_BIT(a) (a%(8*4))
-
-uint32_t kmalloc_paging(uint32_t size) {
-
-}
-
-uint32_t kmalloc_a(uint32_t size) {
-
-}
-
-uint32_t kmalloc_p(uint32_t size, uint32_t *phys) {
-
-}
-
-uint32_t kmalloc_ap(uint32_t size, uint32_t *phys) {
-
-}
 
 /* This function is for paging only */
 uint32_t pmalloc(uint32_t size, int a, uint32_t *phys) {
@@ -48,18 +32,36 @@ uint32_t pmalloc(uint32_t size, int a, uint32_t *phys) {
 	return t;
 }
 
+uint32_t kmalloc_paging(uint32_t size) {
+    return pmalloc(size, 0, 0);
+}
+
+uint32_t kmalloc_a(uint32_t size) {
+    return pmalloc(size, 1, 0);
+}
+
+uint32_t kmalloc_p(uint32_t size, uint32_t *phys) {
+    return pmalloc(size, 0, phys);
+}
+
+uint32_t kmalloc_ap(uint32_t size, uint32_t *phys) {
+    return pmalloc(size, 1, phys);
+}
+
 static void frame_set(uint32_t addr) {
 	uint32_t frame = addr / 0x1000;
 	uint32_t index = INDEX_BIT(frame);
 	uint32_t offset = OFFSET_BIT(frame);
-	frames[index] &= ~(0x1 << offset);
+
+	return (frames[index] |= (0x1 << offset));
 }
 
 static void frame_clear(uint32_t addr) {
 	uint32_t frame = addr / 0x1000;
 	uint32_t index = INDEX_BIT(frame);
 	uint32_t offset = OFFSET_BIT(frame);
-	frames[index] &= ~(0x1 << offset);
+
+	return (frames[index] &= ~(0x1 << offset));
 }
 
 static uint32_t frame_test(uint32_t addr) {
@@ -120,7 +122,7 @@ void frame_free(page_paging_t *page) {
 
 void switch_page_dir(dir_page_t *page_dir) {
 	int current_dir = page_dir;
-
+    
 	__asm__ volatile("mov %0, %%cr3":: "r"(&page_dir->physical_tables));
 	
 	uint32_t cr0;
@@ -128,7 +130,7 @@ void switch_page_dir(dir_page_t *page_dir) {
 
 	cr0 |= 0x80000000;
 
-	__asm__ volatile("mov %0, %%cr0":: "r"(cr0));
+	__asm__ volatile("mov %%cr0, %0": "=r"(cr0));
 }
 
 page_paging_t *page_get(uint32_t addr, int is_created, dir_page_t *page_dir) {
@@ -154,7 +156,6 @@ page_paging_t *page_get(uint32_t addr, int is_created, dir_page_t *page_dir) {
 
 void handler_page_fault(struct registers *regs) {
 	uint32_t fault_addr;
-	__asm__ volatile("mov %%cr2, %0" : "=r" (fault_addr));
 
 	int is_present = !(regs->err_code & 0x1);
 	int rw = regs->err_code & 0x2;
@@ -180,9 +181,9 @@ void init_paging() {
 	frames = (uint32_t*)kmalloc_paging(INDEX_BIT(total_frames));
 	memset(frames, 0, INDEX_BIT(total_frames));
 
-	int kernel_dir = (dir_page_t*)kmalloc_a(sizeof(dir_page_t));
+	uint32_t kernel_dir = (dir_page_t*)kmalloc_a(sizeof(dir_page_t));
 	memset(kernel_dir, 0, sizeof(dir_page_t));
-	int current_dir = kernel_dir;
+	uint32_t current_dir = kernel_dir;
 
 	int i = 0;
     while (i < __kernel_end) {
@@ -191,5 +192,7 @@ void init_paging() {
     }
 
     install_irq_handler(14, handler_page_fault);
+    writestr("[ PAGING ] Installed Fault Handler\n");
     switch_page_dir(kernel_dir);
+    writestr("[ PAGING ] Switched kernel_dir\n");
 }
