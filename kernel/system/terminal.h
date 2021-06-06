@@ -2,16 +2,14 @@
  * The terminal ported from KinuxOS with new code         *
  * Ported code (c) DamieFC 2021 original code (c)         *
  * kushagra765 under the Unlicense                        *
- **********************************************************/
+ **********************************************************
+ */
 
-#ifndef _TERMINAL_H
-#define _TERMINAL_H
+#ifndef _SYSTEM_TERMINAL_H
+#define _SYSTEM_TERMINAL_H
 
-void putPrompt(void);
-void checkCmd(void);
-void init_terminal(void);
+void put_prompt();
+void run_command(char input[]);
+void init_terminal();
 
-char *commands[] = {
-    "version", "help", "uname";
-}
-#endif _TERMINAL_H
+#endif //_SYSTEM_TERMINAL_H
