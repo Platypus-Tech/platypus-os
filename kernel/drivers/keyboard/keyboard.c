@@ -3,6 +3,7 @@
 #include <kernel/ports.h>
 #include <stdint.h>
 #include <vga/vga.h>
+#include <system/terminal.h>
 
 uint8_t keyboard_layout[128] = {
     0,  27, '1', '2', '3', '4', '5', '6', '7', '8',
@@ -52,8 +53,24 @@ void handler_keyboard() {
     // Shift, Ctrl keys to be implemented
 
   } else {
-    putch(keyboard_layout[keyboard_key_scancode]);
+    uint8_t input = keyboard_layout[keyboard_key_scancode];
+    putch(input);
+    save_input_buf(input);
   }
+}
+
+uint8_t buf[40];
+int num = 0;
+
+void save_input_buf(uint8_t input) {
+   if (input == '\n') {
+      run_command(input);
+      num = 0;
+   }
+   else {
+      buf[num] = input; 
+      num++;
+   }
 }
 
 void init_keyboard() {
