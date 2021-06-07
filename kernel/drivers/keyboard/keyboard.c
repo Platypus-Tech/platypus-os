@@ -64,7 +64,7 @@ int num = 0;
 
 void save_input_buf(uint8_t input) {
    if (input == '\n') {
-      run_command(input);
+      run_command(buf);
       num = 0;
    }
    else {
