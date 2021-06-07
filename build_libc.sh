@@ -2,6 +2,10 @@
 
 cd ./lib/libc/
 
+if [ -f libpdclib.a ]; then
+   exit 0;
+fi
+
 if [ ! -d build ]; then
    mkdir build
 fi
