@@ -1,5 +1,7 @@
 #include <vga/vga.h>
+#include <kernel/ports.h>
 #include <string.h>
+#include <stdint.h>
 #include "terminal.h"
 #include "vtconsole.h"
 

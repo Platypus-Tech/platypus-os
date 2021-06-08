@@ -11,5 +11,6 @@
 void put_prompt();
 void run_command(char input[]);
 void init_terminal();
+void reboot();
 
 #endif //_SYSTEM_TERMINAL_H
