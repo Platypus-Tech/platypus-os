@@ -5,7 +5,7 @@
 */
 
 /* This is an example implementation of remove() fit for use with POSIX kernels.
-*/
+ */
 
 #include <stdio.h>
 
@@ -15,40 +15,37 @@
 
 #include <errno.h>
 
-extern struct _PDCLIB_file_t * _PDCLIB_filelist;
+extern struct _PDCLIB_file_t *_PDCLIB_filelist;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-extern int unlink( const char * pathname );
+extern int unlink(const char *pathname);
 
 #ifdef __cplusplus
 }
 #endif
 
-int remove( const char * pathname )
-{
-    int rc;
-    struct _PDCLIB_file_t * current = _PDCLIB_filelist;
+int remove(const char *pathname) {
+  int rc;
+  struct _PDCLIB_file_t *current = _PDCLIB_filelist;
 
-    while ( current != NULL )
-    {
-        if ( ( current->filename != NULL ) && ( strcmp( current->filename, pathname ) == 0 ) )
-        {
-            return EOF;
-        }
-
-        current = current->next;
+  while (current != NULL) {
+    if ((current->filename != NULL) &&
+        (strcmp(current->filename, pathname) == 0)) {
+      return EOF;
     }
 
-    if ( ( rc = unlink( pathname ) ) == -1 )
-    {
-        /* The 1:1 mapping in _PDCLIB_config.h ensures this works. */
-        *_PDCLIB_errno_func() = errno;
-    }
+    current = current->next;
+  }
 
-    return rc;
+  if ((rc = unlink(pathname)) == -1) {
+    /* The 1:1 mapping in _PDCLIB_config.h ensures this works. */
+    *_PDCLIB_errno_func() = errno;
+  }
+
+  return rc;
 }
 
 #endif
@@ -57,10 +54,9 @@ int remove( const char * pathname )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    /* Testing covered by ftell.c (and several others) */
-    return TEST_RESULTS;
+int main(void) {
+  /* Testing covered by ftell.c (and several others) */
+  return TEST_RESULTS;
 }
 
 #endif

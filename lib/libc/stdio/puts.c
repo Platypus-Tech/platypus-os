@@ -14,44 +14,36 @@
 #include <threads.h>
 #endif
 
-int puts( const char * s )
-{
-    _PDCLIB_LOCK( stdout->mtx );
+int puts(const char *s) {
+  _PDCLIB_LOCK(stdout->mtx);
 
-    if ( _PDCLIB_prepwrite( stdout ) == EOF )
-    {
-        _PDCLIB_UNLOCK( stdout->mtx );
+  if (_PDCLIB_prepwrite(stdout) == EOF) {
+    _PDCLIB_UNLOCK(stdout->mtx);
+    return EOF;
+  }
+
+  while (*s != '\0') {
+    stdout->buffer[stdout->bufidx++] = *s++;
+
+    if (stdout->bufidx == stdout->bufsize) {
+      if (_PDCLIB_flushbuffer(stdout) == EOF) {
+        _PDCLIB_UNLOCK(stdout->mtx);
         return EOF;
+      }
     }
+  }
 
-    while ( *s != '\0' )
-    {
-        stdout->buffer[ stdout->bufidx++ ] = *s++;
+  stdout->buffer[stdout->bufidx++] = '\n';
 
-        if ( stdout->bufidx == stdout->bufsize )
-        {
-            if ( _PDCLIB_flushbuffer( stdout ) == EOF )
-            {
-                _PDCLIB_UNLOCK( stdout->mtx );
-                return EOF;
-            }
-        }
-    }
-
-    stdout->buffer[ stdout->bufidx++ ] = '\n';
-
-    if ( ( stdout->bufidx == stdout->bufsize ) ||
-         ( stdout->status & ( _IOLBF | _IONBF ) ) )
-    {
-        int rc = _PDCLIB_flushbuffer( stdout );
-        _PDCLIB_UNLOCK( stdout->mtx );
-        return rc;
-    }
-    else
-    {
-        _PDCLIB_UNLOCK( stdout->mtx );
-        return 0;
-    }
+  if ((stdout->bufidx == stdout->bufsize) ||
+      (stdout->status & (_IOLBF | _IONBF))) {
+    int rc = _PDCLIB_flushbuffer(stdout);
+    _PDCLIB_UNLOCK(stdout->mtx);
+    return rc;
+  } else {
+    _PDCLIB_UNLOCK(stdout->mtx);
+    return 0;
+  }
 }
 
 #endif
@@ -60,21 +52,20 @@ int puts( const char * s )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    FILE * fh;
-    const char * message = "SUCCESS testing puts()";
-    char buffer[23];
-    buffer[22] = 'x';
-    TESTCASE( ( fh = freopen( testfile, "wb+", stdout ) ) != NULL );
-    TESTCASE( puts( message ) >= 0 );
-    rewind( fh );
-    TESTCASE( fread( buffer, 1, 22, fh ) == 22 );
-    TESTCASE( memcmp( buffer, message, 22 ) == 0 );
-    TESTCASE( buffer[22] == 'x' );
-    TESTCASE( fclose( fh ) == 0 );
-    TESTCASE( remove( testfile ) == 0 );
-    return TEST_RESULTS;
+int main(void) {
+  FILE *fh;
+  const char *message = "SUCCESS testing puts()";
+  char buffer[23];
+  buffer[22] = 'x';
+  TESTCASE((fh = freopen(testfile, "wb+", stdout)) != NULL);
+  TESTCASE(puts(message) >= 0);
+  rewind(fh);
+  TESTCASE(fread(buffer, 1, 22, fh) == 22);
+  TESTCASE(memcmp(buffer, message, 22) == 0);
+  TESTCASE(buffer[22] == 'x');
+  TESTCASE(fclose(fh) == 0);
+  TESTCASE(remove(testfile) == 0);
+  return TEST_RESULTS;
 }
 
 #endif

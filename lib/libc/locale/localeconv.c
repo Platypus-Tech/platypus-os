@@ -8,9 +8,8 @@
 
 #ifndef REGTEST
 
-struct lconv * localeconv( void )
-{
-    return _PDCLIB_lc_numeric_monetary.lconv;
+struct lconv *localeconv(void) {
+  return _PDCLIB_lc_numeric_monetary.lconv;
 }
 
 #endif
@@ -19,14 +18,14 @@ struct lconv * localeconv( void )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    struct lconv * lconv;
-    TESTCASE( ( lconv = localeconv() ) != NULL );
-    TESTCASE( strcmp( lconv->decimal_point, "." ) == 0 );
-    TESTCASE( strcmp( lconv->thousands_sep, "" ) == 0 );
-    TESTCASE( ( strcmp( lconv->grouping, "" ) == 0 ) || ( strcmp( lconv->grouping, "\x7f" ) == 0 ) );
-    return TEST_RESULTS;
+int main(void) {
+  struct lconv *lconv;
+  TESTCASE((lconv = localeconv()) != NULL);
+  TESTCASE(strcmp(lconv->decimal_point, ".") == 0);
+  TESTCASE(strcmp(lconv->thousands_sep, "") == 0);
+  TESTCASE((strcmp(lconv->grouping, "") == 0) ||
+           (strcmp(lconv->grouping, "\x7f") == 0));
+  return TEST_RESULTS;
 }
 
 #endif

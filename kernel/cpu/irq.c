@@ -59,7 +59,7 @@ void handler_irq(struct registers *regs) {
   }
 
   if (regs->int_no >= 40) {
-       outp(0xA0, 0x20);
+    outp(0xA0, 0x20);
   }
 
   outp(0x20, 0x20);

@@ -11,20 +11,16 @@
 
 constraint_handler_t _PDCLIB_constraint_handler = abort_handler_s;
 
-constraint_handler_t set_constraint_handler_s( constraint_handler_t handler )
-{
-    constraint_handler_t previous = _PDCLIB_constraint_handler;
+constraint_handler_t set_constraint_handler_s(constraint_handler_t handler) {
+  constraint_handler_t previous = _PDCLIB_constraint_handler;
 
-    if ( handler == NULL )
-    {
-        _PDCLIB_constraint_handler = abort_handler_s;
-    }
-    else
-    {
-        _PDCLIB_constraint_handler = handler;
-    }
+  if (handler == NULL) {
+    _PDCLIB_constraint_handler = abort_handler_s;
+  } else {
+    _PDCLIB_constraint_handler = handler;
+  }
 
-    return previous;
+  return previous;
 }
 
 #endif
@@ -33,16 +29,15 @@ constraint_handler_t set_constraint_handler_s( constraint_handler_t handler )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
+int main(void) {
 #ifndef REGTEST
-    TESTCASE( _PDCLIB_constraint_handler == abort_handler_s );
-    TESTCASE( set_constraint_handler_s( ignore_handler_s ) == abort_handler_s );
-    TESTCASE( _PDCLIB_constraint_handler == ignore_handler_s );
-    TESTCASE( set_constraint_handler_s( NULL ) == ignore_handler_s );
-    TESTCASE( _PDCLIB_constraint_handler == abort_handler_s );
+  TESTCASE(_PDCLIB_constraint_handler == abort_handler_s);
+  TESTCASE(set_constraint_handler_s(ignore_handler_s) == abort_handler_s);
+  TESTCASE(_PDCLIB_constraint_handler == ignore_handler_s);
+  TESTCASE(set_constraint_handler_s(NULL) == ignore_handler_s);
+  TESTCASE(_PDCLIB_constraint_handler == abort_handler_s);
 #endif
-    return TEST_RESULTS;
+  return TEST_RESULTS;
 }
 
 #endif

@@ -4,17 +4,16 @@
    Permission is granted to use, modify, and / or redistribute at will.
 */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #ifndef REGTEST
 
 #include "pdclib/_PDCLIB_glue.h"
 
-void _Exit( int status )
-{
-    _PDCLIB_closeall();
-    _PDCLIB_Exit( status );
+void _Exit(int status) {
+  _PDCLIB_closeall();
+  _PDCLIB_Exit(status);
 }
 
 #endif
@@ -23,12 +22,11 @@ void _Exit( int status )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    int UNEXPECTED_RETURN = 0;
-    _Exit( 0 );
-    TESTCASE( UNEXPECTED_RETURN );
-    return TEST_RESULTS;
+int main(void) {
+  int UNEXPECTED_RETURN = 0;
+  _Exit(0);
+  TESTCASE(UNEXPECTED_RETURN);
+  return TEST_RESULTS;
 }
 
 #endif

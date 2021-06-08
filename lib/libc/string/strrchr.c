@@ -8,24 +8,20 @@
 
 #ifndef REGTEST
 
-char * strrchr( const char * s, int c )
-{
-    size_t i = 0;
+char *strrchr(const char *s, int c) {
+  size_t i = 0;
 
-    while ( s[i++] )
-    {
-        /* EMPTY */
+  while (s[i++]) {
+    /* EMPTY */
+  }
+
+  do {
+    if (s[--i] == (char)c) {
+      return (char *)s + i;
     }
+  } while (i);
 
-    do
-    {
-        if ( s[--i] == ( char ) c )
-        {
-            return ( char * ) s + i;
-        }
-    } while ( i );
-
-    return NULL;
+  return NULL;
 }
 
 #endif
@@ -34,14 +30,13 @@ char * strrchr( const char * s, int c )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    char abccd[] = "abccd";
-    TESTCASE( strrchr( abcde, '\0' ) == &abcde[5] );
-    TESTCASE( strrchr( abcde, 'e' ) == &abcde[4] );
-    TESTCASE( strrchr( abcde, 'a' ) == &abcde[0] );
-    TESTCASE( strrchr( abccd, 'c' ) == &abccd[3] );
-    return TEST_RESULTS;
+int main(void) {
+  char abccd[] = "abccd";
+  TESTCASE(strrchr(abcde, '\0') == &abcde[5]);
+  TESTCASE(strrchr(abcde, 'e') == &abcde[4]);
+  TESTCASE(strrchr(abcde, 'a') == &abcde[0]);
+  TESTCASE(strrchr(abccd, 'c') == &abccd[3]);
+  return TEST_RESULTS;
 }
 
 #endif

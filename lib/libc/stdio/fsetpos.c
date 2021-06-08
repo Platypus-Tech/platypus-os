@@ -14,31 +14,27 @@
 #include <threads.h>
 #endif
 
-int fsetpos( struct _PDCLIB_file_t * stream, const struct _PDCLIB_fpos_t * pos )
-{
-    _PDCLIB_LOCK( stream->mtx );
+int fsetpos(struct _PDCLIB_file_t *stream, const struct _PDCLIB_fpos_t *pos) {
+  _PDCLIB_LOCK(stream->mtx);
 
-    if ( stream->status & _PDCLIB_FWRITE )
-    {
-        if ( _PDCLIB_flushbuffer( stream ) == EOF )
-        {
-            _PDCLIB_UNLOCK( stream->mtx );
-            return EOF;
-        }
+  if (stream->status & _PDCLIB_FWRITE) {
+    if (_PDCLIB_flushbuffer(stream) == EOF) {
+      _PDCLIB_UNLOCK(stream->mtx);
+      return EOF;
     }
+  }
 
-    if ( _PDCLIB_seek( stream, pos->offset, SEEK_SET ) == EOF )
-    {
-        _PDCLIB_UNLOCK( stream->mtx );
-        return EOF;
-    }
+  if (_PDCLIB_seek(stream, pos->offset, SEEK_SET) == EOF) {
+    _PDCLIB_UNLOCK(stream->mtx);
+    return EOF;
+  }
 
-    stream->pos.status = pos->status;
-    /* TODO: Add mbstate. */
+  stream->pos.status = pos->status;
+  /* TODO: Add mbstate. */
 
-    _PDCLIB_UNLOCK( stream->mtx );
+  _PDCLIB_UNLOCK(stream->mtx);
 
-    return 0;
+  return 0;
 }
 
 #endif
@@ -47,10 +43,9 @@ int fsetpos( struct _PDCLIB_file_t * stream, const struct _PDCLIB_fpos_t * pos )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    /* fsetpos() tested together with fsetpos(). */
-    return TEST_RESULTS;
+int main(void) {
+  /* fsetpos() tested together with fsetpos(). */
+  return TEST_RESULTS;
 }
 
 #endif

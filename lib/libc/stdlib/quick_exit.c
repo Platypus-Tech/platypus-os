@@ -12,17 +12,15 @@
    functions that had already been called at the time it was registered."
 */
 
-void ( *_PDCLIB_quickexitstack[ _PDCLIB_ATEXIT_SLOTS ] )( void );
+void (*_PDCLIB_quickexitstack[_PDCLIB_ATEXIT_SLOTS])(void);
 size_t _PDCLIB_quickexitptr = 0;
 
-void quick_exit( int status )
-{
-    while ( _PDCLIB_quickexitptr != 0 )
-    {
-        _PDCLIB_quickexitstack[ --_PDCLIB_quickexitptr ]();
-    }
+void quick_exit(int status) {
+  while (_PDCLIB_quickexitptr != 0) {
+    _PDCLIB_quickexitstack[--_PDCLIB_quickexitptr]();
+  }
 
-    _Exit( status );
+  _Exit(status);
 }
 
 #endif
@@ -31,10 +29,9 @@ void quick_exit( int status )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    /* Unwinding of regstack tested in at_quick_exit(). */
-    return TEST_RESULTS;
+int main(void) {
+  /* Unwinding of regstack tested in at_quick_exit(). */
+  return TEST_RESULTS;
 }
 
 #endif

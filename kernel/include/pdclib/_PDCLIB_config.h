@@ -16,8 +16,8 @@
 /* they are needed in this file already.                                      */
 /* _PDCLIB_cc( x, y ) concatenates two preprocessor tokens without extending. */
 /* _PDCLIB_concat( x, y ) concatenates two preprocessor tokens with extending */
-#define _PDCLIB_cc( x, y )     x ## y
-#define _PDCLIB_concat( x, y ) _PDCLIB_cc( x, y )
+#define _PDCLIB_cc(x, y) x##y
+#define _PDCLIB_concat(x, y) _PDCLIB_cc(x, y)
 
 /* exit() can signal success to the host environment by the value of zero or  */
 /* the constant EXIT_SUCCESS. Failure is signaled by EXIT_FAILURE. Note that  */
@@ -29,20 +29,20 @@
 /* qsort() in <stdlib.h> requires a function that swaps two memory areas.     */
 /* Below is a naive implementation that can be improved significantly for     */
 /* specific platforms, e.g. by swapping int instead of char.                  */
-#define _PDCLIB_memswp( i, j, size ) \
-    char tmp; \
-    do { \
-        tmp = *i; \
-        *i++ = *j; \
-        *j++ = tmp; \
-    } while ( --size );
+#define _PDCLIB_memswp(i, j, size)                                             \
+  char tmp;                                                                    \
+  do {                                                                         \
+    tmp = *i;                                                                  \
+    *i++ = *j;                                                                 \
+    *j++ = tmp;                                                                \
+  } while (--size);
 
 /* Define this to some compiler directive that can be written after the       */
 /* parameter list of a function declaration to indicate the function does     */
 /* never return. If your compiler does not support such a directive, define   */
 /* to nothing. (This is to avoid warnings with the exit functions under GCC   */
 /* when compiling with C99/C++ settings, where C11 _Noreturn is unavailable.) */
-#define _PDCLIB_NORETURN __attribute__(( noreturn ))
+#define _PDCLIB_NORETURN __attribute__((noreturn))
 
 /* -------------------------------------------------------------------------- */
 /* Symbol Visibility                                                          */
@@ -53,33 +53,33 @@
 */
 
 #ifdef _PDCLIB_STATIC_DEFINE
-  #define _PDCLIB_PUBLIC
-  #define _PDCLIB_LOCAL
+#define _PDCLIB_PUBLIC
+#define _PDCLIB_LOCAL
 #else
-  #if defined _WIN32 || defined __CYGWIN__
-    #ifdef _PDCLIB_BUILD
-      #ifdef __GNUC__
-        #define _PDCLIB_PUBLIC __attribute__ ((dllexport))
-      #else
-        #define _PDCLIB_PUBLIC __declspec(dllexport)
-      #endif
-    #else
-      #ifdef __GNUC__
-        #define _PDCLIB_PUBLIC __attribute__ ((dllimport))
-      #else
-        #define _PDCLIB_PUBLIC __declspec(dllimport)
-      #endif
-    #endif
-    #define _PDCLIB_LOCAL
-  #else
-    #if __GNUC__ >= 4
-      #define _PDCLIB_PUBLIC __attribute__ ((visibility ("default")))
-      #define _PDCLIB_LOCAL  __attribute__ ((visibility ("hidden")))
-    #else
-      #define _PDCLIB_PUBLIC
-      #define _PDCLIB_LOCAL
-    #endif
-  #endif
+#if defined _WIN32 || defined __CYGWIN__
+#ifdef _PDCLIB_BUILD
+#ifdef __GNUC__
+#define _PDCLIB_PUBLIC __attribute__((dllexport))
+#else
+#define _PDCLIB_PUBLIC __declspec(dllexport)
+#endif
+#else
+#ifdef __GNUC__
+#define _PDCLIB_PUBLIC __attribute__((dllimport))
+#else
+#define _PDCLIB_PUBLIC __declspec(dllimport)
+#endif
+#endif
+#define _PDCLIB_LOCAL
+#else
+#if __GNUC__ >= 4
+#define _PDCLIB_PUBLIC __attribute__((visibility("default")))
+#define _PDCLIB_LOCAL __attribute__((visibility("hidden")))
+#else
+#define _PDCLIB_PUBLIC
+#define _PDCLIB_LOCAL
+#endif
+#endif
 #endif
 
 /* -------------------------------------------------------------------------- */
@@ -98,7 +98,7 @@
 
 /* Calculation of a minimum value from a given maximum for two's complement.  */
 /* (For convenience only, used only in this header file below.)               */
-#define _PDCLIB_MIN_CALC( max ) ( ( - max ) - 1 )
+#define _PDCLIB_MIN_CALC(max) ((-max) - 1)
 
 /* Now, introducting the various predefines to the _PDCLIB_* namespace, so    */
 /* the rest of PDCLib can work with that and adapting to a different compiler */
@@ -109,8 +109,8 @@
 
 /* Maximum and minimum values of signed / unsigned char                       */
 #define _PDCLIB_SCHAR_MAX __SCHAR_MAX__
-#define _PDCLIB_SCHAR_MIN _PDCLIB_MIN_CALC( __SCHAR_MAX__ )
-#define _PDCLIB_UCHAR_MAX ( __SCHAR_MAX__ * 2 + 1 )
+#define _PDCLIB_SCHAR_MIN _PDCLIB_MIN_CALC(__SCHAR_MAX__)
+#define _PDCLIB_UCHAR_MAX (__SCHAR_MAX__ * 2 + 1)
 
 /* Whether the 'char' type is unsigned                                        */
 #ifdef __CHAR_UNSIGNED__
@@ -123,23 +123,23 @@
 
 /* Maximum and minimum values of signed / unsigned short                      */
 #define _PDCLIB_SHRT_MAX __SHRT_MAX__
-#define _PDCLIB_SHRT_MIN _PDCLIB_MIN_CALC( __SHRT_MAX__ )
-#define _PDCLIB_USHRT_MAX ( __SHRT_MAX__ * 2u + 1 )
+#define _PDCLIB_SHRT_MIN _PDCLIB_MIN_CALC(__SHRT_MAX__)
+#define _PDCLIB_USHRT_MAX (__SHRT_MAX__ * 2u + 1)
 
 /* Maximum and minimum values of signed / unsigned int                        */
 #define _PDCLIB_INT_MAX __INT_MAX__
-#define _PDCLIB_INT_MIN _PDCLIB_MIN_CALC( __INT_MAX__ )
-#define _PDCLIB_UINT_MAX ( __INT_MAX__ * 2u + 1 )
+#define _PDCLIB_INT_MIN _PDCLIB_MIN_CALC(__INT_MAX__)
+#define _PDCLIB_UINT_MAX (__INT_MAX__ * 2u + 1)
 
 /* Maximum and minimum values of signed / unsigned long                       */
 #define _PDCLIB_LONG_MAX __LONG_MAX__
-#define _PDCLIB_LONG_MIN _PDCLIB_MIN_CALC( __LONG_MAX__ )
-#define _PDCLIB_ULONG_MAX ( __LONG_MAX__ * 2ul + 1 )
+#define _PDCLIB_LONG_MIN _PDCLIB_MIN_CALC(__LONG_MAX__)
+#define _PDCLIB_ULONG_MAX (__LONG_MAX__ * 2ul + 1)
 
 /* Maximum and minimum values of signed / unsigned long long                  */
 #define _PDCLIB_LLONG_MAX __LONG_LONG_MAX__
-#define _PDCLIB_LLONG_MIN _PDCLIB_MIN_CALC( __LONG_LONG_MAX__ )
-#define _PDCLIB_ULLONG_MAX ( __LONG_LONG_MAX__ * 2ull + 1 )
+#define _PDCLIB_LLONG_MIN _PDCLIB_MIN_CALC(__LONG_LONG_MAX__)
+#define _PDCLIB_ULLONG_MAX (__LONG_LONG_MAX__ * 2ull + 1)
 
 /* -------------------------------------------------------------------------- */
 /* <stdint.h> defines a set of integer types that are of a minimum width, and */
@@ -161,82 +161,82 @@
 /* -------------------------------------------------------------------------- */
 
 /* int_fast8_t / uint_fast8_t                                                 */
-#define _PDCLIB_int_fast8_t        __INT_FAST8_TYPE__
-#define _PDCLIB_INT_FAST8_MAX      __INT_FAST8_MAX__
-#define _PDCLIB_INT_FAST8_MIN      _PDCLIB_MIN_CALC( __INT_FAST8_MAX__ )
-#define _PDCLIB_uint_fast8_t       __UINT_FAST8_TYPE__
-#define _PDCLIB_UINT_FAST8_MAX     __UINT_FAST8_MAX__
+#define _PDCLIB_int_fast8_t __INT_FAST8_TYPE__
+#define _PDCLIB_INT_FAST8_MAX __INT_FAST8_MAX__
+#define _PDCLIB_INT_FAST8_MIN _PDCLIB_MIN_CALC(__INT_FAST8_MAX__)
+#define _PDCLIB_uint_fast8_t __UINT_FAST8_TYPE__
+#define _PDCLIB_UINT_FAST8_MAX __UINT_FAST8_MAX__
 
 /* int_least8_t / uint_least8_t                                               */
-#define _PDCLIB_int_least8_t       __INT_LEAST8_TYPE__
-#define _PDCLIB_INT_LEAST8_MAX     __INT_LEAST8_MAX__
-#define _PDCLIB_INT_LEAST8_MIN     _PDCLIB_MIN_CALC( __INT_LEAST8_MAX__ )
-#define _PDCLIB_uint_least8_t      __UINT_LEAST8_TYPE__
-#define _PDCLIB_UINT_LEAST8_MAX    __UINT_LEAST8_MAX__
+#define _PDCLIB_int_least8_t __INT_LEAST8_TYPE__
+#define _PDCLIB_INT_LEAST8_MAX __INT_LEAST8_MAX__
+#define _PDCLIB_INT_LEAST8_MIN _PDCLIB_MIN_CALC(__INT_LEAST8_MAX__)
+#define _PDCLIB_uint_least8_t __UINT_LEAST8_TYPE__
+#define _PDCLIB_UINT_LEAST8_MAX __UINT_LEAST8_MAX__
 
 /* int_fast16_t / uint_fast16_t                                               */
-#define _PDCLIB_int_fast16_t       __INT_FAST16_TYPE__
-#define _PDCLIB_INT_FAST16_MAX     __INT_FAST16_MAX__
-#define _PDCLIB_INT_FAST16_MIN     _PDCLIB_MIN_CALC( __INT_FAST16_MAX__ )
-#define _PDCLIB_uint_fast16_t      __UINT_FAST16_TYPE__
-#define _PDCLIB_UINT_FAST16_MAX    __UINT_FAST16_MAX__
+#define _PDCLIB_int_fast16_t __INT_FAST16_TYPE__
+#define _PDCLIB_INT_FAST16_MAX __INT_FAST16_MAX__
+#define _PDCLIB_INT_FAST16_MIN _PDCLIB_MIN_CALC(__INT_FAST16_MAX__)
+#define _PDCLIB_uint_fast16_t __UINT_FAST16_TYPE__
+#define _PDCLIB_UINT_FAST16_MAX __UINT_FAST16_MAX__
 
 /* int_least16_t / uint_least16_t                                             */
-#define _PDCLIB_int_least16_t      __INT_LEAST16_TYPE__
-#define _PDCLIB_INT_LEAST16_MAX    __INT_LEAST16_MAX__
-#define _PDCLIB_INT_LEAST16_MIN    _PDCLIB_MIN_CALC( __INT_LEAST16_MAX__ )
-#define _PDCLIB_uint_least16_t     __UINT_LEAST16_TYPE__
-#define _PDCLIB_UINT_LEAST16_MAX   __UINT_LEAST16_MAX__
+#define _PDCLIB_int_least16_t __INT_LEAST16_TYPE__
+#define _PDCLIB_INT_LEAST16_MAX __INT_LEAST16_MAX__
+#define _PDCLIB_INT_LEAST16_MIN _PDCLIB_MIN_CALC(__INT_LEAST16_MAX__)
+#define _PDCLIB_uint_least16_t __UINT_LEAST16_TYPE__
+#define _PDCLIB_UINT_LEAST16_MAX __UINT_LEAST16_MAX__
 
 /* int_fast32_t / uint_fast32_t                                               */
-#define _PDCLIB_int_fast32_t       __INT_FAST32_TYPE__
-#define _PDCLIB_INT_FAST32_MAX     __INT_FAST32_MAX__
-#define _PDCLIB_INT_FAST32_MIN     _PDCLIB_MIN_CALC( __INT_FAST32_MAX__ )
-#define _PDCLIB_uint_fast32_t      __UINT_FAST32_TYPE__
-#define _PDCLIB_UINT_FAST32_MAX    __UINT_FAST32_MAX__
+#define _PDCLIB_int_fast32_t __INT_FAST32_TYPE__
+#define _PDCLIB_INT_FAST32_MAX __INT_FAST32_MAX__
+#define _PDCLIB_INT_FAST32_MIN _PDCLIB_MIN_CALC(__INT_FAST32_MAX__)
+#define _PDCLIB_uint_fast32_t __UINT_FAST32_TYPE__
+#define _PDCLIB_UINT_FAST32_MAX __UINT_FAST32_MAX__
 
 /* int_least32_t / uint_least32_t                                             */
-#define _PDCLIB_int_least32_t      __INT_LEAST32_TYPE__
-#define _PDCLIB_INT_LEAST32_MAX    __INT_LEAST32_MAX__
-#define _PDCLIB_INT_LEAST32_MIN    _PDCLIB_MIN_CALC( __INT_LEAST32_MAX__ )
-#define _PDCLIB_uint_least32_t     __UINT_LEAST32_TYPE__
-#define _PDCLIB_UINT_LEAST32_MAX   __UINT_LEAST32_MAX__
+#define _PDCLIB_int_least32_t __INT_LEAST32_TYPE__
+#define _PDCLIB_INT_LEAST32_MAX __INT_LEAST32_MAX__
+#define _PDCLIB_INT_LEAST32_MIN _PDCLIB_MIN_CALC(__INT_LEAST32_MAX__)
+#define _PDCLIB_uint_least32_t __UINT_LEAST32_TYPE__
+#define _PDCLIB_UINT_LEAST32_MAX __UINT_LEAST32_MAX__
 
 /* int_fast64_t / uint_fast64_t                                               */
-#define _PDCLIB_int_fast64_t       __INT_FAST64_TYPE__
-#define _PDCLIB_INT_FAST64_MAX     __INT_FAST64_MAX__
-#define _PDCLIB_INT_FAST64_MIN     _PDCLIB_MIN_CALC( __INT_FAST64_MAX__ )
-#define _PDCLIB_uint_fast64_t      __UINT_FAST64_TYPE__
-#define _PDCLIB_UINT_FAST64_MAX    __UINT_FAST64_MAX__
+#define _PDCLIB_int_fast64_t __INT_FAST64_TYPE__
+#define _PDCLIB_INT_FAST64_MAX __INT_FAST64_MAX__
+#define _PDCLIB_INT_FAST64_MIN _PDCLIB_MIN_CALC(__INT_FAST64_MAX__)
+#define _PDCLIB_uint_fast64_t __UINT_FAST64_TYPE__
+#define _PDCLIB_UINT_FAST64_MAX __UINT_FAST64_MAX__
 
 /* int_least64_t / uint_least64_t                                             */
-#define _PDCLIB_int_least64_t      __INT_LEAST64_TYPE__
-#define _PDCLIB_INT_LEAST64_MAX    __INT_LEAST64_MAX__
-#define _PDCLIB_INT_LEAST64_MIN    _PDCLIB_MIN_CALC( __INT_LEAST64_MAX__ )
-#define _PDCLIB_uint_least64_t     __UINT_LEAST64_TYPE__
-#define _PDCLIB_UINT_LEAST64_MAX   __UINT_LEAST64_MAX__
+#define _PDCLIB_int_least64_t __INT_LEAST64_TYPE__
+#define _PDCLIB_INT_LEAST64_MAX __INT_LEAST64_MAX__
+#define _PDCLIB_INT_LEAST64_MIN _PDCLIB_MIN_CALC(__INT_LEAST64_MAX__)
+#define _PDCLIB_uint_least64_t __UINT_LEAST64_TYPE__
+#define _PDCLIB_UINT_LEAST64_MAX __UINT_LEAST64_MAX__
 
 /* INTn_C / UINTn_C macros for define int_leastN_t / uint_leastN_t literals.  */
-#if defined( __INT8_C )
+#if defined(__INT8_C)
 /* GCC                                                                        */
-#define _PDCLIB_INT_LEAST8_C       __INT8_C
-#define _PDCLIB_UINT_LEAST8_C      __UINT8_C
-#define _PDCLIB_INT_LEAST16_C      __INT16_C
-#define _PDCLIB_UINT_LEAST16_C     __UINT16_C
-#define _PDCLIB_INT_LEAST32_C      __INT32_C
-#define _PDCLIB_UINT_LEAST32_C     __UINT32_C
-#define _PDCLIB_INT_LEAST64_C      __INT64_C
-#define _PDCLIB_UINT_LEAST64_C     __UINT64_C
-#elif defined( __INT8_C_SUFFIX__ )
+#define _PDCLIB_INT_LEAST8_C __INT8_C
+#define _PDCLIB_UINT_LEAST8_C __UINT8_C
+#define _PDCLIB_INT_LEAST16_C __INT16_C
+#define _PDCLIB_UINT_LEAST16_C __UINT16_C
+#define _PDCLIB_INT_LEAST32_C __INT32_C
+#define _PDCLIB_UINT_LEAST32_C __UINT32_C
+#define _PDCLIB_INT_LEAST64_C __INT64_C
+#define _PDCLIB_UINT_LEAST64_C __UINT64_C
+#elif defined(__INT8_C_SUFFIX__)
 /* Clang                                                                      */
-#define _PDCLIB_INT_LEAST8_C(c)    _PDCLIB_concat( c, __INT8_C_SUFFIX__ )
-#define _PDCLIB_UINT_LEAST8_C(c)   _PDCLIB_concat( c, __UINT8_C_SUFFIX__ )
-#define _PDCLIB_INT_LEAST16_C(c)   _PDCLIB_concat( c, __INT16_C_SUFFIX__ )
-#define _PDCLIB_UINT_LEAST16_C(c)  _PDCLIB_concat( c, __UINT16_C_SUFFIX__ )
-#define _PDCLIB_INT_LEAST32_C(c)   _PDCLIB_concat( c, __INT32_C_SUFFIX__ )
-#define _PDCLIB_UINT_LEAST32_C(c)  _PDCLIB_concat( c, __UINT32_C_SUFFIX__ )
-#define _PDCLIB_INT_LEAST64_C(c)   _PDCLIB_concat( c, __INT64_C_SUFFIX__ )
-#define _PDCLIB_UINT_LEAST64_C(c)  _PDCLIB_concat( c, __UINT64_C_SUFFIX__ )
+#define _PDCLIB_INT_LEAST8_C(c) _PDCLIB_concat(c, __INT8_C_SUFFIX__)
+#define _PDCLIB_UINT_LEAST8_C(c) _PDCLIB_concat(c, __UINT8_C_SUFFIX__)
+#define _PDCLIB_INT_LEAST16_C(c) _PDCLIB_concat(c, __INT16_C_SUFFIX__)
+#define _PDCLIB_UINT_LEAST16_C(c) _PDCLIB_concat(c, __UINT16_C_SUFFIX__)
+#define _PDCLIB_INT_LEAST32_C(c) _PDCLIB_concat(c, __INT32_C_SUFFIX__)
+#define _PDCLIB_UINT_LEAST32_C(c) _PDCLIB_concat(c, __UINT32_C_SUFFIX__)
+#define _PDCLIB_INT_LEAST64_C(c) _PDCLIB_concat(c, __INT64_C_SUFFIX__)
+#define _PDCLIB_UINT_LEAST64_C(c) _PDCLIB_concat(c, __UINT64_C_SUFFIX__)
 #else
 #error Please create your own _PDCLIB_config.h. Using the existing one as-is will not work. (Unsupported *INTn_C macros.)
 #endif
@@ -247,22 +247,19 @@
 /* the return structure in any way to fit the hardware. That is why those     */
 /* structs can be configured here.                                            */
 
-struct _PDCLIB_div_t
-{
-    int quot;
-    int rem;
+struct _PDCLIB_div_t {
+  int quot;
+  int rem;
 };
 
-struct _PDCLIB_ldiv_t
-{
-    long int quot;
-    long int rem;
+struct _PDCLIB_ldiv_t {
+  long int quot;
+  long int rem;
 };
 
-struct _PDCLIB_lldiv_t
-{
-    long long int quot;
-    long long int rem;
+struct _PDCLIB_lldiv_t {
+  long long int quot;
+  long long int rem;
 };
 
 /* -------------------------------------------------------------------------- */
@@ -270,9 +267,9 @@ struct _PDCLIB_lldiv_t
 /* -------------------------------------------------------------------------- */
 
 /* The result type of substracting two pointers                               */
-#define _PDCLIB_ptrdiff_t   __PTRDIFF_TYPE__
+#define _PDCLIB_ptrdiff_t __PTRDIFF_TYPE__
 #define _PDCLIB_PTRDIFF_MAX __PTRDIFF_MAX__
-#define _PDCLIB_PTRDIFF_MIN _PDCLIB_MIN_CALC( __PTRDIFF_MAX__ )
+#define _PDCLIB_PTRDIFF_MIN _PDCLIB_MIN_CALC(__PTRDIFF_MAX__)
 
 /* An integer type that can be accessed as atomic entity (think asynchronous  */
 /* interrupts). In a freestanding environment, the type itself need not be    */
@@ -280,55 +277,54 @@ struct _PDCLIB_lldiv_t
 /* but clang is only giving us its MAX value, so we use that to identify the  */
 /* type in _PDCLIB_int.h if the type definition is unavailable.               */
 #ifdef __SIG_ATOMIC_TYPE__
-#define _PDCLIB_sig_atomic_t   __SIG_ATOMIC_TYPE__
+#define _PDCLIB_sig_atomic_t __SIG_ATOMIC_TYPE__
 #endif
 #define _PDCLIB_SIG_ATOMIC_MAX __SIG_ATOMIC_MAX__
-#define _PDCLIB_SIG_ATOMIC_MIN _PDCLIB_MIN_CALC( __SIG_ATOMIC_MAX__ )
+#define _PDCLIB_SIG_ATOMIC_MIN _PDCLIB_MIN_CALC(__SIG_ATOMIC_MAX__)
 
 /* Result type of the 'sizeof' operator (must be unsigned).                   */
 /* Note: In <stdint.h>, this is taken as the base for RSIZE_MAX, the limit    */
 /* for the bounds-checking interfaces of Annex K. The recommendation by the   */
 /* standard is to use ( SIZE_MAX >> 1 ) when "targeting machines with large   */
 /* addess spaces", whereas small address spaces should use SIZE_MAX directly. */
-#define _PDCLIB_size_t   __SIZE_TYPE__
+#define _PDCLIB_size_t __SIZE_TYPE__
 #define _PDCLIB_SIZE_MAX __SIZE_MAX__
 
 /* Large enough an integer to hold all character codes of the widest          */
 /* supported locale.                                                          */
-#define _PDCLIB_wchar_t   __WCHAR_TYPE__
+#define _PDCLIB_wchar_t __WCHAR_TYPE__
 #define _PDCLIB_WCHAR_MAX __WCHAR_MAX__
 #define _PDCLIB_WCHAR_MIN __WCHAR_MIN__
 
 /* Large enough an integer to hold all character codes of the widest          */
 /* supported locale plus WEOF (which needs not to be equal to EOF, nor needs  */
 /* to be of negative value).                                                  */
-#define _PDCLIB_wint_t   __WINT_TYPE__
+#define _PDCLIB_wint_t __WINT_TYPE__
 #define _PDCLIB_WINT_MAX __WINT_MAX__
 #define _PDCLIB_WINT_MIN __WINT_MIN__
 
 /* Integer types capable of taking the (cast) value of a void *, and having   */
 /* the value cast back to void *, comparing equal to the original.            */
-#define _PDCLIB_intptr_t     __INTPTR_TYPE__
-#define _PDCLIB_INTPTR_MAX   __INTPTR_MAX__
-#define _PDCLIB_INTPTR_MIN   _PDCLIB_MIN_CALC( __INTPTR_MAX__ )
-#define _PDCLIB_uintptr_t    __UINTPTR_TYPE__
-#define _PDCLIB_UINTPTR_MAX  __UINTPTR_MAX__
+#define _PDCLIB_intptr_t __INTPTR_TYPE__
+#define _PDCLIB_INTPTR_MAX __INTPTR_MAX__
+#define _PDCLIB_INTPTR_MIN _PDCLIB_MIN_CALC(__INTPTR_MAX__)
+#define _PDCLIB_uintptr_t __UINTPTR_TYPE__
+#define _PDCLIB_UINTPTR_MAX __UINTPTR_MAX__
 
 /* Largest supported integer type. Implementation note: see _PDCLIB_atomax(). */
-#define _PDCLIB_intmax_t     __INTMAX_TYPE__
-#define _PDCLIB_INTMAX_MAX   __INTMAX_MAX__
-#define _PDCLIB_INTMAX_MIN   _PDCLIB_MIN_CALC( __INTMAX_MAX__ )
-#define _PDCLIB_INTMAX_C     __INTMAX_C
-#define _PDCLIB_uintmax_t    __UINTMAX_TYPE__
-#define _PDCLIB_UINTMAX_MAX  __UINTMAX_MAX__
-#define _PDCLIB_UINTMAX_C    __UINTMAX_C
+#define _PDCLIB_intmax_t __INTMAX_TYPE__
+#define _PDCLIB_INTMAX_MAX __INTMAX_MAX__
+#define _PDCLIB_INTMAX_MIN _PDCLIB_MIN_CALC(__INTMAX_MAX__)
+#define _PDCLIB_INTMAX_C __INTMAX_C
+#define _PDCLIB_uintmax_t __UINTMAX_TYPE__
+#define _PDCLIB_UINTMAX_MAX __UINTMAX_MAX__
+#define _PDCLIB_UINTMAX_C __UINTMAX_C
 
 /* <inttypes.h> defines imaxdiv(), which is equivalent to the div() function  */
 /* family (see further above) with intmax_t as basis.                         */
-struct _PDCLIB_imaxdiv_t
-{
-    _PDCLIB_intmax_t quot;
-    _PDCLIB_intmax_t rem;
+struct _PDCLIB_imaxdiv_t {
+  _PDCLIB_intmax_t quot;
+  _PDCLIB_intmax_t rem;
 };
 
 /* -------------------------------------------------------------------------- */
@@ -357,18 +353,18 @@ struct _PDCLIB_imaxdiv_t
 #ifdef __MINGW64__
 #define _PDCLIB_time_t long long
 #define _PDCLIB_TIME_MAX __LONG_LONG_MAX__
-#define _PDCLIB_TIME_MIN _PDCLIB_MIN_CALC( __LONG_LONG_MAX__ )
+#define _PDCLIB_TIME_MIN _PDCLIB_MIN_CALC(__LONG_LONG_MAX__)
 #else
 #define _PDCLIB_time_t long
 #define _PDCLIB_TIME_MAX __LONG_MAX__
-#define _PDCLIB_TIME_MIN _PDCLIB_MIN_CALC( __LONG_MAX__ )
+#define _PDCLIB_TIME_MIN _PDCLIB_MIN_CALC(__LONG_MAX__)
 #endif
 
 /* "Unix time" uses 1970-01-01T00:00:00 as "epoch". If your system uses a     */
 /* different "zero point" for its timestamps, set this to the offset between  */
 /* your epoch and Unix epoch. (For example, NTP uses 1900-01-01T00:00:00 as   */
 /* epoch, giving an offset of (70 * 365 + 17) * 86400 = 220898800 seconds.)   */
-#define _PDCLIB_EPOCH_BIAS INT64_C( 0 )
+#define _PDCLIB_EPOCH_BIAS INT64_C(0)
 
 /* Leave this alone for now.                                                  */
 #define _PDCLIB_TIME_UTC 1
@@ -449,37 +445,41 @@ struct _PDCLIB_imaxdiv_t
 /* This implementation casts an integer zero to 'pointer to type', and then   */
 /* takes the address of member. This is undefined behaviour but should work   */
 /* on most compilers.                                                         */
-#define _PDCLIB_offsetof( type, member ) ( (size_t) &( ( (type *) 0 )->member ) )
+#define _PDCLIB_offsetof(type, member) ((size_t) & (((type *)0)->member))
 
 /* Variable Length Parameter List Handling (<stdarg.h>)                       */
 /* The macros defined by <stdarg.h> are highly dependent on the calling       */
 /* conventions used, and you probably have to replace them with builtins of   */
 /* your compiler.                                                             */
 
-#if defined( __i386 )
+#if defined(__i386)
 
 /* The following generic implementation works only for pure stack-based       */
 /* architectures, and only if arguments are aligned to pointer type. Credits  */
 /* to Michael Moody, who contributed this to the Public Domain.               */
 
 /* Internal helper macro. va_round is not part of <stdarg.h>.                 */
-#define _PDCLIB_va_round( type ) ( (sizeof(type) + sizeof(void *) - 1) & ~(sizeof(void *) - 1) )
+#define _PDCLIB_va_round(type)                                                 \
+  ((sizeof(type) + sizeof(void *) - 1) & ~(sizeof(void *) - 1))
 
-typedef char * _PDCLIB_va_list;
-#define _PDCLIB_va_arg( ap, type ) ( (ap) += (_PDCLIB_va_round(type)), ( *(type*) ( (ap) - (_PDCLIB_va_round(type)) ) ) )
-#define _PDCLIB_va_copy( dest, src ) ( (dest) = (src), (void)0 )
-#define _PDCLIB_va_end( ap ) ( (ap) = (void *)0, (void)0 )
-#define _PDCLIB_va_start( ap, parmN ) ( (ap) = (char *) &parmN + ( _PDCLIB_va_round(parmN) ), (void)0 )
+typedef char *_PDCLIB_va_list;
+#define _PDCLIB_va_arg(ap, type)                                               \
+  ((ap) += (_PDCLIB_va_round(type)),                                           \
+   (*(type *)((ap) - (_PDCLIB_va_round(type)))))
+#define _PDCLIB_va_copy(dest, src) ((dest) = (src), (void)0)
+#define _PDCLIB_va_end(ap) ((ap) = (void *)0, (void)0)
+#define _PDCLIB_va_start(ap, parmN)                                            \
+  ((ap) = (char *)&parmN + (_PDCLIB_va_round(parmN)), (void)0)
 
-#elif defined( __x86_64 ) || defined( __arm__ ) || defined( __ARM_NEON )
+#elif defined(__x86_64) || defined(__arm__) || defined(__ARM_NEON)
 
 /* No way to cover x86_64 or arm with a generic implementation, as it uses    */
 /* register-based parameter passing. Using compiler builtins here.            */
 typedef __builtin_va_list _PDCLIB_va_list;
-#define _PDCLIB_va_arg( ap, type ) ( __builtin_va_arg( ap, type ) )
-#define _PDCLIB_va_copy( dest, src ) ( __builtin_va_copy( dest, src ) )
-#define _PDCLIB_va_end( ap ) ( __builtin_va_end( ap ) )
-#define _PDCLIB_va_start( ap, parmN ) ( __builtin_va_start( ap, parmN ) )
+#define _PDCLIB_va_arg(ap, type) (__builtin_va_arg(ap, type))
+#define _PDCLIB_va_copy(dest, src) (__builtin_va_copy(dest, src))
+#define _PDCLIB_va_end(ap) (__builtin_va_end(ap))
+#define _PDCLIB_va_start(ap, parmN) (__builtin_va_start(ap, parmN))
 
 #else
 
@@ -502,7 +502,7 @@ typedef int _PDCLIB_fd_t;
 
 /* The value of type _PDCLIB_fd_t returned by _PDCLIB_open() if the operation */
 /* failed.                                                                    */
-#define _PDCLIB_NOHANDLE ( (_PDCLIB_fd_t) -1 )
+#define _PDCLIB_NOHANDLE ((_PDCLIB_fd_t)-1)
 
 /* The default size for file buffers. Must be at least 256.                   */
 #define _PDCLIB_BUFSIZ 1024
@@ -567,161 +567,161 @@ typedef int _PDCLIB_fd_t;
 /* The values below are read from a Linux system.                             */
 
 /* Argument list too long */
-#define _PDCLIB_E2BIG             7
+#define _PDCLIB_E2BIG 7
 /* Permission denied */
-#define _PDCLIB_EACCES           13
+#define _PDCLIB_EACCES 13
 /* Address in use */
-#define _PDCLIB_EADDRINUSE       98
+#define _PDCLIB_EADDRINUSE 98
 /* Address not available */
-#define _PDCLIB_EADDRNOTAVAIL    99
+#define _PDCLIB_EADDRNOTAVAIL 99
 /* Address family not supported */
-#define _PDCLIB_EAFNOSUPPORT     97
+#define _PDCLIB_EAFNOSUPPORT 97
 /* Resource unavailable, try again */
-#define _PDCLIB_EAGAIN           11
+#define _PDCLIB_EAGAIN 11
 /* Connection already in progress */
-#define _PDCLIB_EALREADY        114
+#define _PDCLIB_EALREADY 114
 /* Bad file descriptor */
-#define _PDCLIB_EBADF             9
+#define _PDCLIB_EBADF 9
 /* Bad message */
-#define _PDCLIB_EBADMSG          74
+#define _PDCLIB_EBADMSG 74
 /* Device or resource busy */
-#define _PDCLIB_EBUSY            16
+#define _PDCLIB_EBUSY 16
 /* Operation canceled */
-#define _PDCLIB_ECANCELED       125
+#define _PDCLIB_ECANCELED 125
 /* No child processes */
-#define _PDCLIB_ECHILD           10
+#define _PDCLIB_ECHILD 10
 /* Connection aborted */
-#define _PDCLIB_ECONNABORTED    103
+#define _PDCLIB_ECONNABORTED 103
 /* Connection refused */
-#define _PDCLIB_ECONNREFUSED    111
+#define _PDCLIB_ECONNREFUSED 111
 /* Connection reset */
-#define _PDCLIB_ECONNRESET      104
+#define _PDCLIB_ECONNRESET 104
 /* Resource deadlock would occur */
-#define _PDCLIB_EDEADLK          35
+#define _PDCLIB_EDEADLK 35
 /* Destination address required */
-#define _PDCLIB_EDESTADDRREQ     89
+#define _PDCLIB_EDESTADDRREQ 89
 /* Mathematics argument out of domain of function */
-#define _PDCLIB_EDOM             33
+#define _PDCLIB_EDOM 33
 /* File exists */
-#define _PDCLIB_EEXIST           17
+#define _PDCLIB_EEXIST 17
 /* Bad address */
-#define _PDCLIB_EFAULT           14
+#define _PDCLIB_EFAULT 14
 /* File too large */
-#define _PDCLIB_EFBIG            27
+#define _PDCLIB_EFBIG 27
 /* Host is unreachable */
-#define _PDCLIB_EHOSTUNREACH    113
+#define _PDCLIB_EHOSTUNREACH 113
 /* Identifier removed */
-#define _PDCLIB_EIDRM            43
+#define _PDCLIB_EIDRM 43
 /* Illegal byte sequence */
-#define _PDCLIB_EILSEQ           84
+#define _PDCLIB_EILSEQ 84
 /* Operation in progress */
-#define _PDCLIB_EINPROGRESS     115
+#define _PDCLIB_EINPROGRESS 115
 /* Interrupted function */
-#define _PDCLIB_EINTR             4
+#define _PDCLIB_EINTR 4
 /* Invalid argument */
-#define _PDCLIB_EINVAL           22
+#define _PDCLIB_EINVAL 22
 /* I/O error */
-#define _PDCLIB_EIO               5
+#define _PDCLIB_EIO 5
 /* Socket is connected */
-#define _PDCLIB_EISCONN         106
+#define _PDCLIB_EISCONN 106
 /* Is a directory */
-#define _PDCLIB_EISDIR           21
+#define _PDCLIB_EISDIR 21
 /* Too many levels of symbolic links */
-#define _PDCLIB_ELOOP            40
+#define _PDCLIB_ELOOP 40
 /* File descriptor value too large */
-#define _PDCLIB_EMFILE           24
+#define _PDCLIB_EMFILE 24
 /* Too many links */
-#define _PDCLIB_EMLINK           31
+#define _PDCLIB_EMLINK 31
 /* Message too large */
-#define _PDCLIB_EMSGSIZE         90
+#define _PDCLIB_EMSGSIZE 90
 /* Filename too long */
-#define _PDCLIB_ENAMETOOLONG     36
+#define _PDCLIB_ENAMETOOLONG 36
 /* Network is down */
-#define _PDCLIB_ENETDOWN        100
+#define _PDCLIB_ENETDOWN 100
 /* Connection aborted by network */
-#define _PDCLIB_ENETRESET       102
+#define _PDCLIB_ENETRESET 102
 /* Network unreachable */
-#define _PDCLIB_ENETUNREACH     101
+#define _PDCLIB_ENETUNREACH 101
 /* Too many files open in system */
-#define _PDCLIB_ENFILE           23
+#define _PDCLIB_ENFILE 23
 /* No buffer space available */
-#define _PDCLIB_ENOBUFS         105
+#define _PDCLIB_ENOBUFS 105
 /* No message is available on the STREAM head read queue */
-#define _PDCLIB_ENODATA          61
+#define _PDCLIB_ENODATA 61
 /* No such device */
-#define _PDCLIB_ENODEV           19
+#define _PDCLIB_ENODEV 19
 /* No such file or directory */
-#define _PDCLIB_ENOENT            2
+#define _PDCLIB_ENOENT 2
 /* Executable file format error */
-#define _PDCLIB_ENOEXEC           8
+#define _PDCLIB_ENOEXEC 8
 /* No locks available */
-#define _PDCLIB_ENOLCK           37
+#define _PDCLIB_ENOLCK 37
 /* Link has been severed */
-#define _PDCLIB_ENOLINK          67
+#define _PDCLIB_ENOLINK 67
 /* Not enough space */
-#define _PDCLIB_ENOMEM           12
+#define _PDCLIB_ENOMEM 12
 /* No message of the desired type */
-#define _PDCLIB_ENOMSG           42
+#define _PDCLIB_ENOMSG 42
 /* Protocol not available */
-#define _PDCLIB_ENOPROTOOPT      92
+#define _PDCLIB_ENOPROTOOPT 92
 /* No space left on device */
-#define _PDCLIB_ENOSPC           28
+#define _PDCLIB_ENOSPC 28
 /* No STREAM resources */
-#define _PDCLIB_ENOSR            63
+#define _PDCLIB_ENOSR 63
 /* Not a STREAM */
-#define _PDCLIB_ENOSTR           60
+#define _PDCLIB_ENOSTR 60
 /* Function not supported */
-#define _PDCLIB_ENOSYS           38
+#define _PDCLIB_ENOSYS 38
 /* The socket is not connected */
-#define _PDCLIB_ENOTCONN        107
+#define _PDCLIB_ENOTCONN 107
 /* Not a directory */
-#define _PDCLIB_ENOTDIR          20
+#define _PDCLIB_ENOTDIR 20
 /* Directory not empty */
-#define _PDCLIB_ENOTEMPTY        39
+#define _PDCLIB_ENOTEMPTY 39
 /* State not recoverable */
 #define _PDCLIB_ENOTRECOVERABLE 131
 /* Not a socket */
-#define _PDCLIB_ENOTSOCK         88
+#define _PDCLIB_ENOTSOCK 88
 /* Not supported */
-#define _PDCLIB_ENOTSUP          95
+#define _PDCLIB_ENOTSUP 95
 /* Inappropriate I/O control operation */
-#define _PDCLIB_ENOTTY           25
+#define _PDCLIB_ENOTTY 25
 /* No such device or address */
-#define _PDCLIB_ENXIO             6
+#define _PDCLIB_ENXIO 6
 /* Operation not supported on socket */
-#define _PDCLIB_EOPNOTSUPP       95
+#define _PDCLIB_EOPNOTSUPP 95
 /* Value too large to be stored in data type */
-#define _PDCLIB_EOVERFLOW        75
+#define _PDCLIB_EOVERFLOW 75
 /* Previous owner died */
-#define _PDCLIB_EOWNERDEAD      130
+#define _PDCLIB_EOWNERDEAD 130
 /* Operation not permitted */
-#define _PDCLIB_EPERM             1
+#define _PDCLIB_EPERM 1
 /* Broken pipe */
-#define _PDCLIB_EPIPE            32
+#define _PDCLIB_EPIPE 32
 /* Protocol error */
-#define _PDCLIB_EPROTO           71
+#define _PDCLIB_EPROTO 71
 /* Protocol not supported */
-#define _PDCLIB_EPROTONOSUPPORT  93
+#define _PDCLIB_EPROTONOSUPPORT 93
 /* Protocol wrong type for socket */
-#define _PDCLIB_EPROTOTYPE       91
+#define _PDCLIB_EPROTOTYPE 91
 /* Result too large */
-#define _PDCLIB_ERANGE           34
+#define _PDCLIB_ERANGE 34
 /* Read-only file system */
-#define _PDCLIB_EROFS            30
+#define _PDCLIB_EROFS 30
 /* Invalid seek */
-#define _PDCLIB_ESPIPE           29
+#define _PDCLIB_ESPIPE 29
 /* No such process */
-#define _PDCLIB_ESRCH             3
+#define _PDCLIB_ESRCH 3
 /* Stream ioctl() timeout */
-#define _PDCLIB_ETIME            62
+#define _PDCLIB_ETIME 62
 /* Connection timed out */
-#define _PDCLIB_ETIMEDOUT       110
+#define _PDCLIB_ETIMEDOUT 110
 /* Text file busy */
-#define _PDCLIB_ETXTBSY          26
+#define _PDCLIB_ETXTBSY 26
 /* Operation would block */
-#define _PDCLIB_EWOULDBLOCK      11
+#define _PDCLIB_EWOULDBLOCK 11
 /* Cross-device link */
-#define _PDCLIB_EXDEV            18
+#define _PDCLIB_EXDEV 18
 
 /* The highest defined errno value, plus one. This is used to set the size    */
 /* of the array in struct _PDCLIB_lc_text_t holding error messages for the    */
@@ -733,7 +733,7 @@ typedef int _PDCLIB_fd_t;
 /* The error message used for unknown error codes (generated by errno_readout */
 /* for consistency between the 'holes' in the list of defined error messages  */
 /* and the text generated by e.g. strerror() for out-of-range error values.)  */
-#define _PDCLIB_EUNKNOWN_TEXT (char*)"unknown error"
+#define _PDCLIB_EUNKNOWN_TEXT (char *)"unknown error"
 
 /* locale data -------------------------------------------------------------- */
 
@@ -767,11 +767,20 @@ typedef unsigned int wint_t;
 /* can be copy & pasted here.                                                 */
 
 typedef unsigned long int _PDCLIB_thrd_t;
-typedef union { unsigned char _PDCLIB_cnd_t_data[ 48 ]; long long int _PDCLIB_cnd_t_align; } _PDCLIB_cnd_t;
-#if defined( __arm__ ) || defined( __ARM_NEON )
-typedef union { unsigned char _PDCLIB_mtx_t_data[ 24 ]; long int _PDCLIB_mtx_t_align; } _PDCLIB_mtx_t;
+typedef union {
+  unsigned char _PDCLIB_cnd_t_data[48];
+  long long int _PDCLIB_cnd_t_align;
+} _PDCLIB_cnd_t;
+#if defined(__arm__) || defined(__ARM_NEON)
+typedef union {
+  unsigned char _PDCLIB_mtx_t_data[24];
+  long int _PDCLIB_mtx_t_align;
+} _PDCLIB_mtx_t;
 #else
-typedef union { unsigned char _PDCLIB_mtx_t_data[ 40 ]; long int _PDCLIB_mtx_t_align; } _PDCLIB_mtx_t;
+typedef union {
+  unsigned char _PDCLIB_mtx_t_data[40];
+  long int _PDCLIB_mtx_t_align;
+} _PDCLIB_mtx_t;
 #endif
 typedef unsigned int _PDCLIB_tss_t;
 typedef int _PDCLIB_once_flag;
@@ -782,38 +791,64 @@ typedef int _PDCLIB_once_flag;
 #define _PDCLIB_TSS_DTOR_ITERATIONS 4
 /* The following are not made public in any header, but used internally for   */
 /* interfacing with the pthread API.                                          */
-typedef union { unsigned char _PDCLIB_cnd_attr_t_data[ 4 ]; int _PDCLIB_cnd_attr_t_align; } _PDCLIB_cnd_attr_t;
-typedef union { unsigned char _PDCLIB_mtx_attr_t_data[ 4 ]; int _PDCLIB_mtx_attr_t_align; } _PDCLIB_mtx_attr_t;
-#if defined( __arm__ ) || defined( __ARM_NEON )
-typedef union { unsigned char _PDCLIB_thrd_attr_t_data[ 36 ]; long int _PDCLIB_thrd_attr_t_align; } _PDCLIB_thrd_attr_t;
+typedef union {
+  unsigned char _PDCLIB_cnd_attr_t_data[4];
+  int _PDCLIB_cnd_attr_t_align;
+} _PDCLIB_cnd_attr_t;
+typedef union {
+  unsigned char _PDCLIB_mtx_attr_t_data[4];
+  int _PDCLIB_mtx_attr_t_align;
+} _PDCLIB_mtx_attr_t;
+#if defined(__arm__) || defined(__ARM_NEON)
+typedef union {
+  unsigned char _PDCLIB_thrd_attr_t_data[36];
+  long int _PDCLIB_thrd_attr_t_align;
+} _PDCLIB_thrd_attr_t;
 #else
-typedef union { unsigned char _PDCLIB_thrd_attr_t_data[ 56 ]; long int _PDCLIB_thrd_attr_t_align; } _PDCLIB_thrd_attr_t;
+typedef union {
+  unsigned char _PDCLIB_thrd_attr_t_data[56];
+  long int _PDCLIB_thrd_attr_t_align;
+} _PDCLIB_thrd_attr_t;
 #endif
 /* Static initialization of recursive mutex.                                  */
-#if defined( __arm__ ) || defined( __ARM_NEON )
-#define _PDCLIB_MTX_RECURSIVE_INIT { {\
-         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\
-         0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00,\
-         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } }
+#if defined(__arm__) || defined(__ARM_NEON)
+#define _PDCLIB_MTX_RECURSIVE_INIT                                             \
+  {                                                                            \
+    {                                                                          \
+      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  \
+          0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    \
+          0x00                                                                 \
+    }                                                                          \
+  }
 /* Static initialization of plain / timeout mutex (identical with pthread).   */
-#define _PDCLIB_MTX_PLAIN_INIT { {\
-         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\
-         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\
-         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } }
+#define _PDCLIB_MTX_PLAIN_INIT                                                 \
+  {                                                                            \
+    {                                                                          \
+      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  \
+          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    \
+          0x00                                                                 \
+    }                                                                          \
+  }
 #else
-#define _PDCLIB_MTX_RECURSIVE_INIT { {\
-     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\
-     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\
-     0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\
-     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\
-     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } }
+#define _PDCLIB_MTX_RECURSIVE_INIT                                             \
+  {                                                                            \
+    {                                                                          \
+      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  \
+          0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    \
+          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    \
+          0x00, 0x00, 0x00, 0x00, 0x00, 0x00                                   \
+    }                                                                          \
+  }
 /* Static initialization of plain / timeout mutex (identical with pthread).   */
-#define _PDCLIB_MTX_PLAIN_INIT { {\
-     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\
-     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\
-     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\
-     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,\
-     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } }
+#define _PDCLIB_MTX_PLAIN_INIT                                                 \
+  {                                                                            \
+    {                                                                          \
+      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  \
+          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    \
+          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,    \
+          0x00, 0x00, 0x00, 0x00, 0x00, 0x00                                   \
+    }                                                                          \
+  }
 #endif
 
 #endif

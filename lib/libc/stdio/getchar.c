@@ -8,9 +8,8 @@
 
 #ifndef REGTEST
 
-int getchar( void )
-{
-    return fgetc( stdin );
+int getchar(void) {
+  return fgetc(stdin);
 }
 
 #endif
@@ -19,10 +18,9 @@ int getchar( void )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    /* Testing covered by ftell.c */
-    return TEST_RESULTS;
+int main(void) {
+  /* Testing covered by ftell.c */
+  return TEST_RESULTS;
 }
 
 #endif

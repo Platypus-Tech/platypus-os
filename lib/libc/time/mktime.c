@@ -15,14 +15,13 @@
 extern mtx_t _PDCLIB_time_mtx;
 #endif
 
-time_t mktime( struct tm * timeptr )
-{
-    time_t t;
-    _PDCLIB_LOCK( _PDCLIB_time_mtx );
-    _PDCLIB_tzset_unlocked();
-    t = _PDCLIB_mktime_tzname( &_PDCLIB_lclmem, timeptr, true );
-    _PDCLIB_UNLOCK( _PDCLIB_time_mtx );
-    return t;
+time_t mktime(struct tm *timeptr) {
+  time_t t;
+  _PDCLIB_LOCK(_PDCLIB_time_mtx);
+  _PDCLIB_tzset_unlocked();
+  t = _PDCLIB_mktime_tzname(&_PDCLIB_lclmem, timeptr, true);
+  _PDCLIB_UNLOCK(_PDCLIB_time_mtx);
+  return t;
 }
 
 #endif
@@ -33,21 +32,20 @@ time_t mktime( struct tm * timeptr )
 
 #include <limits.h>
 
-int main( void )
-{
-    /* System Clock DST */
-    struct tm time;
-    time_t t;
+int main(void) {
+  /* System Clock DST */
+  struct tm time;
+  time_t t;
 
-    MKTIME( time, 52, 45, 21, 13, 11, 1, 0, 0 );
-    t = mktime( &time );
-    TESTCASE( t == -2147483648l );
+  MKTIME(time, 52, 45, 21, 13, 11, 1, 0, 0);
+  t = mktime(&time);
+  TESTCASE(t == -2147483648l);
 
-    MKTIME( time, 7, 14, 4, 19, 0, 138, 0, 0 );
-    t = mktime( &time );
-    TESTCASE( t == 2147483647l );
+  MKTIME(time, 7, 14, 4, 19, 0, 138, 0, 0);
+  t = mktime(&time);
+  TESTCASE(t == 2147483647l);
 
-    return TEST_RESULTS;
+  return TEST_RESULTS;
 }
 
 #endif

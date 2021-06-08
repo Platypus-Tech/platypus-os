@@ -11,8 +11,8 @@
 extern "C" {
 #endif
 
-#include "pdclib/_PDCLIB_lib_ext1.h"
 #include "pdclib/_PDCLIB_internal.h"
+#include "pdclib/_PDCLIB_lib_ext1.h"
 
 typedef _PDCLIB_ptrdiff_t ptrdiff_t;
 
@@ -22,7 +22,7 @@ typedef _PDCLIB_size_t size_t;
 #endif
 
 #ifndef __cplusplus
-typedef _PDCLIB_wchar_t   wchar_t;
+typedef _PDCLIB_wchar_t wchar_t;
 #endif
 
 #ifndef _PDCLIB_NULL_DEFINED
@@ -30,11 +30,11 @@ typedef _PDCLIB_wchar_t   wchar_t;
 #define NULL _PDCLIB_NULL
 #endif
 
-#define offsetof( type, member ) _PDCLIB_offsetof( type, member )
+#define offsetof(type, member) _PDCLIB_offsetof(type, member)
 
 /* Annex K -- Bounds-checking interfaces */
 
-#if ( __STDC_WANT_LIB_EXT1__ + 0 ) != 0
+#if (__STDC_WANT_LIB_EXT1__ + 0) != 0
 #ifndef _PDCLIB_RSIZE_T_DEFINED
 #define _PDCLIB_RSIZE_T_DEFINED _PDCLIB_RSIZE_T_DEFINED
 typedef size_t rsize_t;

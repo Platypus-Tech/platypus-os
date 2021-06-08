@@ -10,9 +10,8 @@
 
 #include <locale.h>
 
-int ispunct( int c )
-{
-    return ( _PDCLIB_lc_ctype->entry[c].flags & _PDCLIB_CTYPE_PUNCT );
+int ispunct(int c) {
+  return (_PDCLIB_lc_ctype->entry[c].flags & _PDCLIB_CTYPE_PUNCT);
 }
 
 #endif
@@ -21,18 +20,17 @@ int ispunct( int c )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    TESTCASE( ! ispunct( 'a' ) );
-    TESTCASE( ! ispunct( 'z' ) );
-    TESTCASE( ! ispunct( 'A' ) );
-    TESTCASE( ! ispunct( 'Z' ) );
-    TESTCASE( ispunct( '@' ) );
-    TESTCASE( ispunct( '.' ) );
-    TESTCASE( ! ispunct( '\t' ) );
-    TESTCASE( ! ispunct( '\0' ) );
-    TESTCASE( ! ispunct( ' ' ) );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(!ispunct('a'));
+  TESTCASE(!ispunct('z'));
+  TESTCASE(!ispunct('A'));
+  TESTCASE(!ispunct('Z'));
+  TESTCASE(ispunct('@'));
+  TESTCASE(ispunct('.'));
+  TESTCASE(!ispunct('\t'));
+  TESTCASE(!ispunct('\0'));
+  TESTCASE(!ispunct(' '));
+  return TEST_RESULTS;
 }
 
 #endif

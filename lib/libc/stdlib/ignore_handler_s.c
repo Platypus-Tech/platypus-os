@@ -11,9 +11,9 @@
 
 #include <stdio.h>
 
-void ignore_handler_s( const char * _PDCLIB_restrict msg, void * _PDCLIB_restrict ptr, errno_t errno )
-{
-    return;
+void ignore_handler_s(const char *_PDCLIB_restrict msg,
+                      void *_PDCLIB_restrict ptr, errno_t errno) {
+  return;
 }
 
 #endif
@@ -22,10 +22,9 @@ void ignore_handler_s( const char * _PDCLIB_restrict msg, void * _PDCLIB_restric
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    TESTCASE( NO_TESTDRIVER );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(NO_TESTDRIVER);
+  return TEST_RESULTS;
 }
 
 #endif

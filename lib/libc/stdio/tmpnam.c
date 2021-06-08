@@ -12,19 +12,17 @@
 
 #include <string.h>
 
-char * tmpnam( char * s )
-{
-    static char filename[ L_tmpnam ];
-    FILE * file = tmpfile();
+char *tmpnam(char *s) {
+  static char filename[L_tmpnam];
+  FILE *file = tmpfile();
 
-    if ( s == NULL )
-    {
-        s = filename;
-    }
+  if (s == NULL) {
+    s = filename;
+  }
 
-    strcpy( s, file->filename );
-    fclose( file );
-    return s;
+  strcpy(s, file->filename);
+  fclose(file);
+  return s;
 }
 
 #endif
@@ -35,10 +33,9 @@ char * tmpnam( char * s )
 
 #include <string.h>
 
-int main( void )
-{
-    TESTCASE( strlen( tmpnam( NULL ) ) < L_tmpnam );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(strlen(tmpnam(NULL)) < L_tmpnam);
+  return TEST_RESULTS;
 }
 
 #endif

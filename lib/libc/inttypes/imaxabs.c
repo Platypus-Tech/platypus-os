@@ -8,9 +8,8 @@
 
 #ifndef REGTEST
 
-intmax_t imaxabs( intmax_t j )
-{
-    return ( j >= 0 ) ? j : -j;
+intmax_t imaxabs(intmax_t j) {
+  return (j >= 0) ? j : -j;
 }
 
 #endif
@@ -21,12 +20,11 @@ intmax_t imaxabs( intmax_t j )
 
 #include <limits.h>
 
-int main( void )
-{
-    TESTCASE( imaxabs( ( intmax_t )0 ) == 0 );
-    TESTCASE( imaxabs( INTMAX_MAX ) == INTMAX_MAX );
-    TESTCASE( imaxabs( INTMAX_MIN + 1 ) == -( INTMAX_MIN + 1 ) );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(imaxabs((intmax_t)0) == 0);
+  TESTCASE(imaxabs(INTMAX_MAX) == INTMAX_MAX);
+  TESTCASE(imaxabs(INTMAX_MIN + 1) == -(INTMAX_MIN + 1));
+  return TEST_RESULTS;
 }
 
 #endif

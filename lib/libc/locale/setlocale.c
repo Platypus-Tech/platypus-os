@@ -39,19 +39,15 @@ static const char * _PDCLIB_default_locale( int category )
 }
 #endif
 
-char * setlocale( int category, const char * locale )
-{
-    /* All below is very much work-in-progress, so we do a dumb-dummy
-       return here.
-    */
-    if ( locale == NULL || ! strcmp( locale, "C" ) )
-    {
-        return ( char * )"C";
-    }
-    else
-    {
-        return NULL;
-    }
+char *setlocale(int category, const char *locale) {
+  /* All below is very much work-in-progress, so we do a dumb-dummy
+     return here.
+  */
+  if (locale == NULL || !strcmp(locale, "C")) {
+    return (char *)"C";
+  } else {
+    return NULL;
+  }
 
 #if 0
     /* Path to locale data files - _PDCLIB_LOCALE_PATH unless overruled
@@ -256,14 +252,13 @@ char * setlocale( int category, const char * locale )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    TESTCASE( strcmp( setlocale( LC_ALL, "C" ), "C" ) == 0 );
+int main(void) {
+  TESTCASE(strcmp(setlocale(LC_ALL, "C"), "C") == 0);
 #ifndef REGTEST
-    TESTCASE( setlocale( LC_ALL, "" ) == NULL );
+  TESTCASE(setlocale(LC_ALL, "") == NULL);
 #endif
-    TESTCASE( strcmp( setlocale( LC_ALL, NULL ), "C" ) == 0 );
-    return TEST_RESULTS;
+  TESTCASE(strcmp(setlocale(LC_ALL, NULL), "C") == 0);
+  return TEST_RESULTS;
 }
 
 #endif

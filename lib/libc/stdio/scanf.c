@@ -4,19 +4,18 @@
    Permission is granted to use, modify, and / or redistribute at will.
 */
 
-#include <stdio.h>
 #include <stdarg.h>
+#include <stdio.h>
 
 #ifndef REGTEST
 
-int scanf( const char * _PDCLIB_restrict format, ... )
-{
-    int rc;
-    va_list ap;
-    va_start( ap, format );
-    rc = vfscanf( stdin, format, ap );
-    va_end( ap );
-    return rc;
+int scanf(const char *_PDCLIB_restrict format, ...) {
+  int rc;
+  va_list ap;
+  va_start(ap, format);
+  rc = vfscanf(stdin, format, ap);
+  va_end(ap);
+  return rc;
 }
 
 #endif
@@ -27,16 +26,15 @@ int scanf( const char * _PDCLIB_restrict format, ... )
 
 #include "_PDCLIB_test.h"
 
-#define testscanf( stream, format, ... ) scanf( format, __VA_ARGS__ )
+#define testscanf(stream, format, ...) scanf(format, __VA_ARGS__)
 
-int main( void )
-{
-    FILE * source;
-    TESTCASE( ( source = freopen( testfile, "wb+", stdin ) ) != NULL );
+int main(void) {
+  FILE *source;
+  TESTCASE((source = freopen(testfile, "wb+", stdin)) != NULL);
 #include "scanf_testcases.h"
-    TESTCASE( fclose( source ) == 0 );
-    TESTCASE( remove( testfile ) == 0 );
-    return TEST_RESULTS;
+  TESTCASE(fclose(source) == 0);
+  TESTCASE(remove(testfile) == 0);
+  return TEST_RESULTS;
 }
 
 #endif

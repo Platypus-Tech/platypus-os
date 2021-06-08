@@ -34,32 +34,55 @@ extern "C" {
    3 - sign immediately precedes symbol
    4 - sign immediately succeeds symbol
 */
-struct lconv
-{
-    char * decimal_point;      /* decimal point character                     */ /* LC_NUMERIC */
-    char * thousands_sep;      /* character for separating groups of digits   */ /* LC_NUMERIC */
-    char * grouping;           /* string indicating the size of digit groups  */ /* LC_NUMERIC */
-    char * mon_decimal_point;  /* decimal point for monetary quantities       */ /* LC_MONETARY */
-    char * mon_thousands_sep;  /* thousands_sep for monetary quantities       */ /* LC_MONETARY */
-    char * mon_grouping;       /* grouping for monetary quantities            */ /* LC_MONETARY */
-    char * positive_sign;      /* string indicating nonnegative mty. qty.     */ /* LC_MONETARY */
-    char * negative_sign;      /* string indicating negative mty. qty.        */ /* LC_MONETARY */
-    char * currency_symbol;    /* local currency symbol (e.g. '$')            */ /* LC_MONETARY */
-    char * int_curr_symbol;    /* international currency symbol (e.g. "USD"   */ /* LC_MONETARY */
-    char frac_digits;          /* fractional digits in local monetary qty.    */ /* LC_MONETARY */
-    char p_cs_precedes;        /* if currency_symbol precedes positive qty.   */ /* LC_MONETARY */
-    char n_cs_precedes;        /* if currency_symbol precedes negative qty.   */ /* LC_MONETARY */
-    char p_sep_by_space;       /* if it is separated by space from pos. qty.  */ /* LC_MONETARY */
-    char n_sep_by_space;       /* if it is separated by space from neg. qty.  */ /* LC_MONETARY */
-    char p_sign_posn;          /* positioning of positive_sign for mon. qty.  */ /* LC_MONETARY */
-    char n_sign_posn;          /* positioning of negative_sign for mon. qty.  */ /* LC_MONETARY */
-    char int_frac_digits;      /* Same as above, for international format     */ /* LC_MONETARY */
-    char int_p_cs_precedes;    /* Same as above, for international format     */ /* LC_MONETARY */
-    char int_n_cs_precedes;    /* Same as above, for international format     */ /* LC_MONETARY */
-    char int_p_sep_by_space;   /* Same as above, for international format     */ /* LC_MONETARY */
-    char int_n_sep_by_space;   /* Same as above, for international format     */ /* LC_MONETARY */
-    char int_p_sign_posn;      /* Same as above, for international format     */ /* LC_MONETARY */
-    char int_n_sign_posn;      /* Same as above, for international format     */ /* LC_MONETARY */
+struct lconv {
+  char *decimal_point;
+      /* decimal point character                     */ /* LC_NUMERIC */
+  char *thousands_sep;
+      /* character for separating groups of digits   */ /* LC_NUMERIC */
+  char *grouping;
+      /* string indicating the size of digit groups  */ /* LC_NUMERIC */
+  char *mon_decimal_point;
+      /* decimal point for monetary quantities       */ /* LC_MONETARY */
+  char *mon_thousands_sep;
+      /* thousands_sep for monetary quantities       */ /* LC_MONETARY */
+  char *mon_grouping;
+      /* grouping for monetary quantities            */ /* LC_MONETARY */
+  char *positive_sign;
+      /* string indicating nonnegative mty. qty.     */ /* LC_MONETARY */
+  char *negative_sign;
+      /* string indicating negative mty. qty.        */ /* LC_MONETARY */
+  char *currency_symbol;
+      /* local currency symbol (e.g. '$')            */ /* LC_MONETARY */
+  char *int_curr_symbol;
+      /* international currency symbol (e.g. "USD"   */ /* LC_MONETARY */
+  char frac_digits;
+      /* fractional digits in local monetary qty.    */ /* LC_MONETARY */
+  char p_cs_precedes;
+      /* if currency_symbol precedes positive qty.   */ /* LC_MONETARY */
+  char n_cs_precedes;
+      /* if currency_symbol precedes negative qty.   */ /* LC_MONETARY */
+  char p_sep_by_space;
+      /* if it is separated by space from pos. qty.  */ /* LC_MONETARY */
+  char n_sep_by_space;
+      /* if it is separated by space from neg. qty.  */ /* LC_MONETARY */
+  char p_sign_posn;
+      /* positioning of positive_sign for mon. qty.  */ /* LC_MONETARY */
+  char n_sign_posn;
+      /* positioning of negative_sign for mon. qty.  */ /* LC_MONETARY */
+  char int_frac_digits;
+      /* Same as above, for international format     */ /* LC_MONETARY */
+  char int_p_cs_precedes;
+      /* Same as above, for international format     */ /* LC_MONETARY */
+  char int_n_cs_precedes;
+      /* Same as above, for international format     */ /* LC_MONETARY */
+  char int_p_sep_by_space;
+      /* Same as above, for international format     */ /* LC_MONETARY */
+  char int_n_sep_by_space;
+      /* Same as above, for international format     */ /* LC_MONETARY */
+  char int_p_sign_posn;
+      /* Same as above, for international format     */ /* LC_MONETARY */
+  char int_n_sign_posn;
+      /* Same as above, for international format     */ /* LC_MONETARY */
 };
 
 /* First arguments to setlocale().
@@ -67,19 +90,19 @@ struct lconv
          and keep things in sync.
 */
 /* Entire locale */
-#define LC_ALL      _PDCLIB_LC_ALL
+#define LC_ALL _PDCLIB_LC_ALL
 /* Collation (strcoll(), strxfrm()) */
-#define LC_COLLATE  _PDCLIB_LC_COLLATE
+#define LC_COLLATE _PDCLIB_LC_COLLATE
 /* Character types (<ctype.h>, <wctype.h>) */
-#define LC_CTYPE    _PDCLIB_LC_CTYPE
+#define LC_CTYPE _PDCLIB_LC_CTYPE
 /* Monetary formatting (as returned by localeconv) */
 #define LC_MONETARY _PDCLIB_LC_MONETARY
 /* Decimal-point character (for printf() / scanf() functions), string
    conversions, nonmonetary formatting as returned by localeconv
 */
-#define LC_NUMERIC  _PDCLIB_LC_NUMERIC
+#define LC_NUMERIC _PDCLIB_LC_NUMERIC
 /* Time formats (strftime(), wcsftime()) */
-#define LC_TIME     _PDCLIB_LC_TIME
+#define LC_TIME _PDCLIB_LC_TIME
 /* Messages (not specified but allowed by C99, and specified by POSIX)
    (used by perror() / strerror())
 */
@@ -93,12 +116,12 @@ struct lconv
    Otherwise, returns a pointer to a string associated with the specified
    category for the new locale.
 */
-_PDCLIB_PUBLIC char * setlocale( int category, const char * locale );
+_PDCLIB_PUBLIC char *setlocale(int category, const char *locale);
 
 /* Returns a struct lconv initialized to the values appropriate for the current
    locale setting.
 */
-_PDCLIB_PUBLIC struct lconv * localeconv( void );
+_PDCLIB_PUBLIC struct lconv *localeconv(void);
 
 #ifdef __cplusplus
 }

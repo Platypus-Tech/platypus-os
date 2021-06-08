@@ -14,23 +14,20 @@
 #include <threads.h>
 #endif
 
-int fgetc( struct _PDCLIB_file_t * stream )
-{
-    int rc = EOF;
+int fgetc(struct _PDCLIB_file_t *stream) {
+  int rc = EOF;
 
-    _PDCLIB_LOCK( stream->mtx );
+  _PDCLIB_LOCK(stream->mtx);
 
-    if ( _PDCLIB_prepread( stream ) != EOF )
-    {
-        if ( _PDCLIB_CHECKBUFFER( stream ) != EOF )
-        {
-            rc = _PDCLIB_GETC( stream );
-        }
+  if (_PDCLIB_prepread(stream) != EOF) {
+    if (_PDCLIB_CHECKBUFFER(stream) != EOF) {
+      rc = _PDCLIB_GETC(stream);
     }
+  }
 
-    _PDCLIB_UNLOCK( stream->mtx );
+  _PDCLIB_UNLOCK(stream->mtx);
 
-    return rc;
+  return rc;
 }
 
 #endif
@@ -39,10 +36,9 @@ int fgetc( struct _PDCLIB_file_t * stream )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    /* Testing covered by ftell.c */
-    return TEST_RESULTS;
+int main(void) {
+  /* Testing covered by ftell.c */
+  return TEST_RESULTS;
 }
 
 #endif

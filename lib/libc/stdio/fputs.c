@@ -14,50 +14,43 @@
 #include <threads.h>
 #endif
 
-int fputs( const char * _PDCLIB_restrict s, struct _PDCLIB_file_t * _PDCLIB_restrict stream )
-{
-    _PDCLIB_LOCK( stream->mtx );
+int fputs(const char *_PDCLIB_restrict s,
+          struct _PDCLIB_file_t *_PDCLIB_restrict stream) {
+  _PDCLIB_LOCK(stream->mtx);
 
-    if ( _PDCLIB_prepwrite( stream ) == EOF )
-    {
-        _PDCLIB_UNLOCK( stream->mtx );
+  if (_PDCLIB_prepwrite(stream) == EOF) {
+    _PDCLIB_UNLOCK(stream->mtx);
+    return EOF;
+  }
+
+  while (*s != '\0') {
+    /* Unbuffered and line buffered streams get flushed when fputs() does
+       write the terminating end-of-line. All streams get flushed if the
+       buffer runs full.
+    */
+    stream->buffer[stream->bufidx++] = *s;
+
+    if ((stream->bufidx == stream->bufsize) ||
+        ((stream->status & _IOLBF) && *s == '\n')) {
+      if (_PDCLIB_flushbuffer(stream) == EOF) {
+        _PDCLIB_UNLOCK(stream->mtx);
         return EOF;
+      }
     }
 
-    while ( *s != '\0' )
-    {
-        /* Unbuffered and line buffered streams get flushed when fputs() does
-           write the terminating end-of-line. All streams get flushed if the
-           buffer runs full.
-        */
-        stream->buffer[ stream->bufidx++ ] = *s;
+    ++s;
+  }
 
-        if ( ( stream->bufidx == stream->bufsize ) ||
-             ( ( stream->status & _IOLBF ) && *s == '\n' )
-           )
-        {
-            if ( _PDCLIB_flushbuffer( stream ) == EOF )
-            {
-                _PDCLIB_UNLOCK( stream->mtx );
-                return EOF;
-            }
-        }
-
-        ++s;
+  if (stream->status & _IONBF) {
+    if (_PDCLIB_flushbuffer(stream) == EOF) {
+      _PDCLIB_UNLOCK(stream->mtx);
+      return EOF;
     }
+  }
 
-    if ( stream->status & _IONBF )
-    {
-        if ( _PDCLIB_flushbuffer( stream ) == EOF )
-        {
-            _PDCLIB_UNLOCK( stream->mtx );
-            return EOF;
-        }
-    }
+  _PDCLIB_UNLOCK(stream->mtx);
 
-    _PDCLIB_UNLOCK( stream->mtx );
-
-    return 0;
+  return 0;
 }
 
 #endif
@@ -66,22 +59,20 @@ int fputs( const char * _PDCLIB_restrict s, struct _PDCLIB_file_t * _PDCLIB_rest
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    const char * const message = "SUCCESS testing fputs()";
-    FILE * fh;
-    size_t i;
-    TESTCASE( ( fh = tmpfile() ) != NULL );
-    TESTCASE( fputs( message, fh ) >= 0 );
-    rewind( fh );
+int main(void) {
+  const char *const message = "SUCCESS testing fputs()";
+  FILE *fh;
+  size_t i;
+  TESTCASE((fh = tmpfile()) != NULL);
+  TESTCASE(fputs(message, fh) >= 0);
+  rewind(fh);
 
-    for ( i = 0; i < 23; ++i )
-    {
-        TESTCASE( fgetc( fh ) == message[i] );
-    }
+  for (i = 0; i < 23; ++i) {
+    TESTCASE(fgetc(fh) == message[i]);
+  }
 
-    TESTCASE( fclose( fh ) == 0 );
-    return TEST_RESULTS;
+  TESTCASE(fclose(fh) == 0);
+  return TEST_RESULTS;
 }
 
 #endif

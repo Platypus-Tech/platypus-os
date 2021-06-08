@@ -8,9 +8,8 @@
 
 #ifndef REGTEST
 
-int getc( struct _PDCLIB_file_t * stream )
-{
-    return fgetc( stream );
+int getc(struct _PDCLIB_file_t *stream) {
+  return fgetc(stream);
 }
 
 #endif
@@ -19,10 +18,9 @@ int getc( struct _PDCLIB_file_t * stream )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    /* Testing covered by ftell.c */
-    return TEST_RESULTS;
+int main(void) {
+  /* Testing covered by ftell.c */
+  return TEST_RESULTS;
 }
 
 #endif

@@ -8,9 +8,8 @@
 
 #ifndef REGTEST
 
-long long int llabs( long long int j )
-{
-    return ( j >= 0 ) ? j : -j;
+long long int llabs(long long int j) {
+  return (j >= 0) ? j : -j;
 }
 
 #endif
@@ -21,12 +20,11 @@ long long int llabs( long long int j )
 
 #include <limits.h>
 
-int main( void )
-{
-    TESTCASE( llabs( 0ll ) == 0 );
-    TESTCASE( llabs( LLONG_MAX ) == LLONG_MAX );
-    TESTCASE( llabs( LLONG_MIN + 1 ) == -( LLONG_MIN + 1 ) );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(llabs(0ll) == 0);
+  TESTCASE(llabs(LLONG_MAX) == LLONG_MAX);
+  TESTCASE(llabs(LLONG_MIN + 1) == -(LLONG_MIN + 1));
+  return TEST_RESULTS;
 }
 
 #endif

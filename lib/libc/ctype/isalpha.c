@@ -10,9 +10,8 @@
 
 #include <locale.h>
 
-int isalpha( int c )
-{
-    return ( _PDCLIB_lc_ctype->entry[c].flags & _PDCLIB_CTYPE_ALPHA );
+int isalpha(int c) {
+  return (_PDCLIB_lc_ctype->entry[c].flags & _PDCLIB_CTYPE_ALPHA);
 }
 
 #endif
@@ -21,14 +20,13 @@ int isalpha( int c )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    TESTCASE( isalpha( 'a' ) );
-    TESTCASE( isalpha( 'z' ) );
-    TESTCASE( ! isalpha( ' ' ) );
-    TESTCASE( ! isalpha( '1' ) );
-    TESTCASE( ! isalpha( '@' ) );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(isalpha('a'));
+  TESTCASE(isalpha('z'));
+  TESTCASE(!isalpha(' '));
+  TESTCASE(!isalpha('1'));
+  TESTCASE(!isalpha('@'));
+  return TEST_RESULTS;
 }
 
 #endif
