@@ -1,6 +1,7 @@
 #include <vga/vga.h>
 #include <string.h>
 #include "terminal.h"
+#include "vtconsole.h"
 
 void put_prompt() {
     writestr("you@platypusOS:# ");
@@ -11,10 +12,13 @@ void run_command(char input[]) {
         writestr("Version 0.08-dev\n");
     }
     else if (strcmp(input, "help")==0) {
-        writestr("Commands - version help uname\n");
+        writestr("Commands - version reboot help uname\n");
     }
     else if (strcmp(input, "uname")==0) {
         writestr("PlatypusOS\n");
+    }
+    else if(strcmp(input, "reboot")==0) {
+        reboot();
     }
     else if (strcmp(input, "\0") == 0) {
     
@@ -28,6 +32,16 @@ void run_command(char input[]) {
     }
 
     put_prompt();
+}
+
+void reboot() {
+    uint8_t t = 0x02;
+    vtconsole_destroy();
+    while (t & 0x02) {
+        t = inp(0x64);
+    }
+    outp(0x64, 0xFE);
+    __asm__ volatile("hlt");
 }
 
 void init_terminal() {
