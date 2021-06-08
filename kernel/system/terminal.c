@@ -3,6 +3,8 @@
 #include "terminal.h"
 #include "vtconsole.h"
 
+extern *vtc;
+
 void put_prompt() {
     writestr("you@platypusOS:# ");
 }
@@ -35,8 +37,8 @@ void run_command(char input[]) {
 }
 
 void reboot() {
+    vtconsole_destroy(vtc);
     uint8_t t = 0x02;
-    vtconsole_destroy();
     while (t & 0x02) {
         t = inp(0x64);
     }
