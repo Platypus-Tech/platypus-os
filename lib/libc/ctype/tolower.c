@@ -10,9 +10,8 @@
 
 #include <locale.h>
 
-int tolower( int c )
-{
-    return _PDCLIB_lc_ctype->entry[c].lower;
+int tolower(int c) {
+  return _PDCLIB_lc_ctype->entry[c].lower;
 }
 
 #endif
@@ -21,15 +20,14 @@ int tolower( int c )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    TESTCASE( tolower( 'A' ) == 'a' );
-    TESTCASE( tolower( 'Z' ) == 'z' );
-    TESTCASE( tolower( 'a' ) == 'a' );
-    TESTCASE( tolower( 'z' ) == 'z' );
-    TESTCASE( tolower( '@' ) == '@' );
-    TESTCASE( tolower( '[' ) == '[' );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(tolower('A') == 'a');
+  TESTCASE(tolower('Z') == 'z');
+  TESTCASE(tolower('a') == 'a');
+  TESTCASE(tolower('z') == 'z');
+  TESTCASE(tolower('@') == '@');
+  TESTCASE(tolower('[') == '[');
+  return TEST_RESULTS;
 }
 
 #endif

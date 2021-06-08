@@ -10,9 +10,9 @@
 
 #include <locale.h>
 
-int isdigit( int c )
-{
-    return ( c >= _PDCLIB_lc_ctype->digits_low && c <= _PDCLIB_lc_ctype->digits_high );
+int isdigit(int c) {
+  return (c >= _PDCLIB_lc_ctype->digits_low &&
+          c <= _PDCLIB_lc_ctype->digits_high);
 }
 
 #endif
@@ -21,14 +21,13 @@ int isdigit( int c )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    TESTCASE( isdigit( '0' ) );
-    TESTCASE( isdigit( '9' ) );
-    TESTCASE( ! isdigit( ' ' ) );
-    TESTCASE( ! isdigit( 'a' ) );
-    TESTCASE( ! isdigit( '@' ) );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(isdigit('0'));
+  TESTCASE(isdigit('9'));
+  TESTCASE(!isdigit(' '));
+  TESTCASE(!isdigit('a'));
+  TESTCASE(!isdigit('@'));
+  return TEST_RESULTS;
 }
 
 #endif

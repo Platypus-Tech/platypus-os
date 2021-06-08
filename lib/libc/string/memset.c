@@ -8,16 +8,14 @@
 
 #ifndef REGTEST
 
-void * memset( void * s, int c, size_t n )
-{
-    unsigned char * p = ( unsigned char * ) s;
+void *memset(void *s, int c, size_t n) {
+  unsigned char *p = (unsigned char *)s;
 
-    while ( n-- )
-    {
-        *p++ = ( unsigned char ) c;
-    }
+  while (n--) {
+    *p++ = (unsigned char)c;
+  }
 
-    return s;
+  return s;
 }
 
 #endif
@@ -26,17 +24,16 @@ void * memset( void * s, int c, size_t n )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    char s[] = "xxxxxxxxx";
-    TESTCASE( memset( s, 'o', 10 ) == s );
-    TESTCASE( s[9] == 'o' );
-    TESTCASE( memset( s, '_', ( 0 ) ) == s );
-    TESTCASE( s[0] == 'o' );
-    TESTCASE( memset( s, '_', 1 ) == s );
-    TESTCASE( s[0] == '_' );
-    TESTCASE( s[1] == 'o' );
-    return TEST_RESULTS;
+int main(void) {
+  char s[] = "xxxxxxxxx";
+  TESTCASE(memset(s, 'o', 10) == s);
+  TESTCASE(s[9] == 'o');
+  TESTCASE(memset(s, '_', (0)) == s);
+  TESTCASE(s[0] == 'o');
+  TESTCASE(memset(s, '_', 1) == s);
+  TESTCASE(s[0] == '_');
+  TESTCASE(s[1] == 'o');
+  return TEST_RESULTS;
 }
 
 #endif

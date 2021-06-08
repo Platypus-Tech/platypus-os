@@ -8,7 +8,7 @@ exec_script:
 	$(BUILD_SCRIPT)
 
 run:
-	qemu-system-x86_64 -d int PlatypusOS.iso
+	qemu-system-x86_64 PlatypusOS.iso
 
 clean:
 	@echo "Cleaning"

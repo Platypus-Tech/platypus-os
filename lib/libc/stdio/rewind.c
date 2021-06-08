@@ -8,10 +8,9 @@
 
 #ifndef REGTEST
 
-void rewind( struct _PDCLIB_file_t * stream )
-{
-    stream->status &= ~ _PDCLIB_ERRORFLAG;
-    fseek( stream, 0L, SEEK_SET );
+void rewind(struct _PDCLIB_file_t *stream) {
+  stream->status &= ~_PDCLIB_ERRORFLAG;
+  fseek(stream, 0L, SEEK_SET);
 }
 
 #endif
@@ -20,10 +19,9 @@ void rewind( struct _PDCLIB_file_t * stream )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    /* Testing covered by ftell.c */
-    return TEST_RESULTS;
+int main(void) {
+  /* Testing covered by ftell.c */
+  return TEST_RESULTS;
 }
 
 #endif

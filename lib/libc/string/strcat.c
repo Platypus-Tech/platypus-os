@@ -8,24 +8,20 @@
 
 #ifndef REGTEST
 
-char * strcat( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2 )
-{
-    char * rc = s1;
+char *strcat(char *_PDCLIB_restrict s1, const char *_PDCLIB_restrict s2) {
+  char *rc = s1;
 
-    if ( *s1 )
-    {
-        while ( *++s1 )
-        {
-            /* EMPTY */
-        }
+  if (*s1) {
+    while (*++s1) {
+      /* EMPTY */
     }
+  }
 
-    while ( ( *s1++ = *s2++ ) )
-    {
-        /* EMPTY */
-    }
+  while ((*s1++ = *s2++)) {
+    /* EMPTY */
+  }
 
-    return rc;
+  return rc;
 }
 
 #endif
@@ -34,22 +30,21 @@ char * strcat( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2 )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    char s[] = "xx\0xxxxxx";
-    TESTCASE( strcat( s, abcde ) == s );
-    TESTCASE( s[2] == 'a' );
-    TESTCASE( s[6] == 'e' );
-    TESTCASE( s[7] == '\0' );
-    TESTCASE( s[8] == 'x' );
-    s[0] = '\0';
-    TESTCASE( strcat( s, abcdx ) == s );
-    TESTCASE( s[4] == 'x' );
-    TESTCASE( s[5] == '\0' );
-    TESTCASE( strcat( s, "\0" ) == s );
-    TESTCASE( s[5] == '\0' );
-    TESTCASE( s[6] == 'e' );
-    return TEST_RESULTS;
+int main(void) {
+  char s[] = "xx\0xxxxxx";
+  TESTCASE(strcat(s, abcde) == s);
+  TESTCASE(s[2] == 'a');
+  TESTCASE(s[6] == 'e');
+  TESTCASE(s[7] == '\0');
+  TESTCASE(s[8] == 'x');
+  s[0] = '\0';
+  TESTCASE(strcat(s, abcdx) == s);
+  TESTCASE(s[4] == 'x');
+  TESTCASE(s[5] == '\0');
+  TESTCASE(strcat(s, "\0") == s);
+  TESTCASE(s[5] == '\0');
+  TESTCASE(s[6] == 'e');
+  return TEST_RESULTS;
 }
 
 #endif

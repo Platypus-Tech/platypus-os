@@ -8,34 +8,29 @@
 
 #ifndef REGTEST
 
-size_t strspn( const char * s1, const char * s2 )
-{
-    size_t len = 0;
-    const char * p;
+size_t strspn(const char *s1, const char *s2) {
+  size_t len = 0;
+  const char *p;
 
-    while ( s1[ len ] )
-    {
-        p = s2;
+  while (s1[len]) {
+    p = s2;
 
-        while ( *p )
-        {
-            if ( s1[len] == *p )
-            {
-                break;
-            }
+    while (*p) {
+      if (s1[len] == *p) {
+        break;
+      }
 
-            ++p;
-        }
-
-        if ( ! *p )
-        {
-            return len;
-        }
-
-        ++len;
+      ++p;
     }
 
-    return len;
+    if (!*p) {
+      return len;
+    }
+
+    ++len;
+  }
+
+  return len;
 }
 
 #endif
@@ -44,12 +39,11 @@ size_t strspn( const char * s1, const char * s2 )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    TESTCASE( strspn( abcde, "abc" ) == 3 );
-    TESTCASE( strspn( abcde, "b" ) == 0 );
-    TESTCASE( strspn( abcde, abcde ) == 5 );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(strspn(abcde, "abc") == 3);
+  TESTCASE(strspn(abcde, "b") == 0);
+  TESTCASE(strspn(abcde, abcde) == 5);
+  return TEST_RESULTS;
 }
 
 #endif

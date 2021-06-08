@@ -8,13 +8,12 @@
 
 #ifndef REGTEST
 
-lldiv_t lldiv( long long int numer, long long int denom )
-{
-    lldiv_t rc;
-    rc.quot = numer / denom;
-    rc.rem  = numer % denom;
-    /* TODO: pre-C99 compilers might require modulus corrections */
-    return rc;
+lldiv_t lldiv(long long int numer, long long int denom) {
+  lldiv_t rc;
+  rc.quot = numer / denom;
+  rc.rem = numer % denom;
+  /* TODO: pre-C99 compilers might require modulus corrections */
+  return rc;
 }
 
 #endif
@@ -23,18 +22,17 @@ lldiv_t lldiv( long long int numer, long long int denom )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    lldiv_t result;
-    result = lldiv( 5ll, 2ll );
-    TESTCASE( result.quot == 2 && result.rem == 1 );
-    result = lldiv( -5ll, 2ll );
-    TESTCASE( result.quot == -2 && result.rem == -1 );
-    result = lldiv( 5ll, -2ll );
-    TESTCASE( result.quot == -2 && result.rem == 1 );
-    TESTCASE( sizeof( result.quot ) == sizeof( long long ) );
-    TESTCASE( sizeof( result.rem )  == sizeof( long long ) );
-    return TEST_RESULTS;
+int main(void) {
+  lldiv_t result;
+  result = lldiv(5ll, 2ll);
+  TESTCASE(result.quot == 2 && result.rem == 1);
+  result = lldiv(-5ll, 2ll);
+  TESTCASE(result.quot == -2 && result.rem == -1);
+  result = lldiv(5ll, -2ll);
+  TESTCASE(result.quot == -2 && result.rem == 1);
+  TESTCASE(sizeof(result.quot) == sizeof(long long));
+  TESTCASE(sizeof(result.rem) == sizeof(long long));
+  return TEST_RESULTS;
 }
 
 #endif

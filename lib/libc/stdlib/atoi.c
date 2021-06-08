@@ -8,9 +8,8 @@
 
 #ifndef REGTEST
 
-int atoi( const char * s )
-{
-    return ( int ) _PDCLIB_atomax( s );
+int atoi(const char *s) {
+  return (int)_PDCLIB_atomax(s);
 }
 
 #endif
@@ -19,10 +18,9 @@ int atoi( const char * s )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    /* no tests for a simple wrapper */
-    return TEST_RESULTS;
+int main(void) {
+  /* no tests for a simple wrapper */
+  return TEST_RESULTS;
 }
 
 #endif

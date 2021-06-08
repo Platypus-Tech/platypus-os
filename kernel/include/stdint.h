@@ -11,16 +11,16 @@
 extern "C" {
 #endif
 
-#include "pdclib/_PDCLIB_lib_ext1.h"
 #include "pdclib/_PDCLIB_internal.h"
+#include "pdclib/_PDCLIB_lib_ext1.h"
 
 /* 7.18.1.1 Exact-width integer types. */
 
 #if _PDCLIB_TWOS_COMPLEMENT == 1
 
 #if _PDCLIB_INT_LEAST8_MAX == 0x7f
-typedef _PDCLIB_int_least8_t  int8_t;
-typedef _PDCLIB_uint_least8_t  uint8_t;
+typedef _PDCLIB_int_least8_t int8_t;
+typedef _PDCLIB_uint_least8_t uint8_t;
 #endif
 
 #if _PDCLIB_INT_LEAST16_MAX == 0x7fff
@@ -44,12 +44,12 @@ typedef _PDCLIB_uint_least64_t uint64_t;
 
 /* You are allowed to add more types here, e.g. int_least24_t. */
 
-typedef _PDCLIB_int_least8_t  int_least8_t;
+typedef _PDCLIB_int_least8_t int_least8_t;
 typedef _PDCLIB_int_least16_t int_least16_t;
 typedef _PDCLIB_int_least32_t int_least32_t;
 typedef _PDCLIB_int_least64_t int_least64_t;
 
-typedef _PDCLIB_uint_least8_t  uint_least8_t;
+typedef _PDCLIB_uint_least8_t uint_least8_t;
 typedef _PDCLIB_uint_least16_t uint_least16_t;
 typedef _PDCLIB_uint_least32_t uint_least32_t;
 typedef _PDCLIB_uint_least64_t uint_least64_t;
@@ -58,29 +58,29 @@ typedef _PDCLIB_uint_least64_t uint_least64_t;
 
 /* You are allowed to add more types here, e.g. int_fast24_t. */
 
-typedef _PDCLIB_int_fast8_t  int_fast8_t;
+typedef _PDCLIB_int_fast8_t int_fast8_t;
 typedef _PDCLIB_int_fast16_t int_fast16_t;
 typedef _PDCLIB_int_fast32_t int_fast32_t;
 typedef _PDCLIB_int_fast64_t int_fast64_t;
 
-typedef _PDCLIB_uint_fast8_t  uint_fast8_t;
+typedef _PDCLIB_uint_fast8_t uint_fast8_t;
 typedef _PDCLIB_uint_fast16_t uint_fast16_t;
 typedef _PDCLIB_uint_fast32_t uint_fast32_t;
 typedef _PDCLIB_uint_fast64_t uint_fast64_t;
 
 /* 7.18.1.4 Integer types capable of holding object pointers */
 
-typedef _PDCLIB_intptr_t  intptr_t;
+typedef _PDCLIB_intptr_t intptr_t;
 typedef _PDCLIB_uintptr_t uintptr_t;
 
 /* 7.18.1.5 Greatest-width integer types */
 
-typedef _PDCLIB_intmax_t  intmax_t;
+typedef _PDCLIB_intmax_t intmax_t;
 typedef _PDCLIB_uintmax_t uintmax_t;
 
 /* 7.18.2 Limits of specified-width integer types */
 
-#if defined( __cplusplus ) && __cplusplus < 201103L
+#if defined(__cplusplus) && __cplusplus < 201103L
 #ifndef __STDC_LIMIT_MACROS
 #define _PDCLIB_NO_LIMIT_MACROS
 #endif
@@ -120,50 +120,50 @@ typedef _PDCLIB_uintmax_t uintmax_t;
 
 /* 7.18.2.2 Limits of minimum-width integer types */
 
-#define INT_LEAST8_MIN  _PDCLIB_INT_LEAST8_MIN
-#define INT_LEAST8_MAX  _PDCLIB_INT_LEAST8_MAX
+#define INT_LEAST8_MIN _PDCLIB_INT_LEAST8_MIN
+#define INT_LEAST8_MAX _PDCLIB_INT_LEAST8_MAX
 #define UINT_LEAST8_MAX _PDCLIB_UINT_LEAST8_MAX
 
-#define INT_LEAST16_MIN  _PDCLIB_INT_LEAST16_MIN
-#define INT_LEAST16_MAX  _PDCLIB_INT_LEAST16_MAX
+#define INT_LEAST16_MIN _PDCLIB_INT_LEAST16_MIN
+#define INT_LEAST16_MAX _PDCLIB_INT_LEAST16_MAX
 #define UINT_LEAST16_MAX _PDCLIB_UINT_LEAST16_MAX
 
-#define INT_LEAST32_MIN  _PDCLIB_INT_LEAST32_MIN
-#define INT_LEAST32_MAX  _PDCLIB_INT_LEAST32_MAX
+#define INT_LEAST32_MIN _PDCLIB_INT_LEAST32_MIN
+#define INT_LEAST32_MAX _PDCLIB_INT_LEAST32_MAX
 #define UINT_LEAST32_MAX _PDCLIB_UINT_LEAST32_MAX
 
-#define INT_LEAST64_MIN  _PDCLIB_INT_LEAST64_MIN
-#define INT_LEAST64_MAX  _PDCLIB_INT_LEAST64_MAX
+#define INT_LEAST64_MIN _PDCLIB_INT_LEAST64_MIN
+#define INT_LEAST64_MAX _PDCLIB_INT_LEAST64_MAX
 #define UINT_LEAST64_MAX _PDCLIB_UINT_LEAST64_MAX
 
 /* 7.18.2.3 Limits of fastest minimum-width integer types */
 
-#define INT_FAST8_MIN  _PDCLIB_INT_FAST8_MIN
-#define INT_FAST8_MAX  _PDCLIB_INT_FAST8_MAX
+#define INT_FAST8_MIN _PDCLIB_INT_FAST8_MIN
+#define INT_FAST8_MAX _PDCLIB_INT_FAST8_MAX
 #define UINT_FAST8_MAX _PDCLIB_UINT_FAST8_MAX
 
-#define INT_FAST16_MIN  _PDCLIB_INT_FAST16_MIN
-#define INT_FAST16_MAX  _PDCLIB_INT_FAST16_MAX
+#define INT_FAST16_MIN _PDCLIB_INT_FAST16_MIN
+#define INT_FAST16_MAX _PDCLIB_INT_FAST16_MAX
 #define UINT_FAST16_MAX _PDCLIB_UINT_FAST16_MAX
 
-#define INT_FAST32_MIN  _PDCLIB_INT_FAST32_MIN
-#define INT_FAST32_MAX  _PDCLIB_INT_FAST32_MAX
+#define INT_FAST32_MIN _PDCLIB_INT_FAST32_MIN
+#define INT_FAST32_MAX _PDCLIB_INT_FAST32_MAX
 #define UINT_FAST32_MAX _PDCLIB_UINT_FAST32_MAX
 
-#define INT_FAST64_MIN  _PDCLIB_INT_FAST64_MIN
-#define INT_FAST64_MAX  _PDCLIB_INT_FAST64_MAX
+#define INT_FAST64_MIN _PDCLIB_INT_FAST64_MIN
+#define INT_FAST64_MAX _PDCLIB_INT_FAST64_MAX
 #define UINT_FAST64_MAX _PDCLIB_UINT_FAST64_MAX
 
 /* 7.18.2.4 Limits of integer types capable of holding object pointers */
 
-#define INTPTR_MIN  _PDCLIB_INTPTR_MIN
-#define INTPTR_MAX  _PDCLIB_INTPTR_MAX
+#define INTPTR_MIN _PDCLIB_INTPTR_MIN
+#define INTPTR_MAX _PDCLIB_INTPTR_MAX
 #define UINTPTR_MAX _PDCLIB_UINTPTR_MAX
 
 /* 7.18.2.5 Limits of greatest-width integer types */
 
-#define INTMAX_MIN  _PDCLIB_INTMAX_MIN
-#define INTMAX_MAX  _PDCLIB_INTMAX_MAX
+#define INTMAX_MIN _PDCLIB_INTMAX_MIN
+#define INTMAX_MAX _PDCLIB_INTMAX_MAX
 #define UINTMAX_MAX _PDCLIB_UINTMAX_MAX
 
 /* 7.18.3 Limits of other integer types */
@@ -186,7 +186,7 @@ typedef _PDCLIB_uintmax_t uintmax_t;
 
 /* 7.18.4 Macros for integer constants */
 
-#if defined( __cplusplus ) && __cplusplus < 201103L
+#if defined(__cplusplus) && __cplusplus < 201103L
 #ifndef __STDC_CONSTANT_MACROS
 #define _PDCLIB_NO_CONSTANT_MACROS
 #endif
@@ -198,14 +198,14 @@ typedef _PDCLIB_uintmax_t uintmax_t;
 
 /* Expand to an integer constant of specified value and type int_leastN_t */
 
-#define INT8_C  _PDCLIB_INT_LEAST8_C
+#define INT8_C _PDCLIB_INT_LEAST8_C
 #define INT16_C _PDCLIB_INT_LEAST16_C
 #define INT32_C _PDCLIB_INT_LEAST32_C
 #define INT64_C _PDCLIB_INT_LEAST64_C
 
 /* Expand to an integer constant of specified value and type uint_leastN_t */
 
-#define UINT8_C  _PDCLIB_INT_LEAST8_C
+#define UINT8_C _PDCLIB_INT_LEAST8_C
 #define UINT16_C _PDCLIB_INT_LEAST16_C
 #define UINT32_C _PDCLIB_INT_LEAST32_C
 #define UINT64_C _PDCLIB_INT_LEAST64_C
@@ -213,17 +213,17 @@ typedef _PDCLIB_uintmax_t uintmax_t;
 /* 7.18.4.2 Macros for greatest-width integer constants */
 
 /* Expand to an integer constant of specified value and type intmax_t */
-#define INTMAX_C( value ) _PDCLIB_INTMAX_C( value )
+#define INTMAX_C(value) _PDCLIB_INTMAX_C(value)
 
 /* Expand to an integer constant of specified value and type uintmax_t */
-#define UINTMAX_C( value ) _PDCLIB_UINTMAX_C( value )
+#define UINTMAX_C(value) _PDCLIB_UINTMAX_C(value)
 
 #endif
 
 /* Annex K -- Bounds-checking interfaces */
 
-#if ( __STDC_WANT_LIB_EXT1__ + 0 ) != 0
-#define RSIZE_MAX ( _PDCLIB_SIZE_MAX >> 1 )
+#if (__STDC_WANT_LIB_EXT1__ + 0) != 0
+#define RSIZE_MAX (_PDCLIB_SIZE_MAX >> 1)
 #endif
 
 /* Extension hook for downstream projects that want to have non-standard

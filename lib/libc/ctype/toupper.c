@@ -10,9 +10,8 @@
 
 #include <locale.h>
 
-int toupper( int c )
-{
-    return _PDCLIB_lc_ctype->entry[c].upper;
+int toupper(int c) {
+  return _PDCLIB_lc_ctype->entry[c].upper;
 }
 
 #endif
@@ -21,15 +20,14 @@ int toupper( int c )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    TESTCASE( toupper( 'a' ) == 'A' );
-    TESTCASE( toupper( 'z' ) == 'Z' );
-    TESTCASE( toupper( 'A' ) == 'A' );
-    TESTCASE( toupper( 'Z' ) == 'Z' );
-    TESTCASE( toupper( '@' ) == '@' );
-    TESTCASE( toupper( '[' ) == '[' );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(toupper('a') == 'A');
+  TESTCASE(toupper('z') == 'Z');
+  TESTCASE(toupper('A') == 'A');
+  TESTCASE(toupper('Z') == 'Z');
+  TESTCASE(toupper('@') == '@');
+  TESTCASE(toupper('[') == '[');
+  return TEST_RESULTS;
 }
 
 #endif

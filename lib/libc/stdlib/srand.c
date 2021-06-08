@@ -8,9 +8,8 @@
 
 #ifndef REGTEST
 
-void srand( unsigned int seed )
-{
-    _PDCLIB_seed = seed;
+void srand(unsigned int seed) {
+  _PDCLIB_seed = seed;
 }
 
 #endif
@@ -19,10 +18,9 @@ void srand( unsigned int seed )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    /* tested in rand.c */
-    return TEST_RESULTS;
+int main(void) {
+  /* tested in rand.c */
+  return TEST_RESULTS;
 }
 
 #endif

@@ -9,9 +9,8 @@
 
 #ifndef REGTEST
 
-size_t strerrorlen_s( errno_t errnum )
-{
-    return strlen( strerror( errnum ) );
+size_t strerrorlen_s(errno_t errnum) {
+  return strlen(strerror(errnum));
 }
 
 #endif
@@ -20,10 +19,9 @@ size_t strerrorlen_s( errno_t errnum )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    TESTCASE( NO_TESTDRIVER );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(NO_TESTDRIVER);
+  return TEST_RESULTS;
 }
 
 #endif

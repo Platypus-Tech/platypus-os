@@ -8,9 +8,8 @@
 
 #ifndef REGTEST
 
-int feof( struct _PDCLIB_file_t * stream )
-{
-    return stream->status & _PDCLIB_EOFFLAG;
+int feof(struct _PDCLIB_file_t *stream) {
+  return stream->status & _PDCLIB_EOFFLAG;
 }
 
 #endif
@@ -19,10 +18,9 @@ int feof( struct _PDCLIB_file_t * stream )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    /* Testing covered by clearerr(). */
-    return TEST_RESULTS;
+int main(void) {
+  /* Testing covered by clearerr(). */
+  return TEST_RESULTS;
 }
 
 #endif

@@ -11,8 +11,8 @@
 extern "C" {
 #endif
 
-#include "pdclib/_PDCLIB_lib_ext1.h"
 #include "pdclib/_PDCLIB_internal.h"
+#include "pdclib/_PDCLIB_lib_ext1.h"
 
 #ifndef _PDCLIB_SIZE_T_DEFINED
 #define _PDCLIB_SIZE_T_DEFINED _PDCLIB_SIZE_T_DEFINED
@@ -25,9 +25,9 @@ typedef _PDCLIB_size_t size_t;
 #endif
 
 /* See setvbuf(), third argument */
-#define _IOFBF (1u<<0)
-#define _IOLBF (1u<<1)
-#define _IONBF (1u<<2)
+#define _IOFBF (1u << 0)
+#define _IOLBF (1u << 1)
+#define _IONBF (1u << 2)
 
 /* The following are platform-dependent, and defined in _PDCLIB_config.h. */
 typedef struct _PDCLIB_fpos_t fpos_t;
@@ -44,9 +44,9 @@ typedef struct _PDCLIB_file_t FILE;
 #define SEEK_END _PDCLIB_SEEK_END
 #define SEEK_SET _PDCLIB_SEEK_SET
 
-extern FILE * stdin;
-extern FILE * stdout;
-extern FILE * stderr;
+extern FILE *stdin;
+extern FILE *stdout;
+extern FILE *stderr;
 
 /* Operations on files */
 
@@ -56,7 +56,7 @@ extern FILE * stderr;
    and fails the remove in this case. This does not detect two distinct names
    that merely result in the same file (e.g. "/home/user/foo" vs. "~/foo").
 */
-_PDCLIB_PUBLIC int remove( const char * filename );
+_PDCLIB_PUBLIC int remove(const char *filename);
 
 /* Rename the given old file to the given new name.
    Returns zero if successful, non-zero otherwise.
@@ -65,7 +65,7 @@ _PDCLIB_PUBLIC int remove( const char * filename );
    If there already is a file with the new filename, behaviour is defined by
    the glue code (see functions/_PDCLIB/rename.c).
 */
-_PDCLIB_PUBLIC int rename( const char * oldpath, const char * newpath );
+_PDCLIB_PUBLIC int rename(const char *oldpath, const char *newpath);
 
 /* Open a temporary file with mode "wb+", i.e. binary-update. Remove the file
    automatically if it is closed or the program exits normally (by returning
@@ -74,7 +74,7 @@ _PDCLIB_PUBLIC int rename( const char * oldpath, const char * newpath );
    This implementation does not remove temporary files if the process aborts
    abnormally (e.g. abort()).
 */
-_PDCLIB_PUBLIC FILE * tmpfile( void );
+_PDCLIB_PUBLIC FILE *tmpfile(void);
 
 /* Generate a file name that is not equal to any existing filename AT THE TIME
    OF GENERATION. Generate a different name each time it is called.
@@ -87,14 +87,14 @@ _PDCLIB_PUBLIC FILE * tmpfile( void );
    Note that this implementation cannot guarantee a file of the name generated
    is not generated between the call to this function and a subsequent fopen().
 */
-_PDCLIB_PUBLIC char * tmpnam( char * s );
+_PDCLIB_PUBLIC char *tmpnam(char *s);
 
 /* File access functions */
 
 /* Close the file associated with the given stream (after flushing its buffers).
    Returns zero if successful, EOF if any errors occur.
 */
-_PDCLIB_PUBLIC int fclose( FILE * stream );
+_PDCLIB_PUBLIC int fclose(FILE *stream);
 
 /* Flush the buffers of the given output stream. If the stream is an input
    stream, or an update stream with the last operation being an input operation,
@@ -104,7 +104,7 @@ _PDCLIB_PUBLIC int fclose( FILE * stream );
    Returns zero if successful, EOF if a write error occurs.
    Sets the error indicator of the stream if a write error occurs.
 */
-_PDCLIB_PUBLIC int fflush( FILE * stream );
+_PDCLIB_PUBLIC int fflush(FILE *stream);
 
 /* Open the file with the given filename in the given mode, and return a stream
    handle for it in which error and end-of-file indicator are cleared. Defined
@@ -156,7 +156,8 @@ _PDCLIB_PUBLIC int fflush( FILE * stream );
 
    Returns a pointer to the stream handle if successfull, NULL otherwise.
 */
-_PDCLIB_PUBLIC FILE * fopen( const char * _PDCLIB_restrict filename, const char * _PDCLIB_restrict mode );
+_PDCLIB_PUBLIC FILE *fopen(const char *_PDCLIB_restrict filename,
+                           const char *_PDCLIB_restrict mode);
 
 /* Close any file currently associated with the given stream. Open the file
    identified by the given filename with the given mode (equivalent to fopen()),
@@ -169,12 +170,15 @@ _PDCLIB_PUBLIC FILE * fopen( const char * _PDCLIB_restrict filename, const char 
 
    Returns a pointer to the stream handle if successfull, NULL otherwise.
 */
-_PDCLIB_PUBLIC FILE * freopen( const char * _PDCLIB_restrict filename, const char * _PDCLIB_restrict mode, FILE * _PDCLIB_restrict stream );
+_PDCLIB_PUBLIC FILE *freopen(const char *_PDCLIB_restrict filename,
+                             const char *_PDCLIB_restrict mode,
+                             FILE *_PDCLIB_restrict stream);
 
 /* If buf is a NULL pointer, call setvbuf( stream, NULL, _IONBF, BUFSIZ ).
    If buf is not a NULL pointer, call setvbuf( stream, buf, _IOFBF, BUFSIZ ).
 */
-_PDCLIB_PUBLIC void setbuf( FILE * _PDCLIB_restrict stream, char * _PDCLIB_restrict buf );
+_PDCLIB_PUBLIC void setbuf(FILE *_PDCLIB_restrict stream,
+                           char *_PDCLIB_restrict buf);
 
 /* Set the given stream to the given buffering mode. If buf is not a NULL
    pointer, use buf as file buffer (of given size). If buf is a NULL pointer,
@@ -185,7 +189,8 @@ _PDCLIB_PUBLIC void setbuf( FILE * _PDCLIB_restrict stream, char * _PDCLIB_restr
    setvbuf()) has been performed.
    Returns zero if successful, nonzero otherwise.
 */
-_PDCLIB_PUBLIC int setvbuf( FILE * _PDCLIB_restrict stream, char * _PDCLIB_restrict buf, int mode, size_t size );
+_PDCLIB_PUBLIC int setvbuf(FILE *_PDCLIB_restrict stream,
+                           char *_PDCLIB_restrict buf, int mode, size_t size);
 
 /* Formatted input/output functions */
 
@@ -400,7 +405,8 @@ _PDCLIB_PUBLIC int setvbuf( FILE * _PDCLIB_restrict stream, char * _PDCLIB_restr
    Returns the number of characters written if successful, a negative value
    otherwise.
 */
-_PDCLIB_PUBLIC int fprintf( FILE * _PDCLIB_restrict stream, const char * _PDCLIB_restrict format, ... );
+_PDCLIB_PUBLIC int fprintf(FILE *_PDCLIB_restrict stream,
+                           const char *_PDCLIB_restrict format, ...);
 
 /* TODO: fscanf() documentation */
 /*
@@ -553,13 +559,14 @@ _PDCLIB_PUBLIC int fprintf( FILE * _PDCLIB_restrict stream, const char * _PDCLIB
    an early mismatch occurs. Returns EOF if an input failure occurs before the
    first conversion.
 */
-_PDCLIB_PUBLIC int fscanf( FILE * _PDCLIB_restrict stream, const char * _PDCLIB_restrict format, ... );
+_PDCLIB_PUBLIC int fscanf(FILE *_PDCLIB_restrict stream,
+                          const char *_PDCLIB_restrict format, ...);
 
 /* Equivalent to fprintf( stdout, format, ... ). */
-_PDCLIB_PUBLIC int printf( const char * _PDCLIB_restrict format, ... );
+_PDCLIB_PUBLIC int printf(const char *_PDCLIB_restrict format, ...);
 
 /* Equivalent to fscanf( stdin, format, ... ). */
-_PDCLIB_PUBLIC int scanf( const char * _PDCLIB_restrict format, ... );
+_PDCLIB_PUBLIC int scanf(const char *_PDCLIB_restrict format, ...);
 
 /* Equivalent to fprintf( stdout, format, ... ), except that the result is
    written into the buffer pointed to by s, instead of stdout, and that any
@@ -569,61 +576,76 @@ _PDCLIB_PUBLIC int scanf( const char * _PDCLIB_restrict format, ... );
    the terminating '\0' character) if n had been sufficiently large, if
    successful, and a negative number if an encoding error ocurred.
 */
-_PDCLIB_PUBLIC int snprintf( char * _PDCLIB_restrict s, size_t n, const char * _PDCLIB_restrict format, ... );
+_PDCLIB_PUBLIC int snprintf(char *_PDCLIB_restrict s, size_t n,
+                            const char *_PDCLIB_restrict format, ...);
 
 /* Equivalent to fprintf( stdout, format, ... ), except that the result is
    written into the buffer pointed to by s, instead of stdout.
 */
-_PDCLIB_PUBLIC int sprintf( char * _PDCLIB_restrict s, const char * _PDCLIB_restrict format, ... );
+_PDCLIB_PUBLIC int sprintf(char *_PDCLIB_restrict s,
+                           const char *_PDCLIB_restrict format, ...);
 
 /* Equivalent to fscanf( stdin, format, ... ), except that the input is read
    from the buffer pointed to by s, instead of stdin.
 */
-_PDCLIB_PUBLIC int sscanf( const char * _PDCLIB_restrict s, const char * _PDCLIB_restrict format, ... );
+_PDCLIB_PUBLIC int sscanf(const char *_PDCLIB_restrict s,
+                          const char *_PDCLIB_restrict format, ...);
 
 /* Equivalent to fprintf( stream, format, ... ), except that the argument stack
    is passed as va_list parameter. Note that va_list is not declared by
    <stdio.h>.
 */
-_PDCLIB_PUBLIC int vfprintf( FILE * _PDCLIB_restrict stream, const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
+_PDCLIB_PUBLIC int vfprintf(FILE *_PDCLIB_restrict stream,
+                            const char *_PDCLIB_restrict format,
+                            _PDCLIB_va_list arg);
 
 /* Equivalent to fscanf( stream, format, ... ), except that the argument stack
    is passed as va_list parameter. Note that va_list is not declared by
    <stdio.h>.
 */
-_PDCLIB_PUBLIC int vfscanf( FILE * _PDCLIB_restrict stream, const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
+_PDCLIB_PUBLIC int vfscanf(FILE *_PDCLIB_restrict stream,
+                           const char *_PDCLIB_restrict format,
+                           _PDCLIB_va_list arg);
 
 /* Equivalent to fprintf( stdout, format, ... ), except that the argument stack
    is passed as va_list parameter. Note that va_list is not declared by
    <stdio.h>.
 */
-_PDCLIB_PUBLIC int vprintf( const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
+_PDCLIB_PUBLIC int vprintf(const char *_PDCLIB_restrict format,
+                           _PDCLIB_va_list arg);
 
 /* Equivalent to fscanf( stdin, format, ... ), except that the argument stack
    is passed as va_list parameter. Note that va_list is not declared by
    <stdio.h>.
 */
-_PDCLIB_PUBLIC int vscanf( const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
+_PDCLIB_PUBLIC int vscanf(const char *_PDCLIB_restrict format,
+                          _PDCLIB_va_list arg);
 
 /* Equivalent to snprintf( s, n, format, ... ), except that the argument stack
    is passed as va_list parameter. Note that va_list is not declared by
    <stdio.h>.
 */
-_PDCLIB_PUBLIC int vsnprintf( char * _PDCLIB_restrict s, size_t n, const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
+_PDCLIB_PUBLIC int vsnprintf(char *_PDCLIB_restrict s, size_t n,
+                             const char *_PDCLIB_restrict format,
+                             _PDCLIB_va_list arg);
 
 /* Equivalent to fprintf( stdout, format, ... ), except that the argument stack
    is passed as va_list parameter, and the result is written to the buffer
    pointed to by s, instead of stdout. Note that va_list is not declared by
    <stdio.h>.
 */
-_PDCLIB_PUBLIC int vsprintf( char * _PDCLIB_restrict s, const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
+_PDCLIB_PUBLIC int vsprintf(char *_PDCLIB_restrict s,
+                            const char *_PDCLIB_restrict format,
+                            _PDCLIB_va_list arg);
 
 /* Equivalent to fscanf( stdin, format, ... ), except that the argument stack
    is passed as va_list parameter, and the input is read from the buffer
    pointed to by s, instead of stdin. Note that va_list is not declared by
    <stdio.h>.
 */
-_PDCLIB_PUBLIC int vsscanf( const char * _PDCLIB_restrict s, const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
+_PDCLIB_PUBLIC int vsscanf(const char *_PDCLIB_restrict s,
+                           const char *_PDCLIB_restrict format,
+                           _PDCLIB_va_list arg);
 
 /* Character input/output functions */
 
@@ -632,7 +654,7 @@ _PDCLIB_PUBLIC int vsscanf( const char * _PDCLIB_restrict s, const char * _PDCLI
    If end-of-file is reached, the EOF indicator of the stream is set.
    If a read error occurs, the error indicator of the stream is set.
 */
-_PDCLIB_PUBLIC int fgetc( FILE * stream );
+_PDCLIB_PUBLIC int fgetc(FILE *stream);
 
 /* Read at most n-1 characters from given stream into the array s, stopping at
    \n or EOF. Terminate the read string with \n. If EOF is encountered before
@@ -641,44 +663,46 @@ _PDCLIB_PUBLIC int fgetc( FILE * stream );
    If a read error occurs, the error indicator of the stream is set. In this
    case, the contents of s are indeterminate.
 */
-_PDCLIB_PUBLIC char * fgets( char * _PDCLIB_restrict s, int n, FILE * _PDCLIB_restrict stream );
+_PDCLIB_PUBLIC char *fgets(char *_PDCLIB_restrict s, int n,
+                           FILE *_PDCLIB_restrict stream);
 
 /* Write the value c (cast to unsigned char) to the given stream.
    Returns c if successful, EOF otherwise.
    If a write error occurs, sets the error indicator of the stream is set.
 */
-_PDCLIB_PUBLIC int fputc( int c, FILE * stream );
+_PDCLIB_PUBLIC int fputc(int c, FILE *stream);
 
 /* Write the string s (not including the terminating \0) to the given stream.
    Returns a value >=0 if successful, EOF otherwise.
    This implementation does set the error indicator of the stream if a write
    error occurs.
 */
-_PDCLIB_PUBLIC int fputs( const char * _PDCLIB_restrict s, FILE * _PDCLIB_restrict stream );
+_PDCLIB_PUBLIC int fputs(const char *_PDCLIB_restrict s,
+                         FILE *_PDCLIB_restrict stream);
 
 /* Equivalent to fgetc( stream ), but may be overloaded by a macro that
    evaluates its parameter more than once.
 */
-_PDCLIB_PUBLIC int getc( FILE * stream );
+_PDCLIB_PUBLIC int getc(FILE *stream);
 
 /* Equivalent to fgetc( stdin ). */
-_PDCLIB_PUBLIC int getchar( void );
+_PDCLIB_PUBLIC int getchar(void);
 
 /* Equivalent to fputc( c, stream ), but may be overloaded by a macro that
    evaluates its parameter more than once.
 */
-_PDCLIB_PUBLIC int putc( int c, FILE * stream );
+_PDCLIB_PUBLIC int putc(int c, FILE *stream);
 
 /* Equivalent to fputc( c, stdout ), but may be overloaded by a macro that
    evaluates its parameter more than once.
 */
-_PDCLIB_PUBLIC int putchar( int c );
+_PDCLIB_PUBLIC int putchar(int c);
 
 /* Write the string s (not including the terminating \0) to stdout, and append
    a newline to the output. Returns a value >= 0 when successful, EOF if a
    write error occurred.
 */
-_PDCLIB_PUBLIC int puts( const char * s );
+_PDCLIB_PUBLIC int puts(const char *s);
 
 /* Push the value c (cast to unsigned char) back onto the given (input) stream.
    A character pushed back in this way will be delivered by subsequent read
@@ -694,7 +718,7 @@ _PDCLIB_PUBLIC int puts( const char * s );
    behaviour is undefined. (Older versions of the library allowed such a call.)
    Returns the pushed-back character if successful, EOF if it fails.
 */
-_PDCLIB_PUBLIC int ungetc( int c, FILE * stream );
+_PDCLIB_PUBLIC int ungetc(int c, FILE *stream);
 
 /* Direct input/output functions */
 
@@ -705,7 +729,8 @@ _PDCLIB_PUBLIC int ungetc( int c, FILE * stream );
    indeterminate. If a partial element is read, its value is indeterminate.
    If size or nmemb are zero, the function does nothing and returns zero.
 */
-_PDCLIB_PUBLIC size_t fread( void * _PDCLIB_restrict ptr, size_t size, size_t nmemb, FILE * _PDCLIB_restrict stream );
+_PDCLIB_PUBLIC size_t fread(void *_PDCLIB_restrict ptr, size_t size,
+                            size_t nmemb, FILE *_PDCLIB_restrict stream);
 
 /* Write up to nmemb elements of given size from buffer pointed to by ptr to
    the given stream. Returns the number of elements successfully written, which
@@ -714,7 +739,8 @@ _PDCLIB_PUBLIC size_t fread( void * _PDCLIB_restrict ptr, size_t size, size_t nm
    indeterminate. If size or nmemb are zero, the function does nothing and
    returns zero.
 */
-_PDCLIB_PUBLIC size_t fwrite( const void * _PDCLIB_restrict ptr, size_t size, size_t nmemb, FILE * _PDCLIB_restrict stream );
+_PDCLIB_PUBLIC size_t fwrite(const void *_PDCLIB_restrict ptr, size_t size,
+                             size_t nmemb, FILE *_PDCLIB_restrict stream);
 
 /* File positioning functions */
 
@@ -726,7 +752,8 @@ _PDCLIB_PUBLIC size_t fwrite( const void * _PDCLIB_restrict ptr, size_t size, si
    Returns zero if successful, nonzero otherwise.
    TODO: Implementation-defined errno setting for fgetpos().
 */
-_PDCLIB_PUBLIC int fgetpos( FILE * _PDCLIB_restrict stream, fpos_t * _PDCLIB_restrict pos );
+_PDCLIB_PUBLIC int fgetpos(FILE *_PDCLIB_restrict stream,
+                           fpos_t *_PDCLIB_restrict pos);
 
 /* Set the position indicator for the given stream to the given offset from:
    - the beginning of the file if whence is SEEK_SET,
@@ -740,7 +767,7 @@ _PDCLIB_PUBLIC int fgetpos( FILE * _PDCLIB_restrict stream, fpos_t * _PDCLIB_res
    Returns zero if successful, nonzero otherwise. If a read/write error occurs,
    the error indicator for the given stream is set.
 */
-_PDCLIB_PUBLIC int fseek( FILE * stream, long int offset, int whence );
+_PDCLIB_PUBLIC int fseek(FILE *stream, long int offset, int whence);
 
 /* Set the position indicator (and, where appropriate the mbstate_t status
    object) for the given stream to the given pos object (created by an earlier
@@ -752,7 +779,7 @@ _PDCLIB_PUBLIC int fseek( FILE * stream, long int offset, int whence );
    the error indicator for the given stream is set.
    TODO: Implementation-defined errno setting for fsetpos().
 */
-_PDCLIB_PUBLIC int fsetpos( FILE * stream, const fpos_t * pos );
+_PDCLIB_PUBLIC int fsetpos(FILE *stream, const fpos_t *pos);
 
 /* Return the current offset of the given stream from the beginning of the
    associated file. For text streams, the exact value returned is unspecified
@@ -761,38 +788,38 @@ _PDCLIB_PUBLIC int fsetpos( FILE * stream, const fpos_t * pos );
    Returns -1L if unsuccessful.
    TODO: Implementation-defined errno setting for ftell().
 */
-_PDCLIB_PUBLIC long int ftell( FILE * stream );
+_PDCLIB_PUBLIC long int ftell(FILE *stream);
 
 /* Equivalent to (void)fseek( stream, 0L, SEEK_SET ), except that the error
    indicator for the stream is also cleared.
 */
-_PDCLIB_PUBLIC void rewind( FILE * stream );
+_PDCLIB_PUBLIC void rewind(FILE *stream);
 
 /* Error-handling functions */
 
 /* Clear the end-of-file and error indicators for the given stream. */
-_PDCLIB_PUBLIC void clearerr( FILE * stream );
+_PDCLIB_PUBLIC void clearerr(FILE *stream);
 
 /* Return zero if the end-of-file indicator for the given stream is not set,
    nonzero otherwise.
 */
-_PDCLIB_PUBLIC int feof( FILE * stream );
+_PDCLIB_PUBLIC int feof(FILE *stream);
 
 /* Return zero if the error indicator for the given stream is not set, nonzero
    otherwise.
 */
-_PDCLIB_PUBLIC int ferror( FILE * stream );
+_PDCLIB_PUBLIC int ferror(FILE *stream);
 
 /* If s is neither a NULL pointer nor an empty string, print the string to
    stderr (with appended colon (':') and a space) first. In any case, print an
    error message depending on the current value of errno (being the same as if
    strerror( errno ) had been called).
 */
-_PDCLIB_PUBLIC void perror( const char * s );
+_PDCLIB_PUBLIC void perror(const char *s);
 
 /* Annex K -- Bounds-checking interfaces */
 
-#if ( __STDC_WANT_LIB_EXT1__ + 0 ) != 0
+#if (__STDC_WANT_LIB_EXT1__ + 0) != 0
 
 #define L_tmpnam_s _PDCLIB_L_tmpnam
 #define TMP_MAX_S _PDCLIB_TMP_MAX
@@ -820,7 +847,8 @@ typedef _PDCLIB_size_t rsize_t;
    This implementation does not remove temporary files if the process aborts
    abnormally (e.g. abort()).
 */
-_PDCLIB_PUBLIC errno_t tmpfile_s( FILE * _PDCLIB_restrict * _PDCLIB_restrict streamptr );
+_PDCLIB_PUBLIC errno_t
+tmpfile_s(FILE *_PDCLIB_restrict *_PDCLIB_restrict streamptr);
 
 /* Open the file with the given filename in the given mode, and sets the given
    streamptr to point at the file handle for that file, in which error and
@@ -879,7 +907,9 @@ _PDCLIB_PUBLIC errno_t tmpfile_s( FILE * _PDCLIB_restrict * _PDCLIB_restrict str
 
    Returns zero if successful, non-zero otherwise.
 */
-_PDCLIB_PUBLIC errno_t fopen_s( FILE * _PDCLIB_restrict * _PDCLIB_restrict streamptr, const char * _PDCLIB_restrict filename, const char * _PDCLIB_restrict mode );
+_PDCLIB_PUBLIC errno_t fopen_s(
+    FILE *_PDCLIB_restrict *_PDCLIB_restrict streamptr,
+    const char *_PDCLIB_restrict filename, const char *_PDCLIB_restrict mode);
 
 /* Close any file currently associated with the given stream. Open the file
    identified by the given filename with the given mode (equivalent to fopen()),
@@ -899,25 +929,45 @@ _PDCLIB_PUBLIC errno_t fopen_s( FILE * _PDCLIB_restrict * _PDCLIB_restrict strea
 
    Returns zero if successfull, non-zero otherwise.
 */
-_PDCLIB_PUBLIC errno_t freopen_s( FILE * _PDCLIB_restrict * _PDCLIB_restrict newstreamptr, const char * _PDCLIB_restrict filename, const char * _PDCLIB_restrict mode, FILE * _PDCLIB_restrict stream );
+_PDCLIB_PUBLIC errno_t
+freopen_s(FILE *_PDCLIB_restrict *_PDCLIB_restrict newstreamptr,
+          const char *_PDCLIB_restrict filename,
+          const char *_PDCLIB_restrict mode, FILE *_PDCLIB_restrict stream);
 
 /* None of these are implemented yet. Placeholder declarations. */
-_PDCLIB_PUBLIC errno_t tmpnam_s( char * s, rsize_t maxsize );
-_PDCLIB_PUBLIC int fprintf_s( FILE * _PDCLIB_restrict stream, const char * _PDCLIB_restrict format, ... );
-_PDCLIB_PUBLIC int fscanf_s( FILE * _PDCLIB_restrict stream, const char * _PDCLIB_restrict format, ... );
-_PDCLIB_PUBLIC int printf_s( const char * _PDCLIB_restrict format, ... );
-_PDCLIB_PUBLIC int scanf_s( const char * _PDCLIB_restrict format, ... );
-_PDCLIB_PUBLIC int snprintf_s( char * _PDCLIB_restrict s, rsize_t n, const char * _PDCLIB_restrict format, ... );
-_PDCLIB_PUBLIC int sprintf_s( char * _PDCLIB_restrict s, rsize_t n, const char * _PDCLIB_restrict format, ... );
-_PDCLIB_PUBLIC int sscanf_s( const char * _PDCLIB_restrict s, const char * _PDCLIB_restrict format, ... );
-_PDCLIB_PUBLIC int vfprintf_s( FILE * _PDCLIB_restrict stream, const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
-_PDCLIB_PUBLIC int vfscanf_s( FILE * _PDCLIB_restrict stream, const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
-_PDCLIB_PUBLIC int vprintf_s( const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
-_PDCLIB_PUBLIC int vscanf_s( const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
-_PDCLIB_PUBLIC int vsnprintf_s( char * _PDCLIB_restrict s, rsize_t n, const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
-_PDCLIB_PUBLIC int vsprintf_s( char * _PDCLIB_restrict s, rsize_t n, const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
-_PDCLIB_PUBLIC int vsscanf_s( const char * _PDCLIB_restrict s, const char * _PDCLIB_restrict format, _PDCLIB_va_list arg );
-_PDCLIB_PUBLIC char * gets_s( char * s, rsize_t n );
+_PDCLIB_PUBLIC errno_t tmpnam_s(char *s, rsize_t maxsize);
+_PDCLIB_PUBLIC int fprintf_s(FILE *_PDCLIB_restrict stream,
+                             const char *_PDCLIB_restrict format, ...);
+_PDCLIB_PUBLIC int fscanf_s(FILE *_PDCLIB_restrict stream,
+                            const char *_PDCLIB_restrict format, ...);
+_PDCLIB_PUBLIC int printf_s(const char *_PDCLIB_restrict format, ...);
+_PDCLIB_PUBLIC int scanf_s(const char *_PDCLIB_restrict format, ...);
+_PDCLIB_PUBLIC int snprintf_s(char *_PDCLIB_restrict s, rsize_t n,
+                              const char *_PDCLIB_restrict format, ...);
+_PDCLIB_PUBLIC int sprintf_s(char *_PDCLIB_restrict s, rsize_t n,
+                             const char *_PDCLIB_restrict format, ...);
+_PDCLIB_PUBLIC int sscanf_s(const char *_PDCLIB_restrict s,
+                            const char *_PDCLIB_restrict format, ...);
+_PDCLIB_PUBLIC int vfprintf_s(FILE *_PDCLIB_restrict stream,
+                              const char *_PDCLIB_restrict format,
+                              _PDCLIB_va_list arg);
+_PDCLIB_PUBLIC int vfscanf_s(FILE *_PDCLIB_restrict stream,
+                             const char *_PDCLIB_restrict format,
+                             _PDCLIB_va_list arg);
+_PDCLIB_PUBLIC int vprintf_s(const char *_PDCLIB_restrict format,
+                             _PDCLIB_va_list arg);
+_PDCLIB_PUBLIC int vscanf_s(const char *_PDCLIB_restrict format,
+                            _PDCLIB_va_list arg);
+_PDCLIB_PUBLIC int vsnprintf_s(char *_PDCLIB_restrict s, rsize_t n,
+                               const char *_PDCLIB_restrict format,
+                               _PDCLIB_va_list arg);
+_PDCLIB_PUBLIC int vsprintf_s(char *_PDCLIB_restrict s, rsize_t n,
+                              const char *_PDCLIB_restrict format,
+                              _PDCLIB_va_list arg);
+_PDCLIB_PUBLIC int vsscanf_s(const char *_PDCLIB_restrict s,
+                             const char *_PDCLIB_restrict format,
+                             _PDCLIB_va_list arg);
+_PDCLIB_PUBLIC char *gets_s(char *s, rsize_t n);
 
 #endif
 

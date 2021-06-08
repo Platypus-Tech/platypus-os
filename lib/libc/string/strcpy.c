@@ -8,16 +8,14 @@
 
 #ifndef REGTEST
 
-char * strcpy( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2 )
-{
-    char * rc = s1;
+char *strcpy(char *_PDCLIB_restrict s1, const char *_PDCLIB_restrict s2) {
+  char *rc = s1;
 
-    while ( ( *s1++ = *s2++ ) )
-    {
-        /* EMPTY */
-    }
+  while ((*s1++ = *s2++)) {
+    /* EMPTY */
+  }
 
-    return rc;
+  return rc;
 }
 
 #endif
@@ -26,17 +24,16 @@ char * strcpy( char * _PDCLIB_restrict s1, const char * _PDCLIB_restrict s2 )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    char s[] = "xxxxx";
-    TESTCASE( strcpy( s, "" ) == s );
-    TESTCASE( s[0] == '\0' );
-    TESTCASE( s[1] == 'x' );
-    TESTCASE( strcpy( s, abcde ) == s );
-    TESTCASE( s[0] == 'a' );
-    TESTCASE( s[4] == 'e' );
-    TESTCASE( s[5] == '\0' );
-    return TEST_RESULTS;
+int main(void) {
+  char s[] = "xxxxx";
+  TESTCASE(strcpy(s, "") == s);
+  TESTCASE(s[0] == '\0');
+  TESTCASE(s[1] == 'x');
+  TESTCASE(strcpy(s, abcde) == s);
+  TESTCASE(s[0] == 'a');
+  TESTCASE(s[4] == 'e');
+  TESTCASE(s[5] == '\0');
+  return TEST_RESULTS;
 }
 
 #endif

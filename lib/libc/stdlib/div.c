@@ -8,13 +8,12 @@
 
 #ifndef REGTEST
 
-div_t div( int numer, int denom )
-{
-    div_t rc;
-    rc.quot = numer / denom;
-    rc.rem  = numer % denom;
-    /* TODO: pre-C99 compilers might require modulus corrections */
-    return rc;
+div_t div(int numer, int denom) {
+  div_t rc;
+  rc.quot = numer / denom;
+  rc.rem = numer % denom;
+  /* TODO: pre-C99 compilers might require modulus corrections */
+  return rc;
 }
 
 #endif
@@ -23,18 +22,17 @@ div_t div( int numer, int denom )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    div_t result;
-    result = div( 5, 2 );
-    TESTCASE( result.quot == 2 && result.rem == 1 );
-    result = div( -5, 2 );
-    TESTCASE( result.quot == -2 && result.rem == -1 );
-    result = div( 5, -2 );
-    TESTCASE( result.quot == -2 && result.rem == 1 );
-    TESTCASE( sizeof( result.quot ) == sizeof( int ) );
-    TESTCASE( sizeof( result.rem )  == sizeof( int ) );
-    return TEST_RESULTS;
+int main(void) {
+  div_t result;
+  result = div(5, 2);
+  TESTCASE(result.quot == 2 && result.rem == 1);
+  result = div(-5, 2);
+  TESTCASE(result.quot == -2 && result.rem == -1);
+  result = div(5, -2);
+  TESTCASE(result.quot == -2 && result.rem == 1);
+  TESTCASE(sizeof(result.quot) == sizeof(int));
+  TESTCASE(sizeof(result.rem) == sizeof(int));
+  return TEST_RESULTS;
 }
 
 #endif

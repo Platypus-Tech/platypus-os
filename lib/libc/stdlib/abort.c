@@ -4,15 +4,14 @@
    Permission is granted to use, modify, and / or redistribute at will.
 */
 
-#include <stdlib.h>
 #include <signal.h>
+#include <stdlib.h>
 
 #ifndef REGTEST
 
-void abort( void )
-{
-    raise( SIGABRT );
-    exit( EXIT_FAILURE );
+void abort(void) {
+  raise(SIGABRT);
+  exit(EXIT_FAILURE);
 }
 
 #endif
@@ -23,18 +22,16 @@ void abort( void )
 
 #include <stdio.h>
 
-static void aborthandler( int sig )
-{
-    exit( 0 );
+static void aborthandler(int sig) {
+  exit(0);
 }
 
-int main( void )
-{
-    int UNEXPECTED_RETURN_FROM_ABORT = 0;
-    TESTCASE( signal( SIGABRT, &aborthandler ) != SIG_ERR );
-    abort();
-    TESTCASE( UNEXPECTED_RETURN_FROM_ABORT );
-    return TEST_RESULTS;
+int main(void) {
+  int UNEXPECTED_RETURN_FROM_ABORT = 0;
+  TESTCASE(signal(SIGABRT, &aborthandler) != SIG_ERR);
+  abort();
+  TESTCASE(UNEXPECTED_RETURN_FROM_ABORT);
+  return TEST_RESULTS;
 }
 
 #endif

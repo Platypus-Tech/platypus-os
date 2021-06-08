@@ -24,31 +24,31 @@ extern "C" {
 */
 
 /* Returns isalpha( c ) || isdigit( c ) */
-_PDCLIB_PUBLIC int isalnum( int c );
+_PDCLIB_PUBLIC int isalnum(int c);
 
 /* Returns isupper( c ) || islower( c ) in the "C" locale.
    In any other locale, also returns true for a locale-specific set of
    alphabetic characters which are neither control characters, digits,
    punctation, or whitespace.
 */
-_PDCLIB_PUBLIC int isalpha( int c );
+_PDCLIB_PUBLIC int isalpha(int c);
 
 /* Returns true if the character isspace() and used for separating words within
    a line of text. In the "C" locale, only ' ' and '\t' are considered blanks.
 */
-_PDCLIB_PUBLIC int isblank( int c );
+_PDCLIB_PUBLIC int isblank(int c);
 
 /* Returns true if the character is a control character. */
-_PDCLIB_PUBLIC int iscntrl( int c );
+_PDCLIB_PUBLIC int iscntrl(int c);
 
 /* Returns true if the character is a decimal digit. Locale-independent. */
-_PDCLIB_PUBLIC int isdigit( int c );
+_PDCLIB_PUBLIC int isdigit(int c);
 
 /* Returns true for every printing character except space (' ').
    NOTE: This definition differs from that of iswgraph() in <wctype.h>,
          which considers any iswspace() character, not only ' '.
 */
-_PDCLIB_PUBLIC int isgraph( int c );
+_PDCLIB_PUBLIC int isgraph(int c);
 
 /* Returns true for lowercase letters in the "C" locale.
    In any other locale, also returns true for a locale-specific set of
@@ -56,22 +56,22 @@ _PDCLIB_PUBLIC int isgraph( int c );
    space (' '). In a locale other than the "C" locale, a character might test
    true for both islower() and isupper().
 */
-_PDCLIB_PUBLIC int islower( int c );
+_PDCLIB_PUBLIC int islower(int c);
 
 /* Returns true for every printing character including space (' '). */
-_PDCLIB_PUBLIC int isprint( int c );
+_PDCLIB_PUBLIC int isprint(int c);
 
 /* Returns true for a locale-specific set of punctuation charcters; these
    may not be whitespace or alphanumeric. In the "C" locale, returns true
    for every printing character that is not whitespace or alphanumeric.
 */
-_PDCLIB_PUBLIC int ispunct( int c );
+_PDCLIB_PUBLIC int ispunct(int c);
 
 /* Returns true for every standard whitespace character (' ', '\f', '\n', '\r',
    '\t', '\v') in the "C" locale. In any other locale, also returns true for a
    locale-specific set of characters for which isalnum() is false.
 */
-_PDCLIB_PUBLIC int isspace( int c );
+_PDCLIB_PUBLIC int isspace(int c);
 
 /* Returns true for uppercase letters in the "C" locale.
    In any other locale, also returns true for a locale-specific set of
@@ -79,22 +79,22 @@ _PDCLIB_PUBLIC int isspace( int c );
    space (' '). In a locale other than the "C" locale, a character might test
    true for both islower() and isupper().
 */
-_PDCLIB_PUBLIC int isupper( int c );
+_PDCLIB_PUBLIC int isupper(int c);
 
 /* Returns true for any hexadecimal-digit character. Locale-independent. */
-_PDCLIB_PUBLIC int isxdigit( int c );
+_PDCLIB_PUBLIC int isxdigit(int c);
 
 /* Character case mapping functions */
 
 /* Converts an uppercase letter to a corresponding lowercase letter. Input that
    is not an uppercase letter remains unchanged.
 */
-_PDCLIB_PUBLIC int tolower( int c );
+_PDCLIB_PUBLIC int tolower(int c);
 
 /* Converts a lowercase letter to a corresponding uppercase letter. Input that
    is not a lowercase letter remains unchanged.
 */
-_PDCLIB_PUBLIC int toupper( int c );
+_PDCLIB_PUBLIC int toupper(int c);
 
 /* Extension hook for downstream projects that want to have non-standard
    extensions to standard headers.

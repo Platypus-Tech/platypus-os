@@ -8,9 +8,8 @@
 
 #ifndef REGTEST
 
-int putchar( int c )
-{
-    return fputc( c, stdout );
+int putchar(int c) {
+  return fputc(c, stdout);
 }
 
 #endif
@@ -19,11 +18,10 @@ int putchar( int c )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    /* Testing covered by ftell.c */
-    putchar( 'x' );
-    return TEST_RESULTS;
+int main(void) {
+  /* Testing covered by ftell.c */
+  putchar('x');
+  return TEST_RESULTS;
 }
 
 #endif

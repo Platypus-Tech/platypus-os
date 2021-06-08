@@ -11,16 +11,12 @@
 #include <locale.h>
 
 /* TODO: Doing this via a static array is not the way to do it. */
-char * strerror( int errnum )
-{
-    if ( errnum >= _PDCLIB_ERRNO_MAX || errnum < 0 )
-    {
-        return _PDCLIB_EUNKNOWN_TEXT;
-    }
-    else
-    {
-        return _PDCLIB_lc_messages->errno_texts[errnum];
-    }
+char *strerror(int errnum) {
+  if (errnum >= _PDCLIB_ERRNO_MAX || errnum < 0) {
+    return _PDCLIB_EUNKNOWN_TEXT;
+  } else {
+    return _PDCLIB_lc_messages->errno_texts[errnum];
+  }
 }
 
 #endif
@@ -29,13 +25,12 @@ char * strerror( int errnum )
 
 #include "_PDCLIB_test.h"
 
-#include <stdio.h>
 #include <errno.h>
+#include <stdio.h>
 
-int main( void )
-{
-    TESTCASE( strerror( ERANGE ) != strerror( EDOM ) );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(strerror(ERANGE) != strerror(EDOM));
+  return TEST_RESULTS;
 }
 
 #endif

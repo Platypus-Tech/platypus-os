@@ -10,9 +10,8 @@
 
 #include <locale.h>
 
-int isspace( int c )
-{
-    return ( _PDCLIB_lc_ctype->entry[c].flags & _PDCLIB_CTYPE_SPACE );
+int isspace(int c) {
+  return (_PDCLIB_lc_ctype->entry[c].flags & _PDCLIB_CTYPE_SPACE);
 }
 
 #endif
@@ -21,16 +20,15 @@ int isspace( int c )
 
 #include "_PDCLIB_test.h"
 
-int main( void )
-{
-    TESTCASE( isspace( ' ' ) );
-    TESTCASE( isspace( '\f' ) );
-    TESTCASE( isspace( '\n' ) );
-    TESTCASE( isspace( '\r' ) );
-    TESTCASE( isspace( '\t' ) );
-    TESTCASE( isspace( '\v' ) );
-    TESTCASE( ! isspace( 'a' ) );
-    return TEST_RESULTS;
+int main(void) {
+  TESTCASE(isspace(' '));
+  TESTCASE(isspace('\f'));
+  TESTCASE(isspace('\n'));
+  TESTCASE(isspace('\r'));
+  TESTCASE(isspace('\t'));
+  TESTCASE(isspace('\v'));
+  TESTCASE(!isspace('a'));
+  return TEST_RESULTS;
 }
 
 #endif
