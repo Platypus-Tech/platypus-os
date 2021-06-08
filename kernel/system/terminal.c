@@ -37,7 +37,7 @@ void run_command(char input[]) {
 }
 
 void reboot() {
-    vtconsole_destroy(vtc);
+    vtconsole_delete(vtc);
     uint8_t t = 0x02;
     while (t & 0x02) {
         t = inp(0x64);
