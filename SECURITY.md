@@ -22,3 +22,5 @@ Key:
 Please fix the issue and create a pull request.
 ### If you can't fix it:
 Please create an issue.
+### If it ain't broke
+Make it better but don't fix it.
