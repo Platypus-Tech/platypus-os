@@ -14,4 +14,5 @@ clean:
 	@echo "Cleaning"
 	rm *.bin
 	rm *.iso
+	rm isodir
 	@echo "Done"
