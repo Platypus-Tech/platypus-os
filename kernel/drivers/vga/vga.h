@@ -22,8 +22,8 @@ void scroll();
 void move_csr();
 void cls();
 void putch(unsigned char c);
-void writestr(char *fmt, ...);
+void writestr(const char *fmt, ...);
 void settextcolor(unsigned char forecolor, unsigned char backcolor);
-void terminal_initialize();
+void init_vga();
 
 #endif //_DRIVERS_VGA_H

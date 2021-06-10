@@ -13,7 +13,7 @@ nasm -f elf32 ./kernel/arch/i386/boot.asm -o boot.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/vga/vga.c -o vga.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/ports/ports.c -o ports.o
 i686-elf-gcc -I./kernel/ -I./kernel/include/ -I./kernel/drivers/ -I./kernel/cpu/ -c ./kernel/drivers/keyboard/keyboard.c -o keyboard.o
-i686-elf-gcc -I./kernel/ -I./kernel/drivers/ -I./kernel/include/ -I./kernel/fs/ -c ./init/main.c -o main.o
+i686-elf-gcc -I./kernel/ -I./kernel/drivers/ -I./kernel/include/ -c ./init/main.c -o main.o
 nasm -f elf32 ./kernel/cpu/load_gdt.asm -o load_gdt.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/cpu/gdt.c -o gdt.o
 nasm -f elf32 ./kernel/cpu/load_idt.asm -o load_idt.o

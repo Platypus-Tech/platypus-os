@@ -111,7 +111,7 @@ void putch(unsigned char c) {
   move_csr();
 }
 
-void writestr(char *fmt, ...) {
+void writestr(const char *fmt, ...) {
   va_list ap;
   char *p, *sval;
   int ival;
@@ -145,7 +145,7 @@ void settextcolor(unsigned char forecolor, unsigned char backcolor) {
   attrib = (backcolor << 4) | (forecolor & 0x0F);
 }
 
-void terminal_initialize() {
+void init_vga() {
   textmemptr = (unsigned short *)0xB8000;
   cls();
 }

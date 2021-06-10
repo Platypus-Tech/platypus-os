@@ -7,7 +7,6 @@
 #include <pit/pit.h>
 #include <system/terminal.h>
 #include <system/vtconsole.h>
-#include <vfs/vfs.h>
 #include <vga/vga.h>
 
 extern *vtc;
@@ -15,10 +14,8 @@ extern void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y);
 extern void cursor_move_callback(vtconsole_t *vtc, vtcursor_t *cur);
 
 void kernel_main() {
-  /* Initialize the Terminal */
-  terminal_initialize();
-  /* Initialize VFS */
-  init_vfs();
+  /* Initialize VGA */
+  init_vga();
 
   /* Load GDT, IDT, ISR, IRQ and PIT */
   init_gdt();
