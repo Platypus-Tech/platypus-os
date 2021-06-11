@@ -2,6 +2,7 @@
 #include <cpu/idt.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
+#include <kernel/log.h>
 #include <kernel/nmi.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
@@ -28,7 +29,7 @@ void kernel_main() {
   writestr("[OK] Load IRQ\n");
   nmi_enable();
   writestr("[OK] Enable NMI\n");
-  init_timer(100);
+  init_timer(50);
   writestr("[OK] Load PIT\n");
 
   /* Load Drivers */
@@ -36,6 +37,8 @@ void kernel_main() {
   writestr("[OK] Load Drivers\n");
 
   __asm__ volatile("sti");
+
+  info_log("System Loaded\n");
 
   vtc = vtconsole(VGA_SCREEN_WIDTH, VGA_SCREEN_HEIGHT, paint_callback,
                   cursor_move_callback);

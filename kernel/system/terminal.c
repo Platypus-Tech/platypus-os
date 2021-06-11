@@ -1,5 +1,6 @@
 #include "terminal.h"
 #include "vtconsole.h"
+#include <kernel/log.h>
 #include <kernel/ports.h>
 #include <stdint.h>
 #include <string.h>
@@ -15,11 +16,13 @@ void run_command(char input[]) {
   if (strcmp(input, "version") == 0) {
     writestr("Version 0.08-dev\n");
   } else if (strcmp(input, "help") == 0) {
-    writestr("Commands - version reboot help uname\n");
+    writestr("Commands - version reboot help log uname\n");
   } else if (strcmp(input, "uname") == 0) {
     writestr("PlatypusOS\n");
   } else if (strcmp(input, "reboot") == 0) {
     reboot();
+  } else if (strcmp(input, "log") == 0) {
+    show_log();
   } else if (strcmp(input, "\0") == 0) {
 
   } else {

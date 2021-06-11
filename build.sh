@@ -1,9 +1,9 @@
 #!/bin/sh
 
-sudo apt-get update
-sudo apt-get install nasm mtools
+#sudo apt-get update
+#sudo apt-get install nasm mtools
 
-export PATH="$PWD/toolchain/compiler/bin:$PATH"
+#export PATH="$PWD/toolchain/compiler/bin:$PATH"
 
 # Compile the libc
 sh ./build_libc.sh
@@ -27,11 +27,12 @@ i686-elf-gcc -I./kernel/drivers/ -c ./kernel/kernel/panic.c -o panic.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -c ./kernel/kernel/memory.c -o memory.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -c ./kernel/kernel/nmi.c -o nmi.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/kernel/ -I./kernel/include/ -c ./kernel/system/vtconsole.c -o vtconsole.o
+i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -c ./kernel/system/log.c -o log.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -c ./kernel/system/terminal.c -o terminal.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -c ./kernel/fs/vfs/vfs.c -o vfs.o
 
 
-i686-elf-gcc -T ./kernel/arch/i386/linker.ld -o kernel.bin -ffreestanding -O2 -nostdlib boot.o vga.o keyboard.o ports.o gdt.o load_gdt.o idt.o load_idt.o isr.o load_isr.o irq.o load_irq.o pit.o panic.o memory.o nmi.o vtconsole.o terminal.o vfs.o main.o ./lib/libc/libpdclib.a
+i686-elf-gcc -T ./kernel/arch/i386/linker.ld -o kernel.bin -ffreestanding -O2 -nostdlib boot.o vga.o keyboard.o ports.o gdt.o load_gdt.o idt.o load_idt.o isr.o load_isr.o irq.o load_irq.o pit.o panic.o memory.o nmi.o vtconsole.o log.o terminal.o vfs.o main.o ./lib/libc/libpdclib.a
 
 # After linking everything, remove the object files
 rm *.o
