@@ -1,9 +1,9 @@
 #!/bin/sh
 
-#sudo apt-get update
-#sudo apt-get install nasm mtools
+sudo apt-get update
+sudo apt-get install nasm mtools
 
-#export PATH="$PWD/toolchain/compiler/bin:$PATH"
+export PATH="$PWD/toolchain/compiler/bin:$PATH"
 
 # Compile the libc
 sh ./build_libc.sh
