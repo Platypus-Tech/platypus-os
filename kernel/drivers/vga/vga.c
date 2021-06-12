@@ -25,7 +25,7 @@ void clearwin(unsigned char fg_color, unsigned char bg_color) {
 }
 
 void putch(const char character, const unsigned char fg_color,
-             const unsigned char bg_color) {
+           const unsigned char bg_color) {
   unsigned short position = get_cursor_pos();
 
   if (character == '\n') {
