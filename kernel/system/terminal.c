@@ -9,16 +9,16 @@
 extern *vtc;
 
 void put_prompt() {
-  writestr("you@platypusOS:# ");
+  printm("you@platypusOS:# ");
 }
 
 void run_command(char input[]) {
   if (strcmp(input, "version") == 0) {
-    writestr("Version 0.08-dev\n");
+    printm("Version 0.08-dev\n");
   } else if (strcmp(input, "help") == 0) {
-    writestr("Commands - version reboot help log uname\n");
+    printm("Commands - version reboot help log uname\n");
   } else if (strcmp(input, "uname") == 0) {
-    writestr("PlatypusOS\n");
+    printm("PlatypusOS\n");
   } else if (strcmp(input, "reboot") == 0) {
     reboot();
   } else if (strcmp(input, "log") == 0) {
@@ -26,7 +26,8 @@ void run_command(char input[]) {
   } else if (strcmp(input, "\0") == 0) {
 
   } else {
-    writestr("%s : command not found!\n", input);
+    printm(input);
+    printm(" : command not found!\n");
   }
 
   for (int i = 0; input[i] != '\0'; i++) {

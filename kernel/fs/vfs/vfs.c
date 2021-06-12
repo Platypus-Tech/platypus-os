@@ -42,7 +42,7 @@ struct dirent *readdir_vfs(vfs_node_t *node, uint32_t index) {
   if ((node->flags & 0x7) == VFS_DIR && node->readdir != 0) {
     return node->readdir(node, index);
   } else {
-    writestr("VFS: Not a directory!\n");
+    printm("VFS: Not a directory!\n");
   }
 }
 
@@ -50,6 +50,6 @@ vfs_node_t *finddir_vfs(vfs_node_t *node, char *name) {
   if ((node->flags & 0x7) == VFS_DIR && node->readdir != 0) {
     return node->finddir(node, name);
   } else {
-    writestr("VFS: %s : no such directory\n", name);
+    printm("VFS: no such directory\n");
   }
 }
