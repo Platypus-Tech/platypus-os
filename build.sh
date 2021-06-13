@@ -16,8 +16,8 @@ sh ./build_libc.sh
 nasm -f elf32 ./kernel/arch/i386/boot.asm -o boot.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/vga/vga.c -o vga.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/ports/ports.c -o ports.o
-i686-elf-gcc -I./kernel/ -I./kernel/include/ -I./kernel/drivers/ -I./kernel/cpu/ -c ./kernel/drivers/keyboard/keyboard.c -o keyboard.o
-i686-elf-gcc -I./kernel/ -I./kernel/drivers/ -I./kernel/include/ -I./kernel/kernel/ -c ./init/main.c -o main.o
+i686-elf-gcc -I./kernel/ -I./kernel/include/ -I./kernel/drivers/ -I./kernel/cpu/ -I./user/ -c ./kernel/drivers/keyboard/keyboard.c -o keyboard.o
+i686-elf-gcc -I./kernel/ -I./kernel/drivers/ -I./kernel/include/ -I./kernel/kernel/ -I./user/ -c ./init/main.c -o main.o
 nasm -f elf32 ./kernel/cpu/load_gdt.asm -o load_gdt.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/cpu/gdt.c -o gdt.o
 nasm -f elf32 ./kernel/cpu/load_idt.asm -o load_idt.o
@@ -32,7 +32,7 @@ i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -c ./kernel/kernel/memory.c
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -c ./kernel/kernel/nmi.c -o nmi.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/kernel/ -I./kernel/include/ -c ./kernel/system/vtconsole.c -o vtconsole.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -I./kernel/kernel/ -c ./kernel/system/log.c -o log.o
-i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -I./kernel/kernel/ -c ./kernel/system/terminal.c -o terminal.o
+i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -I./kernel/kernel/ -I./kernel/ -c ./user/terminal/terminal.c -o terminal.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -c ./kernel/kernel/printm/printm.c -o printm.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -I./kernel/ -I./kernel/kernel/ -c ./kernel/fs/vfs/vfs.c -o vfs.o
 
