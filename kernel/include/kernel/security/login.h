@@ -1,0 +1,6 @@
+#ifndef _INCLUDE_KERNEL_SECURITY_LOGIN_H
+#define _INCLUDE_KERNEL_SECURITY_LOGIN_H
+
+void login(void);
+
+#endif /* _INCLUDE_KERNEL_SECURITY_LOGIN_H */
