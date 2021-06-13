@@ -62,7 +62,6 @@ void putch(const char character, const unsigned char fg_color,
            const unsigned char bg_color);
 
 // print a string to the screen
-void printm(const char *str);
 void putstr(const char *string, const unsigned char fg_color,
             const unsigned char bg_color);
 

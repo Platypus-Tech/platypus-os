@@ -1,4 +1,5 @@
 #include <kernel/log.h>
+#include <printm/printm.h>
 #include <vga/vga.h>
 
 struct log *log_info;
@@ -17,11 +18,11 @@ void error_log(const char *str) {
 
 void info_log(const char *str) {
   putstr("INFO: ", COLOR_WHT, COLOR_BLK);
-  printm(str);
+  printm(4, str);
   log_info->last_log = str;
 }
 
 void show_log() {
-  printm("Last Log: ");
-  printm(log_info->last_log);
+  printm(4, "Last Log: ");
+  printm(4, log_info->last_log);
 }

@@ -3,11 +3,13 @@
 #include <cpu/irq.h>
 #include <cpu/isr.h>
 #include <kernel/log.h>
+#include <kernel/nmi.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <system/terminal.h>
 #include <system/vtconsole.h>
 #include <vga/vga.h>
+#include <printm/printm.h>
 
 extern *vtc;
 extern void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y);
@@ -17,19 +19,21 @@ void kernel_main() {
 
   /* Load GDT, IDT, ISR, IRQ and PIT */
   init_gdt();
-  printm("[OK] Load GDT\n");
+  printm(0, "[OK] Load GDT\n");
   init_idt();
-  printm("[OK] Load IDT\n");
+  printm(0, "[OK] Load IDT\n");
   init_isr();
-  printm("[OK] Load ISR\n");
+  printm(0, "[OK] Load ISR\n");
   init_irq();
-  printm("[OK] Load IRQ\n");
+  printm(0, "[OK] Load IRQ\n");
+  nmi_enable();
+  printm(0, "[OK] Enable NMI\n");
   init_timer(50);
-  printm("[OK] Load PIT\n");
+  printm(0, "[OK] Load PIT\n");
 
   /* Load Drivers */
   init_keyboard();
-  printm("[OK] Load Drivers\n");
+  printm(0, "[OK] Load Drivers\n");
 
   __asm__ volatile("sti");
 
