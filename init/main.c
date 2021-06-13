@@ -6,7 +6,7 @@
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <printm/printm.h>
-#include <system/terminal.h>
+#include <terminal/terminal.h>
 #include <system/vtconsole.h>
 #include <vga/vga.h>
 
