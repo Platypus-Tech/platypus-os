@@ -3,7 +3,6 @@
 #include <cpu/irq.h>
 #include <cpu/isr.h>
 #include <kernel/log.h>
-#include <kernel/nmi.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <system/terminal.h>
@@ -25,8 +24,6 @@ void kernel_main() {
   init_isr();
   printm(0, "[OK] Load ISR\n");
   init_irq();
-  printm(0, "[OK] Load IRQ\n");
-  nmi_enable();
   printm(0, "[OK] Enable NMI\n");
   init_timer(50);
   printm(0, "[OK] Load PIT\n");
