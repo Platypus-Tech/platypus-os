@@ -1,10 +1,11 @@
 #include "terminal.h"
-#include "vtconsole.h"
 #include <kernel/log.h>
 #include <kernel/ports.h>
+#include <kernel/power.h>
 #include <printm/printm.h>
 #include <stdint.h>
 #include <string.h>
+#include <system/vtconsole.h>
 #include <vga/vga.h>
 
 extern *vtc;

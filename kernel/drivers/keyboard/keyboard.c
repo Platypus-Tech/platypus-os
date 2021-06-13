@@ -2,7 +2,7 @@
 #include <irq.h>
 #include <kernel/ports.h>
 #include <stdint.h>
-#include <system/terminal.h>
+#include <terminal/terminal.h>
 #include <vga/vga.h>
 
 uint8_t keyboard_layout[128] = {
