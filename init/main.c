@@ -6,10 +6,10 @@
 #include <kernel/nmi.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
+#include <printm/printm.h>
 #include <system/terminal.h>
 #include <system/vtconsole.h>
 #include <vga/vga.h>
-#include <printm/printm.h>
 
 extern *vtc;
 extern void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y);

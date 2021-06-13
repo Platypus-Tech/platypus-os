@@ -1,7 +1,7 @@
 #include "isr.h"
 #include "idt.h"
-#include <stdint.h>
 #include <printm/printm.h>
+#include <stdint.h>
 
 void init_isr() {
 
