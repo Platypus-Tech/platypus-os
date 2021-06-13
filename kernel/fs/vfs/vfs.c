@@ -1,11 +1,12 @@
 #include "vfs.h"
 #include <errno.h>
+#include <kernel/panic.h>
 #include <stdint.h>
 #include <vga/vga.h>
 
 /* A simple VFS, based on JamesM's kernel development tutorials */
 
-vfs_node_t *fs_root = 0;
+vfs_node_t *vfs_root = 0;
 
 uint32_t read_vfs(vfs_node_t *node, uint32_t offset, uint32_t size,
                   uint8_t *buf) {
@@ -33,6 +34,10 @@ void open_vfs(vfs_node_t *node, uint8_t read, uint8_t write) {
 }
 
 void close_vfs(vfs_node_t *node) {
+  if (node == vfs_root) {
+    panic("Attempted to close vfs_root!\n");
+  }
+
   if (node->close != 0) {
     return node->close(node);
   }
