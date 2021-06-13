@@ -2,7 +2,6 @@
 #include <vga/vga.h>
 
 void panic(const char *panicmessage) {
-  clearwin(COLOR_WHT, COLOR_BLK);
   putstr("Kernel Panic: ", COLOR_RED, COLOR_BLK);
   putstr(panicmessage, COLOR_RED, COLOR_BLK);
 
