@@ -51,6 +51,5 @@ void open_vfs(vfs_node_t *node, uint8_t read, uint8_t write);
 void close_vfs(vfs_node_t *node);
 struct dirent *readdir_vfs(vfs_node_t *node, uint32_t index);
 vfs_node_t *finddir_vfs(vfs_node_t *node, char *name);
-void init_vfs();
 
 #endif //_VFS_H

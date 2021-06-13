@@ -25,7 +25,7 @@ void handler_keyboard() {
 
   } else {
     uint8_t input = keyboard_layout[keyboard_key_scancode];
-    putch(input);
+    putch(input, COLOR_WHT, COLOR_BLK);
     save_input_buf(input);
   }
 }

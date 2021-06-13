@@ -1,7 +1,7 @@
 #include "isr.h"
 #include "idt.h"
+#include <printm/printm.h>
 #include <stdint.h>
-#include <vga/vga.h>
 
 void init_isr() {
 
@@ -78,7 +78,7 @@ const char *exceptions[] = {"Division by zero",
 void handler_isr(struct registers *regs) {
 
   if (regs->int_no <= 31) {
-    writestr(exceptions[regs->int_no]);
+    printm(2, exceptions[regs->int_no]);
     for (;;)
       ;
   }

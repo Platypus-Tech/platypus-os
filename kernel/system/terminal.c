@@ -1,6 +1,8 @@
 #include "terminal.h"
 #include "vtconsole.h"
+#include <kernel/log.h>
 #include <kernel/ports.h>
+#include <printm/printm.h>
 #include <stdint.h>
 #include <string.h>
 #include <vga/vga.h>
@@ -8,22 +10,25 @@
 extern *vtc;
 
 void put_prompt() {
-  writestr("you@platypusOS:# ");
+  printm(4, "you@platypusOS:# ");
 }
 
 void run_command(char input[]) {
   if (strcmp(input, "version") == 0) {
-    writestr("Version 0.08-dev\n");
+    printm(4, "Version 0.08-dev\n");
   } else if (strcmp(input, "help") == 0) {
-    writestr("Commands - version reboot help uname\n");
+    printm(4, "Commands - version reboot help log uname\n");
   } else if (strcmp(input, "uname") == 0) {
-    writestr("PlatypusOS\n");
+    printm(4, "PlatypusOS\n");
   } else if (strcmp(input, "reboot") == 0) {
     reboot();
+  } else if (strcmp(input, "log") == 0) {
+    show_log();
   } else if (strcmp(input, "\0") == 0) {
 
   } else {
-    writestr("%s : command not found!\n", input);
+    printm(4, input);
+    printm(4, " : command not found!\n");
   }
 
   for (int i = 0; input[i] != '\0'; i++) {
