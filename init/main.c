@@ -5,10 +5,10 @@
 #include <kernel/log.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
+#include <printm/printm.h>
 #include <system/terminal.h>
 #include <system/vtconsole.h>
 #include <vga/vga.h>
-#include <printm/printm.h>
 
 extern *vtc;
 extern void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y);
@@ -38,13 +38,18 @@ void kernel_main() {
 
   vtc = vtconsole(VGA_SCREEN_WIDTH, VGA_SCREEN_HEIGHT, paint_callback,
                   cursor_move_callback);
-  
-  print("\033[1;33m -------------------------------------------------------------------\n");
-  print("\033[1;33m|                       WELCOME TO PLATYPUS OS                      |\n");
-  print("\033[1;33m -------------------------------------------------------------------\n");
-  print("\033[1;34mOS: \033[1;36mPlatypusOS \033[1;33mx86_32 \033[1;32mx86_64 \n");
+
+  print(
+      "\033[1;33m -------------------------------------------------------------------\n");
+  print(
+      "\033[1;33m|                       WELCOME TO PLATYPUS OS                      |\n");
+  print(
+      "\033[1;33m -------------------------------------------------------------------\n");
+  print(
+      "\033[1;34mOS: \033[1;36mPlatypusOS \033[1;33mx86_32 \033[1;32mx86_64 \n");
   print("\033[1;34mKernel: \033[1;32mPlatypus\n");
   print("\033[1;34mVersion: \033[1;31m0.08-dev\n");
   putstr("\n", COLOR_WHT, COLOR_BLK);
+
   init_terminal();
 }
