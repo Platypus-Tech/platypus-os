@@ -16,19 +16,17 @@ extern void cursor_move_callback(vtconsole_t *vtc, vtcursor_t *cur);
 
 void kernel_main() {
 
-  /* Load GDT, IDT, ISR, IRQ and PIT */
+  /* Load GDT, IDT, ISR, IRQ */
   init_gdt();
-  printm(0, "[OK] Load GDT\n");
+  printm(4, "[OK] Load GDT\n");
   init_idt();
-  printm(0, "[OK] Load IDT\n");
+  printm(4, "[OK] Load IDT\n");
   init_isr();
-  printm(0, "[OK] Load ISR\n");
+  printm(4, "[OK] Load ISR\n");
   init_irq();
-  printm(0, "[OK] Enable NMI\n");
-  init_timer(50);
-  printm(0, "[OK] Load PIT\n");
 
   /* Load Drivers */
+  init_timer(50);
   init_keyboard();
   printm(0, "[OK] Load Drivers\n");
 

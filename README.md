@@ -14,6 +14,9 @@ Seems like an odd combination, but that's what I like to do: program, pentest, a
 # Building
 To build the OS, read the [build guide](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.08/docs/Building.md).
 
+# Mailing patches
+See the [Mailing Patches](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.08/docs/Mailing-Patches.md) file.
+
 # Screenshots
 ![Image](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.08/screenshots/Screenshot-0.08-dev-2.png)
 
