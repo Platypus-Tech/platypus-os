@@ -5,10 +5,7 @@
 #include <printm/printm.h>
 #include <stdint.h>
 #include <string.h>
-#include <system/vtconsole.h>
 #include <vga/vga.h>
-
-extern *vtc;
 
 void put_prompt() {
   printm(4, "you@platypusOS:# ");

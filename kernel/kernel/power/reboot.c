@@ -3,7 +3,9 @@
 #include <stddef.h>
 #include <kernel/ports.h>
 
-void reboot(void) {
+extern *vtc;
+
+void reboot() {
   vtconsole_delete(vtc);
   uint8_t t = 0x02;
   while (t & 0x02) {

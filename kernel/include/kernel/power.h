@@ -1,6 +1,6 @@
-#ifndef _INCLUDE_KERNEL_POWER_H
-#define _INCLUDE_KERNEL_POWER_H
+#ifndef _KERNEL_POWER_H
+#define _KERNEL_POWER_H
 
-void reboot(void);
+void reboot();
 
-#endif /* _INCLUDE_KERNEL_POWER_H */
+#endif //_KERNEL_POWER_H
