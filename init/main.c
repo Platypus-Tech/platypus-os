@@ -16,7 +16,7 @@ extern void cursor_move_callback(vtconsole_t *vtc, vtcursor_t *cur);
 
 void kernel_main() {
 
-  /* Load GDT, IDT, ISR, IRQ and PIT */
+  /* Load GDT, IDT, ISR, IRQ */
   init_gdt();
   printm(4, "[OK] Load GDT\n");
   init_idt();
@@ -24,7 +24,6 @@ void kernel_main() {
   init_isr();
   printm(4, "[OK] Load ISR\n");
   init_irq();
-  printm(4, "[OK] Load PIT\n");
 
   /* Load Drivers */
   init_timer(50);
