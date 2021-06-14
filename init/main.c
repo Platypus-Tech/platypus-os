@@ -24,7 +24,6 @@ void kernel_main() {
   init_isr();
   printm(0, "[OK] Load ISR\n");
   init_irq();
-  printm(0, "[OK] Enable NMI\n");
   init_timer(50);
   printm(0, "[OK] Load PIT\n");
 

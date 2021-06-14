@@ -1,7 +1,7 @@
-#include <kernel/power.h>
-#include <system/vtconsole.h>
-#include <stddef.h>
 #include <kernel/ports.h>
+#include <kernel/power.h>
+#include <stddef.h>
+#include <system/vtconsole.h>
 
 extern *vtc;
 

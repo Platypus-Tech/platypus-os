@@ -1,0 +1,10 @@
+# MAINTAINERS FILE
+# N: Name, E: Email, M: Maintainer of ...
+
+N: DamieFC
+E: gnuoveryou@gmail.com
+M: Everything
+
+N: Kushagra
+E: kushagra765@outlook.com
+M: VGA, Keyboard, PIT and Timer Driver, VFS, printm(), Memory Management, Log Service
