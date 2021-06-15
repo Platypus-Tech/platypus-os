@@ -14,7 +14,7 @@ void put_prompt() {
 
 void run_command(char input[]) {
   if (strcmp(input, "version") == 0) {
-    writestr("Version 0.08-dev\n");
+    writestr("Version 0.08\n");
   } else if (strcmp(input, "help") == 0) {
     writestr("Commands - version reboot help log playsound stopsound uname\n");
   } else if (strcmp(input, "uname") == 0) {
