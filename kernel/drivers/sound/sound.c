@@ -16,7 +16,7 @@ void register_snd_driver() {
 
 void play_sound(uint32_t frequency) {
   if (!is_registered) {
-    return 1;
+    // Do nothing
   }
 
   uint32_t d;
