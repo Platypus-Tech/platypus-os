@@ -2,8 +2,10 @@
 #include <vga/vga.h>
 
 void panic(const char *panicmessage) {
-  putstr("Kernel Panic: ", COLOR_RED, COLOR_BLK);
-  putstr(panicmessage, COLOR_RED, COLOR_BLK);
+  cls();
+  settextcolor(COLOR_RED, COLOR_BLACK);
+
+  writestr("Kernel Panic: %s", panicmessage);
 
   /* Disable the interrupts */
   __asm__ volatile("cli");

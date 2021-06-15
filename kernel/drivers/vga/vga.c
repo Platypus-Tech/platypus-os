@@ -1,153 +1,151 @@
-/* drivers/vga/vga.c
- * Author - @jaychandra6
- */
-
 #include "vga.h"
 #include <kernel/ports.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <stdint.h>
 
-volatile vga_char *TEXT_AREA = (vga_char *)VGA_START;
-
-unsigned char vga_color(const unsigned char fg_color,
-                        const unsigned char bg_color) {
-  // Put bg color in the higher 4 bits and mask those of fg
-  return (bg_color << 4) | (fg_color & 0x0F);
+void *memcpy(void *dest, const void *src, size_t count) {
+  const char *sp = (const char *)src;
+  char *dp = (char *)dest;
+  for (; count != 0; count--)
+    *dp++ = *sp++;
+  return dest;
 }
 
-void clearwin(unsigned char fg_color, unsigned char bg_color) {
-  const char space = ' ';
-  unsigned char clear_color = vga_color(fg_color, bg_color);
+unsigned short *memsetw(unsigned short *dest, unsigned short val,
+                        size_t count) {
+  unsigned short *temp = (unsigned short *)dest;
+  for (; count != 0; count--)
+    *temp++ = val;
+  return dest;
+}
 
-  const vga_char clear_char = {.character = space, .style = clear_color};
+size_t strlen(const char *string) {
+  size_t length = 0;
 
-  for (unsigned long i = 0; i < VGA_EXTENT; i++) {
-    TEXT_AREA[i] = clear_char;
+  while (string[length]) {
+    length++;
+  }
+
+  return length;
+}
+
+unsigned short *textmemptr;
+int attrib = 0x0F;
+int csr_x = 0, csr_y = 0;
+
+void scroll() {
+  unsigned blank, temp;
+
+  blank = 0x20 | (attrib << 8);
+
+  if (csr_y >= 25) {
+    temp = csr_y - 25 + 1;
+    memcpy(textmemptr, textmemptr + temp * 80, (25 - temp) * 80 * 2);
+    memsetw(textmemptr + (25 - temp) * 80, blank, 80);
+    csr_y = 25 - 1;
   }
 }
 
-void putch(const char character, const unsigned char fg_color,
-           const unsigned char bg_color) {
-  unsigned short position = get_cursor_pos();
+void move_csr() {
+  unsigned temp;
 
-  if (character == '\n') {
-    unsigned char current_row = (unsigned char)(position / VGA_WIDTH);
+  temp = csr_y * 80 + csr_x;
 
-    if (++current_row >= VGA_HEIGHT) {
-      scroll_line();
-    } else {
-      set_cursor_pos(0, current_row);
+  outp(0x3D4, 14);
+  outp(0x3D5, temp >> 8);
+  outp(0x3D4, 15);
+  outp(0x3D5, temp);
+}
+
+void cls() {
+  unsigned blank;
+  int i;
+
+  blank = 0x20 | (attrib << 8);
+
+  for (i = 0; i < 25; i++) {
+    memsetw(textmemptr + i * 80, blank, 80);
+  }
+
+  csr_x = 0;
+  csr_y = 0;
+  move_csr();
+}
+
+void putch(unsigned char c) {
+  unsigned short *where;
+  unsigned att = attrib << 8;
+
+  if (c == 0x08) {
+    if (csr_x != 0) {
+      csr_x--;
     }
   }
 
-  else if (character == '\r') {
-    unsigned char current_row = (unsigned char)(position / VGA_WIDTH);
-
-    set_cursor_pos(0, current_row);
+  else if (c == 0x09) {
+    csr_x = (csr_x + 8) & ~(8 - 1);
   }
 
-  else if (character == '\t') {
-    // Turn tab to 4 spaces
-    for (unsigned char i = 0; i < 4; i++) {
-      putch(' ', fg_color, bg_color);
+  else if (c == '\r') {
+    csr_x = 0;
+  }
+
+  else if (c == '\n') {
+    csr_x = 0;
+    csr_y++;
+  }
+
+  else if (c >= ' ') {
+    where = textmemptr + (csr_y * 80 + csr_x);
+    *where = c | att;
+    csr_x++;
+  }
+
+  if (csr_x >= 80) {
+    csr_x = 0;
+    csr_y++;
+  }
+
+  scroll();
+  move_csr();
+}
+
+void writestr(const char *fmt, ...) {
+  va_list ap;
+  char *p, *sval;
+  int ival;
+
+  va_start(ap, fmt);
+
+  for (p = fmt; *p; p++) {
+    if (*p != '%') {
+      putch(*p);
+      continue;
     }
-    advance_cursor();
-  }
 
-  else {
-    unsigned char style = vga_color(fg_color, bg_color);
-    vga_char printed = {.character = character, .style = style};
-
-    TEXT_AREA[position] = printed;
-
-    advance_cursor();
-  }
-}
-
-void putstr(const char *string, const unsigned char fg_color,
-            const unsigned char bg_color) {
-  while (*string != '\0') {
-    putch(*string++, fg_color, bg_color);
-  }
-}
-
-unsigned short get_cursor_pos() {
-  unsigned short position = 0;
-
-  outp(CURSOR_PORT_COMMAND, 0x0F);
-  position |= inp(CURSOR_PORT_DATA);
-
-  outp(CURSOR_PORT_COMMAND, 0x0E);
-  position |= inp(CURSOR_PORT_DATA) << 8;
-
-  return position;
-}
-
-void show_cursor() {
-  unsigned char current;
-
-  outp(CURSOR_PORT_COMMAND, 0x0A);
-  current = inp(CURSOR_PORT_DATA);
-  outp(CURSOR_PORT_DATA, current & 0xC0);
-
-  outp(CURSOR_PORT_COMMAND, 0x0B);
-  current = inp(CURSOR_PORT_DATA);
-  outp(CURSOR_PORT_DATA, current & 0xE0);
-}
-
-void hide_cursor() {
-  outp(CURSOR_PORT_COMMAND, 0x0A);
-  outp(CURSOR_PORT_DATA, 0x20);
-}
-
-void advance_cursor() {
-  unsigned short pos = get_cursor_pos();
-  pos++;
-
-  if (pos >= VGA_EXTENT) {
-    scroll_line();
-  }
-
-  outp(CURSOR_PORT_COMMAND, 0x0F);
-  outp(CURSOR_PORT_DATA, (unsigned char)(pos & 0xFF));
-
-  outp(CURSOR_PORT_COMMAND, 0x0E);
-  outp(CURSOR_PORT_DATA, (unsigned char)((pos >> 8) & 0xFF));
-}
-
-void set_cursor_pos(unsigned char x, unsigned char y) {
-  unsigned short pos = (unsigned short)x + ((unsigned short)VGA_WIDTH * y);
-
-  if (pos >= VGA_EXTENT) {
-    pos = VGA_EXTENT - 1;
-  }
-
-  outp(CURSOR_PORT_COMMAND, 0x0F);
-  outp(CURSOR_PORT_DATA, (unsigned char)(pos & 0xFF));
-
-  outp(CURSOR_PORT_COMMAND, 0x0E);
-  outp(CURSOR_PORT_DATA, (unsigned char)((pos >> 8) & 0xFF));
-}
-
-void scroll_line() {
-  // Copy memory buffer upward
-  for (unsigned short i = 1; i < VGA_HEIGHT; i++) {
-    for (unsigned short j = 0; j < VGA_WIDTH; j++) {
-      unsigned short to_pos = j + ((i - 1) * VGA_WIDTH);
-      unsigned short from_pos = j + (i * VGA_WIDTH);
-
-      TEXT_AREA[to_pos] = TEXT_AREA[from_pos];
+    switch (*++p) {
+    case 'd':
+      ival = va_arg(ap, int);
+      putch(ival);
+      break;
+    case 's':
+      for (sval = va_arg(ap, char *); *sval; sval++) {
+        putch(*sval);
+      }
+      break;
+    default:
+      putch(*p);
+      break;
     }
   }
+}
 
-  // Clear the final row
-  unsigned short i = VGA_HEIGHT - 1;
-  for (unsigned short j = 0; j < VGA_WIDTH; j++) {
-    unsigned short pos = j + (i * VGA_WIDTH);
+void settextcolor(unsigned char forecolor, unsigned char backcolor) {
+  attrib = (backcolor << 4) | (forecolor & 0x0F);
+}
 
-    vga_char current = TEXT_AREA[pos];
-    vga_char clear = {.character = ' ', .style = current.style};
-
-    TEXT_AREA[pos] = clear;
-  }
-
-  set_cursor_pos(0, VGA_HEIGHT - 1);
+void init_vga() {
+  textmemptr = (unsigned short *)0xB8000;
+  cls();
 }

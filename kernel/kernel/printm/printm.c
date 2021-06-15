@@ -11,7 +11,7 @@ void printm(int log_type, const char *str) {
   } else if (log_type == ERROR) {
     error_log(str);
   } else if (log_type == MESSAGE) {
-    putstr(str, COLOR_WHT, COLOR_BLK);
+    writestr(str);
   } else {
     // Do nothing
   }

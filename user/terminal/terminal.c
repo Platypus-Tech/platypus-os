@@ -8,16 +8,16 @@
 #include <vga/vga.h>
 
 void put_prompt() {
-  printm(4, "you@platypusOS:# ");
+  writestr("you@platypusOS:# ");
 }
 
 void run_command(char input[]) {
   if (strcmp(input, "version") == 0) {
-    printm(4, "Version 0.08-dev\n");
+    writestr("Version 0.08-dev\n");
   } else if (strcmp(input, "help") == 0) {
-    printm(4, "Commands - version reboot help log uname\n");
+    writestr("Commands - version reboot help log uname\n");
   } else if (strcmp(input, "uname") == 0) {
-    printm(4, "PlatypusOS\n");
+    writestr("PlatypusOS\n");
   } else if (strcmp(input, "reboot") == 0) {
     reboot();
   } else if (strcmp(input, "log") == 0) {
@@ -25,8 +25,7 @@ void run_command(char input[]) {
   } else if (strcmp(input, "\0") == 0) {
 
   } else {
-    printm(4, input);
-    printm(4, " : command not found!\n");
+    writestr("%s: command not found!\n", input);
   }
 
   for (int i = 0; input[i] != '\0'; i++) {
