@@ -6,6 +6,7 @@
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <printm/printm.h>
+#include <sound/sound.h>
 #include <system/vtconsole.h>
 #include <terminal/terminal.h>
 #include <vga/vga.h>
@@ -31,6 +32,7 @@ void kernel_main() {
   /* Load Drivers */
   init_timer(50);
   init_keyboard();
+  register_snd_driver();
   writestr("[OK] Load Drivers\n");
 
   __asm__ volatile("sti");
