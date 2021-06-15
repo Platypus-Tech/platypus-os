@@ -8,7 +8,7 @@ exec_script:
 	$(BUILD_SCRIPT)
 
 run:
-	qemu-system-x86_64 PlatypusOS.iso
+	qemu-system-x86_64 -soundhw pcspk PlatypusOS.iso
 
 clean:
 	@echo "Cleaning"

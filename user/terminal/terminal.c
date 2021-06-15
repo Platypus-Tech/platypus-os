@@ -3,30 +3,34 @@
 #include <kernel/ports.h>
 #include <kernel/power.h>
 #include <printm/printm.h>
+#include <sound/sound.h>
 #include <stdint.h>
 #include <string.h>
 #include <vga/vga.h>
 
 void put_prompt() {
-  printm(4, "you@platypusOS:# ");
+  writestr("you@platypusOS:# ");
 }
 
 void run_command(char input[]) {
   if (strcmp(input, "version") == 0) {
-    printm(4, "Version 0.08-dev\n");
+    writestr("Version 0.08-dev\n");
   } else if (strcmp(input, "help") == 0) {
-    printm(4, "Commands - version reboot help log uname\n");
+    writestr("Commands - version reboot help log playsound stopsound uname\n");
   } else if (strcmp(input, "uname") == 0) {
-    printm(4, "PlatypusOS\n");
+    writestr("PlatypusOS\n");
   } else if (strcmp(input, "reboot") == 0) {
     reboot();
+  } else if (strcmp(input, "playsound") == 0) {
+    beep();
+  } else if (strcmp(input, "stopsound") == 0) {
+    stop_sound();
   } else if (strcmp(input, "log") == 0) {
     show_log();
   } else if (strcmp(input, "\0") == 0) {
 
   } else {
-    printm(4, input);
-    printm(4, " : command not found!\n");
+    writestr("%s: command not found!\n", input);
   }
 
   for (int i = 0; input[i] != '\0'; i++) {
