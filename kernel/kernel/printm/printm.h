@@ -5,6 +5,7 @@
 #define WARN 1
 #define ERROR 2
 #define MESSAGE 4
+#define PANIC 5
 
 void printm(int log_type, const char *str);
 
