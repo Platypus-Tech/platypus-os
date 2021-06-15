@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 void beep();
-void play_sound(uint32_t nFrequence);
+void play_sound(uint32_t frequency);
 void nosound();
 void register_snd_driver();
 
