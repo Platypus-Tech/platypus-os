@@ -34,6 +34,7 @@ void kernel_main() {
   writestr("[OK] Load Drivers\n");
 
   __asm__ volatile("sti");
+
   info_log("System Loaded\n");
 
   vtc = vtconsole(VGA_SCREEN_WIDTH, VGA_SCREEN_HEIGHT, paint_callback,
