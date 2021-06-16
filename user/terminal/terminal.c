@@ -1,5 +1,6 @@
 #include "terminal.h"
 #include <kernel/log.h>
+#include <kernel/panic.h>
 #include <kernel/ports.h>
 #include <kernel/power.h>
 #include <printm/printm.h>
@@ -14,9 +15,10 @@ void put_prompt() {
 
 void run_command(char input[]) {
   if (strcmp(input, "version") == 0) {
-    writestr("Version 0.08\n");
+    writestr("Version 0.09-dev\n");
   } else if (strcmp(input, "help") == 0) {
-    writestr("Commands - version reboot help log playsound stopsound uname\n");
+    writestr(
+        "Commands - version reboot help log playsound stopsound panic uname\n");
   } else if (strcmp(input, "uname") == 0) {
     writestr("PlatypusOS\n");
   } else if (strcmp(input, "reboot") == 0) {
@@ -28,7 +30,7 @@ void run_command(char input[]) {
   } else if (strcmp(input, "log") == 0) {
     show_log();
   } else if (strcmp(input, "bsod") == 0 || strcmp(input, "panic") == 0) {
-    panic("User created panic using either the `bsod` or `panic` command!");
+    panic("Panic command used!\n");
   } else if (strcmp(input, "\0") == 0) {
 
   } else {

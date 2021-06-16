@@ -3,9 +3,7 @@
 
 void panic(const char *panicmessage) {
   cls();
-  settextcolor(COLOR_WHITE, COLOR_BLUE);
-
-  writestr(":(\n\n");
+  settextcolor(COLOR_RED, COLOR_BLACK);
   writestr("Kernel Panic: %s", panicmessage);
 
   /* Disable the interrupts */
