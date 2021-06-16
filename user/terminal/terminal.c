@@ -29,8 +29,8 @@ void run_command(char input[]) {
     stop_sound();
   } else if (strcmp(input, "log") == 0) {
     show_log();
-  } else if (strcmp(input, "bsod") == 0 || strcmp(input, "panic") == 0) {
-    panic("Panic command used!\n");
+  } else if (strcmp(input, "panic") == 0) {
+    panic("panic command used!\n");
   } else if (strcmp(input, "\0") == 0) {
 
   } else {

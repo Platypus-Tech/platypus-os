@@ -51,7 +51,7 @@ void kernel_main() {
   print(
       "\033[1;34mOS: \033[1;36mPlatypusOS \033[1;33mx86_32 \033[1;32mx86_64 \n");
   print("\033[1;34mKernel: \033[1;32mPlatypus\n");
-  print("\033[1;34mVersion: \033[1;31m0.08\n");
+  print("\033[1;34mVersion: \033[1;31m0.09-dev\n");
 
   writestr("\n");
 
