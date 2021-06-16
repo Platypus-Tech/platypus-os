@@ -28,6 +28,7 @@ i686-elf-gcc -I../../../kernel/include/ -c tolower.c
 i686-elf-gcc -I../../../kernel/include/ -c toupper.c
 
 cp *.o ../build/
+rm *.o
 cd ..
 
 # Build inttypes
@@ -38,6 +39,7 @@ i686-elf-gcc -I../../../kernel/include/ -c strtoimax.c
 i686-elf-gcc -I../../../kernel/include/ -c strtoumax.c
 
 cp *.o ../build/
+rm *.o
 cd ..
 
 # Build locale
@@ -46,6 +48,7 @@ i686-elf-gcc -I../../../kernel/include/ -c localeconv.c
 i686-elf-gcc -I../../../kernel/include/ -c setlocale.c
 
 cp *.o ../build/
+rm *.o
 cd ..
 
 # Build stdio
@@ -98,7 +101,8 @@ i686-elf-gcc -I../../../kernel/include/ -c vsnprintf.c
 i686-elf-gcc -I../../../kernel/include/ -c vsprintf.c
 i686-elf-gcc -I../../../kernel/include/ -c vsscanf.c
 
-cp *.o ../build
+cp *.o ../build/
+rm *.o
 cd ..
 
 # Build stdlib
@@ -133,6 +137,7 @@ i686-elf-gcc -I../../../kernel/include/ -c strtoul.c
 i686-elf-gcc -I../../../kernel/include/ -c strtoull.c
 
 cp *.o ../build/
+rm *.o
 cd ..
 
 # Build string
@@ -171,6 +176,7 @@ i686-elf-gcc -I../../../kernel/include/ -c strtok_s.c
 i686-elf-gcc -I../../../kernel/include/ -c strxfrm.c
 
 cp *.o ../build/
+rm *.o
 cd ..
 
 # Build time
@@ -188,6 +194,7 @@ i686-elf-gcc -I../../../kernel/include/ -c mktime.c
 i686-elf-gcc -I../../../kernel/include/ -c strftime.c
 
 cp *.o ../build/
+rm *.o
 cd ..
 
 ar rcs libpdclib.a ./build/*.o

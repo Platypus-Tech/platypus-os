@@ -4,7 +4,10 @@
 void panic(const char *panicmessage) {
   cls();
   settextcolor(COLOR_RED, COLOR_BLACK);
-  writestr("Kernel Panic: %s", panicmessage);
+
+  /* This is based on Linux */
+  writestr("Kernel Panic: not syncing, %s\n", panicmessage);
+  writestr("---[end Kernel Panic: not syncing, %s ]---\n", panicmessage);
 
   /* Disable the interrupts */
   __asm__ volatile("cli");
