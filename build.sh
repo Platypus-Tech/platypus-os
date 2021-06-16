@@ -34,7 +34,7 @@ i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -c ./kernel/kernel/nmi.c -o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/kernel/ -I./kernel/include/ -c ./kernel/system/vtconsole.c -o vtconsole.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -I./kernel/kernel/ -c ./kernel/system/log.c -o log.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -I./kernel/kernel/ -I./kernel/ -c ./user/terminal/terminal.c -o terminal.o
-i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -c ./kernel/kernel/printm/printm.c -o printm.o
+i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -I./kernel/kernel/ -c ./kernel/kernel/printm/printm.c -o printm.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/ -c ./kernel/kernel/power/reboot.c -o reboot.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -I./kernel/ -I./kernel/kernel/ -c ./kernel/fs/vfs/vfs.c -o vfs.o
 
