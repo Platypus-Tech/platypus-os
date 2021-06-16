@@ -12,13 +12,13 @@ I want it to be for:
 Seems like an odd combination, but that's what I like to do: program, pentest, and play video games.
 
 # Building
-To build the OS, read the [build guide](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.08/docs/Building.md).
+To build the OS, read the [build guide](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.09/docs/Building.md).
 
 # Mailing patches
-See the [Mailing Patches](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.08/docs/Mailing-Patches.md) file.
+See the [Mailing Patches](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.09/docs/Mailing-Patches.md) file.
 
 # Screenshots
-![Image](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.08/screenshots/Release-0.08.png)
+![Image](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.09/screenshots/Screenshot-0.09-dev.png)
 
 # Acknowledgments
 ## Projects
@@ -26,4 +26,4 @@ See the [Mailing Patches](https://github.com/kushagra765/new-platypus-os-drafts/
 - [pdclib](https://github.com/DevSolar/pdclib)
 
 # License
-This project is licensed under GPL v2. See the [`LICENSE`](https://github.com/Platypus-Tech/new-platypus-os-drafts/blob/0.08/LICENSE) file for more info.
+This project is licensed under GPL v2. See the [`LICENSE`](https://github.com/Platypus-Tech/new-platypus-os-drafts/blob/0.09/LICENSE) file for more info.

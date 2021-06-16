@@ -1,7 +1,7 @@
 #include "printm.h"
 #include <kernel/log.h>
-#include <vga/vga.h>
 #include <kernel/panic.h>
+#include <vga/vga.h>
 
 void printm(int log_type, const char *str) {
 
