@@ -9,11 +9,14 @@
 #include <string.h>
 #include <vga/vga.h>
 
+const char *cmd;
+
 void put_prompt() {
   writestr("you@platypusOS:# ");
 }
 
 void run_command(char input[]) {
+  cmd = input;
   if (strcmp(input, "version") == 0) {
     writestr("Version 0.09-dev\n");
   } else if (strcmp(input, "help") == 0) {
@@ -30,7 +33,7 @@ void run_command(char input[]) {
   } else if (strcmp(input, "log") == 0) {
     show_log();
   } else if (strcmp(input, "panic") == 0) {
-    panic("panic command used!\n");
+    panic("panic command used!");
   } else if (strcmp(input, "\0") == 0) {
 
   } else {
