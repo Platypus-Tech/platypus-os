@@ -23,6 +23,7 @@ void move_csr();
 void cls();
 void putch(unsigned char c);
 void writestr(const char *fmt, ...);
+void writeint(int num);
 void settextcolor(unsigned char forecolor, unsigned char backcolor);
 void init_vga();
 
