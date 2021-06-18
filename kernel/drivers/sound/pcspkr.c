@@ -1,4 +1,4 @@
-#include "sound.h"
+#include "pcspkr.h"
 #include <kernel/ports.h>
 #include <printm/printm.h>
 #include <stdint.h>
