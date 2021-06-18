@@ -28,7 +28,7 @@ i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -I./kernel/kernel/ -c ./ker
 nasm -f elf32 ./kernel/cpu/load_irq.asm -o load_irq.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/cpu/irq.c -o irq.o
 i686-elf-gcc -I./kernel/ -I./kernel/include/ -c ./kernel/drivers/pit/pit.c -o pit.o
-i686-elf-gcc -I./kernel/drivers/ -I./user/ -c ./kernel/kernel/panic.c -o panic.o
+i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -I./user/ -c ./kernel/kernel/panic.c -o panic.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -c ./kernel/kernel/memory.c -o memory.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -c ./kernel/kernel/nmi.c -o nmi.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/kernel/ -I./kernel/include/ -c ./kernel/system/vtconsole.c -o vtconsole.o
