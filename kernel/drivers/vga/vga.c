@@ -127,7 +127,7 @@ void writestr(const char *fmt, ...) {
     switch (*++p) {
     case 'd':
       ival = va_arg(ap, int);
-      putch(ival);
+      writeint(ival);
       break;
     case 's':
       for (sval = va_arg(ap, char *); *sval; sval++) {
@@ -141,7 +141,7 @@ void writestr(const char *fmt, ...) {
   }
 }
 
-void writeint(int num) {
+void writeint(uint32_t num) {
   int a = num;
   int i = 0;
   char c[30];
@@ -159,7 +159,7 @@ void writeint(int num) {
 
   c[i] = 0;
 
-  char c2[32];
+  char c2[30];
   c2[i--] = 0;
   int j = 0;
 

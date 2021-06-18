@@ -1,6 +1,8 @@
 #ifndef _DRIVERS_VGA_H
 #define _DRIVERS_VGA_H
 
+#include <stdint.h>
+
 #define COLOR_BLACK 0
 #define COLOR_BLUE 1
 #define COLOR_GREEN 2
@@ -23,7 +25,7 @@ void move_csr();
 void cls();
 void putch(unsigned char c);
 void writestr(const char *fmt, ...);
-void writeint(int num);
+void writeint(uint32_t num);
 void settextcolor(unsigned char forecolor, unsigned char backcolor);
 void init_vga();
 

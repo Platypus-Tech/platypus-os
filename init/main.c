@@ -30,7 +30,7 @@ void kernel_main() {
   writestr("[OK] Load IRQ\n");
 
   /* Load Drivers */
-  init_timer(50);
+  init_timer(1000);
   init_keyboard();
   register_snd_driver();
   writestr("[OK] Load Drivers\n");
