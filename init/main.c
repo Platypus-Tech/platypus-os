@@ -28,6 +28,7 @@ void kernel_main() {
   writestr("[OK] Load ISR\n");
   init_irq();
   writestr("[OK] Load IRQ\n");
+  init_paging();
 
   /* Load Drivers */
   init_timer(1000);

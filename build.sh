@@ -1,9 +1,9 @@
 #!/bin/sh
 
-sudo apt-get update
-sudo apt-get install nasm mtools
+#sudo apt-get update
+#sudo apt-get install nasm mtools
 
-export PATH="$PWD/toolchain/compiler/bin:$PATH"
+#export PATH="$PWD/toolchain/compiler/bin:$PATH"
 
 if [ ! -d build ]; then
    mkdir build
@@ -14,6 +14,7 @@ sh ./build_libc.sh
 
 # Compile the OS
 nasm -f elf32 ./kernel/arch/i386/boot.asm -o boot.o
+nasm -f elf32 ./kernel/kernel/load_paging.asm -o load_paging.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/vga/vga.c -o vga.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/kernel/ -c ./kernel/drivers/sound/pcspkr.c -o pcspkr.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/ports/ports.c -o ports.o
@@ -27,6 +28,7 @@ nasm -f elf32 ./kernel/cpu/load_isr.asm -o load_isr.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -I./kernel/kernel/ -c ./kernel/cpu/isr.c -o isr.o
 nasm -f elf32 ./kernel/cpu/load_irq.asm -o load_irq.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/cpu/irq.c -o irq.o
+i686-elf-gcc -c ./kernel/kernel/paging.c -o paging.o
 i686-elf-gcc -I./kernel/ -I./kernel/include/ -c ./kernel/drivers/pit/pit.c -o pit.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -I./user/ -c ./kernel/kernel/panic.c -o panic.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -c ./kernel/kernel/memory.c -o memory.o
