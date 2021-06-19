@@ -4,7 +4,7 @@
 #include <kernel/ports.h>
 #include <kernel/power.h>
 #include <printm/printm.h>
-#include <sound/sound.h>
+#include <sound/pcspkr.h>
 #include <stdint.h>
 #include <string.h>
 #include <vga/vga.h>

@@ -127,7 +127,7 @@ void writestr(const char *fmt, ...) {
     switch (*++p) {
     case 'd':
       ival = va_arg(ap, int);
-      putch(ival);
+      writeint(ival);
       break;
     case 's':
       for (sval = va_arg(ap, char *); *sval; sval++) {
@@ -139,6 +139,34 @@ void writestr(const char *fmt, ...) {
       break;
     }
   }
+}
+
+void writeint(uint32_t num) {
+  int a = num;
+  int i = 0;
+  char c[30];
+
+  if (num == 0) {
+    putch("0");
+    return;
+  }
+
+  while (a > 0) {
+    c[i] = '0' + a % 10;
+    a /= 10;
+    i++;
+  }
+
+  c[i] = 0;
+
+  char c2[30];
+  c2[i--] = 0;
+  int j = 0;
+
+  while (i >= 0) {
+    c2[i--] = c[j++];
+  }
+  writestr(c2);
 }
 
 void settextcolor(unsigned char forecolor, unsigned char backcolor) {

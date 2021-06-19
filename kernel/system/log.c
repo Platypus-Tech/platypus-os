@@ -1,24 +1,28 @@
 #include <kernel/log.h>
+#include <pit/pit.h>
 #include <printm/printm.h>
 #include <vga/vga.h>
 
+extern int kernel_timer_ticks;
 struct log *log_info;
 
 void warn_log(const char *str) {
   settextcolor(COLOR_RED, COLOR_BLACK);
-  writestr("WARN: %s", str);
+  writestr("[ %d ] WARN: %s", kernel_timer_ticks, str);
   log_info->last_log = str;
+  settextcolor(COLOR_WHITE, COLOR_BLACK);
 }
 
 void error_log(const char *str) {
   settextcolor(COLOR_RED, COLOR_BLACK);
-  writestr("ERROR: %s", str);
+  writestr("[ %d ] ERROR: %s", kernel_timer_ticks, str);
   log_info->last_log = str;
+  settextcolor(COLOR_WHITE, COLOR_BLACK);
 }
 
 void info_log(const char *str) {
   settextcolor(COLOR_WHITE, COLOR_BLACK);
-  writestr("INFO: %s", str);
+  writestr("[ %d ] INFO: %s", kernel_timer_ticks, str);
   log_info->last_log = str;
 }
 

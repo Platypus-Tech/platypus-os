@@ -3,6 +3,7 @@
 #include <cpu/irq.h>
 #include <cpu/isr.h>
 #include <kernel/log.h>
+#include <kernel/paging.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <printm/printm.h>
@@ -19,7 +20,7 @@ void kernel_main() {
   /* Initialize VGA */
   init_vga();
 
-  /* Load GDT, IDT, ISR, IRQ */
+  /* Load GDT, IDT, ISR, IRQ and Paging */
   init_gdt();
   writestr("[OK] Load GDT\n");
   init_idt();
@@ -28,9 +29,11 @@ void kernel_main() {
   writestr("[OK] Load ISR\n");
   init_irq();
   writestr("[OK] Load IRQ\n");
+  init_paging();
+  writestr("[OK] Load Paging\n");
 
   /* Load Drivers */
-  init_timer(50);
+  init_timer(1000);
   init_keyboard();
   register_snd_driver();
   writestr("[OK] Load Drivers\n");
