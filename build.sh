@@ -15,7 +15,7 @@ sh ./build_libc.sh
 # Compile the OS
 nasm -f elf32 ./kernel/arch/i386/boot.asm -o boot.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/vga/vga.c -o vga.o
-i686-elf-gcc -I./kernel/include/ -I./kernel/kernel/ -c ./kernel/drivers/sound/sound.c -o sound.o
+i686-elf-gcc -I./kernel/include/ -I./kernel/kernel/ -c ./kernel/drivers/sound/pcspkr.c -o pcspkr.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/drivers/ports/ports.c -o ports.o
 i686-elf-gcc -I./kernel/ -I./kernel/include/ -I./kernel/drivers/ -I./kernel/cpu/ -I./user/ -c ./kernel/drivers/keyboard/keyboard.c -o keyboard.o
 i686-elf-gcc -I./kernel/ -I./kernel/drivers/ -I./kernel/include/ -I./kernel/kernel/ -I./user/ -c ./init/main.c -o main.o
@@ -42,6 +42,10 @@ cp *.o ./build/
 rm *.o
 
 i686-elf-gcc -T ./kernel/arch/i386/linker.ld -o kernel.bin -ffreestanding -O2 -nostdlib ./build/*.o ./lib/libc/libpdclib.a
+
+if [ ! -f kernel.bin ]; then
+   exit 1;
+fi
 
 # Now generate the ISO file
 mkdir -p isodir/boot/grub
