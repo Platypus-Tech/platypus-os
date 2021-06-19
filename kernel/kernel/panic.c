@@ -7,7 +7,8 @@ extern const char *cmd;
 
 void panic(const char *panicmessage) {
   cls();
-  settextcolor(COLOR_RED, COLOR_BLACK);
+  /* Colors influenced by Windows *eek* */
+  settextcolor(COLOR_BLUE, COLOR_WHITE);
 
   /* This is based on Linux */
   writestr("Kernel Panic: not syncing, %s\n", panicmessage);

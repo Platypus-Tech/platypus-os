@@ -6,7 +6,7 @@
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <printm/printm.h>
-#include <sound/sound.h>
+#include <sound/pcspkr.h>
 #include <system/vtconsole.h>
 #include <terminal/terminal.h>
 #include <vga/vga.h>
@@ -45,11 +45,11 @@ void kernel_main() {
   print(
       "\033[1;33m -------------------------------------------------------------------\n");
   print(
-      "\033[1;33m|                       WELCOME TO PLATYPUS OS                      |\n");
+      "\033[1;33m|                       Welcome to Platypus OS!                     |\n");
   print(
       "\033[1;33m -------------------------------------------------------------------\n");
   print(
-      "\033[1;34mOS: \033[1;36mPlatypusOS \033[1;33mx86_32 \033[1;32mx86_64 \n");
+      "\033[1;34mOS: \033[1;36mPlatypus OS \033[1;33mx86_32 \033[1;32mx86_64 \n");
   print("\033[1;34mKernel: \033[1;32mPlatypus\n");
   print("\033[1;34mVersion: \033[1;31m0.09-dev\n");
 
