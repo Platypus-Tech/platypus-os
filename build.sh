@@ -28,6 +28,8 @@ nasm -f elf32 ./kernel/cpu/load_isr.asm -o load_isr.o
 i686-elf-gcc -I./kernel/include/ -I./kernel/drivers/ -I./kernel/kernel/ -c ./kernel/cpu/isr.c -o isr.o
 nasm -f elf32 ./kernel/cpu/load_irq.asm -o load_irq.o
 i686-elf-gcc -I./kernel/include/ -c ./kernel/cpu/irq.c -o irq.o
+i686-elf-gcc -I./kernel/include/ -I./kernel/ -c ./kernel/kernel/pmm.c -o pmm.o
+i686-elf-gcc -I./kernel/include/ -I./kernel/ -c ./kernel/kernel/vmm.c -o vmm.o
 i686-elf-gcc -c ./kernel/kernel/paging.c -o paging.o
 i686-elf-gcc -I./kernel/ -I./kernel/include/ -c ./kernel/drivers/pit/pit.c -o pit.o
 i686-elf-gcc -I./kernel/drivers/ -I./kernel/include/ -I./user/ -c ./kernel/kernel/panic.c -o panic.o

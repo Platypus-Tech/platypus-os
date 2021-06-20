@@ -1,9 +1,11 @@
+#include "multiboot.h"
 #include <cpu/gdt.h>
 #include <cpu/idt.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
 #include <kernel/log.h>
-#include <kernel/paging.h>
+#include <kernel/pmm.h>
+#include <kernel/vmm.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <printm/printm.h>
@@ -16,11 +18,11 @@ extern *vtc;
 extern void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y);
 extern void cursor_move_callback(vtconsole_t *vtc, vtcursor_t *cur);
 
-void kernel_main() {
+void kernel_main(multiboot_info_t *mboot_info) {
   /* Initialize VGA */
   init_vga();
 
-  /* Load GDT, IDT, ISR, IRQ and Paging */
+  /* Load GDT, IDT, ISR, IRQ */
   init_gdt();
   writestr("[OK] Load GDT\n");
   init_idt();
@@ -29,8 +31,12 @@ void kernel_main() {
   writestr("[OK] Load ISR\n");
   init_irq();
   writestr("[OK] Load IRQ\n");
-  init_paging();
-  writestr("[OK] Load Paging\n");
+
+  /* Load VMM and PMM */
+  init_pmm(mboot_info->mem_upper);
+  writestr("[OK] Load PMM\n");
+  init_vmm();
+  writestr("[OK] Load VMM\n");
 
   /* Load Drivers */
   init_timer(1000);
@@ -55,8 +61,6 @@ void kernel_main() {
       "\033[1;34mOS: \033[1;36mPlatypus OS \033[1;33mx86_32 \033[1;32mx86_64 \n");
   print("\033[1;34mKernel: \033[1;32mPlatypus\n");
   print("\033[1;34mVersion: \033[1;31m0.09-dev\n");
-
-  writestr("\n");
 
   init_terminal();
 }
