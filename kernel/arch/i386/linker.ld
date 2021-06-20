@@ -9,7 +9,7 @@ SECTIONS
     *(.rodata)
     . = ALIGN(4096);
   }
-
+ 
   .data : AT(memory_address + (data - code))
   {
     data = .;
