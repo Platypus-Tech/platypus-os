@@ -44,9 +44,9 @@ void init_vmm() {
 
   init_paging();
 
-  uint32_t pt_idx = PAGE_DIRECTORY_IDX((PMM_STACK_ADDRESS >> 12));
-  page_dir[pt_idx] = pmm_page_alloc() | PRESENT_PAGE | WRITE_PAGE;
-  memset(page_tables[pt_idx * 1024], 0, 0x1000);
+  // uint32_t pt_idx = PAGE_DIRECTORY_IDX((PMM_STACK_ADDRESS >> 12));
+  // page_dir[pt_idx] = pmm_page_alloc() | PRESENT_PAGE | WRITE_PAGE;
+  // memset(page_tables[pt_idx * 1024], 0, 0x1000);
 
   paging_active = 1;
 }

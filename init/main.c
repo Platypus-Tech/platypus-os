@@ -48,8 +48,8 @@ void kernel_main(multiboot_info_t *mboot_info) {
 
   info_log("System Loaded\n");
 
-  // vtc = vtconsole(VGA_SCREEN_WIDTH, VGA_SCREEN_HEIGHT, paint_callback,
-  // cursor_move_callback);
+  vtc = vtconsole(VGA_SCREEN_WIDTH, VGA_SCREEN_HEIGHT, paint_callback,
+                  cursor_move_callback);
 
   print(
       "\033[1;33m -------------------------------------------------------------------\n");
