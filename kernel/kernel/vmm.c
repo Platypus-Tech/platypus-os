@@ -1,4 +1,5 @@
 #include "vmm.h"
+#include "paging.h"
 #include "panic.h"
 #include "pmm.h"
 #include <cpu/idt.h>
@@ -41,9 +42,7 @@ void init_vmm() {
 
   switch_page_directory(pd);
 
-  asm volatile("mov %%cr0, %0" : "=r"(cr0));
-  cr0 |= 0x800000000;
-  asm volatile("mov %0, %%cr0" : : "r"(cr0));
+  init_paging();
 
   uint32_t pt_idx = PAGE_DIRECTORY_IDX((PMM_STACK_ADDRESS >> 12));
   page_dir[pt_idx] = pmm_page_alloc() | PRESENT_PAGE | WRITE_PAGE;
