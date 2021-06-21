@@ -26,6 +26,7 @@ void cls();
 void putch(unsigned char c);
 void writestr(const char *fmt, ...);
 void writeint(uint32_t num);
+void writehex(uint32_t num);
 void settextcolor(unsigned char forecolor, unsigned char backcolor);
 void init_vga();
 

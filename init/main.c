@@ -4,12 +4,14 @@
 #include <cpu/irq.h>
 #include <cpu/isr.h>
 #include <kernel/log.h>
+#include <kernel/panic.h>
 #include <kernel/pmm.h>
 #include <kernel/vmm.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <printm/printm.h>
 #include <sound/pcspkr.h>
+#include <string.h>
 #include <system/vtconsole.h>
 #include <terminal/terminal.h>
 #include <vga/vga.h>
@@ -18,9 +20,13 @@ extern *vtc;
 extern void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y);
 extern void cursor_move_callback(vtconsole_t *vtc, vtcursor_t *cur);
 
-void kernel_main(multiboot_info_t *mboot_info) {
+void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
   /* Initialize VGA */
   init_vga();
+
+  if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {
+    panic("Invalid magic number");
+  }
 
   /* Load GDT, IDT, ISR, IRQ */
   init_gdt();
@@ -48,8 +54,10 @@ void kernel_main(multiboot_info_t *mboot_info) {
 
   info_log("System Loaded\n");
 
-  vtc = vtconsole(VGA_SCREEN_WIDTH, VGA_SCREEN_HEIGHT, paint_callback,
-                  cursor_move_callback);
+  if (strcmp(mboot_info->cmdline, "withvtconsole") == 0) {
+    vtc = vtconsole(VGA_SCREEN_WIDTH, VGA_SCREEN_HEIGHT, paint_callback,
+                    cursor_move_callback);
+  }
 
   print(
       "\033[1;33m -------------------------------------------------------------------\n");
@@ -57,10 +65,23 @@ void kernel_main(multiboot_info_t *mboot_info) {
       "\033[1;33m|                       Welcome to Platypus OS!                     |\n");
   print(
       "\033[1;33m -------------------------------------------------------------------\n");
+
   print(
       "\033[1;34mOS: \033[1;36mPlatypus OS \033[1;33mx86_32 \033[1;32mx86_64 \n");
   print("\033[1;34mKernel: \033[1;32mPlatypus\n");
   print("\033[1;34mVersion: \033[1;31m0.09-dev\n");
+  writestr("Kernel command line: %s\n", mboot_info->cmdline);
+  writestr("Memory Mapping: \n");
+  int i;
+  for (i = 0; i < mboot_info->mmap_length;
+       i += sizeof(multiboot_memory_map_t)) {
+    multiboot_memory_map_t *mmmt =
+        (multiboot_memory_map_t *)(mboot_info->mmap_addr + i);
 
+    writestr("Start Address: %x | Length: %x | Size: %x | Type %d\n",
+             mmmt->addr, mmmt->len, mmmt->size, mmmt->type);
+  }
+
+  writestr("\n\n");
   init_terminal();
 }

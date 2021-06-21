@@ -119,7 +119,7 @@ struct multiboot_header {
   multiboot_uint32_t width;
   multiboot_uint32_t height;
   multiboot_uint32_t depth;
-};
+} __attribute__((section(".multiboot")));
 
 /* The symbol table for a.out.  */
 struct multiboot_aout_symbol_table {
@@ -222,8 +222,8 @@ struct multiboot_color {
 
 struct multiboot_mmap_entry {
   multiboot_uint32_t size;
-  multiboot_uint64_t addr;
-  multiboot_uint64_t len;
+  multiboot_uint32_t addr;
+  multiboot_uint32_t len;
 #define MULTIBOOT_MEMORY_AVAILABLE 1
 #define MULTIBOOT_MEMORY_RESERVED 2
 #define MULTIBOOT_MEMORY_ACPI_RECLAIMABLE 3

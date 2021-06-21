@@ -115,6 +115,7 @@ void writestr(const char *fmt, ...) {
   va_list ap;
   char *p, *sval;
   int ival;
+  int xval;
 
   va_start(ap, fmt);
 
@@ -133,6 +134,10 @@ void writestr(const char *fmt, ...) {
       for (sval = va_arg(ap, char *); *sval; sval++) {
         putch(*sval);
       }
+      break;
+    case 'x':
+      xval = va_arg(ap, int);
+      writehex(xval);
       break;
     default:
       putch(*p);
@@ -167,6 +172,37 @@ void writeint(uint32_t num) {
     c2[i--] = c[j++];
   }
   writestr(c2);
+}
+
+void writehex(uint32_t num) {
+  signed int t;
+
+  writestr("0x");
+
+  char noZeroes = 1;
+
+  int i;
+  for (i = 28; i > 0; i -= 4) {
+    t = (num >> i) & 0xF;
+    if (t == 0 && noZeroes != 0) {
+      continue;
+    }
+
+    if (t >= 0xA) {
+      noZeroes = 0;
+      putch(t - 0xA + 'a');
+    } else {
+      noZeroes = 0;
+      putch(t + '0');
+    }
+  }
+
+  t = num & 0xF;
+  if (t >= 0xA) {
+    putch(t - 0xA + 'a');
+  } else {
+    putch(t + '0');
+  }
 }
 
 void settextcolor(unsigned char forecolor, unsigned char backcolor) {
