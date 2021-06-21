@@ -4,6 +4,8 @@ memory_address = 0x00100000;
 SECTIONS
 {
   .text memory_address : AT(memory_address) {
+    . = ALIGN(8);
+    KEEP(*(.multiboot))
     code = .;
     *(.text)
     *(.rodata)
