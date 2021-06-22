@@ -15,13 +15,9 @@ uint32_t *page_tables = (uint32_t *)PAGE_TABLE_VIRTUAL_ADDRESS;
 
 page_dir_t *current_directory;
 
-void page_fault(struct registers *regs);
-
 void init_vmm() {
   int i;
   uint32_t cr0;
-
-  install_irq_handler(14, &page_fault);
 
   page_dir_t *pd = (page_dir_t *)pmm_page_alloc();
 
@@ -89,10 +85,4 @@ char vmm_get_mapping(uint32_t va, uint32_t *pa) {
     }
     return 1;
   }
-}
-
-void page_fault(struct registers *regs) {
-  uint32_t cr2;
-  asm volatile("mov %%cr2, %0" : "=r"(cr2));
-  panic("Page fault!");
 }
