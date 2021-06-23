@@ -1,34 +1,8 @@
 #include "vga.h"
 #include <kernel/ports.h>
 #include <stdarg.h>
-#include <stddef.h>
 #include <stdint.h>
-
-void *memcpy(void *dest, const void *src, size_t count) {
-  const char *sp = (const char *)src;
-  char *dp = (char *)dest;
-  for (; count != 0; count--)
-    *dp++ = *sp++;
-  return dest;
-}
-
-unsigned short *memsetw(unsigned short *dest, unsigned short val,
-                        size_t count) {
-  unsigned short *temp = (unsigned short *)dest;
-  for (; count != 0; count--)
-    *temp++ = val;
-  return dest;
-}
-
-size_t strlen(const char *string) {
-  size_t length = 0;
-
-  while (string[length]) {
-    length++;
-  }
-
-  return length;
-}
+#include <string.h>
 
 unsigned short *textmemptr;
 int attrib = 0x0F;

@@ -57,14 +57,6 @@ void vga_cursor(int x, int y) {
   outp(0x3D5, (char)(cursorLocation));
 }
 
-int isdigit(int c) {
-  if (c >= '0' && c <= '9') {
-    return 1;
-  }
-
-  return 0;
-}
-
 #define min(a, b) ((a) < (b) ? (a) : (b))
 
 /* --- Constructor/Destructor ----------------------------------------------- */
