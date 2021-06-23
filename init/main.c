@@ -71,32 +71,9 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
   print("\033[1;34mKernel: \033[1;32mPlatypus\n");
   print("\033[1;34mVersion: \033[1;31m0.09-dev\n");
   writestr("Kernel command line: %s\n", mboot_info->cmdline);
+  uint32_t memsize = (mboot_info->mem_lower + mboot_info->mem_upper) / 1024;
+  writestr("Total memory: %d MB\n", memsize);
 
-  /* Print the memory mapping */
-  writestr("Memory Mapping: \n");
-  int i;
-  for (i = 0; i < mboot_info->mmap_length;
-       i += sizeof(multiboot_memory_map_t)) {
-    multiboot_memory_map_t *mem_map =
-        (multiboot_memory_map_t *)(mboot_info->mmap_addr + i);
-
-    writestr("Start Address: %x | Length: %x | Size: %x | Type: ",
-             mem_map->addr, mem_map->len, mem_map->size);
-
-    if (mem_map->type == MULTIBOOT_MEMORY_AVAILABLE) {
-      writestr("FREE\n");
-    } else if (mem_map->type == MULTIBOOT_MEMORY_RESERVED) {
-      writestr("RESERVED\n");
-    } else if (mem_map->type == MULTIBOOT_MEMORY_ACPI_RECLAIMABLE) {
-      writestr("ACPI RECLAIMABLE\n");
-    } else if (mem_map->type == MULTIBOOT_MEMORY_NVS) {
-      writestr("NVS\n");
-    } else if (mem_map->type == MULTIBOOT_MEMORY_BADRAM) {
-      writestr("BADRAM\n");
-    } else {
-      writestr("UNKNOWN\n");
-    }
-  }
   writestr("\n\n");
   init_terminal();
 }
