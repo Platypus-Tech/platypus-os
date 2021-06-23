@@ -1,5 +1,6 @@
 #include "vtconsole.h"
 #include "memory.h"
+#include <ctype.h>
 #include <kernel/ports.h>
 #include <string.h>
 #include <vga/vga.h>
@@ -55,14 +56,6 @@ void vga_cursor(int x, int y) {
   outp(0x3D5, (char)(cursorLocation >> 8));
   outp(0x3D4, 15);
   outp(0x3D5, (char)(cursorLocation));
-}
-
-int isdigit(int c) {
-  if (c >= '0' && c <= '9') {
-    return 1;
-  }
-
-  return 0;
 }
 
 #define min(a, b) ((a) < (b) ? (a) : (b))

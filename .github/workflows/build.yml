@@ -26,10 +26,14 @@ jobs:
          cd ./toolchain/
          chmod +x ./build_toolchain.sh
          ./build_toolchain.sh
+
+     - name: Install Dependencies
+       run: |
+         sh ./scripts/install_deps.sh
      
      - name: Build PlatypusOS
        run: |
-         make all
+         make
          
      - name: Upload Build Artifact
        uses: actions/upload-artifact@v2.2.3
