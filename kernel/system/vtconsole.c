@@ -1,5 +1,6 @@
 #include "vtconsole.h"
 #include "memory.h"
+#include <ctype.h>
 #include <kernel/ports.h>
 #include <string.h>
 #include <vga/vga.h>
