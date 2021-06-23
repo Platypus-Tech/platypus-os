@@ -30,10 +30,6 @@ jobs:
      - name: Install Dependencies
        run: |
          sh ./scripts/install_deps.sh
-
-     - name: Export $PATH
-       run: |
-         export PATH="$PWD/toolchain/compiler/bin:$PATH"
      
      - name: Build PlatypusOS
        run: |
