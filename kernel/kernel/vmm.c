@@ -49,7 +49,7 @@ void init_vmm() {
 
 void switch_page_directory(page_dir_t *pd) {
   current_directory = pd;
-  asm volatile("mov %0, %%cr3" : : "r"(pd));
+  __asm__ volatile("mov %0, %%cr3" : : "r"(pd));
 }
 
 void vmm_map(uint32_t va, uint32_t pa, uint32_t flags) {
@@ -68,7 +68,7 @@ void vmm_unmap(uint32_t va) {
   uint32_t virtual_page = va / 0x1000;
 
   page_tables[virtual_page] = 0;
-  asm volatile("invlpg (%0)" : : "a"(va));
+  __asm__ volatile("invlpg (%0)" : : "a"(va));
 }
 
 char vmm_get_mapping(uint32_t va, uint32_t *pa) {
