@@ -7,6 +7,7 @@
 #include <sound/pcspkr.h>
 #include <stdint.h>
 #include <string.h>
+#include <vfs/vfs.h>
 #include <vga/vga.h>
 
 const char *cmd;
@@ -21,11 +22,13 @@ void run_command(char input[]) {
     writestr("Version 0.09-dev\n");
   } else if (strcmp(input, "help") == 0) {
     writestr(
-        "Commands - version reboot help log playsound stopsound panic uname\n");
+        "Commands - version reboot help log ls playsound stopsound panic uname\n");
   } else if (strcmp(input, "uname") == 0) {
     writestr("PlatypusOS\n");
   } else if (strcmp(input, "reboot") == 0) {
     reboot();
+  } else if (strcmp(input, "ls") == 0) {
+    ls();
   } else if (strcmp(input, "playsound") == 0) {
     beep();
   } else if (strcmp(input, "stopsound") == 0) {
@@ -45,6 +48,16 @@ void run_command(char input[]) {
   }
 
   put_prompt();
+}
+
+void ls() {
+  int i = 0;
+  struct vfs_dirent *node = 0;
+  while ((node = readdir_vfs(vfs_root, i)) != 0) {
+    writestr(node->name);
+    writestr("\n");
+    i++;
+  }
 }
 
 void init_terminal() {
