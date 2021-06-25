@@ -35,7 +35,7 @@ void open_vfs(vfs_node_t *node, uint8_t read, uint8_t write) {
 
 void close_vfs(vfs_node_t *node) {
   if (node == vfs_root) {
-    panic("Attempted to close vfs_root!\n");
+    panic("Attempted to close vfs_root!");
   }
 
   if (node->close != 0) {

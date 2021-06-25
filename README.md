@@ -18,7 +18,7 @@ To build the OS, read the [build guide](https://github.com/kushagra765/new-platy
 See the [Mailing Patches](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.09/docs/Mailing-Patches.md) file.
 
 # Screenshots
-![Image](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.09/screenshots/Screenshot-0.09-dev-5.png)
+![Image](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.09/screenshots/Screenshot-0.09-dev-7.png)
 
 # Acknowledgments
 ## Projects

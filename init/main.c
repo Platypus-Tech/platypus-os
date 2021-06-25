@@ -3,6 +3,7 @@
 #include <cpu/idt.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
+#include <initrd/initrd.h>
 #include <kernel/log.h>
 #include <kernel/panic.h>
 #include <kernel/pmm.h>
@@ -14,6 +15,7 @@
 #include <string.h>
 #include <system/vtconsole.h>
 #include <terminal/terminal.h>
+#include <vfs/vfs.h>
 #include <vga/vga.h>
 
 extern *vtc;
@@ -73,7 +75,35 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
   writestr("Kernel command line: %s\n", mboot_info->cmdline);
   uint32_t memsize = (mboot_info->mem_lower + mboot_info->mem_upper) / 1024;
   writestr("Total memory: %d MB\n", memsize);
-
+  writestr("Initrd at address: %x", mboot_info->mods_addr);
   writestr("\n\n");
+
+  uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
+
+  vfs_root = init_initrd(initrd);
+
+  int i = 0;
+  struct vfs_dirent *node = 0;
+  while ((node = readdir_vfs(vfs_root, i)) != 0) {
+    writestr("Found ");
+    writestr(node->name);
+    vfs_node_t *fsnode = finddir_vfs(vfs_root, node->name);
+
+    if ((fsnode->flags & 0x7) == VFS_DIR) {
+      writestr(" (directory)\n");
+    } else {
+      writestr("\n\t contents: ");
+      char buf[256];
+      uint32_t sz = read_vfs(fsnode, 0, 256, buf);
+      int j;
+      for (j = 0; j < sz; j++) {
+        putch(buf[j]);
+      }
+      writestr("\n");
+    }
+    i++;
+  }
+
+  writestr("\n");
   init_terminal();
 }

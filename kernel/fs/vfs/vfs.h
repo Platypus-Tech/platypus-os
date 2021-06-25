@@ -43,6 +43,8 @@ typedef struct vfs_node {
   struct fs_node *ptr;
 } vfs_node_t;
 
+extern vfs_node_t *vfs_root;
+
 uint32_t read_vfs(vfs_node_t *node, uint32_t offset, uint32_t size,
                   uint8_t *buf);
 uint32_t write_vfs(vfs_node_t *node, uint32_t offset, uint32_t size,
