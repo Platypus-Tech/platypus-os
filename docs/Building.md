@@ -1,7 +1,7 @@
 # Building the OS (with toolchain)
 To build the OS, you need `i686-elf-gcc` toolchain and many other packages. You can build the toolchain by running:
 ```
-cd ./toolchain/ 
+cd ./scripts/
 sh ./build_toolchain.sh
 ```
 
