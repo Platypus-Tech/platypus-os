@@ -1,4 +1,4 @@
-CC = i686-elf-gcc
+CC = ./toolchain/compiler/bin/i686-elf-gcc
 LD = $(CC)
 NASM = nasm
 ISO_FILE = PlatypusOS.iso
