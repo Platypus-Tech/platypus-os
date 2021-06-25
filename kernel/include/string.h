@@ -4,7 +4,7 @@
 #include "stddef.h"
 
 int strcmp(const char *str1, const char *str2);
-char *strcpy(char *str1, char *str2);
+char *strcpy(char *str1, const char *str2);
 char *strcat(char *str1, char *str2);
 size_t strlen(const char *string);
 char *strerror(int err_code);
