@@ -91,8 +91,7 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
 
     if ((fsnode->flags & 0x7) == VFS_DIR) {
       writestr(" (directory)\n");
-    }
-    else {
+    } else {
       writestr("\n\t contents: ");
       char buf[256];
       uint32_t sz = read_vfs(fsnode, 0, 256, buf);
