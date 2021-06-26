@@ -15,34 +15,30 @@ ASM_SOURCES = $(shell find kernel/ -name '*.asm')
 OBJ_FILES = $(C_SOURCES:.c=.o) $(ASM_SOURCES:.asm=.o)
 
 $(ISO_FILE): $(KERNEL_FILE)
-	 gcc -o ./scripts/gen_initrd ./scripts/gen_initrd.c
-	 ./scripts/gen_initrd initrd/file.txt initrd/file.txt initrd/file2.txt initrd/file2.txt
+	 @gcc -o ./scripts/gen_initrd ./scripts/gen_initrd.c
+	 @./scripts/gen_initrd initrd/file.txt initrd/file.txt initrd/file2.txt initrd/file2.txt
 	 @echo "MKDIR"
-	 mkdir -p isodir/boot/grub/
+	 @mkdir -p isodir/boot/grub/
 	 @echo "CP"
-	 cp grub.cfg isodir/boot/grub/
-	 cp kernel.bin initrd.img isodir/boot/
+	 @cp grub.cfg isodir/boot/grub/
+	 @cp kernel.bin initrd.img isodir/boot/
 	 @echo "GRUB-MKRESCUE"
-	 grub-mkrescue -o PlatypusOS.iso isodir
+	 @grub-mkrescue -o PlatypusOS.iso isodir
 
 $(KERNEL_FILE): kernel/arch/i386/boot.o $(OBJ_FILES)
 	 @echo "LD $^"
-	 $(LD) $(LDFLAGS) $^ -o $@
-
-kernel/arch/i386/boot.o: kernel/arch/i386/boot.asm
-	  $(NASM) $(NASMFLAGS) $< -o $@
+	 @$(LD) $(LDFLAGS) $^ -o $@
 
 %.o: %.c
-	  @echo "CC $<"
-	  $(CC) $(CFLAGS) -c $< -o $@
+	 @echo "CC $<"
+	 @$(CC) $(CFLAGS) -c $< -o $@
 
 %.o: %.asm
-	  @echo "NASM $<"
-	  $(NASM) $(NASMFLAGS) $< -o $@
+	 @echo "NASM $<"
+	 @$(NASM) $(NASMFLAGS) $< -o $@
 
 clean:
-	  @echo "Cleaning"
-	  rm -rf isodir/ $(KERNEL_FILE) $(INITRD_FILE) $(ISO_FILE) $(OBJ_FILES)
+	 @rm -rf isodir/ $(KERNEL_FILE) $(INITRD_FILE) $(ISO_FILE) $(OBJ_FILES)
 
 run:
-	  qemu-system-x86_64 -soundhw pcspk $(ISO_FILE)
+	 @qemu-system-x86_64 -soundhw pcspk $(ISO_FILE)
