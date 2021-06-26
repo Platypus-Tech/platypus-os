@@ -1,7 +1,7 @@
 #include "vfs.h"
 #include <errno.h>
 #include <kernel/panic.h>
-#include <kernel/printm/printm.h>
+#include <printm/printm.h>
 #include <stdint.h>
 
 /* A simple VFS, based on JamesM's kernel development tutorials */
@@ -43,7 +43,7 @@ void close_vfs(vfs_node_t *node) {
   }
 }
 
-struct dirent *readdir_vfs(vfs_node_t *node, uint32_t index) {
+struct vfs_dirent *readdir_vfs(vfs_node_t *node, uint32_t index) {
   if ((node->flags & 0x7) == VFS_DIR && node->readdir != 0) {
     return node->readdir(node, index);
   } else {

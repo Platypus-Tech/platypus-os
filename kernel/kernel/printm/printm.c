@@ -1,6 +1,7 @@
 #include "printm.h"
 #include <kernel/log.h>
 #include <kernel/panic.h>
+#include <serial/serial.h>
 #include <vga/vga.h>
 
 void printm(int log_type, const char *str) {
@@ -11,6 +12,8 @@ void printm(int log_type, const char *str) {
     warn_log(str);
   } else if (log_type == ERROR) {
     error_log(str);
+  } else if (log_type == DEBUG) {
+    writestr_serial(str);
   } else if (log_type == MESSAGE) {
     writestr(str);
   } else if (log_type == PANIC) {
