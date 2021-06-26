@@ -4,6 +4,7 @@
 #define INFO 0
 #define WARN 1
 #define ERROR 2
+#define DEBUG 3
 #define MESSAGE 4
 #define PANIC 5
 

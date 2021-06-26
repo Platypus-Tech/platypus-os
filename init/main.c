@@ -11,6 +11,7 @@
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <printm/printm.h>
+#include <serial/serial.h>
 #include <sound/pcspkr.h>
 #include <string.h>
 #include <system/vtconsole.h>
@@ -50,6 +51,7 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
   init_timer(1000);
   init_keyboard();
   register_snd_driver();
+  init_serial();
   writestr("[OK] Load Drivers\n");
 
   __asm__ volatile("sti");
