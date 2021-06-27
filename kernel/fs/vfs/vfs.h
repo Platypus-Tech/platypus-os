@@ -40,7 +40,7 @@ typedef struct vfs_node {
   close_type_t close;
   readdir_type_t readdir;
   finddir_type_t finddir;
-  struct fs_node *ptr;
+  struct vfs_node *ptr;
 } vfs_node_t;
 
 extern vfs_node_t *vfs_root;
