@@ -1,5 +1,5 @@
-#ifndef _DRIVERS_ATA_H
-#define _DRIVERS_ATA_H
+#ifndef _DRIVERS_ATA_PIO_H
+#define _DRIVERS_ATA_PIO_H
 
 #define ATA_PRIMARY_BUS_PORT 0x1F0
 #define ATA_PRIMARY_BUS_CTRL_PORT 0x3F6
@@ -35,4 +35,4 @@
 // ATA Commands
 #define ATA_IDENTIFY 0xEC
 
-#endif //_DRIVERS_ATA_H
+#endif //_DRIVERS_ATA_PIO_H
