@@ -17,7 +17,7 @@ int ata_drive_chk(int drive) {
     printm(3, "ATA PIO: Drive doesn't exist\n");
   }
 
-  for (;;;) {
+  for (;;) {
     int status = inp(ATA_COMMAND_PORT);
     int low = inp(ATA_CYLINDER_LOW);
     int high = inp(ATA_CYLINDER_HIGH);
