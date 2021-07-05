@@ -17,6 +17,7 @@
 #define ATA_DRIVE 6
 #define ATA_STATUS 7
 #define ATA_COMMAND 7
+#define ATA_COMMAND_PORT 0x1F7
 
 #define ATA_ALTERNATE_STATUS 0
 #define ATA_DEVICE_CONTROL 0
