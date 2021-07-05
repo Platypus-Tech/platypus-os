@@ -1,6 +1,3 @@
-include kernel/arch/i386/i386.conf
-
-ARCH =
 CC = ./toolchain/compiler/bin/i686-elf-gcc
 LD = $(CC)
 NASM = nasm
@@ -18,9 +15,6 @@ ASM_SOURCES = $(shell find kernel/ -name '*.asm')
 OBJ_FILES = $(C_SOURCES:.c=.o) $(ASM_SOURCES:.asm=.o)
 
 $(ISO_FILE): $(KERNEL_FILE)
-	@echo "ARCH = $(ARCH)"
-	@echo "CFLAGS = $(CFLAGS)"
-	@echo "LDFLAGS = $(LDFLAGS)"
 	@gcc -o ./scripts/gen_initrd ./scripts/gen_initrd.c
 	@./scripts/gen_initrd initrd/file.txt initrd/file.txt initrd/file2.txt initrd/file2.txt
 	@echo "MKDIR"
