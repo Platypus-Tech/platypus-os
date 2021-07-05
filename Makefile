@@ -1,3 +1,6 @@
+include kernel/arch/i386/i386.conf
+
+ARCH = 
 CC = ./toolchain/compiler/bin/i686-elf-gcc
 LD = $(CC)
 NASM = nasm
