@@ -6,8 +6,8 @@
 #include <initrd/initrd.h>
 #include <kernel/log.h>
 #include <kernel/panic.h>
-#include <kernel/pmm.h>
-#include <kernel/vmm.h>
+#include <mm/pmm.h>
+#include <mm/vmm.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <printm/printm.h>
