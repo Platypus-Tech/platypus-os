@@ -11,7 +11,7 @@ char *strerror(int err_code);
 void *memcpy(void *str1, const void *str2, size_t n);
 void *memmove(void *str1, const void *str2, size_t n);
 int memcmp(const void *str1, const void *str2, size_t n);
-void memset(void *ptr, int ch, size_t n);
+void *memset(void *ptr, int ch, size_t n);
 unsigned short *memsetw(unsigned short *dest, unsigned short val, size_t count);
 
 #endif //_STRING_H

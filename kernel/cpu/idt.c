@@ -1,5 +1,6 @@
 #include "idt.h"
 #include <stddef.h>
+#include <string.h>
 #include <stdint.h>
 
 struct entry_idt {
@@ -17,18 +18,6 @@ struct pointer_idt {
 
 struct entry_idt idt[256];
 struct pointer_idt idt_ptr;
-
-/* This function is based on the PDCLIB memset function */
-void *memset(void *ptr, int ch, size_t n) {
-
-  uint8_t *p = (uint8_t *)ptr;
-
-  while (n--) {
-    *p++ = (uint8_t)ch;
-  }
-
-  return ptr;
-}
 
 void set_gate_idt(int num, uint32_t base, uint16_t sel, uint8_t flags) {
 

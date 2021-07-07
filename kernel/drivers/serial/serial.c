@@ -1,6 +1,6 @@
 #include "serial.h"
-#include <kernel/ports.h>
 #include <kernel/log.h>
+#include <kernel/ports.h>
 
 #define SERIAL_COM1 0x3f8
 
@@ -44,7 +44,7 @@ void init_serial() {
   outp(SERIAL_COM1 + 0, 0xAE);
 
   if (inp(SERIAL_COM1 + 0) != 0xAE) {
-    error_log("Faulty serial device");
+    error_log("Faulty serial device\n");
     return;
   }
 

@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <string.h>
 
-unsigned short *textmemptr;
+uint16_t *textmemptr;
 int attrib = 0x0F;
 int csr_x = 0, csr_y = 0;
 
@@ -47,8 +47,8 @@ void cls() {
   move_csr();
 }
 
-void putch(unsigned char c) {
-  unsigned short *where;
+void putch(uint8_t c) {
+  uint16_t *where;
   unsigned att = attrib << 8;
 
   if (c == 0x08) {
@@ -179,11 +179,11 @@ void writehex(uint32_t num) {
   }
 }
 
-void settextcolor(unsigned char forecolor, unsigned char backcolor) {
+void settextcolor(uint8_t forecolor, uint8_t backcolor) {
   attrib = (backcolor << 4) | (forecolor & 0x0F);
 }
 
 void init_vga() {
-  textmemptr = (unsigned short *)0xB8000;
+  textmemptr = (uint16_t *)0xB8000;
   cls();
 }

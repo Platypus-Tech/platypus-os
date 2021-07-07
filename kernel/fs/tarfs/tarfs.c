@@ -1,4 +1,5 @@
 #include "tarfs.h"
+#include <stdint.h>
 
 struct tarfs_header *headers[32];
 

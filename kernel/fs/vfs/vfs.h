@@ -1,5 +1,5 @@
-#ifndef _VFS_H
-#define _VFS_H
+#ifndef _FS_VFS_H
+#define _FS_VFS_H
 
 #include <stdint.h>
 
@@ -40,7 +40,7 @@ typedef struct vfs_node {
   close_type_t close;
   readdir_type_t readdir;
   finddir_type_t finddir;
-  struct fs_node *ptr;
+  struct vfs_node *ptr;
 } vfs_node_t;
 
 extern vfs_node_t *vfs_root;
@@ -54,4 +54,4 @@ void close_vfs(vfs_node_t *node);
 struct vfs_dirent *readdir_vfs(vfs_node_t *node, uint32_t index);
 vfs_node_t *finddir_vfs(vfs_node_t *node, char *name);
 
-#endif //_VFS_H
+#endif //_FS_VFS_H
