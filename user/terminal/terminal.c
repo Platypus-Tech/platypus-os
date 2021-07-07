@@ -37,6 +37,8 @@ void run_command(char input[]) {
     show_log();
   } else if (strcmp(input, "panic") == 0) {
     panic("panic command used!");
+  } else if (strcmp(input, "hello") == 0) {
+    writestr("Hello to you too?");
   } else if (strcmp(input, "\0") == 0) {
 
   } else {
