@@ -6,5 +6,5 @@ void mount() {
     writestr("No filesystem mounted.\n");
   }
 
-  writestr("VFS: Mounted on %s", vfs_root);
+  writestr("VFS: Mounted on %s\n", vfs_root);
 }
