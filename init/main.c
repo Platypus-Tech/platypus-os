@@ -86,4 +86,5 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
 
   writestr("\n");
   init_terminal();
+  ls();
 }
