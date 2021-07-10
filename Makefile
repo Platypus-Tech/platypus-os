@@ -16,7 +16,7 @@ OBJ_FILES = $(C_SOURCES:.c=.o) $(ASM_SOURCES:.asm=.o)
 
 $(ISO_FILE): $(KERNEL_FILE)
 	@gcc -o ./scripts/gen_initrd ./scripts/gen_initrd.c
-	@./scripts/gen_initrd initrd/file.txt initrd/file.txt initrd/file2.txt initrd/file2.txt
+	@./scripts/gen_initrd initrd/file.txt file.txt initrd/file2.txt file2.txt
 	@echo "MKDIR"
 	@mkdir -p isodir/boot/grub/
 	@echo "CP"
