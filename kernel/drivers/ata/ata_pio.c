@@ -27,3 +27,4 @@ int ata_drive_chk(int drive) {
       }
     }
   }
+}
