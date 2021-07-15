@@ -36,4 +36,6 @@
 // ATA Commands
 #define ATA_IDENTIFY 0xEC
 
+void ata_drive_chk(int drive);
+
 #endif //_DRIVERS_ATA_PIO_H
