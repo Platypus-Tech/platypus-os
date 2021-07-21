@@ -1,5 +1,5 @@
-#ifndef _ISR_H
-#define _ISR_H
+#ifndef _CPU_ISR_H
+#define _CPU_ISR_H
 
 extern void isr0();
 extern void isr1();
@@ -44,4 +44,4 @@ struct registers {
 void init_isr();
 void handler_isr(struct registers *regs);
 
-#endif //_ISR_H
+#endif //_CPU_ISR_H

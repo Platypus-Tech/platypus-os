@@ -6,9 +6,9 @@
 #include <initrd/initrd.h>
 #include <kernel/log.h>
 #include <kernel/panic.h>
+#include <keyboard/keyboard.h>
 #include <mm/pmm.h>
 #include <mm/vmm.h>
-#include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <printm/printm.h>
 #include <serial/serial.h>
@@ -86,5 +86,4 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
 
   writestr("\n");
   init_terminal();
-  ls();
 }

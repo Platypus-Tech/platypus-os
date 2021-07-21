@@ -22,7 +22,7 @@ void run_command(char input[]) {
     writestr("Version 0.09-dev\n");
   } else if (strcmp(input, "help") == 0) {
     writestr(
-        "Commands - version reboot help log ls playsound stopsound panic uname\n");
+        "Commands - version reboot help log mount ls hello playsound stopsound panic uname\n");
   } else if (strcmp(input, "uname") == 0) {
     writestr("PlatypusOS\n");
   } else if (strcmp(input, "reboot") == 0) {
@@ -38,7 +38,9 @@ void run_command(char input[]) {
   } else if (strcmp(input, "panic") == 0) {
     panic("panic command used!");
   } else if (strcmp(input, "hello") == 0) {
-    writestr("Hello to you too?");
+    writestr("Hello to you too?\n");
+  } else if (strcmp(input, "mount") == 0) {
+    mount();
   } else if (strcmp(input, "\0") == 0) {
 
   } else {
@@ -50,16 +52,6 @@ void run_command(char input[]) {
   }
 
   put_prompt();
-}
-
-void ls() {
-  int i = 0;
-  struct vfs_dirent *node = 0;
-  while ((node = readdir_vfs(vfs_root, i)) != 0) {
-    writestr(node->name);
-    writestr("\n");
-    i++;
-  }
 }
 
 void init_terminal() {

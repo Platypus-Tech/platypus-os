@@ -11,6 +11,7 @@ unsigned int getsize_tarfs(const char *in) {
   for (j = 11; j > 0; j--, count *= 8) {
     size += ((in[j - 1] - '0') * count);
   }
+
   return size;
 }
 

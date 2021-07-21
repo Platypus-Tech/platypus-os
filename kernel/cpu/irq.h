@@ -1,5 +1,5 @@
-#ifndef _IRQ_H
-#define _IRQ_H
+#ifndef _CPU_IRQ_H
+#define _CPU_IRQ_H
 
 #include "isr.h"
 
@@ -45,4 +45,4 @@ void init_irq();
 void remap_kernel_irq();
 void handler_irq(struct registers *regs);
 
-#endif //_IRQ_H
+#endif //_CPU_IRQ_H

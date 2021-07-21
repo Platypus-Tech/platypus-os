@@ -1,5 +1,5 @@
-#include <string.h>
 #include <stdint.h>
+#include <string.h>
 
 /* This function is based on the PDCLIB memset function */
 void *memset(void *ptr, int ch, size_t n) {

@@ -15,16 +15,16 @@ int ata_drive_chk(int drive) {
 
   if (i == 0) {
     printm(3, "ATA PIO: Drive doesn't exist\n");
-  }
+  } else {
+    for (;;) {
+      int status = inp(ATA_COMMAND_PORT);
+      int low = inp(ATA_CYLINDER_LOW);
+      int high = inp(ATA_CYLINDER_HIGH);
 
-  for (;;) {
-    int status = inp(ATA_COMMAND_PORT);
-    int low = inp(ATA_CYLINDER_LOW);
-    int high = inp(ATA_CYLINDER_HIGH);
-
-    if (low != 0 && high != 0) {
-      printm(3, "ATA PIO: Drive is not ATA\n");
-      return 1;
+      if (low != 0 && high != 0) {
+        printm(3, "ATA PIO: Drive is not ATA\n");
+        return 1;
+      }
     }
   }
 }
