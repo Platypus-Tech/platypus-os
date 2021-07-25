@@ -1,5 +1,5 @@
 #include "keyboard.h"
-#include <irq.h>
+#include <cpu/irq.h>
 #include <kernel/ports.h>
 #include <stdint.h>
 #include <terminal/terminal.h>
