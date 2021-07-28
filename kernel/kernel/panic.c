@@ -1,4 +1,4 @@
-#include "panic.h"
+#include <kernel/panic.h>
 #include <stdint.h>
 #include <terminal/terminal.h>
 #include <vga/vga.h>

@@ -1,4 +1,4 @@
-#include "paging.h"
+#include <kernel/paging.h>
 
 /* Based on osdever Implementing Basic Paging tutorial */
 

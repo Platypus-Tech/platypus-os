@@ -1,4 +1,4 @@
-#include "memory.h"
+#include <kernel/memory.h>
 #include <stdint.h>
 
 /* This file contains memory management functions for the kernel. */

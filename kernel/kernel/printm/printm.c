@@ -1,6 +1,6 @@
-#include "printm.h"
 #include <kernel/log.h>
 #include <kernel/panic.h>
+#include <kernel/printm.h>
 #include <serial/serial.h>
 #include <vga/vga.h>
 

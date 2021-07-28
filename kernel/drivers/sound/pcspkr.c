@@ -1,6 +1,6 @@
 #include "pcspkr.h"
 #include <kernel/ports.h>
-#include <printm/printm.h>
+#include <kernel/printm.h>
 #include <stdint.h>
 
 int is_registered = 0;

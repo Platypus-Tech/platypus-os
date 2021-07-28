@@ -6,11 +6,11 @@
 #include <initrd/initrd.h>
 #include <kernel/log.h>
 #include <kernel/panic.h>
+#include <kernel/printm.h>
 #include <keyboard/keyboard.h>
 #include <mm/pmm.h>
 #include <mm/vmm.h>
 #include <pit/pit.h>
-#include <printm/printm.h>
 #include <serial/serial.h>
 #include <sound/pcspkr.h>
 #include <string.h>
@@ -19,7 +19,7 @@
 #include <vfs/vfs.h>
 #include <vga/vga.h>
 
-extern *vtc;
+extern vtconsole_t *vtc;
 extern void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y);
 extern void cursor_move_callback(vtconsole_t *vtc, vtcursor_t *cur);
 
@@ -54,7 +54,7 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
   init_serial();
   writestr("[OK] Load Drivers\n");
 
-  __asm__ volatile("sti");
+  irq_enable();
 
   info_log("System Loaded\n");
 

@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include <system/vtconsole.h>
 
-extern *vtc;
+extern vtconsole_t *vtc;
 
 void reboot() {
   vtconsole_delete(vtc);

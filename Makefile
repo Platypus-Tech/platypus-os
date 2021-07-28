@@ -4,7 +4,7 @@ NASM = nasm
 ISO_FILE = PlatypusOS.iso
 KERNEL_FILE = kernel.bin
 INITRD_FILE = initrd.img
-INCLUDE = -I$(PWD) -I./kernel/ -I./kernel/drivers/ -I./kernel/fs/ -I./kernel/kernel/ -I./kernel/include/ -I./user/
+INCLUDE = -I$(PWD) -I./kernel/ -I./kernel/drivers/ -I./kernel/fs/ -I./kernel/include/ -I./user/
 
 CFLAGS = -fno-builtin $(INCLUDE)
 NASMFLAGS = -f elf32

@@ -43,6 +43,7 @@ void install_irq_handler(int irq_num,
 void uninstall_irq_handler(int irq_num);
 void init_irq();
 void remap_kernel_irq();
+int irq_enable();
 void handler_irq(struct registers *regs);
 
 #endif //_CPU_IRQ_H

@@ -1,6 +1,6 @@
 #include <kernel/log.h>
+#include <kernel/printm.h>
 #include <pit/pit.h>
-#include <printm/printm.h>
 #include <vga/vga.h>
 
 extern int kernel_timer_ticks;

@@ -1,6 +1,6 @@
 #include "pmm.h"
-#include "panic.h"
 #include "vmm.h"
+#include <kernel/panic.h>
 #include <stdint.h>
 
 /* Based on JamesM's kernel development tutorials */

@@ -16,6 +16,8 @@ struct vfs_dirent {
   uint32_t inode_num;
 };
 
+struct vfs_node;
+
 typedef uint32_t (*read_type_t)(struct vfs_node *, uint32_t, uint32_t,
                                 uint8_t *);
 typedef uint32_t (*write_type_t)(struct vfs_node *, uint32_t, uint32_t,
@@ -51,7 +53,7 @@ uint32_t write_vfs(vfs_node_t *node, uint32_t offset, uint32_t size,
                    uint8_t *buf);
 void open_vfs(vfs_node_t *node, uint8_t read, uint8_t write);
 void close_vfs(vfs_node_t *node);
-void ls();
+int ls();
 void mount();
 struct vfs_dirent *readdir_vfs(vfs_node_t *node, uint32_t index);
 vfs_node_t *finddir_vfs(vfs_node_t *node, char *name);

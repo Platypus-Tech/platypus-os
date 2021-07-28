@@ -25,7 +25,6 @@ static char brightcolors[] = {
     [VTCOLOR_GREY] = VGACOLOR_WHITE,
 };
 
-// For now, we are using the example of these functions
 void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y) {
   if (cell->attr.bright) {
     vga_cell(

@@ -1,6 +1,6 @@
 #include "ata_pio.h"
 #include <kernel/ports.h>
-#include <printm/printm.h>
+#include <kernel/printm.h>
 
 int ata_drive_chk(int drive) {
   outp(drive, 0x1F6);

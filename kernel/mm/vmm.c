@@ -1,9 +1,9 @@
 #include "vmm.h"
-#include "paging.h"
-#include "panic.h"
 #include "pmm.h"
 #include <cpu/idt.h>
 #include <cpu/irq.h>
+#include <kernel/paging.h>
+#include <kernel/panic.h>
 #include <stdint.h>
 #include <string.h>
 
