@@ -2,19 +2,19 @@
 #include <cpu/isr.h>
 #include <kernel/panic.h>
 #include <stdint.h>
+#include <string.h>
 #include <terminal/terminal.h>
 #include <vga/vga.h>
-#include <string.h>
 
 extern const char *cmd;
 
 void panic_remove_newline(char str[]) {
-   int i;
-   for (i = 0; i < strlen(str); i++) {
-      if (str[i] == '\n') {
-         str[i] = '\0';
-      }
-   }
+  int i;
+  for (i = 0; i < strlen(str); i++) {
+    if (str[i] == '\n') {
+      str[i] = '\0';
+    }
+  }
 }
 
 void panic(const char *panicmessage) {
