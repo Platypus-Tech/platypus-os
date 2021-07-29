@@ -118,7 +118,7 @@ void writestr(const char *fmt, ...) {
       break;
     }
   }
-  
+
   va_end(ap);
 }
 

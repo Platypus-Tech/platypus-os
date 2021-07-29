@@ -1,3 +1,4 @@
+ARCH = i386
 CC = ./toolchain/compiler/bin/i686-elf-gcc
 LD = $(CC)
 NASM = nasm
@@ -6,7 +7,7 @@ KERNEL_FILE = kernel.bin
 INITRD_FILE = initrd.img
 INCLUDE = -I$(PWD) -I./kernel/ -I./kernel/drivers/ -I./kernel/fs/ -I./kernel/include/ -I./user/
 
-CFLAGS = -fno-builtin $(INCLUDE)
+CFLAGS = -ffreestanding $(INCLUDE)
 NASMFLAGS = -f elf32
 LDFLAGS = -T./kernel/arch/i386/linker.ld -ffreestanding -O2 -nostdlib
 
@@ -17,15 +18,12 @@ OBJ_FILES = $(C_SOURCES:.c=.o) $(ASM_SOURCES:.asm=.o)
 $(ISO_FILE): $(KERNEL_FILE)
 	@gcc -o ./scripts/gen_initrd ./scripts/gen_initrd.c
 	@./scripts/gen_initrd initrd/file.txt file.txt initrd/file2.txt file2.txt
-	@echo "MKDIR"
 	@mkdir -p isodir/boot/grub/
-	@echo "CP"
 	@cp grub.cfg isodir/boot/grub/
 	@cp kernel.bin initrd.img isodir/boot/
-	@echo "GRUB-MKRESCUE"
 	@grub-mkrescue -o PlatypusOS.iso isodir
 
-$(KERNEL_FILE): kernel/arch/i386/boot.o $(OBJ_FILES)
+$(KERNEL_FILE): kernel/arch/$(ARCH)/boot.o $(OBJ_FILES)
 	@echo "LD $^"
 	@$(LD) $(LDFLAGS) $^ -o $@
 
@@ -44,4 +42,5 @@ clean:
 	@rm -rf isodir/ $(KERNEL_FILE) $(INITRD_FILE) $(ISO_FILE) $(OBJ_FILES)
 
 run:
+	# TODO: Remove -soundhw pcspk
 	@qemu-system-x86_64 -serial stdio -soundhw pcspk $(ISO_FILE)
