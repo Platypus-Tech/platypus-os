@@ -7,10 +7,10 @@ int is_registered = 0;
 
 void register_snd_driver() {
   if (is_registered == 1) {
-    printm(1, "snd_pcspk_drv is already registered\n");
+    printm("KERN_WARN", "snd_pcspk_drv is already registered\n");
   } else {
     is_registered = 1;
-    printm(0, "Registered snd_pcspk_drv\n");
+    printm("KERN_INFO", "Registered snd_pcspk_drv\n");
   }
 }
 

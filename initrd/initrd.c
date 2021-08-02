@@ -54,7 +54,7 @@ vfs_node_t *initrd_finddir(vfs_node_t *node, char *name) {
 
   int i;
   for (i = 0; i < nroot_nodes; i++) {
-    if (!strcmp(name, root_nodes[i].name)) {
+    if (strcmp(name, root_nodes[i].name) == 0) {
       return &root_nodes[i];
     }
   }

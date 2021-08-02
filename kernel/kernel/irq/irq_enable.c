@@ -6,7 +6,7 @@ int irq_is_enabled;
 
 int irq_enable() {
   if (irq_is_enabled == 1) {
-    printm(1, "irqs already enabled");
+    printm("KERN_ERROR", "irqs already enabled");
     return 1;
   }
 

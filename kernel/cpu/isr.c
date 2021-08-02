@@ -78,7 +78,7 @@ const char *exceptions[] = {"Division by zero",
 void handler_isr(struct registers *regs) {
 
   if (regs->int_no <= 31) {
-    printm(2, exceptions[regs->int_no]);
+    printm("KERN_ERROR", exceptions[regs->int_no]);
     for (;;)
       ;
   }
