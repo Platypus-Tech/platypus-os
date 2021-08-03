@@ -1,12 +1,12 @@
 #include <asm/asm.h>
 #include <cpu/irq.h>
-#include <kernel/printm.h>
+#include <vga/vga.h>
 
 int irq_is_enabled;
 
 int irq_enable() {
   if (irq_is_enabled == 1) {
-    printm("KERN_ERROR", "irqs already enabled");
+    writestr("irqs already enabled");
     return 1;
   }
 

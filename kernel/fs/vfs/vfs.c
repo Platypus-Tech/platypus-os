@@ -1,8 +1,8 @@
 #include "vfs.h"
 #include <errno.h>
 #include <kernel/panic.h>
-#include <kernel/printm.h>
 #include <stdint.h>
+#include <vga/vga.h>
 
 /* A simple VFS, based on JamesM's kernel development tutorials */
 
@@ -47,14 +47,12 @@ struct vfs_dirent *readdir_vfs(vfs_node_t *node, uint32_t index) {
   if ((node->flags & 0x7) == VFS_DIR && node->readdir != 0) {
     return node->readdir(node, index);
   } else {
-    printm("KERN_ERROR", "VFS: Not a directory!\n");
+    writestr("VFS: %d : Not a directory!\n", node);
   }
 }
 
 vfs_node_t *finddir_vfs(vfs_node_t *node, char *name) {
   if ((node->flags & 0x7) == VFS_DIR && node->readdir != 0) {
     return node->finddir(node, name);
-  } else {
-    printm("KERN_ERROR", "VFS: no such directory\n");
   }
 }

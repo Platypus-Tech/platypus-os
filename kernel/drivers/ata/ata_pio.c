@@ -1,6 +1,6 @@
 #include "ata_pio.h"
 #include <kernel/ports.h>
-#include <kernel/printm.h>
+#include <vga/vga.h>
 
 int ata_drive_chk(int drive) {
   outp(drive, 0x1F6);
@@ -14,7 +14,7 @@ int ata_drive_chk(int drive) {
   int i = inp(ATA_COMMAND_PORT);
 
   if (i == 0) {
-    printm("KERN_ERROR", "ATA PIO: Drive doesn't exist\n");
+    writestr("ATA PIO: Drive doesn't exist\n");
   } else {
     for (;;) {
       int status = inp(ATA_COMMAND_PORT);
@@ -22,7 +22,7 @@ int ata_drive_chk(int drive) {
       int high = inp(ATA_CYLINDER_HIGH);
 
       if (low != 0 && high != 0) {
-        printm("KERN_ERROR", "ATA PIO: Drive is not ATA\n");
+        writestr("ATA PIO: Drive is not ATA\n");
         return 1;
       }
     }
