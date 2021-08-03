@@ -9,7 +9,6 @@ void printm(const char *fmt, ...) {
   va_start(args, fmt);
   vsprintf(buf, fmt, args);
   va_end(args);
-  show_printm_log();
 }
 
 void show_printm_log() {
