@@ -2,6 +2,11 @@
 #include <vga/vga.h>
 
 int ls() {
+  if (!vfs_root) {
+    writestr("No filesystem mounted\n");
+    return 1;
+  }
+
   int i = 0;
   struct vfs_dirent *node = 0;
   while ((node = readdir_vfs(vfs_root, i)) != 0) {

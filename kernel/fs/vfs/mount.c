@@ -3,9 +3,10 @@
 
 /* mount - Print the mounted filesystems */
 
-void mount() {
+int mount() {
   if (!vfs_root) {
-    writestr("No filesystem mounted.\n");
+    writestr("No filesystem mounted\n");
+    return 1;
   }
 
   writestr("VFS: Mounted on %s\n", vfs_root);

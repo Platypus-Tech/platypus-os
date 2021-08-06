@@ -5,11 +5,10 @@
 #include <cpu/isr.h>
 #include <initrd/initrd.h>
 #include <kernel/log.h>
+#include <kernel/paging.h>
 #include <kernel/panic.h>
 #include <kernel/printm.h>
 #include <keyboard/keyboard.h>
-#include <mm/pmm.h>
-#include <mm/vmm.h>
 #include <pit/pit.h>
 #include <serial/serial.h>
 #include <sound/pcspkr.h>
@@ -41,11 +40,8 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
   init_irq();
   writestr("[OK] Load IRQ\n");
 
-  /* Load VMM and PMM */
-  init_pmm(mboot_info->mem_upper);
-  writestr("[OK] Load PMM\n");
-  init_vmm();
-  writestr("[OK] Load VMM\n");
+  /* Load Paging */
+  init_paging();
 
   /* Load Drivers */
   init_timer(1000);
@@ -82,7 +78,8 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
 
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
 
-  vfs_root = init_initrd(initrd);
+  // Page Fault !
+  // vfs_root = init_initrd(initrd);
 
   writestr("\n");
   init_terminal();
