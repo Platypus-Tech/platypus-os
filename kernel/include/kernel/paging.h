@@ -28,6 +28,7 @@ typedef struct page_directory {
 
 void switch_page_directory(page_dir_t *new);
 page_t *get_page(uint32_t address, int make, page_dir_t *dir);
+page_dir_t *clone_directory(page_dir_t *src);
 void init_paging();
 
 #endif //_KERNEL_PAGING_H

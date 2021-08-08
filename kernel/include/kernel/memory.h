@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-void *kmalloc(uint32_t size);
-void kfree(void *addr);
+void *mem_alloc(uint32_t size);
+void mem_free(void *addr);
 
 #endif //_KERNEL_MEMORY_H

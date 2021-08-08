@@ -1,4 +1,5 @@
 #include "multiboot.h"
+#include <asm/asm.h>
 #include <cpu/gdt.h>
 #include <cpu/idt.h>
 #include <cpu/irq.h>
@@ -8,6 +9,7 @@
 #include <kernel/paging.h>
 #include <kernel/panic.h>
 #include <kernel/printm.h>
+#include <kernel/task.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <serial/serial.h>
@@ -22,13 +24,13 @@ extern vtconsole_t *vtc;
 extern void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y);
 extern void cursor_move_callback(vtconsole_t *vtc, vtcursor_t *cur);
 
-void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
+uint32_t initial_esp;
+
+void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
+  initial_esp = initial_stack;
+
   /* Initialize VGA */
   init_vga();
-
-  if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {
-    panic("Invalid magic number");
-  }
 
   /* Load GDT, IDT, ISR, IRQ */
   init_gdt();
@@ -40,15 +42,15 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
   init_irq();
   writestr("[OK] Load IRQ\n");
 
-  /* Load Paging */
-  init_paging();
-
   /* Load Drivers */
   init_timer(1000);
   init_keyboard();
   register_snd_driver();
   init_serial();
   writestr("[OK] Load Drivers\n");
+
+  init_paging();
+  init_tasking();
 
   irq_enable();
 
