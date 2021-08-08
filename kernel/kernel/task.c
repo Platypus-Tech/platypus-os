@@ -113,7 +113,7 @@ void switch_task() {
 }
 
 int fork() {
-  __asm__ volatile("cli");
+  _asm("cli");
 
   task_t *parent_task = (task_t *)current_task;
   page_dir_t *directory = clone_directory(current_directory);
@@ -142,7 +142,7 @@ int fork() {
     new_task->esp = esp;
     new_task->ebp = ebp;
     new_task->eip = eip;
-    __asm__ volatile("sti");
+    _asm("sti");
 
     return new_task->id;
   } else {

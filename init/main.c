@@ -1,5 +1,4 @@
 #include "multiboot.h"
-#include <asm/asm.h>
 #include <cpu/gdt.h>
 #include <cpu/idt.h>
 #include <cpu/irq.h>
