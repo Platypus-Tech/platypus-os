@@ -95,7 +95,7 @@ static signed int find_smallest_hole(uint32_t size, uint8_t page_align,
     if (page_align > 0) {
       uint32_t location = (uint32_t)header;
       signed int offset = 0;
-      if ((location + sizeof(header_t)) & 0xFFFFF000 != 0)
+      if ((location + sizeof(header_t) & 0xFFFFF000) != 0)
         offset = 0x1000 - (location + sizeof(header_t)) % 0x1000;
       signed int hole_size = (signed int)header->size - offset;
 

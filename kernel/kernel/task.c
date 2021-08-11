@@ -11,6 +11,7 @@ extern page_dir_t *current_directory;
 extern void alloc_frame(page_t *, int, int);
 extern uint32_t initial_esp;
 extern uint32_t read_eip();
+extern void do_task_switch(uint32_t, uint32_t, uint32_t, uint32_t);
 
 uint32_t next_pid = 1;
 
@@ -98,18 +99,7 @@ void switch_task() {
 
   current_directory = current_task->page_directory;
 
-  __asm__ volatile("     \
-      cli;                 \
-      mov %0, %%ecx;       \
-      mov %1, %%esp;       \
-      mov %2, %%ebp;       \
-      mov %3, %%cr3;       \
-      mov $0x12345, %%eax; \
-      sti;                 \
-      jmp *%%ecx           "
-                   :
-                   : "r"(eip), "r"(esp), "r"(ebp),
-                     "r"(current_directory->physicalAddr));
+  do_task_switch(eip, current_directory->physicalAddr, ebp, esp);
 }
 
 int fork() {

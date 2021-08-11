@@ -77,7 +77,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   writestr("Initrd at address: %x", mboot_info->mods_addr);
   writestr("\n\n");
 
-  uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
+  // uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
 
   // Page Fault !
   // vfs_root = init_initrd(initrd);
