@@ -9,6 +9,7 @@
 #include <kernel/panic.h>
 #include <kernel/printm.h>
 #include <kernel/task.h>
+#include <kernel/virt_module.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <serial/serial.h>
