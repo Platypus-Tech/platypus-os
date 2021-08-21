@@ -16,6 +16,9 @@ void init_tasking();
 void task_switch();
 int fork();
 void move_stack(void *new_stack_start, uint32_t size);
+extern void alloc_frame(page_t *, int, int);
+extern uint32_t read_eip();
+extern void do_task_switch(uint32_t, uint32_t, uint32_t, uint32_t);
 int getpid();
 
 #endif //_KERNEL_TASK_H

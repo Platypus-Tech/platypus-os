@@ -13,28 +13,28 @@ uint32_t nframes;
 extern uint32_t placement_address;
 extern heap_t *kheap;
 
-static void set_frame(uint32_t frame_addr) {
+void set_frame(uint32_t frame_addr) {
   uint32_t frame = frame_addr / 0x1000;
   uint32_t idx = INDEX_FROM_BIT(frame);
   uint32_t off = OFFSET_FROM_BIT(frame);
   frames[idx] |= (0x1 << off);
 }
 
-static void clear_frame(uint32_t frame_addr) {
+void clear_frame(uint32_t frame_addr) {
   uint32_t frame = frame_addr / 0x1000;
   uint32_t idx = INDEX_FROM_BIT(frame);
   uint32_t off = OFFSET_FROM_BIT(frame);
   frames[idx] &= ~(0x1 << off);
 }
 
-static uint32_t test_frame(uint32_t frame_addr) {
+uint32_t test_frame(uint32_t frame_addr) {
   uint32_t frame = frame_addr / 0x1000;
   uint32_t idx = INDEX_FROM_BIT(frame);
   uint32_t off = OFFSET_FROM_BIT(frame);
   return (frames[idx] & (0x1 << off));
 }
 
-static uint32_t first_frame() {
+uint32_t first_frame() {
   uint32_t i, j;
   for (i = 0; i < INDEX_FROM_BIT(nframes); i++) {
     if (frames[i] != 0xFFFFFFFF) {

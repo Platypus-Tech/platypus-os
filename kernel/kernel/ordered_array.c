@@ -1,5 +1,6 @@
 #include <kernel/kheap.h>
 #include <kernel/ordered_array.h>
+#include <kernel/paging.h>
 #include <stdint.h>
 #include <string.h>
 

@@ -1,4 +1,5 @@
 #include <asm/asm.h>
+#include <cpu/irq.h>
 #include <cpu/isr.h>
 #include <kernel/panic.h>
 #include <stdint.h>
@@ -19,7 +20,7 @@ void panic_remove_newline(char str[]) {
 
 void panic(const char *panicmessage) {
   struct registers *regs;
-  _asm("cli");
+  irq_disable();
   cls();
   panic_remove_newline(panicmessage);
   settextcolor(COLOR_LIGHT_GREY, COLOR_BLACK);

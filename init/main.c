@@ -3,13 +3,11 @@
 #include <cpu/idt.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
-#include <initrd/initrd.h>
 #include <kernel/log.h>
 #include <kernel/paging.h>
 #include <kernel/panic.h>
 #include <kernel/printm.h>
 #include <kernel/task.h>
-#include <kernel/virt_module.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <serial/serial.h>
@@ -17,7 +15,6 @@
 #include <string.h>
 #include <system/vtconsole.h>
 #include <terminal/terminal.h>
-#include <vfs/vfs.h>
 #include <vga/vga.h>
 
 extern vtconsole_t *vtc;
@@ -78,10 +75,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   writestr("Initrd at address: %x", mboot_info->mods_addr);
   writestr("\n\n");
 
-  // uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
-
-  // Page Fault !
-  // vfs_root = init_initrd(initrd);
+  // uint32_t initrd = (uint32_t *)mboot_info->mods_addr;
 
   writestr("\n");
   init_terminal();

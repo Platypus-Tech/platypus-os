@@ -1,4 +1,5 @@
-#include <asm/asm.h>
+#include <cpu/irq.h>
+#include <kernel/kheap.h>
 #include <kernel/paging.h>
 #include <kernel/task.h>
 #include <string.h>
@@ -8,15 +9,12 @@ volatile task_t *ready_queue;
 
 extern page_dir_t *kernel_directory;
 extern page_dir_t *current_directory;
-extern void alloc_frame(page_t *, int, int);
 extern uint32_t initial_esp;
-extern uint32_t read_eip();
-extern void do_task_switch(uint32_t, uint32_t, uint32_t, uint32_t);
 
 uint32_t next_pid = 1;
 
 void init_tasking() {
-  _asm("cli");
+  irq_disable();
 
   move_stack((void *)0xE0000000, 0x2000);
 
@@ -27,7 +25,7 @@ void init_tasking() {
   current_task->page_directory = current_directory;
   current_task->next = 0;
 
-  _asm("sti");
+  irq_enable();
 }
 
 void move_stack(void *new_stack_start, uint32_t size) {
@@ -100,44 +98,6 @@ void switch_task() {
   current_directory = current_task->page_directory;
 
   do_task_switch(eip, current_directory->physicalAddr, ebp, esp);
-}
-
-int fork() {
-  _asm("cli");
-
-  task_t *parent_task = (task_t *)current_task;
-  page_dir_t *directory = clone_directory(current_directory);
-
-  task_t *new_task = (task_t *)kmalloc(sizeof(task_t));
-
-  new_task->id = next_pid++;
-  new_task->esp = new_task->ebp = 0;
-  new_task->eip = 0;
-  new_task->page_directory = directory;
-  new_task->next = 0;
-
-  task_t *tmp_task = (task_t *)ready_queue;
-  while (tmp_task->next) {
-    tmp_task = tmp_task->next;
-  }
-  tmp_task->next = new_task;
-
-  uint32_t eip = read_eip();
-
-  if (current_task == parent_task) {
-    uint32_t esp;
-    __asm__ volatile("mov %%esp, %0" : "=r"(esp));
-    uint32_t ebp;
-    __asm__ volatile("mov %%ebp, %0" : "=r"(ebp));
-    new_task->esp = esp;
-    new_task->ebp = ebp;
-    new_task->eip = eip;
-    _asm("sti");
-
-    return new_task->id;
-  } else {
-    return 0;
-  }
 }
 
 int getpid() {

@@ -4,6 +4,7 @@
  */
 
 #include <stdarg.h>
+#include <stdio.h>
 #include <string.h>
 
 /* we use this so that we can do without the ctype library */

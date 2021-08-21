@@ -27,8 +27,15 @@ typedef struct page_directory {
 } page_dir_t;
 
 void switch_page_directory(page_dir_t *new);
+extern int copy_page_physical(uint32_t, uint32_t);
 page_t *get_page(uint32_t address, int make, page_dir_t *dir);
 page_dir_t *clone_directory(page_dir_t *src);
+void set_frame(uint32_t frame_addr);
+void clear_frame(uint32_t frame_addr);
+uint32_t test_frame(uint32_t frame_addr);
+uint32_t first_frame();
+void alloc_frame(page_t *page, int is_kernel, int is_writeable);
+void free_frame(page_t *page);
 void init_paging();
 
 #endif //_KERNEL_PAGING_H
