@@ -3,33 +3,31 @@
 #include <cpu/idt.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
-#include <initrd/initrd.h>
 #include <kernel/log.h>
+#include <kernel/paging.h>
 #include <kernel/panic.h>
+#include <kernel/printm.h>
+#include <kernel/task.h>
 #include <keyboard/keyboard.h>
-#include <mm/pmm.h>
-#include <mm/vmm.h>
 #include <pit/pit.h>
-#include <printm/printm.h>
 #include <serial/serial.h>
 #include <sound/pcspkr.h>
 #include <string.h>
 #include <system/vtconsole.h>
 #include <terminal/terminal.h>
-#include <vfs/vfs.h>
 #include <vga/vga.h>
 
-extern *vtc;
+extern vtconsole_t *vtc;
 extern void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y);
 extern void cursor_move_callback(vtconsole_t *vtc, vtcursor_t *cur);
 
-void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
+uint32_t initial_esp;
+
+void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
+  initial_esp = initial_stack;
+
   /* Initialize VGA */
   init_vga();
-
-  if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {
-    panic("Invalid magic number");
-  }
 
   /* Load GDT, IDT, ISR, IRQ */
   init_gdt();
@@ -41,12 +39,6 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
   init_irq();
   writestr("[OK] Load IRQ\n");
 
-  /* Load VMM and PMM */
-  init_pmm(mboot_info->mem_upper);
-  writestr("[OK] Load PMM\n");
-  init_vmm();
-  writestr("[OK] Load VMM\n");
-
   /* Load Drivers */
   init_timer(1000);
   init_keyboard();
@@ -54,7 +46,10 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
   init_serial();
   writestr("[OK] Load Drivers\n");
 
-  __asm__ volatile("sti");
+  init_paging();
+  init_tasking();
+
+  irq_enable();
 
   info_log("System Loaded\n");
 
@@ -80,9 +75,7 @@ void kernel_main(multiboot_info_t *mboot_info, unsigned int magic) {
   writestr("Initrd at address: %x", mboot_info->mods_addr);
   writestr("\n\n");
 
-  uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
-
-  vfs_root = init_initrd(initrd);
+  // uint32_t initrd = (uint32_t *)mboot_info->mods_addr;
 
   writestr("\n");
   init_terminal();

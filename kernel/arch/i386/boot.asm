@@ -28,7 +28,7 @@ multiboot:
 
 stublet:
      extern kernel_main
-     push eax
+     push esp
      push ebx
      call kernel_main
      jmp $

@@ -1,6 +1,6 @@
 #include "isr.h"
 #include "idt.h"
-#include <printm/printm.h>
+#include <kernel/panic.h>
 #include <stdint.h>
 
 void init_isr() {
@@ -78,7 +78,7 @@ const char *exceptions[] = {"Division by zero",
 void handler_isr(struct registers *regs) {
 
   if (regs->int_no <= 31) {
-    printm(2, exceptions[regs->int_no]);
+    panic(exceptions[regs->int_no]);
     for (;;)
       ;
   }

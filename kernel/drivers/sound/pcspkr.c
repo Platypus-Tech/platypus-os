@@ -1,21 +1,21 @@
 #include "pcspkr.h"
+#include <kernel/log.h>
 #include <kernel/ports.h>
-#include <printm/printm.h>
 #include <stdint.h>
 
 int is_registered = 0;
 
 void register_snd_driver() {
-  if (is_registered) {
-    printm(1, "snd_pcspk_drv is already registered\n");
+  if (is_registered == 1) {
+    error_log("snd_pcspk_drv is already registered\n");
   } else {
     is_registered = 1;
-    printm(0, "Registered snd_pcspk_drv\n");
+    info_log("Registered snd_pcspk_drv\n");
   }
 }
 
 void play_sound(uint32_t frequency) {
-  if (!is_registered) {
+  if (is_registered != 1) {
     // Do nothing
   }
 

@@ -1,9 +1,10 @@
+#include <asm/asm.h>
 #include <kernel/ports.h>
 #include <kernel/power.h>
 #include <stddef.h>
 #include <system/vtconsole.h>
 
-extern *vtc;
+extern vtconsole_t *vtc;
 
 void reboot() {
   vtconsole_delete(vtc);
@@ -12,5 +13,5 @@ void reboot() {
     t = inp(0x64);
   }
   outp(0x64, 0xFE);
-  __asm__ volatile("hlt");
+  _asm("hlt");
 }

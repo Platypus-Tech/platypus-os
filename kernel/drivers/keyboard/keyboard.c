@@ -1,5 +1,5 @@
 #include "keyboard.h"
-#include <irq.h>
+#include <cpu/irq.h>
 #include <kernel/ports.h>
 #include <stdint.h>
 #include <terminal/terminal.h>
@@ -37,6 +37,9 @@ void save_input_buf(uint8_t input) {
   if (input == '\n') {
     run_command(buf);
     num = 0;
+    for (int i = 0; buf[i] != '\0'; i++) {
+      buf[i] = '\0';
+    }
   } else {
     buf[num] = input;
     num++;

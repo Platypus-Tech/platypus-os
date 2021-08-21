@@ -3,7 +3,7 @@
 #include <kernel/panic.h>
 #include <kernel/ports.h>
 #include <kernel/power.h>
-#include <printm/printm.h>
+#include <kernel/printm.h>
 #include <sound/pcspkr.h>
 #include <stdint.h>
 #include <string.h>
@@ -22,7 +22,7 @@ void run_command(char input[]) {
     writestr("Version 0.09-dev\n");
   } else if (strcmp(input, "help") == 0) {
     writestr(
-        "Commands - version reboot help log mount ls hello playsound stopsound panic uname\n");
+        "Commands - version reboot help log mount ls hello playsound stopsound panic \nuname\n");
   } else if (strcmp(input, "uname") == 0) {
     writestr("PlatypusOS\n");
   } else if (strcmp(input, "reboot") == 0) {

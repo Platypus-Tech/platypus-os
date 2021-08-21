@@ -1,24 +1,26 @@
-#include "printm.h"
-#include <kernel/log.h>
-#include <kernel/panic.h>
-#include <serial/serial.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
 #include <vga/vga.h>
 
-void printm(int log_type, const char *str) {
+static char buf[1024];
 
-  if (log_type == INFO) {
-    info_log(str);
-  } else if (log_type == WARN) {
-    warn_log(str);
-  } else if (log_type == ERROR) {
-    error_log(str);
-  } else if (log_type == DEBUG) {
-    writestr_serial(str);
-  } else if (log_type == MESSAGE) {
-    writestr(str);
-  } else if (log_type == PANIC) {
-    panic(str);
-  } else {
-    // Do nothing
+void printm(const char *fmt, ...) {
+  va_list args;
+  va_start(args, fmt);
+  vsprintf(buf, fmt, args);
+  va_end(args);
+}
+
+void show_printm_log() {
+  int i;
+  for (int i = 0; i < strlen(buf); i++) {
+    putch(buf[i]);
+    if (buf[i] == '\0') {
+      return;
+    }
+    if (buf[i] == '\n') {
+      writestr("\n");
+    }
   }
 }

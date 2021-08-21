@@ -2,5 +2,7 @@
 *.o
 *.a
 *.bin
+*.img
 scripts/gen_initrd
+toolchain/compiler/
 isodir/

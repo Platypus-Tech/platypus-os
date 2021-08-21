@@ -54,7 +54,7 @@ vfs_node_t *initrd_finddir(vfs_node_t *node, char *name) {
 
   int i;
   for (i = 0; i < nroot_nodes; i++) {
-    if (!strcmp(name, root_nodes[i].name)) {
+    if (strcmp(name, root_nodes[i].name) == 0) {
       return &root_nodes[i];
     }
   }
@@ -67,7 +67,7 @@ vfs_node_t *init_initrd(uint32_t location) {
   initrd_header = (initrd_header_t *)location;
   file_headers = (initrd_file_header_t *)(location + sizeof(initrd_header_t));
 
-  initrd_root = (vfs_node_t *)kmalloc(sizeof(vfs_node_t));
+  initrd_root = (vfs_node_t *)mem_alloc(sizeof(vfs_node_t));
   strcpy(initrd_root->name, "initrd");
   initrd_root->mask = initrd_root->uid = initrd_root->gid = initrd_root->inode =
       initrd_root->length = 0;
@@ -81,7 +81,7 @@ vfs_node_t *init_initrd(uint32_t location) {
   initrd_root->ptr = 0;
   initrd_root->impl = 0;
 
-  initrd_dev = (vfs_node_t *)kmalloc(sizeof(vfs_node_t));
+  initrd_dev = (vfs_node_t *)mem_alloc(sizeof(vfs_node_t));
   strcpy(initrd_dev->name, "dev");
   initrd_dev->mask = initrd_dev->uid = initrd_dev->gid = initrd_dev->inode =
       initrd_dev->length = 0;
@@ -96,7 +96,7 @@ vfs_node_t *init_initrd(uint32_t location) {
   initrd_dev->impl = 0;
 
   root_nodes =
-      (vfs_node_t *)kmalloc(sizeof(vfs_node_t) * initrd_header->nfiles);
+      (vfs_node_t *)mem_alloc(sizeof(vfs_node_t) * initrd_header->nfiles);
   nroot_nodes = initrd_header->nfiles;
 
   int i;

@@ -5,8 +5,8 @@ struct tarfs_header *headers[32];
 
 unsigned int getsize_tarfs(const char *in) {
   unsigned int size = 0;
-  unsigned int j;
   unsigned int count = 1;
+  unsigned int j;
 
   for (j = 11; j > 0; j--, count *= 8) {
     size += ((in[j - 1] - '0') * count);
@@ -26,7 +26,9 @@ unsigned int parse_tarfs(unsigned int addr) {
     }
 
     unsigned int size = getsize_tarfs(header->size);
+
     headers[i] = header;
+
     addr += ((size / 512) + 1) * 512;
 
     if (size % 512) {

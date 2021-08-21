@@ -1,4 +1,4 @@
-#include "nmi.h"
+#include <kernel/nmi.h>
 #include <kernel/ports.h>
 
 void nmi_enable() {

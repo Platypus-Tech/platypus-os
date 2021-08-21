@@ -118,6 +118,8 @@ void writestr(const char *fmt, ...) {
       break;
     }
   }
+
+  va_end(ap);
 }
 
 void writeint(uint32_t num) {
@@ -126,7 +128,7 @@ void writeint(uint32_t num) {
   char c[30];
 
   if (num == 0) {
-    putch("0");
+    writestr("0");
     return;
   }
 

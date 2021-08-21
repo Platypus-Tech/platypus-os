@@ -43,10 +43,11 @@ void init_serial() {
   outp(SERIAL_COM1 + 4, 0x1E);
   outp(SERIAL_COM1 + 0, 0xAE);
 
+  /*
   if (inp(SERIAL_COM1 + 0) != 0xAE) {
     error_log("Faulty serial device\n");
     return;
-  }
+  } */
 
   outp(SERIAL_COM1 + 4, 0x0F);
 }

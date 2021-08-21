@@ -1,10 +1,11 @@
 #!/bin/sh
 
+GCC_VERSION=11.1.0
+BINUTILS_VERSION=2.36.1
+
 if [ -d "compiler/" ]; then
     echo "Found i686-elf-gcc Toolchain"
     exit 0;
-else
-    continue;
 fi
 
 sudo apt-get update
@@ -19,16 +20,16 @@ mkdir ./compiler
 mkdir ./src
 cd ./src
 
-wget https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.gz
-wget https://ftp.gnu.org/gnu/gcc/gcc-11.1.0/gcc-11.1.0.tar.gz
+wget https://ftp.gnu.org/gnu/binutils/binutils-$BINUTILS_VERSION.tar.gz
+wget https://ftp.gnu.org/gnu/gcc/gcc-11.1.0/gcc-$GCC_VERSION.tar.gz
 
-tar -xf gcc-11.1.0.tar.gz
-tar -xf binutils-2.36.1.tar.gz
+tar -xf gcc-$GCC_VERSION.tar.gz
+tar -xf binutils-$BINUTILS_VERSION.tar.gz
 
 mkdir binutils-build
 cd binutils-build
-../binutils-2.36.1/configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror
-make
+../binutils-$BINUTILS_VERSION/configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror
+make -j$(nproc)
 make install
 
 cd ..
@@ -37,9 +38,9 @@ which -- $TARGET-as || echo $TARGET-as not found
  
 mkdir gcc-build
 cd gcc-build
-../gcc-11.1.0/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c,c++ --without-headers
-make all-gcc
-make all-target-libgcc
+../gcc-$GCC_VERSION/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c,c++ --without-headers
+make -j$(nproc) all-gcc
+make -j$(nproc) all-target-libgcc
 make install-gcc
 make install-target-libgcc
 
