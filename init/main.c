@@ -40,7 +40,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   writestr("[OK] Load IRQ\n");
 
   /* Load Drivers */
-  init_timer(1000);
+  init_pit(1000);
   init_keyboard();
   register_snd_driver();
   init_serial();

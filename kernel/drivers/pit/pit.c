@@ -4,13 +4,13 @@
 
 int kernel_timer_ticks = 0;
 
-void handler_timer() {
+void handler_pit() {
   kernel_timer_ticks++;
 }
 
-void init_timer(int frequency) {
+void init_pit(int frequency) {
 
-  install_irq_handler(0, handler_timer);
+  install_irq_handler(0, handler_pit);
   int divisor = 1193180 / frequency;
 
   outp(0x43, 0x36);
