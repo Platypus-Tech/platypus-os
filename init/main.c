@@ -12,6 +12,7 @@
 #include <pit/pit.h>
 #include <serial/serial.h>
 #include <sound/pcspkr.h>
+#include <rtc/rtc.h>
 #include <string.h>
 #include <system/vtconsole.h>
 #include <terminal/terminal.h>
@@ -44,6 +45,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   init_keyboard();
   register_snd_driver();
   init_serial();
+  init_rtc();
   writestr("[OK] Load Drivers\n");
 
   init_paging();
