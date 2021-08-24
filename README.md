@@ -1,4 +1,4 @@
-# New Platypus OS Drafts
+# Platypus OS
 New OS drafts, I stopped the old one :(
 <br/><br/>
 Chat about development on [Discord](https://discord.gg/t6keJw974q)!
