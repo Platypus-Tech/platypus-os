@@ -5,7 +5,7 @@
 #include <asm/asm.h>
 
 void handler_rtc(void) {
-    _asm("cli");
+  _asm("cli");
   nmi_disable();
   outp(0x71, 0x20);
   nmi_enable();
@@ -14,4 +14,12 @@ void handler_rtc(void) {
 
 void init_rtc(void) {
   install_irq_handler(8, handler_rtc);
+}
+
+int rtc_get_seconds() {
+  nmi_disable();
+  outp(0x71, 0x00);
+  int seconds = inp(0x71);
+  nmi_enable();
+  return(seconds);
 }
