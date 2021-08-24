@@ -1,6 +1,0 @@
-#ifndef _KERNEL_SECURITY_LOGIN_H
-#define _KERNEL_SECURITY_LOGIN_H
-
-void login();
-
-#endif //_KERNEL_SECURITY_LOGIN_H
