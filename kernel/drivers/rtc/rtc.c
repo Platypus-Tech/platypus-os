@@ -4,15 +4,14 @@
 #include <cpu/irq.h>
 #include <asm/asm.h>
 
-void init_rtc(void) {
-  _asm("cli");
+void handler_rtc(void) {
+    _asm("cli");
   nmi_disable();
   outp(0x71, 0x20);
   nmi_enable();
   _asm("sti");
-  install_irq_handler(8, handler_rtc);
 }
 
-void handler_rtc(void) {
-  // nothing yet
+void init_rtc(void) {
+  install_irq_handler(8, handler_rtc);
 }
