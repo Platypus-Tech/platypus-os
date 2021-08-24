@@ -4,5 +4,6 @@
 #define _DRIVERS_RTC_H
 
 void init_rtc();
+void rtc_handler();
 
 #endif _DRIVERS_RTC_H
