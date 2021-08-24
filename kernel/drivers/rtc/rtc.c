@@ -5,10 +5,11 @@
 #include <asm.h>
 
 void init_rtc(void) {
-  _asm("cli")
+  _asm("cli");
   nmi_disable();
   outp(0x71, 0x20);
   nmi_enable();
+  _asm("sti");
   install_irq_handler(8, handler_rtc);
 }
 
