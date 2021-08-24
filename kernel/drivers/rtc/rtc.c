@@ -2,7 +2,7 @@
 #include <rtc/rtc.h>
 #include <kernel/nmi.h>
 #include <cpu/irq.h>
-#include <asm.h>
+#include <asm/asm.h>
 
 void init_rtc(void) {
   _asm("cli");
