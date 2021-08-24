@@ -1,10 +1,14 @@
-#include <ports/ports.h>
+#include <kernel/ports.h>
 #include <rtc/rtc.h>
 #include <kernel/nmi.h>
 #include <cpu/irq.h>
 #include <asm.h>
 
 void init_rtc(void) {
+  _asm("cli")
+  nmi_disable();
+  outp(0x71, 0x20);
+  nmi_enable();
   install_irq_handler(8, handler_rtc);
 }
 
