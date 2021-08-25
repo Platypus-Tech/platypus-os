@@ -1,0 +1,5 @@
+ISO_FILE = ./PlatypusOS.iso
+
+run:
+	# TODO: Remove -soundhw pcspk
+	@qemu-system-x86_64 -serial stdio -soundhw pcspk $(ISO_FILE)
