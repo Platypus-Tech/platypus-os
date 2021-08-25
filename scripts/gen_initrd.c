@@ -11,10 +11,16 @@ struct initrd_header {
 };
 
 int main(char argc, char **argv) {
+  if (argc < 2) {
+    printf("No arguments given.\n");
+    return 1;
+  }
 
   int nheaders = (argc - 1) / 2;
   struct initrd_header headers[64];
+
   printf("Size of Header: %ld\n", sizeof(struct initrd_header));
+
   unsigned int off = sizeof(struct initrd_header) * 64 + sizeof(int);
 
   int i;

@@ -10,9 +10,9 @@
 #include <kernel/task.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
+#include <rtc/rtc.h>
 #include <serial/serial.h>
 #include <sound/pcspkr.h>
-#include <rtc/rtc.h>
 #include <string.h>
 #include <system/vtconsole.h>
 #include <terminal/terminal.h>
@@ -38,6 +38,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   init_isr();
   writestr("[OK] Load ISR\n");
   init_irq();
+  irq_enable();
   writestr("[OK] Load IRQ\n");
 
   /* Load Drivers */
@@ -50,8 +51,6 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
 
   init_paging();
   init_tasking();
-
-  irq_enable();
 
   info_log("System Loaded\n");
 

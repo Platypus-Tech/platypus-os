@@ -1,8 +1,7 @@
 #ifndef _SYSTEM_VTCONSOLE_H
 #define _SYSTEM_VTCONSOLE_H
 
-#define true 1
-#define false 0
+#include <stdbool.h>
 
 #define VTC_DEFAULT_FOREGROUND VTCOLOR_GREY
 #define VTC_DEFAULT_BACKGROUND VTCOLOR_BLACK
@@ -39,7 +38,6 @@
   ((((__bg)&0XF) << 4 | ((__fg)&0XF)) << 8 | ((__c)&0XFF))
 
 typedef unsigned int uint;
-typedef _Bool bool;
 
 struct vtconsole;
 
