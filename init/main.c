@@ -69,7 +69,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   print(
       "\033[1;34mOS: \033[1;36mPlatypus OS \033[1;33mx86_32 \033[1;32mx86_64 \n");
   print("\033[1;34mKernel: \033[1;32mPlatypus\n");
-  print("\033[1;34mVersion: \033[1;31m0.10-dev\n");
+  print("\033[1;34mVersion: \033[1;31m0.10-rc1\n");
   writestr("Kernel command line: %s\n", mboot_info->cmdline);
   uint32_t memsize = (mboot_info->mem_lower + mboot_info->mem_upper) / 1024;
   writestr("Total memory: %d MB\n", memsize);
