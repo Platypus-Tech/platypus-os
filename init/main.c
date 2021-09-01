@@ -3,6 +3,7 @@
 #include <cpu/idt.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
+#include <initrd/initrd.h>
 #include <kernel/log.h>
 #include <kernel/paging.h>
 #include <kernel/panic.h>
@@ -16,9 +17,11 @@
 #include <string.h>
 #include <system/vtconsole.h>
 #include <terminal/terminal.h>
+#include <vfs/vfs.h>
 #include <vga/vga.h>
 
 extern vtconsole_t *vtc;
+extern uint32_t placement_address;
 extern void paint_callback(vtconsole_t *vtc, vtcell_t *cell, int x, int y);
 extern void cursor_move_callback(vtconsole_t *vtc, vtcursor_t *cur);
 
@@ -27,8 +30,9 @@ uint32_t initial_esp;
 void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   initial_esp = initial_stack;
 
-  /* Initialize VGA */
+  /* Initialize VGA and Framebuffer */
   init_vga();
+  init_framebuffer();
 
   /* Load GDT, IDT, ISR, IRQ */
   init_gdt();
@@ -46,8 +50,12 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   init_keyboard();
   register_snd_driver();
   init_serial();
-  init_rtc();
+  // init_rtc();
   writestr("[OK] Load Drivers\n");
+
+  uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
+  uint32_t initrd_end = *(uint32_t *)(mboot_info->mods_addr + 4);
+  placement_address = initrd_end;
 
   init_paging();
   init_tasking();
@@ -73,10 +81,10 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   writestr("Kernel command line: %s\n", mboot_info->cmdline);
   uint32_t memsize = (mboot_info->mem_lower + mboot_info->mem_upper) / 1024;
   writestr("Total memory: %d MB\n", memsize);
-  writestr("Initrd at address: %x", mboot_info->mods_addr);
+  writestr("Initrd at address: %x", initrd);
   writestr("\n\n");
 
-  // uint32_t initrd = (uint32_t *)mboot_info->mods_addr;
+  vfs_root = init_initrd(initrd);
 
   writestr("\n");
   init_terminal();

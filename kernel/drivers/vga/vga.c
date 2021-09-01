@@ -147,6 +147,7 @@ void writeint(uint32_t num) {
   while (i >= 0) {
     c2[i--] = c[j++];
   }
+
   writestr(c2);
 }
 
@@ -157,8 +158,7 @@ void writehex(uint32_t num) {
 
   char noZeroes = 1;
 
-  int i;
-  for (i = 28; i > 0; i -= 4) {
+  for (int i = 28; i > 0; i -= 4) {
     t = (num >> i) & 0xF;
     if (t == 0 && noZeroes != 0) {
       continue;

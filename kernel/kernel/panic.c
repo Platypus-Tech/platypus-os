@@ -1,4 +1,3 @@
-#include <asm/asm.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
 #include <kernel/panic.h>
@@ -37,5 +36,5 @@ void panic(const char *panicmessage) {
   writestr("---[end Kernel Panic: not syncing, %s ]---", panicmessage);
 
   /* Halt the CPU */
-  _asm("hlt");
+  __asm__ volatile("hlt");
 }

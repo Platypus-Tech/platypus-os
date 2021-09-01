@@ -16,7 +16,7 @@ uint32_t kmalloc_int(uint32_t sz, int align, uint32_t *phys) {
     }
     return (uint32_t)addr;
   } else {
-    if (align == 1 && (placement_address & 0xFFFFF000)) {
+    if (align == 1 && (placement_address & 0x00000FFF)) {
       placement_address &= 0xFFFFF000;
       placement_address += 0x1000;
     }
@@ -86,20 +86,21 @@ static uint32_t contract(uint32_t new_size, heap_t *heap) {
   return new_size;
 }
 
-static signed int find_smallest_hole(uint32_t size, uint8_t page_align,
-                                     heap_t *heap) {
+static int32_t find_smallest_hole(uint32_t size, uint8_t page_align,
+                                  heap_t *heap) {
   uint32_t iterator = 0;
   while (iterator < heap->index.size) {
     header_t *header = (header_t *)lookup_ordered_array(iterator, &heap->index);
 
     if (page_align > 0) {
       uint32_t location = (uint32_t)header;
-      signed int offset = 0;
-      if ((location + sizeof(header_t) & 0xFFFFF000) != 0)
+      int32_t offset = 0;
+      if ((location + sizeof(header_t) & 0xFFFFF000) != 0) {
         offset = 0x1000 - (location + sizeof(header_t)) % 0x1000;
-      signed int hole_size = (signed int)header->size - offset;
+      }
+      int32_t hole_size = (int32_t)header->size - offset;
 
-      if (hole_size >= (signed int)size) {
+      if (hole_size >= (int32_t)size) {
         break;
       }
     } else if (header->size >= size) {
