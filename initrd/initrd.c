@@ -1,6 +1,5 @@
 #include "initrd.h"
 #include <kernel/kheap.h>
-#include <kernel/memory.h>
 #include <stdint.h>
 #include <string.h>
 
