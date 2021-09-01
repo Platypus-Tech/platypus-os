@@ -1,6 +1,6 @@
 #include "vtconsole.h"
 #include <ctype.h>
-#include <kernel/memory.h>
+#include <kernel/kheap.h>
 #include <kernel/ports.h>
 #include <string.h>
 #include <vga/vga.h>
@@ -63,7 +63,7 @@ void vga_cursor(int x, int y) {
 
 vtconsole_t *vtconsole(int width, int height, vtc_paint_handler_t on_paint,
                        vtc_cursor_handler_t on_move) {
-  vtconsole_t *vtc = mem_alloc(sizeof(vtconsole_t));
+  vtconsole_t *vtc = kmalloc(sizeof(vtconsole_t));
 
   vtc->width = width;
   vtc->height = height;
@@ -71,7 +71,7 @@ vtconsole_t *vtconsole(int width, int height, vtc_paint_handler_t on_paint,
   vtc->ansiparser = (vtansi_parser_t){VTSTATE_ESC, {{0, 0}}, 0};
   vtc->attr = VTC_DEFAULT_ATTR;
 
-  vtc->buffer = mem_alloc(width * height * sizeof(vtcell_t));
+  vtc->buffer = kmalloc(width * height * sizeof(vtcell_t));
 
   vtc->cursor = (vtcursor_t){0, 0};
 
@@ -84,8 +84,8 @@ vtconsole_t *vtconsole(int width, int height, vtc_paint_handler_t on_paint,
 }
 
 void vtconsole_delete(vtconsole_t *vtc) {
-  mem_free(vtc->buffer);
-  mem_free(vtc);
+  kfree(vtc->buffer);
+  kfree(vtc);
 }
 
 /* --- Internal methodes ---------------------------------------------------- */

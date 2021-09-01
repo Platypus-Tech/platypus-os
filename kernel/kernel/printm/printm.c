@@ -3,13 +3,16 @@
 #include <string.h>
 #include <vga/vga.h>
 
-static char buf[1024];
+#define PRINTM_BUF_SIZE 1024
+
+static char buf[PRINTM_BUF_SIZE];
 
 void printm(const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
   vsprintf(buf, fmt, args);
   va_end(args);
+  show_printm_log();
 }
 
 void show_printm_log() {
@@ -18,9 +21,6 @@ void show_printm_log() {
     putch(buf[i]);
     if (buf[i] == '\0') {
       return;
-    }
-    if (buf[i] == '\n') {
-      writestr("\n");
     }
   }
 }

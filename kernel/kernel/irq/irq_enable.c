@@ -1,4 +1,3 @@
-#include <asm/asm.h>
 #include <cpu/irq.h>
 #include <vga/vga.h>
 
@@ -11,7 +10,7 @@ int irq_enable() {
     return 1;
   }
 
-  _asm("sti");
+  __asm__ volatile("sti");
 
   irq_is_disabled = 0;
   irq_is_enabled = 1;
