@@ -22,7 +22,6 @@ See the [Mailing Patches](https://github.com/kushagra765/new-platypus-os-drafts/
 
 # Acknowledgments
 ## Projects
-- [vtconsole](https://github.com/sleepy-monax/vtconsole)
 - [pdclib](https://github.com/DevSolar/pdclib) (The libc is based on pdclib)
 
 # License
