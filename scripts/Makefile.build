@@ -20,7 +20,7 @@ $(ISO_FILE): $(KERNEL_FILE)
 	@./scripts/gen_initrd initrd/file.txt file.txt initrd/file2.txt file2.txt
 	@mkdir -p isodir/boot/grub/
 	@cp grub.cfg isodir/boot/grub/
-	@cp kernel.bin initrd.img isodir/boot/
+	@cp $(KERNEL_FILE) $(INITRD_FILE) isodir/boot/
 	@grub-mkrescue -o PlatypusOS.iso isodir
 
 $(KERNEL_FILE): kernel/arch/$(ARCH)/boot.o $(OBJ_FILES)
@@ -40,3 +40,4 @@ kernel/system/vtconsole.o: kernel/system/vtconsole.c
 
 clean:
 	@rm -rf isodir/ $(KERNEL_FILE) $(INITRD_FILE) $(ISO_FILE) $(OBJ_FILES)
+	@./scripts/clean_scripts.sh

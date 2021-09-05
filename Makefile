@@ -1,7 +1,7 @@
 # Makefile for Platypus OS
 
 VERSION = 0.10
-EXTRAVERSION = -rc1
+EXTRAVERSION = -rc2
 
 MAKEFILE_BUILD = ./scripts/Makefile.build
 MAKEFILE_RUN = ./scripts/Makefile.run
