@@ -14,7 +14,7 @@ do_task_switch:
      mov cr3, eax     
      mov eax, 0x12345   
      sti
-     jmp ecx     
+     jmp ecx
                           
 
 global copy_page_physical

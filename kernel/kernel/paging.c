@@ -92,7 +92,7 @@ void init_paging() {
   }
 
   i = 0;
-  while (i < placement_address + 0x1000) {
+  while (i < 0x400000) {
     alloc_frame(get_page(i, 1, kernel_directory), 0, 0);
     i += 0x1000;
   }

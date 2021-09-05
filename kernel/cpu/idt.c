@@ -25,7 +25,7 @@ void set_gate_idt(int num, uint32_t base, uint16_t sel, uint8_t flags) {
   idt[num].hi_base = (base >> 16) & 0xFFFF;
   idt[num].sel = sel;
   idt[num].always0 = 0;
-  idt[num].flags = flags;
+  idt[num].flags = flags | 0x60;
 }
 
 void init_idt() {

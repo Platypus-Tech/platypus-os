@@ -19,10 +19,10 @@ void panic_remove_newline(char str[]) {
 
 void panic(const char *panicmessage) {
   struct registers *regs;
+
   irq_disable();
-  cls();
   panic_remove_newline(panicmessage);
-  settextcolor(COLOR_LIGHT_GREY, COLOR_BLACK);
+  settextcolor(LIGHT_GRAY, BLACK);
 
   /* This is based on Linux */
   writestr("Kernel Panic: not syncing, %s\n", panicmessage);

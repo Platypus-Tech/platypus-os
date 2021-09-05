@@ -1,5 +1,4 @@
 #include "terminal.h"
-#include <kernel/log.h>
 #include <kernel/panic.h>
 #include <kernel/ports.h>
 #include <kernel/power.h>
@@ -34,7 +33,7 @@ void run_command(char input[]) {
   } else if (strcmp(input, "stopsound") == 0) {
     stop_sound();
   } else if (strcmp(input, "log") == 0) {
-    show_log();
+    show_printm_log();
   } else if (strcmp(input, "panic") == 0) {
     panic("panic command used!");
   } else if (strcmp(input, "hello") == 0) {

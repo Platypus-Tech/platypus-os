@@ -13,3 +13,9 @@ gdt_load:
 
 flush_gdt:
     ret
+    
+global flush_tss
+flush_tss:
+    mov ax, 0x2B
+    ltr ax
+    ret

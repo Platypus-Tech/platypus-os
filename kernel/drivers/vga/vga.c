@@ -185,6 +185,10 @@ void settextcolor(uint8_t forecolor, uint8_t backcolor) {
   attrib = (backcolor << 4) | (forecolor & 0x0F);
 }
 
+void reset_text_color() {
+  settextcolor(WHITE, BLACK);
+}
+
 void init_vga() {
   textmemptr = (uint16_t *)0xB8000;
   cls();
