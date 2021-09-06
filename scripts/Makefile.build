@@ -40,4 +40,3 @@ kernel/system/vtconsole.o: kernel/system/vtconsole.c
 
 clean:
 	@rm -rf isodir/ $(KERNEL_FILE) $(INITRD_FILE) $(ISO_FILE) $(OBJ_FILES)
-	@./scripts/clean_scripts.sh
