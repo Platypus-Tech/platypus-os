@@ -1,20 +1,20 @@
 #ifndef _FS_TARFS_H
 #define _FS_TARFS_H
 
-#include <stdint.h>
-
 struct tarfs_header {
   char filename[100];
-  uint8_t mode[8];
-  uint8_t uid[8];
-  uint8_t gid[8];
-  uint8_t size[12];
-  uint8_t mtime[12];
-  uint8_t checksum[8];
-  uint8_t typeflag[1];
+  char mode[8];
+  char uid[8];
+  char gid[8];
+  char size[12];
+  char mtime[12];
+  char checksum[8];
+  char typeflag[1];
 };
 
 unsigned int getsize_tarfs(const char *in);
 unsigned int parse_tarfs(unsigned int addr);
+void alloc_headers_tarfs();
+int init_tarfs();
 
 #endif //_FS_TARFS_H

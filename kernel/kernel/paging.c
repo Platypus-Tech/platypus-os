@@ -138,8 +138,7 @@ static page_table_t *clone_table(page_table_t *src, uint32_t *physAddr) {
       (page_table_t *)kmalloc_ap(sizeof(page_table_t), physAddr);
   memset(table, 0, sizeof(page_dir_t));
 
-  int i;
-  for (i = 0; i < 1024; i++) {
+  for (int i = 0; i < 1024; i++) {
     if (src->pages[i].frame) {
       alloc_frame(&table->pages[i], 0, 0);
 
@@ -173,8 +172,7 @@ page_dir_t *clone_directory(page_dir_t *src) {
   uint32_t offset = (uint32_t)dir->tablesPhysical - (uint32_t)dir;
   dir->physicalAddr = phys + offset;
 
-  int i;
-  for (i = 0; i < 1024; i++) {
+  for (int i = 0; i < 1024; i++) {
     if (!src->tables[i]) {
       continue;
     }

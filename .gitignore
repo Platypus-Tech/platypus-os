@@ -3,6 +3,7 @@
 *.a
 *.bin
 *.img
+*.tar
 scripts/gen_initrd
 toolchain/compiler/
 isodir/

@@ -17,7 +17,7 @@ void printm(const char *fmt, ...) {
 void show_printm_log() {
   for (int i = 0; i < strlen(buf); i++) {
     putch(buf[i]);
-    
+
     if (buf[i] == '\0') {
       return;
     }
