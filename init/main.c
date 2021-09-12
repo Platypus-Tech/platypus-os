@@ -90,7 +90,6 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   writestr("Initrd at address: %x", initrd);
   writestr("\n\n");
 
-  alloc_headers_tarfs();
   init_tarfs(initrd);
 
   init_terminal();

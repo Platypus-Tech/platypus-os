@@ -64,6 +64,7 @@ int remove_full_path_tarfs() {
 }
 
 int init_tarfs(uint32_t location) {
+  alloc_headers_tarfs();
   parse_tarfs(location);
   remove_full_path_tarfs();
 }
