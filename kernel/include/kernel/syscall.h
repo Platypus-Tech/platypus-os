@@ -66,6 +66,7 @@
 DECLARE_SYSCALL1(writestr, const char *)
 DECLARE_SYSCALL1(writehex, const char *)
 DECLARE_SYSCALL1(writeint, const char *)
+DECLARE_SYSCALL1(putch, const char *)
 
 void init_syscalls();
 

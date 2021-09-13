@@ -22,6 +22,8 @@
 
 void scroll();
 void move_csr();
+void disable_csr();
+uint16_t get_csr_position();
 void cls();
 void putch(uint8_t c);
 void writestr(const char *fmt, ...);

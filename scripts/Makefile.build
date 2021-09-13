@@ -3,7 +3,7 @@ CC = ./toolchain/compiler/bin/i686-elf-gcc
 LD = $(CC)
 NASM = nasm
 ISO_FILE = PlatypusOS.iso
-KERNEL_FILE = kernel.bin
+KERNEL_FILE = kernel.elf
 INITRD_FILE = initrd.tar
 INCLUDE = -I$(PWD) -I./kernel/ -I./kernel/drivers/ -I./kernel/fs/ -I./kernel/include/ -I./user/
 

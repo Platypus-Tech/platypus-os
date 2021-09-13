@@ -1,3 +1,4 @@
+OUTPUT_FORMAT(elf32-i386)
 ENTRY(start)
 memory_address = 0x00100000;
 

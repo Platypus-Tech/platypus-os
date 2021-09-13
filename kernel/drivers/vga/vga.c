@@ -32,6 +32,20 @@ void move_csr() {
   outp(0x3D5, temp);
 }
 
+void disable_csr() {
+  outp(0x3D4, 0x0A);
+  outp(0x3D5, 0x20);
+}
+
+uint16_t get_csr_position() {
+  uint16_t pos = 0;
+  outp(0x3D4, 0x0F);
+  pos |= inp(0x3D5);
+  outp(0x3D4, 0x0E);
+  pos |= ((uint16_t)inp(0x3D5)) << 8;
+  return pos;
+}
+
 void cls() {
   unsigned blank;
   int i;

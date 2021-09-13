@@ -9,14 +9,11 @@ static void syscall_handler(struct registers *regs);
 DEFINE_SYSCALL1(writestr, 0, const char *);
 DEFINE_SYSCALL1(writehex, 1, const char *);
 DEFINE_SYSCALL1(writeint, 2, const char *);
+DEFINE_SYSCALL1(putch, 3, const char *);
 
-static void *syscalls[3] = {
-    &writestr,
-    &writehex,
-    &writeint,
-};
+static void *syscalls[4] = {&writestr, &writehex, &writeint, &putch};
 
-uint32_t num_syscalls = 3;
+uint32_t num_syscalls = 4;
 
 void init_syscalls() {
   install_irq_handler(0x80, &syscall_handler);

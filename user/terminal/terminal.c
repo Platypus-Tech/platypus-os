@@ -18,7 +18,7 @@ void put_prompt() {
 void run_command(char input[]) {
   cmd = input;
   if (strcmp(input, "version") == 0) {
-    writestr("Version 0.10-rc1\n");
+    writestr("Version 0.10-rc2\n");
   } else if (strcmp(input, "help") == 0) {
     writestr(
         "Commands - version reboot help log mount ls hello playsound stopsound panic \nuname\n");
