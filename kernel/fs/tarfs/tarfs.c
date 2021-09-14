@@ -47,24 +47,7 @@ unsigned int parse_tarfs(unsigned int addr) {
   return i;
 }
 
-int remove_full_path_tarfs() {
-  for (int i = 0; i < 32; i++) {
-    if (headers[i]->filename[0] == '\0') {
-      break;
-    }
-
-    headers[i]->filename[0] = ' ';
-    headers[i]->filename[1] = ' ';
-    headers[i]->filename[2] = ' ';
-    headers[i]->filename[3] = ' ';
-    headers[i]->filename[4] = ' ';
-    headers[i]->filename[5] = ' ';
-    headers[i]->filename[6] = ' ';
-  }
-}
-
 int init_tarfs(uint32_t location) {
   alloc_headers_tarfs();
   parse_tarfs(location);
-  remove_full_path_tarfs();
 }

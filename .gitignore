@@ -4,6 +4,7 @@
 *.bin
 *.img
 *.tar
+*.elf
 scripts/gen_initrd
 toolchain/compiler/
 isodir/

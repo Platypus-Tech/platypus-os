@@ -16,7 +16,7 @@ ASM_SOURCES = $(shell find kernel/ -name '*.asm')
 OBJ_FILES = $(C_SOURCES:.c=.o) $(ASM_SOURCES:.asm=.o)
 
 $(ISO_FILE): $(KERNEL_FILE)
-	@tar cvf $(INITRD_FILE) initrd/*
+	@tar cvf $(INITRD_FILE) -C initrd/ .
 	@mkdir -p isodir/boot/grub/
 	@cp grub.cfg isodir/boot/grub/
 	@cp $(KERNEL_FILE) $(INITRD_FILE) isodir/boot/
