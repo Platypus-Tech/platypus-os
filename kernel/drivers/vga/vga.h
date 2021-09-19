@@ -4,7 +4,6 @@
 #include <stdint.h>
 
 #define BLACK 0x0
-#define BLUE 0x1
 #define GREEN 0x2
 #define CYAN 0x3
 #define RED 0x4

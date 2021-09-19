@@ -30,9 +30,6 @@ $(KERNEL_FILE): kernel/arch/$(ARCH)/boot.o $(OBJ_FILES)
 	@echo "CC $<"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-kernel/system/vtconsole.o: kernel/system/vtconsole.c
-	@$(CC) -I$(INCLUDE) -c $< -o $@
-
 %.o: %.asm
 	@echo "NASM $<"
 	@$(NASM) $(NASMFLAGS) $< -o $@
