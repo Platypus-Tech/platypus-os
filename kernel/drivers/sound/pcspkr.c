@@ -4,11 +4,12 @@
 
 int is_registered = 0;
 
-void register_snd_driver() {
+int register_snd_driver() {
   if (is_registered == 1) {
-    // If the driver is already registered do nothing
+    return 1;
   } else {
     is_registered = 1;
+    return 0;
   }
 }
 
