@@ -1,7 +1,13 @@
 #include "tarfs.h"
+#include <kernel/kheap.h>
 #include <stdint.h>
 
 struct tarfs_header *headers[32];
+int total_files = 0;
+
+void alloc_headers_tarfs() {
+  kmalloc(headers);
+}
 
 unsigned int getsize_tarfs(const char *in) {
   unsigned int size = 0;
@@ -36,5 +42,12 @@ unsigned int parse_tarfs(unsigned int addr) {
     }
   }
 
+  total_files = i;
+
   return i;
+}
+
+int init_tarfs(uint32_t location) {
+  alloc_headers_tarfs();
+  parse_tarfs(location);
 }

@@ -18,11 +18,10 @@ To build the OS, read the [build guide](https://github.com/kushagra765/new-platy
 See the [Mailing Patches](https://github.com/kushagra765/new-platypus-os-drafts/blob/0.09/docs/Mailing-Patches.md) file.
 
 # Screenshot
-![Image](https://github.com/kushagra765/platypus-os/blob/0.10/screenshots/Screenshot-0.10-rc1.png)
+![Image](https://github.com/kushagra765/platypus-os/blob/0.10/screenshots/Screenshot-0.10-rc3.png)
 
 # Acknowledgments
 ## Projects
-- [vtconsole](https://github.com/sleepy-monax/vtconsole)
 - [pdclib](https://github.com/DevSolar/pdclib) (The libc is based on pdclib)
 
 # License

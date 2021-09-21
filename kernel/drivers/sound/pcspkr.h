@@ -6,6 +6,6 @@
 void beep();
 void play_sound(uint32_t frequency);
 void stop_sound();
-void register_snd_driver();
+int register_snd_driver();
 
 #endif //_DRIVERS_PCSPKR_H

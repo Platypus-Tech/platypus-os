@@ -21,6 +21,7 @@ int fork() {
   new_task->esp = new_task->ebp = 0;
   new_task->eip = 0;
   new_task->page_directory = directory;
+  current_task->kernel_stack = kmalloc_a(KERNEL_STACK_SIZE);
   new_task->next = 0;
 
   task_t *tmp_task = (task_t *)ready_queue;

@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <kernel/kheap.h>
 #include <kernel/paging.h>
 #include <stdint.h>
@@ -50,10 +51,14 @@ uint32_t kmalloc(uint32_t sz) {
 }
 
 static void expand(uint32_t new_size, heap_t *heap) {
+  ASSERT(new_size > heap->end_address - heap->start_address);
+
   if (new_size & 0xFFFFF000 != 0) {
     new_size &= 0xFFFFF000;
     new_size += 0x1000;
   }
+
+  ASSERT(heap->start_address + new_size <= heap->max_address);
 
   uint32_t old_size = heap->end_address - heap->start_address;
 
@@ -67,6 +72,8 @@ static void expand(uint32_t new_size, heap_t *heap) {
 }
 
 static uint32_t contract(uint32_t new_size, heap_t *heap) {
+  ASSERT(new_size < heap->end_address - heap->start_address);
+
   if (new_size & 0x1000) {
     new_size &= 0x1000;
     new_size += 0x1000;
@@ -122,7 +129,12 @@ static int8_t header_t_less_than(void *a, void *b) {
 
 heap_t *create_heap(uint32_t start, uint32_t end_addr, uint32_t max,
                     uint8_t supervisor, uint8_t readonly) {
+
   heap_t *heap = (heap_t *)kmalloc(sizeof(heap_t));
+
+  ASSERT(start % 0x1000 == 0);
+  ASSERT(end_addr % 0x1000 == 0);
+
   heap->index =
       place_ordered_array((void *)start, HEAP_INDEX_SIZE, &header_t_less_than);
 
@@ -258,6 +270,9 @@ void free(void *p, heap_t *heap) {
   footer_t *footer =
       (footer_t *)((uint32_t)header + header->size - sizeof(footer_t));
 
+  ASSERT(header->magic == HEAP_MAGIC);
+  ASSERT(footer->magic == HEAP_MAGIC);
+
   header->is_hole = 1;
   char do_add = 1;
 
@@ -284,6 +299,7 @@ void free(void *p, heap_t *heap) {
       iterator++;
     }
 
+    ASSERT(iterator < heap->index.size);
     remove_ordered_array(iterator, &heap->index);
   }
 

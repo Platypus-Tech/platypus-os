@@ -15,4 +15,6 @@
 #define EPIPE 32
 #define ENAMETOOLONG 36
 
+extern int errno;
+
 #endif //_ERRNO_H

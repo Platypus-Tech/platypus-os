@@ -8,6 +8,16 @@ void handler_pit() {
   kernel_timer_ticks++;
 }
 
+unsigned read_pit_count() {
+  unsigned count = 0;
+  irq_disable();
+  outp(0x43, 0b0000000);
+  count = inp(0x40);
+  count |= inp(0x40) << 8;
+  irq_enable();
+  return count;
+}
+
 void init_pit(int frequency) {
 
   install_irq_handler(0, handler_pit);

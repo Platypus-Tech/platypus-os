@@ -92,7 +92,7 @@ void init_paging() {
   }
 
   i = 0;
-  while (i < placement_address + 0x1000) {
+  while (i < 0x400000) {
     alloc_frame(get_page(i, 1, kernel_directory), 0, 0);
     i += 0x1000;
   }
@@ -138,8 +138,7 @@ static page_table_t *clone_table(page_table_t *src, uint32_t *physAddr) {
       (page_table_t *)kmalloc_ap(sizeof(page_table_t), physAddr);
   memset(table, 0, sizeof(page_dir_t));
 
-  int i;
-  for (i = 0; i < 1024; i++) {
+  for (int i = 0; i < 1024; i++) {
     if (src->pages[i].frame) {
       alloc_frame(&table->pages[i], 0, 0);
 
@@ -173,8 +172,7 @@ page_dir_t *clone_directory(page_dir_t *src) {
   uint32_t offset = (uint32_t)dir->tablesPhysical - (uint32_t)dir;
   dir->physicalAddr = phys + offset;
 
-  int i;
-  for (i = 0; i < 1024; i++) {
+  for (int i = 0; i < 1024; i++) {
     if (!src->tables[i]) {
       continue;
     }

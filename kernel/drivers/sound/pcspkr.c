@@ -1,16 +1,15 @@
 #include "pcspkr.h"
-#include <kernel/log.h>
 #include <kernel/ports.h>
 #include <stdint.h>
 
 int is_registered = 0;
 
-void register_snd_driver() {
+int register_snd_driver() {
   if (is_registered == 1) {
-    error_log("snd_pcspk_drv is already registered\n");
+    return 1;
   } else {
     is_registered = 1;
-    info_log("Registered snd_pcspk_drv\n");
+    return 0;
   }
 }
 

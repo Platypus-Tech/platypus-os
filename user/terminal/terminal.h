@@ -1,10 +1,3 @@
-/**********************************************************
- * The terminal ported from KinuxOS with new code         *
- * Ported code (c) DamieFC 2021 original code (c)         *
- * kushagra765 under the Unlicense                        *
- **********************************************************
- */
-
 #ifndef _USER_TERMINAL_H
 #define _USER_TERMINAL_H
 
