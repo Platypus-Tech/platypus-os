@@ -67,7 +67,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   init_keyboard();
   register_snd_driver();
   init_serial();
-  // init_rtc();
+  init_rtc();
   writestr("[OK] Load Drivers\n");
 
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
