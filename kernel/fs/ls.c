@@ -1,17 +1,27 @@
-#include <tarfs/tarfs.h>
+#include <vfs/vfs.h>
 #include <vga/vga.h>
 
-extern struct tarfs_header *headers[32];
-
 int ls() {
-  for (int i = 0; i < 32; i++) {
-    if (headers[i]->filename == '\0') {
-      break;
-    }
-
-    writestr(headers[i]->filename);
-    writestr("\n");
+  if (!vfs_root) {
+    writestr("No filesystem mounted\n");
+    return 1;
   }
 
-  return 0;
+  int i = 0;
+  struct vfs_dirent *node = 0;
+  while ((node = readdir_vfs(vfs_root, i)) != 0) {
+    vfs_node_t *__node = finddir_vfs(vfs_root, node->name);
+    if ((__node->flags & 0x7) == VFS_DIR) {
+      settextcolor(BLUE, BLACK);
+      writestr(node->name);
+      writestr("\n");
+    } else {
+      settextcolor(GREEN, BLACK);
+      writestr(node->name);
+      writestr("\n");
+    }
+    i++;
+  }
+
+  reset_text_color();
 }

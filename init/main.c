@@ -1,4 +1,5 @@
 #include "multiboot.h"
+#include <initrd/initrd.h>
 #include <cpu/gdt.h>
 #include <cpu/idt.h>
 #include <cpu/irq.h>
@@ -16,6 +17,7 @@
 #include <terminal/terminal.h>
 #include <vga/framebuffer.h>
 #include <vga/vga.h>
+#include <vfs/vfs.h>
 
 extern uint32_t placement_address;
 uint32_t initial_esp;
@@ -67,7 +69,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   init_keyboard();
   register_snd_driver();
   init_serial();
-  // init_rtc();
+  init_rtc();
   writestr("[OK] Load Drivers\n");
 
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
@@ -90,7 +92,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   writestr("Initrd at address: %x", initrd);
   writestr("\n\n");
 
-  init_tarfs(initrd);
+  vfs_root = init_initrd(initrd);
 
   init_terminal();
 }
