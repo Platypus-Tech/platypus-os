@@ -12,17 +12,17 @@ I want it to be for:
 Seems like an odd combination, but that's what I like to do: program, pentest, and play video games.
 
 # Building
-To build the OS, read the [build guide](https://github.com/kushagra765/platypus-os/blob/0.10/docs/Building.md).
+To build the OS, read the [build guide](docs/Building.md).
 
 # Mailing patches
-See the [Mailing Patches](https://github.com/kushagra765/platypus-os/blob/0.10/docs/Mailing-Patches.md) file.
+See the [Mailing Patches](docs/Mailing-Patches.md) file.
 
 # Screenshot
-![Image](https://github.com/kushagra765/platypus-os/blob/0.10/screenshots/Screenshot-0.10-rc3.png)
+![Image](screenshots/Screenshot-0.10-rc3.png)
 
 # Acknowledgments
 ## Projects
 - [pdclib](https://github.com/DevSolar/pdclib) (The libc is based on pdclib)
 
 # License
-This project is licensed under GPL v2. See the [`LICENSE`](https://github.com/Platypus-Tech/platypus-os/blob/0.10/LICENSE) file for more info.
+This project is licensed under GPL v2. See the [`LICENSE`](LICENSE) file for more info.
