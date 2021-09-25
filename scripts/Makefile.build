@@ -4,19 +4,20 @@ LD = $(CC)
 NASM = nasm
 ISO_FILE = PlatypusOS.iso
 KERNEL_FILE = kernel.elf
-INITRD_FILE = initrd.tar
+INITRD_FILE = initrd.img
 INCLUDE = -I$(PWD) -I./kernel/ -I./kernel/drivers/ -I./kernel/fs/ -I./kernel/include/ -I./user/
 
 CFLAGS = -ffreestanding $(INCLUDE)
 NASMFLAGS = -f elf32
 LDFLAGS = -T./kernel/arch/i386/linker.ld -ffreestanding -O2 -nostdlib
 
-C_SOURCES = $(shell find init/ kernel/ lib/ user/ -name '*.c')
+C_SOURCES = $(shell find init/ initrd/ kernel/ lib/ user/ -name '*.c')
 ASM_SOURCES = $(shell find kernel/ -name '*.asm')
 OBJ_FILES = $(C_SOURCES:.c=.o) $(ASM_SOURCES:.asm=.o)
 
 $(ISO_FILE): $(KERNEL_FILE)
-	@tar cvf $(INITRD_FILE) -C initrd/ .
+	@gcc -o ./scripts/gen_initrd ./scripts/gen_initrd.c
+	@./scripts/gen_initrd initrd/file.txt file.txt initrd/file2.txt file2.txt
 	@mkdir -p isodir/boot/grub/
 	@cp grub.cfg isodir/boot/grub/
 	@cp $(KERNEL_FILE) $(INITRD_FILE) isodir/boot/

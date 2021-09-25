@@ -79,11 +79,13 @@ static uint32_t contract(uint32_t new_size, heap_t *heap) {
     new_size += 0x1000;
   }
 
-  if (new_size < HEAP_MIN_SIZE)
+  if (new_size < HEAP_MIN_SIZE) {
     new_size = HEAP_MIN_SIZE;
+  }
 
   uint32_t old_size = heap->end_address - heap->start_address;
   uint32_t i = old_size - 0x1000;
+
   while (new_size < i) {
     free_frame(get_page(heap->start_address + i, 0, kernel_directory));
     i -= 0x1000;

@@ -3,17 +3,17 @@
 #include <cpu/idt.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
+#include <initrd/initrd.h>
 #include <kernel/paging.h>
 #include <kernel/printm.h>
-#include <kernel/syscall.h>
 #include <kernel/task.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <rtc/rtc.h>
 #include <serial/serial.h>
 #include <sound/pcspkr.h>
-#include <tarfs/tarfs.h>
 #include <terminal/terminal.h>
+#include <vfs/vfs.h>
 #include <vga/framebuffer.h>
 #include <vga/vga.h>
 
@@ -90,7 +90,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   writestr("Initrd at address: %x", initrd);
   writestr("\n\n");
 
-  init_tarfs(initrd);
+  vfs_root = init_initrd(initrd);
 
   init_terminal();
 }
