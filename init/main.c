@@ -1,23 +1,21 @@
 #include "multiboot.h"
-#include <initrd/initrd.h>
 #include <cpu/gdt.h>
 #include <cpu/idt.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
+#include <initrd/initrd.h>
 #include <kernel/paging.h>
 #include <kernel/printm.h>
-#include <kernel/syscall.h>
 #include <kernel/task.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <rtc/rtc.h>
 #include <serial/serial.h>
 #include <sound/pcspkr.h>
-#include <tarfs/tarfs.h>
 #include <terminal/terminal.h>
+#include <vfs/vfs.h>
 #include <vga/framebuffer.h>
 #include <vga/vga.h>
-#include <vfs/vfs.h>
 
 extern uint32_t placement_address;
 uint32_t initial_esp;

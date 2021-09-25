@@ -4,7 +4,7 @@
 /* mount - Print the mounted filesystems */
 
 int mount() {
-   if (!vfs_root) {
+  if (!vfs_root) {
     writestr("No filesystem mounted\n");
     return 1;
   }

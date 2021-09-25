@@ -29,10 +29,12 @@ int main(char argc, char **argv) {
     strcpy(headers[i].name, argv[i * 2 + 2]);
     headers[i].offset = off;
     FILE *stream = fopen(argv[i * 2 + 1], "r");
+
     if (stream == 0) {
       printf("Error: %s : file not found\n", argv[i * 2 + 1]);
       return 1;
     }
+
     fseek(stream, 0, SEEK_END);
     headers[i].length = ftell(stream);
     off += headers[i].length;
