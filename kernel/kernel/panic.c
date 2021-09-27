@@ -8,7 +8,7 @@
 
 extern const char *cmd;
 
-void panic_remove_newline(char *str[]) {
+void panic_remove_newline(char str[]) {
   for (int i = 0; i < strlen(str); i++) {
     if (str[i] == '\n') {
       str[i] = '\0';
@@ -23,7 +23,7 @@ void panic_assert(const char *filename, int line, const char *desc) {
   panic("Assertion failed\n");
 }
 
-void panic(const char *panicmessage) {
+void panic(char panicmessage[]) {
   struct registers *regs;
 
   irq_disable();

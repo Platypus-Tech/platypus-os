@@ -7,7 +7,7 @@
 
 bool check_file_elf(Elf32_Ehdr *header) {
   if (!header) {
-    return;
+    return 1;
   }
 
   if (header->e_ident[EI_MAG0] != ELFMAG0) {
@@ -83,7 +83,7 @@ void *load_file_elf(void *file) {
 
   if (!check_supported_elf(header)) {
     printm("ERROR: ELF File cannot be loaded.\n");
-    return;
+    return 1;
   }
   switch (header->e_type) {
   case ET_EXEC:
