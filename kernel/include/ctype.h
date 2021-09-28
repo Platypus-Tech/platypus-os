@@ -13,5 +13,10 @@ int isupper(int ch);
 int isspace(int ch);
 int toupper(int ch);
 int tolower(int ch);
+int ispunct(int ch);
+int isxdigit(int ch);
+int isprint(int ch);
+int iscntrl(int ch);
+int isgraph(int ch);
 
 #endif //_CTYPE_H

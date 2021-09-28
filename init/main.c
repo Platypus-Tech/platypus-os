@@ -1,4 +1,5 @@
 #include "multiboot.h"
+#include <assert.h>
 #include <cpu/gdt.h>
 #include <cpu/idt.h>
 #include <cpu/irq.h>
@@ -70,6 +71,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   init_rtc();
   writestr("[OK] Load Drivers\n");
 
+  ASSERT(mboot_info->mods_count > 0);
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
   uint32_t initrd_end = *(uint32_t *)(mboot_info->mods_addr + 4);
   placement_address = initrd_end;

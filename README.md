@@ -22,7 +22,8 @@ See the [Mailing Patches](docs/Mailing-Patches.md) file.
 
 # Acknowledgments
 ## Projects
-- [pdclib](https://github.com/DevSolar/pdclib) (The libc is based on pdclib)
+- [pdclib](https://github.com/DevSolar/pdclib)
+- [libc11](https://github.com/dryc/libc11)
 
 # License
 This project is licensed under GPL v2. See the [`LICENSE`](LICENSE) file for more info.

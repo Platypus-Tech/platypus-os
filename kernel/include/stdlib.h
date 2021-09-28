@@ -3,9 +3,11 @@
 
 #include "stddef.h"
 
+void _Exit(int status);
 void exit(int status);
-void abort(void);
-void _exit(int status);
-char *getenv(const char *name);
+void abort();
+int abs(int j);
+long int labs(long int j);
+long long int llabs(long long int j);
 
 #endif //_STDLIB_H

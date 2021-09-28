@@ -16,7 +16,7 @@ int ls() {
       writestr(node->name);
       writestr("\n");
     } else {
-      settextcolor(GREEN, BLACK);
+      settextcolor(LIGHT_YELLOW, BLACK);
       writestr(node->name);
       writestr("\n");
     }
