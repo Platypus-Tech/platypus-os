@@ -5,6 +5,7 @@
 #include <cpu/irq.h>
 #include <cpu/isr.h>
 #include <initrd/initrd.h>
+#include <kernel/device.h>
 #include <kernel/paging.h>
 #include <kernel/printm.h>
 #include <kernel/task.h>
@@ -70,6 +71,8 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   init_serial();
   init_rtc();
   writestr("[OK] Load Drivers\n");
+
+  init_device();
 
   ASSERT(mboot_info->mods_count > 0);
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);

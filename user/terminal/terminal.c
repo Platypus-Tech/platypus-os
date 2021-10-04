@@ -1,9 +1,9 @@
 #include "terminal.h"
+#include <commands/commands.h>
 #include <kernel/panic.h>
 #include <kernel/ports.h>
 #include <kernel/power.h>
 #include <sound/pcspkr.h>
-#include <stdint.h>
 #include <string.h>
 #include <vfs/vfs.h>
 #include <vga/vga.h>
@@ -17,12 +17,11 @@ void put_prompt() {
 void run_command(char input[]) {
   cmd = input;
   if (strcmp(input, "version") == 0) {
-    writestr("Version 0.10-rc3\n");
+    version();
   } else if (strcmp(input, "help") == 0) {
-    writestr(
-        "Commands - version reboot help mount ls hello playsound stopsound panic \nuname\n");
+    help();
   } else if (strcmp(input, "uname") == 0) {
-    writestr("PlatypusOS\n");
+    uname();
   } else if (strcmp(input, "reboot") == 0) {
     reboot();
   } else if (strcmp(input, "ls") == 0) {
@@ -34,7 +33,7 @@ void run_command(char input[]) {
   } else if (strcmp(input, "panic") == 0) {
     panic("panic command used!");
   } else if (strcmp(input, "hello") == 0) {
-    writestr("Hello to you too?\n");
+    hello();
   } else if (strcmp(input, "mount") == 0) {
     mount();
   } else if (strcmp(input, "\0") == 0) {
