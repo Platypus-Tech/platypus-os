@@ -18,6 +18,6 @@ struct device {
 };
 
 void add_device(struct device *dev);
-void init_device();
+void init_device_manager();
 
 #endif //_KERNEL_DEVICE_H

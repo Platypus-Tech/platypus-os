@@ -72,7 +72,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   init_rtc();
   writestr("[OK] Load Drivers\n");
 
-  init_device();
+  init_device_manager();
 
   ASSERT(mboot_info->mods_count > 0);
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);

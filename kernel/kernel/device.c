@@ -18,7 +18,7 @@ void add_device(struct device *dev) {
   printm("Registered device %s. id=%d\n", dev->name, dev->id);
 }
 
-void init_device() {
+void init_device_manager() {
   kmalloc(devices);
   memset(devices, 0, MAX_DEVICES * sizeof(struct device));
   printm("Device manager: Initialized\n");
