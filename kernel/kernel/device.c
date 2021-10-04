@@ -21,5 +21,5 @@ void add_device(struct device *dev) {
 void init_device() {
   kmalloc(devices);
   memset(devices, 0, MAX_DEVICES * sizeof(struct device));
-  printm("Device manager: Intialized\n");
+  printm("Device manager: Initialized\n");
 }
