@@ -1,5 +1,6 @@
 #include "floppy.h"
 #include <kernel/ports.h>
+#include <kernel/printm.h>
 #include <stdint.h>
 
 static const char *drive_types[7] = {"no drive",          "360 KB 5.25 Drive",
