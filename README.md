@@ -18,7 +18,7 @@ To build the OS, read the [build guide](docs/Building.md).
 See the [Mailing Patches](docs/Mailing-Patches.md) file.
 
 # Screenshot
-![Image](screenshots/Screenshot-0.10-rc3.png)
+![Image](screenshots/Screenshot-0.10-rc4.png)
 
 # Acknowledgments
 ## Projects
