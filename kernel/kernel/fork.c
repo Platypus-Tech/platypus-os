@@ -25,9 +25,11 @@ int fork() {
   new_task->next = 0;
 
   task_t *tmp_task = (task_t *)ready_queue;
+
   while (tmp_task->next) {
     tmp_task = tmp_task->next;
   }
+
   tmp_task->next = new_task;
 
   uint32_t eip = read_eip();

@@ -57,7 +57,7 @@
 #define EXT2_INODE_FLAG_AFS_DIR 0x00020000
 #define EXT2_INODE_FLAG_JOURNAL_FILE_DATA 0x00040000
 
-struct ext2_superblock {
+typedef struct {
   uint32_t total_inodes;
   uint32_t total_blocks;
   uint32_t blocks_reserved_for_superuser;
@@ -83,9 +83,9 @@ struct ext2_superblock {
   uint32_t major_version;
   uint16_t uid_can_use_reserved_blocks;
   uint16_t gid_can_use_reserved_blocks;
-};
+} ext2_superblock_t;
 
-struct ext2_block_group_descriptor {
+typedef struct {
   uint32_t block_addr_of_block_usage_bitmap;
   uint32_t block_addr_of_inode_usage_bitmap;
   uint32_t start_block_addr_of_inode_table;
@@ -93,9 +93,9 @@ struct ext2_block_group_descriptor {
   uint32_t unallocated_inodes_in_group;
   uint32_t directories_in_group;
   char unused[8];
-};
+} ext2_block_group_desc_t;
 
-struct ext2_inode {
+typedef struct {
   uint16_t type_and_permissions;
   uint16_t uid;
   uint32_t size;
@@ -127,13 +127,13 @@ struct ext2_inode {
   uint32_t reserved_2;
   uint32_t block_addr_of_fragment;
   uint32_t os_specific_val_2;
-};
+} ext2_inode_t;
 
-struct ext2_dir {
+typedef struct {
   uint32_t inode;
   uint32_t total_size;
   uint32_t name_length;
   uint32_t name_chars;
-};
+} ext2_dir_t;
 
 #endif //_FS_EXT2_H

@@ -276,7 +276,7 @@ void free(void *p, heap_t *heap) {
   ASSERT(footer->magic == HEAP_MAGIC);
 
   header->is_hole = 1;
-  char do_add = 1;
+  int do_add = 1;
 
   footer_t *test_footer = (footer_t *)((uint32_t)header - sizeof(footer_t));
   if (test_footer->magic == HEAP_MAGIC && test_footer->header->is_hole == 1) {

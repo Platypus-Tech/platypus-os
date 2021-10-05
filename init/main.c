@@ -4,6 +4,7 @@
 #include <cpu/idt.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
+#include <floppy/floppy.h>
 #include <initrd/initrd.h>
 #include <kernel/device.h>
 #include <kernel/paging.h>
@@ -62,7 +63,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   init_idt();
   init_isr();
   init_irq();
-  writestr("[OK] Load GDT, IDT, ISR and IRQ\n");
+  printm("[OK] Load GDT, IDT, ISR and IRQ\n");
 
   // Load Drivers
   init_pit(1000);
@@ -70,9 +71,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   register_snd_driver();
   init_serial();
   init_rtc();
-  writestr("[OK] Load Drivers\n");
-
-  init_device_manager();
+  printm("[OK] Load Drivers\n");
 
   ASSERT(mboot_info->mods_count > 0);
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
@@ -82,7 +81,9 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   // Initialize paging and tasking
   init_paging();
   init_tasking();
-  writestr("[OK] Initialize paging and tasking\n");
+  printm("[OK] Initialize paging and tasking\n");
+
+  init_device_manager();
 
   irq_enable();
 
@@ -92,9 +93,10 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   writestr("Kernel command line: %s\n", mboot_info->cmdline);
   uint32_t memsize = (mboot_info->mem_lower + mboot_info->mem_upper) / 1024;
   writestr("Total memory: %d MB\n", memsize);
-  writestr("Initrd at address: %x", initrd);
-  writestr("\n\n");
+  writestr("Initrd at address: %x\n", initrd);
+  writestr("\n");
 
+  detect_drives_floppy();
   vfs_root = init_initrd(initrd);
 
   init_terminal();

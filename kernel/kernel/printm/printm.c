@@ -1,6 +1,5 @@
 #include <stdarg.h>
 #include <stdio.h>
-#include <string.h>
 #include <vga/vga.h>
 
 #define PRINTM_BUF_SIZE 1024

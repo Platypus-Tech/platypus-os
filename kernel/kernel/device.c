@@ -18,6 +18,14 @@ void add_device(struct device *dev) {
   printm("Registered device %s. id=%d\n", dev->name, dev->id);
 }
 
+int get_device_by_id(int id) {
+  for (int i = 0; i < next_device_entry; i++) {
+    if (devices[i]->id == id) {
+      return &devices[i];
+    }
+  }
+}
+
 void init_device_manager() {
   kmalloc(devices);
   memset(devices, 0, MAX_DEVICES * sizeof(struct device));
