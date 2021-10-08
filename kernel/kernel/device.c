@@ -29,5 +29,5 @@ int get_device_by_id(int id) {
 void init_device_manager() {
   kmalloc(devices);
   memset(devices, 0, MAX_DEVICES * sizeof(struct device));
-  printm("Device manager: Initialized\n");
+  printm("[OK] Initialized Device Manager\n");
 }

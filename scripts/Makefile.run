@@ -2,4 +2,4 @@ ISO_FILE = PlatypusOS.iso
 FLOPPY_FILE = floppy.img
 
 run:
-	@qemu-system-x86_64 -drive file=$(FLOPPY_FILE),index=1 -serial stdio -m 256 -soundhw pcspk $(ISO_FILE)
+	@qemu-system-x86_64 -fda $(FLOPPY_FILE) -serial stdio -m 256 -soundhw pcspk $(ISO_FILE)
