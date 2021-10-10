@@ -5,14 +5,14 @@
 
 int ext2_probe(struct device *dev) {
   if (!dev) {
-    return 1;
+    return -1;
   }
 
   printm("EXT2-fs: Probing device %d\n", dev->id);
 
   if (!dev->read) {
     printm("EXT2-fs: error: Cannot read device %d\n", dev->id);
-    return 1;
+    return -1;
   }
 
   /* Check if the device has a valid EXT2 signature */
@@ -24,7 +24,7 @@ int ext2_probe(struct device *dev) {
   if (sb->ext2_signature != EXT2_SIGNATURE) {
     printm("EXT2-fs: error: Device %d has a invalid ext2 signature!\n",
            dev->id);
-    return 1;
+    return -1;
   }
 
   kfree(buf);

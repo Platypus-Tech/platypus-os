@@ -48,11 +48,10 @@ uint16_t get_csr_position() {
 
 void cls() {
   unsigned blank;
-  int i;
 
   blank = 0x20 | (attrib << 8);
 
-  for (i = 0; i < 25; i++) {
+  for (int i = 0; i < 25; i++) {
     memsetw(textmemptr + i * 80, blank, 80);
   }
 
@@ -170,19 +169,19 @@ void writehex(uint32_t num) {
 
   writestr("0x");
 
-  char noZeroes = 1;
+  int no_zeroes = 1;
 
   for (int i = 28; i > 0; i -= 4) {
     t = (num >> i) & 0xF;
-    if (t == 0 && noZeroes != 0) {
+    if (t == 0 && no_zeroes != 0) {
       continue;
     }
 
     if (t >= 0xA) {
-      noZeroes = 0;
+      no_zeroes = 0;
       putch(t - 0xA + 'a');
     } else {
-      noZeroes = 0;
+      no_zeroes = 0;
       putch(t + '0');
     }
   }

@@ -6,7 +6,7 @@ int is_registered = 0;
 
 int register_snd_driver() {
   if (is_registered == 1) {
-    return 1;
+    return -1;
   } else {
     is_registered = 1;
     return 0;

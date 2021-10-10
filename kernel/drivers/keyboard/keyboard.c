@@ -18,7 +18,7 @@ uint8_t keyboard_layout[128] = {
 void handler_keyboard() {
   uint8_t keyboard_key_scancode;
 
-  keyboard_key_scancode = inp(DATA_PORT);
+  keyboard_key_scancode = inp(KEYBOARD_DATA_PORT);
 
   if (keyboard_key_scancode & 0x80) {
     // Shift, Ctrl keys to be implemented
