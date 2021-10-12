@@ -16,8 +16,8 @@ int floppy_motor_state = 0;
 void detect_drives_floppy() {
   outp(0x70, 0x10);
   uint8_t drives = inp(0x71);
-  printm("Floppy drive 0: %s, ", drive_types[drives >> 4]);
-  printm("1: %s\n", drive_types[drives & 0xF]);
+  printm("Floppy drive 0: %s, 1: %s\n", drive_types[drives >> 4],
+         drive_types[drives & 0xF]);
 }
 
 void write_command_floppy(int base, char command) {
@@ -58,7 +58,7 @@ int calibrate_floppy(int base) {
   for (int i = 0; i < 4; i++) {
     write_command_floppy(base, RECALIBRATE);
     write_command_floppy(base, 0);
-    sleep_pit(2);
+    sleep_pit(3);
     check_interrupt_floppy(base, &st0, &cyl);
 
     if (st0 & 0xC0) {
@@ -74,7 +74,7 @@ int calibrate_floppy(int base) {
 
   printm("Floppy: error: cannot calibrate\n");
   motor_floppy(base, MOTOR_OFF);
-  return 1;
+  return -1;
 }
 
 int reset_floppy(int base) {
@@ -100,7 +100,7 @@ void motor_floppy(int base, int state) {
   if (state) {
     if (!floppy_motor_state) {
       outp(base + DIGITAL_OUTPUT_REGISTER, 0x1C);
-      sleep_pit(0.50);
+      sleep_pit(1);
     }
     floppy_motor_state = MOTOR_ON;
   } else {
@@ -109,4 +109,9 @@ void motor_floppy(int base, int state) {
     }
     floppy_motor_state = MOTOR_WAIT;
   }
+}
+
+void kill_motor_floppy(int base) {
+  outp(base + DIGITAL_OUTPUT_REGISTER, 0x0C);
+  floppy_motor_state = MOTOR_OFF;
 }
