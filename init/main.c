@@ -21,6 +21,7 @@
 #include <vga/vga.h>
 
 extern uint32_t placement_address;
+extern time_t time_global;
 uint32_t initial_esp;
 
 void welcome_screen() {
