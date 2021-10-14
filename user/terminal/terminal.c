@@ -27,9 +27,9 @@ void run_command(char input[]) {
   } else if (strcmp(input, "ls") == 0) {
     ls();
   } else if (strcmp(input, "playsound") == 0) {
-    beep();
+    beep_pcspkr();
   } else if (strcmp(input, "stopsound") == 0) {
-    stop_sound();
+    stop_sound_pcspkr();
   } else if (strcmp(input, "panic") == 0) {
     panic("panic command used!");
   } else if (strcmp(input, "hello") == 0) {

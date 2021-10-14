@@ -7,8 +7,8 @@ int kernel_timer_ticks = 0;
 int timer_freq = 0;
 
 void handler_pit() {
-  switch_task();
   kernel_timer_ticks++;
+  switch_task();
 }
 
 unsigned read_count_pit() {

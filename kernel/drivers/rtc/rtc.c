@@ -8,7 +8,7 @@
 time_t time_global;
 bool bcd;
 
-void rtc_gettime(time_t *time) {
+void gettime_rtc(time_t *time) {
   memcpy(time, &time_global, sizeof(time_t));
 }
 

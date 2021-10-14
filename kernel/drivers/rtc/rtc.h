@@ -13,5 +13,6 @@ typedef struct {
 
 void init_rtc();
 void handler_rtc();
+void gettime_rtc(time_t *time);
 
 #endif //_DRIVERS_RTC_H

@@ -68,7 +68,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   // Load Drivers
   init_pit(1000);
   init_keyboard();
-  register_snd_driver();
+  init_pcspkr();
   init_serial();
   init_rtc();
   printm("[OK] Load Drivers\n");

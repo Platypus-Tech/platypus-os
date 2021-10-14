@@ -9,7 +9,7 @@ static const char *drive_types[7] = {"no drive",          "360 KB 5.25 Drive",
                                      "1.44 MB 3.5 Drive", "2.88 MB 3.5 Drive",
                                      "unknown drive"};
 
-static const char *drive_status[3] = {"error", "invalid", "drive"};
+static const char *drive_status[] = {0, "error", "invalid", "drive"};
 
 int floppy_motor_state = 0;
 
