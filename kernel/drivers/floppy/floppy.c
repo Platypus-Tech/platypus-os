@@ -55,7 +55,7 @@ int calibrate_floppy(int base) {
 
   motor_floppy(base, MOTOR_ON);
 
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 10; i++) {
     write_command_floppy(base, RECALIBRATE);
     write_command_floppy(base, 0);
     sleep_pit(3);
