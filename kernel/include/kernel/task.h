@@ -4,15 +4,12 @@
 #include "paging.h"
 #include <stdint.h>
 
-#define KERNEL_STACK_SIZE 2048
-
 typedef struct task {
   int id;
   uint32_t esp, ebp;
   uint32_t eip;
   page_dir_t *page_directory;
   struct task *next;
-  uint32_t kernel_stack;
 } task_t;
 
 void init_tasking();

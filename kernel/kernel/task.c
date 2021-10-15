@@ -1,5 +1,4 @@
 #include <cpu/irq.h>
-#include <cpu/tss.h>
 #include <kernel/kheap.h>
 #include <kernel/paging.h>
 #include <kernel/task.h>
@@ -25,7 +24,6 @@ void init_tasking() {
   current_task->eip = 0;
   current_task->page_directory = current_directory;
   current_task->next = 0;
-  current_task->kernel_stack = kmalloc_a(KERNEL_STACK_SIZE);
 
   irq_enable();
 }
@@ -98,7 +96,6 @@ void switch_task() {
   ebp = current_task->ebp;
 
   current_directory = current_task->page_directory;
-  set_kernel_stack(current_task->kernel_stack + KERNEL_STACK_SIZE);
 
   do_task_switch(eip, current_directory->physicalAddr, ebp, esp);
 }
@@ -108,7 +105,6 @@ int getpid() {
 }
 
 void move_to_user_mode() {
-  set_kernel_stack(current_task->kernel_stack + KERNEL_STACK_SIZE);
 
   __asm__ volatile("  \
       cli; \
