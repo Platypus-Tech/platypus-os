@@ -1,14 +1,12 @@
 #include "pit.h"
 #include <cpu/irq.h>
 #include <kernel/ports.h>
-#include <kernel/task.h>
 
 int kernel_timer_ticks = 0;
 int timer_freq = 0;
 
 void handler_pit() {
   kernel_timer_ticks++;
-  switch_task();
 }
 
 unsigned read_count_pit() {

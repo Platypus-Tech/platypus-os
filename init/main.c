@@ -79,10 +79,9 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   uint32_t initrd_end = *(uint32_t *)(mboot_info->mods_addr + 4);
   placement_address = initrd_end;
 
-  // Initialize paging and tasking
+  // Initialize paging
   init_paging();
-  init_tasking();
-  printm("[OK] Initialize paging and tasking\n");
+  printm("[OK] Initialize paging\n");
 
   init_device_manager();
 
