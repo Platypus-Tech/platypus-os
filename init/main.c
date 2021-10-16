@@ -7,6 +7,7 @@
 #include <floppy/floppy.h>
 #include <initrd/initrd.h>
 #include <kernel/device.h>
+#include <kernel/mmap.h>
 #include <kernel/paging.h>
 #include <kernel/printm.h>
 #include <kernel/task.h>
@@ -65,6 +66,9 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   init_isr();
   init_irq();
   printm("[OK] Load GDT, IDT, ISR and IRQ\n");
+
+  // Print the memory map
+  print_mmap(mboot_info);
 
   // Load Drivers
   init_pit(1000);

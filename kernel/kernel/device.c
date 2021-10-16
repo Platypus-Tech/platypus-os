@@ -1,7 +1,6 @@
 #include <kernel/device.h>
 #include <kernel/kheap.h>
 #include <kernel/printm.h>
-#include <string.h>
 
 #define MAX_DEVICES 10
 
@@ -28,6 +27,5 @@ int get_device_by_id(int id) {
 
 void init_device_manager() {
   kmalloc(devices);
-  memset(devices, 0, MAX_DEVICES * sizeof(struct device));
   printm("[OK] Initialize Device Manager\n");
 }

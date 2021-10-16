@@ -26,7 +26,7 @@ enum floppy_motor_states { MOTOR_OFF = 0, MOTOR_ON, MOTOR_WAIT };
 void detect_drives_floppy();
 void write_command_floppy(int base, char command);
 uint8_t read_data_floppy(int base);
-void check_interrupt_floppy(int base, int *st0, uint16_t *cyl);
+void check_interrupt_floppy(int base, int *st0, int *cyl);
 int calibrate_floppy(int base);
 int reset_floppy(int base);
 void motor_floppy(int base, int state);

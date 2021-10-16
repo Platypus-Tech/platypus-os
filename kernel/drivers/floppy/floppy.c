@@ -44,7 +44,7 @@ uint8_t read_data_floppy(int base) {
   printm("Floppy: read_data_floppy: timeout\n");
 }
 
-void check_interrupt_floppy(int base, int *st0, uint16_t *cyl) {
+void check_interrupt_floppy(int base, int *st0, int *cyl) {
   write_command_floppy(base, SENSE_INTERRUPT);
   *st0 = read_data_floppy(base);
   *cyl = read_data_floppy(base);

@@ -8,7 +8,7 @@ KERNEL_FILE = kernel.elf
 INITRD_FILE = initrd.img
 INCLUDE = -I$(PWD) -I./kernel/ -I./kernel/drivers/ -I./kernel/fs/ -I./kernel/include/ -I./user/
 
-CFLAGS = -Wno-attributes -Wno-discarded-qualifiers -Wno-incompatible-pointer-types -Wno-int-conversion -ffreestanding $(INCLUDE)
+CFLAGS = -Wno-attributes -Wno-discarded-qualifiers -Wno-int-conversion -ffreestanding $(INCLUDE)
 ASFLAGS = -f elf32
 LDFLAGS = -T./kernel/arch/$(ARCH)/linker.ld -ffreestanding -O2 -nostdlib
 
@@ -23,7 +23,7 @@ $(ISO_FILE): $(KERNEL_FILE)
 	@mkdir -p isodir/boot/grub/
 	@cp grub.cfg isodir/boot/grub/
 	@cp $(KERNEL_FILE) $(INITRD_FILE) isodir/boot/
-	@grub-mkrescue -o PlatypusOS.iso isodir
+	@grub-mkrescue -o $(ISO_FILE) isodir
 
 $(KERNEL_FILE): kernel/arch/$(ARCH)/boot.o $(OBJ_FILES)
 	@echo "LD $@"
