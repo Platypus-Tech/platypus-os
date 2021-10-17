@@ -1,5 +1,4 @@
 #include <kernel/elf.h>
-#include <kernel/kheap.h>
 #include <kernel/printm.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -184,10 +183,7 @@ int load_stage1_elf(Elf32_Ehdr *header) {
       }
 
       if (section->sh_flags & SHF_ALLOC) {
-        void *mem = kmalloc(section->sh_size);
-        memset(mem, 0, section->sh_size);
-        section->sh_offset = (int)mem - (int)header;
-        printm("Allocated memory for a section (%ld).\n", section->sh_size);
+        // TODO
       }
     }
   }

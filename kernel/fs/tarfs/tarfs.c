@@ -1,5 +1,4 @@
 #include "tarfs.h"
-#include <kernel/kheap.h>
 #include <stdint.h>
 
 struct tarfs_header *headers[32];
@@ -44,6 +43,6 @@ unsigned int parse_tarfs(unsigned int addr) {
 }
 
 int init_tarfs(uint32_t location) {
-  kmalloc(headers);
+  // kmalloc(headers);
   parse_tarfs(location);
 }

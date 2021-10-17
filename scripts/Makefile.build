@@ -12,17 +12,17 @@ CFLAGS = -Wno-attributes -Wno-discarded-qualifiers -Wno-int-conversion -ffreesta
 ASFLAGS = -f elf32
 LDFLAGS = -T./kernel/arch/$(ARCH)/linker.ld -ffreestanding -O2 -nostdlib
 
-C_SOURCES = $(shell find init/ initrd/ kernel/ lib/ user/ -name '*.c')
+C_SOURCES = $(shell find init/ kernel/ lib/ user/ -name '*.c')
 ASM_SOURCES = $(shell find kernel/ -name '*.asm')
 OBJ_FILES = $(C_SOURCES:.c=.o) $(ASM_SOURCES:.asm=.o)
 
 $(ISO_FILE): $(KERNEL_FILE)
-	@gcc -o ./scripts/gen_initrd ./scripts/gen_initrd.c
-	@./scripts/gen_initrd initrd/file.txt file.txt initrd/file2.txt file2.txt
+	# @gcc -o ./scripts/gen_initrd ./scripts/gen_initrd.c
+	# @./scripts/gen_initrd initrd/file.txt file.txt initrd/file2.txt file2.txt
 	@dd if=/dev/zero of=$(FLOPPY_FILE) bs=512 count=2880
 	@mkdir -p isodir/boot/grub/
 	@cp grub.cfg isodir/boot/grub/
-	@cp $(KERNEL_FILE) $(INITRD_FILE) isodir/boot/
+	@cp $(KERNEL_FILE) isodir/boot/
 	@grub-mkrescue -o $(ISO_FILE) isodir
 
 $(KERNEL_FILE): kernel/arch/$(ARCH)/boot.o $(OBJ_FILES)

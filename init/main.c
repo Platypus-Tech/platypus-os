@@ -5,12 +5,9 @@
 #include <cpu/irq.h>
 #include <cpu/isr.h>
 #include <floppy/floppy.h>
-#include <initrd/initrd.h>
 #include <kernel/device.h>
 #include <kernel/mmap.h>
-#include <kernel/paging.h>
 #include <kernel/printm.h>
-#include <kernel/task.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <rtc/rtc.h>
@@ -21,8 +18,6 @@
 #include <vga/framebuffer.h>
 #include <vga/vga.h>
 
-extern uint32_t placement_address;
-extern time_t time_global;
 uint32_t initial_esp;
 
 void welcome_screen() {
@@ -53,8 +48,7 @@ void welcome_screen() {
   writestr("\n");
 }
 
-void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
-  initial_esp = initial_stack;
+void kernel_main(multiboot_info_t *mboot_info) {
 
   // Initialize VGA and Framebuffer
   init_vga();
@@ -78,14 +72,12 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   init_rtc();
   printm("[OK] Load Drivers\n");
 
+  /*
   ASSERT(mboot_info->mods_count > 0);
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
   uint32_t initrd_end = *(uint32_t *)(mboot_info->mods_addr + 4);
   placement_address = initrd_end;
-
-  // Initialize paging
-  init_paging();
-  printm("[OK] Initialize paging\n");
+  */
 
   init_device_manager();
 
@@ -97,11 +89,9 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   writestr("Kernel command line: %s\n", mboot_info->cmdline);
   uint32_t memsize = (mboot_info->mem_lower + mboot_info->mem_upper) / 1024;
   writestr("Total memory: %d MB\n", memsize);
-  writestr("Initrd at address: %x\n", initrd);
+  // writestr("Initrd at address: %x\n", initrd);
   detect_drives_floppy();
   writestr("\n");
-
-  vfs_root = init_initrd(initrd);
 
   init_terminal();
 }
