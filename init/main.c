@@ -7,7 +7,9 @@
 #include <floppy/floppy.h>
 #include <kernel/device.h>
 #include <kernel/mmap.h>
+#include <kernel/pmm.h>
 #include <kernel/printm.h>
+#include <kernel/vmm.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <rtc/rtc.h>
@@ -71,6 +73,9 @@ void kernel_main(multiboot_info_t *mboot_info) {
   init_serial();
   init_rtc();
   printm("[OK] Load Drivers\n");
+
+  init_pmm(mboot_info);
+  init_vmm();
 
   /*
   ASSERT(mboot_info->mods_count > 0);
