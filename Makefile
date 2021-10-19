@@ -9,10 +9,10 @@ MAKEFILE_RUN = ./scripts/Makefile.run
 .PHONY: all
 
 all:
-	make -f $(MAKEFILE_BUILD) -j$(nproc)
+	@make -f $(MAKEFILE_BUILD) -j$(nproc)
 	
 clean:
-	make -f $(MAKEFILE_BUILD) clean
+	@make -f $(MAKEFILE_BUILD) clean
 	
 run:
-	make -f $(MAKEFILE_RUN)
+	@make -f $(MAKEFILE_RUN)

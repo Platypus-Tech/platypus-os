@@ -6,7 +6,6 @@
 #include <cpu/isr.h>
 #include <floppy/floppy.h>
 #include <kernel/device.h>
-#include <kernel/mmap.h>
 #include <kernel/pmm.h>
 #include <kernel/printm.h>
 #include <kernel/vmm.h>
@@ -63,9 +62,6 @@ void kernel_main(multiboot_info_t *mboot_info) {
   init_irq();
   printm("[OK] Load GDT, IDT, ISR and IRQ\n");
 
-  // Print the memory map
-  print_mmap(mboot_info);
-
   // Load Drivers
   init_pit(1000);
   init_keyboard();
@@ -75,7 +71,6 @@ void kernel_main(multiboot_info_t *mboot_info) {
   printm("[OK] Load Drivers\n");
 
   init_pmm(mboot_info);
-  init_vmm();
 
   /*
   ASSERT(mboot_info->mods_count > 0);

@@ -17,7 +17,7 @@ uint32_t alloc_page_pmm() {
     uint32_t *stack = (uint32_t *)stack_location_pmm;
     return *stack;
   } else {
-    location_pmm += 0x1000;
+    return location_pmm += 0x1000;
   }
 }
 
@@ -40,13 +40,15 @@ void init_pmm(multiboot_info_t *mboot_info) {
   uint32_t start = mboot_info->mem_upper;
   location_pmm = (start + 0x1000) & PAGE_MASK;
 
+  init_vmm();
+
   uint32_t i = mboot_info->mmap_addr;
   while (i < mboot_info->mmap_addr + mboot_info->mmap_length) {
     multiboot_memory_map_t *entry = (multiboot_memory_map_t *)i;
 
     if (entry->type == MULTIBOOT_MEMORY_AVAILABLE) {
-      for (uint32_t j = entry->addr; j < entry->addr + entry->len;
-           j += 0x1000) {
+      for (uint32_t j = entry->base_addr_low;
+           j < entry->base_addr_low + entry->length_low; j += 0x1000) {
         free_page_pmm(j);
       }
     }

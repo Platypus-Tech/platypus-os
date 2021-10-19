@@ -10,7 +10,7 @@ page_dir_t *current_dir;
 extern int paging_active_pmm;
 
 void map_vmm(uint32_t va, uint32_t pa, uint32_t flags) {
-  uint32_t virt_page = va / 1000;
+  uint32_t virt_page = va / 0x1000;
   uint32_t page_table_index = PAGE_DIR_INDEX(virt_page);
 
   if (page_dir[page_table_index] == 0) {
