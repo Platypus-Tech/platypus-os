@@ -1,6 +1,7 @@
 #include <kernel/panic.h>
 #include <kernel/pmm.h>
 #include <kernel/vmm.h>
+#include <stddef.h>
 
 uint32_t stack_location_pmm = PMM_STACK_ADDRESS;
 uint32_t stack_max_pmm = PMM_STACK_ADDRESS;
@@ -28,11 +29,31 @@ void free_page_pmm(uint32_t page) {
 
   if (stack_max_pmm <= stack_location_pmm) {
     map_vmm(stack_max_pmm, page, PAGE_PRESENT | PAGE_WRITE);
-    stack_max_pmm += 4096;
+    stack_max_pmm += PAGE_SIZE;
   } else {
     uint32_t *stack = (uint32_t *)stack_location_pmm;
     *stack = page;
     stack_location_pmm += sizeof(uint32_t);
+  }
+}
+
+void *alloc_pages_pmm(size_t pages) {
+  void *ptr = NULL;
+
+  for (size_t i = 0; i < pages; i++) {
+    if (ptr == NULL) {
+      ptr = alloc_page_pmm();
+    } else {
+      alloc_page_pmm();
+    }
+  }
+
+  return ptr;
+}
+
+void free_pages_pmm(void *start, size_t pages) {
+  for (size_t i = 0; i < pages; i++) {
+    free_page_pmm((uint32_t *)(start + (i * PAGE_SIZE)));
   }
 }
 
