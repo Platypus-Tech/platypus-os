@@ -54,7 +54,6 @@ void welcome_screen() {
 }
 
 void kernel_main(multiboot_info_t *mboot_info) {
-  multiboot_elf_section_header_table_t *elfinfo;
 
   // Initialize VGA and Framebuffer
   init_vga();
