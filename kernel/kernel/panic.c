@@ -2,6 +2,7 @@
 #include <cpu/isr.h>
 #include <kernel/elf.h>
 #include <kernel/panic.h>
+#include <kernel/printm.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
