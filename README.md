@@ -18,6 +18,7 @@ To build the OS, read the [build guide](docs/Building.md).
 See the [Mailing Patches](docs/Mailing-Patches.md) file.
 
 # Screenshot
+Version 0.10-rc4
 ![Image](screenshots/Screenshot-0.10-rc4.png)
 
 # Acknowledgments
