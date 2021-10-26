@@ -1,5 +1,6 @@
 #include "terminal.h"
 #include <commands/commands.h>
+#include <generated/config.h>
 #include <kernel/panic.h>
 #include <kernel/ports.h>
 #include <kernel/power.h>
@@ -11,17 +12,20 @@
 const char *cmd;
 
 void put_prompt() {
-  writestr("you@platypusOS:# ");
+  writestr("%s@platypusOS:# ", CONFIG_USERNAME);
 }
 
-void run_command(char input[]) {
+void run_command(char input[], char args[]) {
   cmd = input;
+
   if (strcmp(input, "version") == 0) {
     version();
   } else if (strcmp(input, "help") == 0) {
     help();
   } else if (strcmp(input, "uname") == 0) {
-    uname();
+    uname(args);
+  } else if (strcmp(input, "whoami") == 0) {
+    whoami();
   } else if (strcmp(input, "reboot") == 0) {
     reboot();
   } else if (strcmp(input, "ls") == 0) {
@@ -44,6 +48,9 @@ void run_command(char input[]) {
 
   for (int i = 0; input[i] != '\0'; i++) {
     input[i] = '\0';
+  }
+  for (int j = 0; args[j] != '\0'; j++) {
+    args[j] = '\0';
   }
 
   put_prompt();

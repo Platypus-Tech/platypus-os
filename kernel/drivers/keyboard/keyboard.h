@@ -15,6 +15,6 @@ void init_keyboard();
 void handler_keyboard();
 
 /* Save Input */
-void save_input_buf(uint8_t input);
+int save_input_buf(uint8_t input);
 
 #endif //_DRIVERS_KEYBOARD_H

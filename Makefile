@@ -9,6 +9,7 @@ MAKEFILE_RUN = ./scripts/Makefile.run
 .PHONY: all
 
 all:
+	@./scripts/gen_config.sh
 	@make -f $(MAKEFILE_BUILD) -j$(nproc)
 	
 clean:

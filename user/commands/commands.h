@@ -3,9 +3,10 @@
 
 #include <vga/vga.h>
 
-void uname();
+int uname(char args[]);
 void help();
 void version();
 void hello();
+void whoami();
 
 #endif //_USER_COMMANDS_H

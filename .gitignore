@@ -8,3 +8,4 @@
 scripts/gen_initrd
 toolchain/compiler/
 isodir/
+kernel/include/generated/
