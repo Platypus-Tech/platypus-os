@@ -10,11 +10,7 @@ struct initrd_header {
   uint32_t length;
 };
 
-int main(char argc, char **argv) {
-  if (argc < 2) {
-    printf("No arguments given.\n");
-    return 1;
-  }
+int main(int argc, char *argv[]) {
 
   int nheaders = (argc - 1) / 2;
   struct initrd_header headers[64];

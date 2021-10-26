@@ -16,7 +16,7 @@ void put_pixel(int pos_x, int pos_y, unsigned char color) {
 void init_framebuffer() {
   multiboot_info_t *mboot_fb_info;
 
-  framebuffer = (uint32_t *)mboot_fb_info->framebuffer_addr;
+  framebuffer = mboot_fb_info->framebuffer_addr;
   framebuffer_width = mboot_fb_info->framebuffer_width;
   framebuffer_height = mboot_fb_info->framebuffer_height;
 }

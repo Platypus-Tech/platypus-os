@@ -5,10 +5,6 @@
 struct tarfs_header *headers[32];
 int total_files = 0;
 
-void alloc_headers_tarfs() {
-  kmalloc(headers);
-}
-
 unsigned int getsize_tarfs(const char *in) {
   unsigned int size = 0;
   unsigned int count = 1;
@@ -48,6 +44,6 @@ unsigned int parse_tarfs(unsigned int addr) {
 }
 
 int init_tarfs(uint32_t location) {
-  alloc_headers_tarfs();
+  kmalloc(headers);
   parse_tarfs(location);
 }

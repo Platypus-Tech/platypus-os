@@ -1,5 +1,5 @@
 ISO_FILE = PlatypusOS.iso
+FLOPPY_FILE = floppy.img
 
 run:
-	# TODO: Remove -soundhw pcspk
-	@qemu-system-x86_64 -serial stdio -m 256 -soundhw pcspk $(ISO_FILE)
+	@qemu-system-x86_64 -fda $(FLOPPY_FILE) -serial stdio -m 256 -soundhw pcspk $(ISO_FILE)

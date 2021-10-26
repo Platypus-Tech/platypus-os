@@ -15,7 +15,7 @@ AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false
 BreakStringLiterals: false
-ReflowComments:  true
-SortIncludes:    true
-UseTab:          Never
+ReflowComments: true
+SortIncludes: true
+UseTab: Never
 ...

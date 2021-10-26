@@ -9,10 +9,9 @@ ALIGN 4
 multiboot:
 
     PAGE_ALIGN   equ 1<<0
-    MEMORY_INFO  equ 1<<0
-    KLUDGE_AOUT  equ 1<<16
+    MEMORY_INFO  equ 1<<1
     MAGIC        equ 0x1BADB002
-    FLAGS        equ PAGE_ALIGN | MEMORY_INFO | KLUDGE_AOUT
+    FLAGS        equ PAGE_ALIGN | MEMORY_INFO
     CHECKSUM     equ -(MAGIC + FLAGS)
 
     EXTERN code, bss, end
@@ -28,7 +27,6 @@ multiboot:
 
 stublet:
      extern kernel_main
-     push esp
      push ebx
      call kernel_main
      jmp $

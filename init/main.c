@@ -1,12 +1,17 @@
 #include "multiboot.h"
+#include <assert.h>
 #include <cpu/gdt.h>
 #include <cpu/idt.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
+#include <floppy/floppy.h>
 #include <initrd/initrd.h>
-#include <kernel/paging.h>
+#include <kernel/device.h>
+#include <kernel/elf.h>
+#include <kernel/kheap.h>
+#include <kernel/pmm.h>
 #include <kernel/printm.h>
-#include <kernel/task.h>
+#include <kernel/vmm.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <rtc/rtc.h>
@@ -17,8 +22,8 @@
 #include <vga/framebuffer.h>
 #include <vga/vga.h>
 
-extern uint32_t placement_address;
 uint32_t initial_esp;
+elf_t kernel_elf;
 
 void welcome_screen() {
   settextcolor(LIGHT_YELLOW, BLACK);
@@ -43,13 +48,12 @@ void welcome_screen() {
   settextcolor(BLUE, BLACK);
   writestr("Version: ");
   settextcolor(LIGHT_RED, BLACK);
-  writestr("0.10-rc3\n");
+  writestr("0.10\n");
   reset_text_color();
   writestr("\n");
 }
 
-void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
-  initial_esp = initial_stack;
+void kernel_main(multiboot_info_t *mboot_info) {
 
   // Initialize VGA and Framebuffer
   init_vga();
@@ -60,24 +64,39 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   init_idt();
   init_isr();
   init_irq();
-  writestr("[OK] Load GDT, IDT, ISR and IRQ\n");
+  printm("[OK] Load GDT, IDT, ISR and IRQ\n");
 
   // Load Drivers
   init_pit(1000);
   init_keyboard();
-  register_snd_driver();
+  init_pcspkr();
   init_serial();
   init_rtc();
-  writestr("[OK] Load Drivers\n");
+  printm("[OK] Load Drivers\n");
 
+  init_pmm(mboot_info->mem_upper);
+  init_vmm();
+
+  uint32_t i = mboot_info->mmap_addr;
+  while (i < mboot_info->mmap_addr + mboot_info->mmap_length) {
+    multiboot_memory_map_t *entry = (multiboot_memory_map_t *)i;
+
+    if (entry->type == MULTIBOOT_MEMORY_AVAILABLE) {
+      uint32_t j;
+      for (j = entry->base_addr_low;
+           j < entry->base_addr_low + entry->length_low; j += 0x1000) {
+        free_page_pmm(j);
+      }
+    }
+    i += entry->size + sizeof(uint32_t);
+  }
+
+  kernel_elf = elf_from_multiboot(mboot_info->u.elf_sec);
+
+  ASSERT(mboot_info->mods_count > 0);
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
-  uint32_t initrd_end = *(uint32_t *)(mboot_info->mods_addr + 4);
-  placement_address = initrd_end;
 
-  // Initialize paging and tasking
-  init_paging();
-  init_tasking();
-  writestr("[OK] Initialize paging and tasking\n");
+  init_device_manager();
 
   irq_enable();
 
@@ -87,8 +106,9 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   writestr("Kernel command line: %s\n", mboot_info->cmdline);
   uint32_t memsize = (mboot_info->mem_lower + mboot_info->mem_upper) / 1024;
   writestr("Total memory: %d MB\n", memsize);
-  writestr("Initrd at address: %x", initrd);
-  writestr("\n\n");
+  writestr("Initrd at address: %x\n", initrd);
+  detect_drives_floppy();
+  writestr("\n");
 
   vfs_root = init_initrd(initrd);
 

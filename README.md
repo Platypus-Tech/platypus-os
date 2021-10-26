@@ -18,11 +18,13 @@ To build the OS, read the [build guide](docs/Building.md).
 See the [Mailing Patches](docs/Mailing-Patches.md) file.
 
 # Screenshot
-![Image](screenshots/Screenshot-0.10-rc3.png)
+Version 0.10 (GitHub Actions Build ISO)
+![Image](screenshots/Screenshot-0.10.png)
 
 # Acknowledgments
 ## Projects
-- [pdclib](https://github.com/DevSolar/pdclib) (The libc is based on pdclib)
+- [pdclib](https://github.com/DevSolar/pdclib)
+- [libc11](https://github.com/dryc/libc11)
 
 # License
 This project is licensed under GPL v2. See the [`LICENSE`](LICENSE) file for more info.

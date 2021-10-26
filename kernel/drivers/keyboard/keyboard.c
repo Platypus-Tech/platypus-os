@@ -1,6 +1,7 @@
 #include "keyboard.h"
 #include <cpu/irq.h>
 #include <kernel/ports.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <terminal/terminal.h>
 #include <vga/vga.h>
@@ -18,7 +19,7 @@ uint8_t keyboard_layout[128] = {
 void handler_keyboard() {
   uint8_t keyboard_key_scancode;
 
-  keyboard_key_scancode = inp(DATA_PORT);
+  keyboard_key_scancode = inp(KEYBOARD_DATA_PORT);
 
   if (keyboard_key_scancode & 0x80) {
     // Shift, Ctrl keys to be implemented
@@ -30,17 +31,33 @@ void handler_keyboard() {
   }
 }
 
-uint8_t buf[40];
+char buf[40];
 int num = 0;
+char args[45];
+int args_num = 0;
+bool is_arg = false;
 
-void save_input_buf(uint8_t input) {
+int save_input_buf(uint8_t input) {
   if (input == '\n') {
-    run_command(buf);
+    run_command(buf, args);
     num = 0;
+    args_num = 0;
+    is_arg = false;
     for (int i = 0; buf[i] != '\0'; i++) {
       buf[i] = '\0';
     }
+    for (int j = 0; args[j] != '\0'; j++) {
+      args[j] = '\0';
+    }
+  } else if (input == ' ') {
+    is_arg = true;
+    return 0;
   } else {
+    if (is_arg) {
+      args[args_num] = input;
+      args_num++;
+      return 0;
+    }
     buf[num] = input;
     num++;
   }

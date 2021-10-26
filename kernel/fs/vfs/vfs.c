@@ -13,7 +13,6 @@ uint32_t read_vfs(vfs_node_t *node, uint32_t offset, uint32_t size,
   if (node->read != 0) {
     return node->read(node, offset, size, buf);
   } else {
-    /* No such file or directory */
     return -ENOENT;
   }
 }
@@ -46,8 +45,6 @@ void close_vfs(vfs_node_t *node) {
 struct vfs_dirent *readdir_vfs(vfs_node_t *node, uint32_t index) {
   if ((node->flags & 0x7) == VFS_DIR && node->readdir != 0) {
     return node->readdir(node, index);
-  } else {
-    printm("VFS: %d : Not a directory!\n", node);
   }
 }
 

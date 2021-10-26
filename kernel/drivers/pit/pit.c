@@ -3,12 +3,13 @@
 #include <kernel/ports.h>
 
 int kernel_timer_ticks = 0;
+int timer_freq = 0;
 
 void handler_pit() {
   kernel_timer_ticks++;
 }
 
-unsigned read_pit_count() {
+unsigned read_count_pit() {
   unsigned count = 0;
   irq_disable();
   outp(0x43, 0b0000000);
@@ -18,8 +19,14 @@ unsigned read_pit_count() {
   return count;
 }
 
-void init_pit(int frequency) {
+void sleep_pit(int seconds) {
+  int end = kernel_timer_ticks + seconds * timer_freq;
+  while (kernel_timer_ticks < end)
+    ;
+}
 
+void init_pit(int frequency) {
+  timer_freq = frequency;
   install_irq_handler(0, handler_pit);
   int divisor = 1193180 / frequency;
 

@@ -5,8 +5,8 @@
 
 #include <stdint.h>
 
-#define DATA_PORT 0x60
-#define STATUS_PORT 0x64
+#define KEYBOARD_DATA_PORT 0x60
+#define KEYBOARD_STATUS_PORT 0x64
 
 /* Initialize the keyboard */
 void init_keyboard();
@@ -15,6 +15,6 @@ void init_keyboard();
 void handler_keyboard();
 
 /* Save Input */
-void save_input_buf(uint8_t input);
+int save_input_buf(uint8_t input);
 
 #endif //_DRIVERS_KEYBOARD_H
