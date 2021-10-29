@@ -1,4 +1,5 @@
 #include "commands.h"
+#include <vga/vga.h>
 
 void help() {
   writestr(

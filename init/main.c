@@ -11,6 +11,8 @@
 #include <kernel/kheap.h>
 #include <kernel/pmm.h>
 #include <kernel/printm.h>
+#include <kernel/sched.h>
+#include <kernel/thread.h>
 #include <kernel/vmm.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
@@ -48,7 +50,7 @@ void welcome_screen() {
   settextcolor(BLUE, BLACK);
   writestr("Version: ");
   settextcolor(LIGHT_RED, BLACK);
-  writestr("0.10\n");
+  writestr("0.11-rc1\n");
   reset_text_color();
   writestr("\n");
 }
@@ -92,6 +94,7 @@ void kernel_main(multiboot_info_t *mboot_info) {
   }
 
   kernel_elf = elf_from_multiboot(mboot_info->u.elf_sec);
+  init_sched(init_threads());
 
   ASSERT(mboot_info->mods_count > 0);
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);

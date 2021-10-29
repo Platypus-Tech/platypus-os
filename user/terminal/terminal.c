@@ -26,6 +26,8 @@ void run_command(char input[], char args[]) {
     uname(args);
   } else if (strcmp(input, "whoami") == 0) {
     whoami();
+  } else if (strcmp(input, "cat") == 0) {
+    cat(args);
   } else if (strcmp(input, "reboot") == 0) {
     reboot();
   } else if (strcmp(input, "ls") == 0) {

@@ -1,8 +1,7 @@
 #ifndef _USER_COMMANDS_H
 #define _USER_COMMANDS_H
 
-#include <vga/vga.h>
-
+int cat(char args[]);
 int uname(char args[]);
 void help();
 void version();
