@@ -3,5 +3,5 @@
 
 void help() {
   writestr(
-      "Commands - version reboot help mount ls hello playsound stopsound panic \nuname whoami\n");
+      "Commands - version reboot help mount ls hello playsound stopsound panic \nuname whoami cat\n");
 }
