@@ -32,6 +32,8 @@ void run_command(char input[], char args[]) {
     reboot();
   } else if (strcmp(input, "ls") == 0) {
     ls();
+  } else if (strcmp(input, "echo") == 0) {
+    echo(args);
   } else if (strcmp(input, "playsound") == 0) {
     beep_pcspkr();
   } else if (strcmp(input, "stopsound") == 0) {

@@ -2,6 +2,7 @@
 #define _USER_COMMANDS_H
 
 int cat(char args[]);
+int echo(char args[]);
 int uname(char args[]);
 void help();
 void version();
