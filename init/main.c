@@ -9,7 +9,9 @@
 #include <kernel/device.h>
 #include <kernel/elf.h>
 #include <kernel/kheap.h>
+#include <kernel/paging.h>
 #include <kernel/printm.h>
+#include <kernel/task.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <rtc/rtc.h>
