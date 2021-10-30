@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 typedef struct task {
+  const char *name;
   int id;
   uint32_t esp, ebp;
   uint32_t eip;

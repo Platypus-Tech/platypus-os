@@ -136,6 +136,7 @@ void init_tasking() {
   move_stack((void *)0xE0000000, 0x2000);
 
   current_task = ready_queue = (task_t *)kmalloc(sizeof(task_t));
+  current_task->name = "init";
   current_task->id = next_pid++;
   current_task->esp = current_task->ebp = 0;
   current_task->eip = 0;
