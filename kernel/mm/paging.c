@@ -74,40 +74,6 @@ void free_frame(page_t *page) {
   }
 }
 
-void init_paging() {
-  uint32_t mem_end_page = 0x1000000;
-
-  nframes = mem_end_page / 0x1000;
-  frames = (uint32_t *)kmalloc(INDEX_FROM_BIT(nframes));
-  memset(frames, 0, INDEX_FROM_BIT(nframes));
-
-  uint32_t phys;
-  kernel_directory = (page_dir_t *)kmalloc_a(sizeof(page_dir_t));
-  memset(kernel_directory, 0, sizeof(page_dir_t));
-  kernel_directory->physicalAddr = (uint32_t)kernel_directory->tablesPhysical;
-
-  int i = 0;
-  for (i = KHEAP_START; i < KHEAP_START + KHEAP_INITIAL_SIZE; i += 0x1000) {
-    get_page(i, 1, kernel_directory);
-  }
-
-  i = 0;
-  while (i < 0x400000) {
-    alloc_frame(get_page(i, 1, kernel_directory), 0, 0);
-    i += 0x1000;
-  }
-
-  for (i = KHEAP_START; i < KHEAP_START + KHEAP_INITIAL_SIZE; i += 0x1000) {
-    alloc_frame(get_page(i, 1, kernel_directory), 0, 0);
-  }
-
-  switch_page_directory(kernel_directory);
-  kheap = create_heap(KHEAP_START, KHEAP_START + KHEAP_INITIAL_SIZE, 0xCFFFF000,
-                      0, 0);
-  current_directory = clone_directory(kernel_directory);
-  switch_page_directory(current_directory);
-}
-
 void switch_page_directory(page_dir_t *dir) {
   current_directory = dir;
   __asm__ volatile("mov %0, %%cr3" ::"r"(dir->physicalAddr));
@@ -187,4 +153,38 @@ page_dir_t *clone_directory(page_dir_t *src) {
     }
   }
   return dir;
+}
+
+void init_paging() {
+  uint32_t mem_end_page = 0x1000000;
+
+  nframes = mem_end_page / 0x1000;
+  frames = (uint32_t *)kmalloc(INDEX_FROM_BIT(nframes));
+  memset(frames, 0, INDEX_FROM_BIT(nframes));
+
+  uint32_t phys;
+  kernel_directory = (page_dir_t *)kmalloc_a(sizeof(page_dir_t));
+  memset(kernel_directory, 0, sizeof(page_dir_t));
+  kernel_directory->physicalAddr = (uint32_t)kernel_directory->tablesPhysical;
+
+  int i = 0;
+  for (i = KHEAP_START; i < KHEAP_START + KHEAP_INITIAL_SIZE; i += 0x1000) {
+    get_page(i, 1, kernel_directory);
+  }
+
+  i = 0;
+  while (i < 0x400000) {
+    alloc_frame(get_page(i, 1, kernel_directory), 0, 0);
+    i += 0x1000;
+  }
+
+  for (i = KHEAP_START; i < KHEAP_START + KHEAP_INITIAL_SIZE; i += 0x1000) {
+    alloc_frame(get_page(i, 1, kernel_directory), 0, 0);
+  }
+
+  switch_page_directory(kernel_directory);
+  kheap = create_heap(KHEAP_START, KHEAP_START + KHEAP_INITIAL_SIZE, 0xCFFFF000,
+                      0, 0);
+  current_directory = clone_directory(kernel_directory);
+  switch_page_directory(current_directory);
 }
