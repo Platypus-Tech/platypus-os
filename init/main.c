@@ -9,9 +9,9 @@
 #include <kernel/device.h>
 #include <kernel/elf.h>
 #include <kernel/kheap.h>
-#include <kernel/pmm.h>
+#include <kernel/paging.h>
 #include <kernel/printm.h>
-#include <kernel/vmm.h>
+#include <kernel/task.h>
 #include <keyboard/keyboard.h>
 #include <pit/pit.h>
 #include <rtc/rtc.h>
@@ -23,6 +23,7 @@
 #include <vga/vga.h>
 
 uint32_t initial_esp;
+extern uint32_t placement_address;
 elf_t kernel_elf;
 
 void welcome_screen() {
@@ -48,12 +49,13 @@ void welcome_screen() {
   settextcolor(BLUE, BLACK);
   writestr("Version: ");
   settextcolor(LIGHT_RED, BLACK);
-  writestr("0.10\n");
+  writestr("0.11-rc1\n");
   reset_text_color();
   writestr("\n");
 }
 
-void kernel_main(multiboot_info_t *mboot_info) {
+void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
+  initial_esp = initial_stack;
 
   // Initialize VGA and Framebuffer
   init_vga();
@@ -74,27 +76,16 @@ void kernel_main(multiboot_info_t *mboot_info) {
   init_rtc();
   printm("[OK] Load Drivers\n");
 
-  init_pmm(mboot_info->mem_upper);
-  init_vmm();
-
-  uint32_t i = mboot_info->mmap_addr;
-  while (i < mboot_info->mmap_addr + mboot_info->mmap_length) {
-    multiboot_memory_map_t *entry = (multiboot_memory_map_t *)i;
-
-    if (entry->type == MULTIBOOT_MEMORY_AVAILABLE) {
-      uint32_t j;
-      for (j = entry->base_addr_low;
-           j < entry->base_addr_low + entry->length_low; j += 0x1000) {
-        free_page_pmm(j);
-      }
-    }
-    i += entry->size + sizeof(uint32_t);
-  }
-
   kernel_elf = elf_from_multiboot(mboot_info->u.elf_sec);
 
   ASSERT(mboot_info->mods_count > 0);
   uint32_t initrd = *((uint32_t *)mboot_info->mods_addr);
+  uint32_t initrd_end = *(uint32_t *)(mboot_info->mods_addr + 4);
+  placement_address = initrd_end;
+
+  init_paging();
+  init_tasking();
+  printm("[OK] Load Paging and Tasking\n");
 
   init_device_manager();
 

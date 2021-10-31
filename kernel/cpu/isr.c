@@ -1,7 +1,6 @@
 #include "isr.h"
 #include "idt.h"
 #include <kernel/panic.h>
-#include <kernel/vmm.h>
 #include <stdint.h>
 
 void init_isr() {
@@ -77,9 +76,6 @@ const char *exceptions[] = {"Division by zero",
                             "Reserved"};
 
 void handler_isr(struct registers *regs) {
-  if (regs->int_no == 14) {
-    page_fault(regs);
-  }
 
   if (regs->int_no <= 31) {
     panic(exceptions[regs->int_no]);

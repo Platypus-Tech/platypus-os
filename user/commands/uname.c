@@ -1,6 +1,7 @@
 #include "commands.h"
 #include <generated/config.h>
 #include <string.h>
+#include <vga/vga.h>
 
 int uname(char args[]) {
   if (strcmp(args, "-s") == 0) {
