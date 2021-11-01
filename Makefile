@@ -4,7 +4,6 @@ VERSION = 0.11
 EXTRAVERSION = -rc1
 
 MAKEFILE_BUILD = ./scripts/Makefile.build
-MAKEFILE_RUN = ./scripts/Makefile.run
 
 .PHONY: all
 
@@ -16,4 +15,4 @@ clean:
 	@make -f $(MAKEFILE_BUILD) clean
 	
 run:
-	@make -f $(MAKEFILE_RUN)
+	@./scripts/run.sh PlatypusOS.iso floppy.img
