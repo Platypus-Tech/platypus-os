@@ -2,8 +2,7 @@
 #define _DRIVERS_PIT_H
 
 void handler_pit();
-unsigned read_count_pit();
-void sleep_pit(int seconds);
-void init_pit(int frequency);
+void sleep_pit(int ticks);
+void init_pit(int hz);
 
 #endif //_DRIVERS_PIT_H
