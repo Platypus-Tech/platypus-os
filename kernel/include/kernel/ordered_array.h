@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 typedef void *type_t;
-typedef signed int (*lessthan_predicate_t)(type_t, type_t);
+typedef int8_t (*lessthan_predicate_t)(type_t, type_t);
 
 typedef struct {
   type_t *array;
@@ -13,7 +13,7 @@ typedef struct {
   lessthan_predicate_t less_than;
 } ordered_array_t;
 
-signed int standard_lessthan_predicate(type_t a, type_t b);
+int8_t standard_lessthan_predicate(type_t a, type_t b);
 ordered_array_t create_ordered_array(uint32_t max_size,
                                      lessthan_predicate_t less_than);
 ordered_array_t place_ordered_array(void *addr, uint32_t max_size,

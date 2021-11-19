@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <string.h>
 
-signed int standard_lessthan_predicate(type_t a, type_t b) {
+int8_t standard_lessthan_predicate(type_t a, type_t b) {
   return (a < b) ? 1 : 0;
 }
 
