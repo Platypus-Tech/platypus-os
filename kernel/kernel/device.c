@@ -25,6 +25,18 @@ int get_device_by_id(int id) {
   }
 }
 
+int remove_device_by_id(int id) {
+  for (int i = 0; i < next_device_entry; i++) {
+    if (devices[i]->id == id) {
+      printm("Removing device %s... ", devices[i]->name);
+      devices[i] = 0;
+      printm("done\n");
+      return 0;
+    }
+  }
+  return 1;
+}
+
 void init_device_manager() {
   kmalloc(devices);
   printm("[OK] Initialize Device Manager\n");

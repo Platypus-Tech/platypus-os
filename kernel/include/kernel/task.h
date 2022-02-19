@@ -14,8 +14,6 @@ typedef struct task {
 } task_t;
 
 void init_tasking();
-void task_switch();
-void move_to_user_mode();
 int fork();
 void switch_task();
 void move_stack(void *new_stack_start, uint32_t size);

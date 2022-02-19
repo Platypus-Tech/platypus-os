@@ -4,7 +4,6 @@
 #include <cpu/idt.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
-#include <floppy/floppy.h>
 #include <initrd/initrd.h>
 #include <kernel/device.h>
 #include <kernel/elf.h>
@@ -49,7 +48,7 @@ void welcome_screen() {
   settextcolor(BLUE, BLACK);
   writestr("Version: ");
   settextcolor(LIGHT_RED, BLACK);
-  writestr("0.11-rc1\n");
+  writestr("0.11-rc2\n");
   reset_text_color();
   writestr("\n");
 }
@@ -69,7 +68,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   printm("[OK] Load GDT, IDT, ISR and IRQ\n");
 
   // Load Drivers
-  init_pit(1000);
+  init_pit(100);
   init_keyboard();
   init_pcspkr();
   init_serial();
@@ -98,7 +97,6 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   uint32_t memsize = (mboot_info->mem_lower + mboot_info->mem_upper) / 1024;
   writestr("Total memory: %d MB\n", memsize);
   writestr("Initrd at address: %x\n", initrd);
-  detect_drives_floppy();
   writestr("\n");
 
   vfs_root = init_initrd(initrd);

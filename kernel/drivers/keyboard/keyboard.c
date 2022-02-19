@@ -32,7 +32,7 @@ void handler_keyboard() {
 }
 
 char buf[40];
-int num = 0;
+int buf_num = 0;
 char args[45];
 int args_num = 0;
 bool is_arg = false;
@@ -40,7 +40,7 @@ bool is_arg = false;
 int save_input_buf(uint8_t input) {
   if (input == '\n') {
     run_command(buf, args);
-    num = 0;
+    buf_num = 0;
     args_num = 0;
     is_arg = false;
     for (int i = 0; buf[i] != '\0'; i++) {
@@ -50,6 +50,11 @@ int save_input_buf(uint8_t input) {
       args[j] = '\0';
     }
   } else if (input == ' ') {
+    if (is_arg) {
+      args[args_num] = input;
+      args_num++;
+      return 0;
+    }
     is_arg = true;
     return 0;
   } else {
@@ -58,8 +63,8 @@ int save_input_buf(uint8_t input) {
       args_num++;
       return 0;
     }
-    buf[num] = input;
-    num++;
+    buf[buf_num] = input;
+    buf_num++;
   }
 }
 

@@ -3,15 +3,15 @@
 #include <kernel/elf.h>
 #include <kernel/panic.h>
 #include <kernel/printm.h>
+#include <kernel/task.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
-#include <terminal/terminal.h>
 #include <vga/vga.h>
 
-extern const char *cmd;
 bool assert_panic_in_progress;
 extern elf_t kernel_elf;
+extern task_t *current_task;
 
 void panic_remove_newline(char str[]) {
   for (int i = 0; i < strlen(str); i++) {
@@ -55,7 +55,7 @@ void panic(char panicmessage[]) {
 
   /* This is based on Linux */
   printm("Kernel Panic: not syncing, %s\n", panicmessage);
-  printm("Command: %s\n", cmd);
+  printm("PID: %d Comm: %s\n", current_task->id, current_task->name);
 
   printm("Registers:  ");
   printm("GS: 0x%x FS: 0x%x ES: 0x%x DS: 0x%x CS: 0x%x SS: 0x%x\n", regs->gs,

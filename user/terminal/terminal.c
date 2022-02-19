@@ -9,15 +9,11 @@
 #include <vfs/vfs.h>
 #include <vga/vga.h>
 
-const char *cmd;
-
 void put_prompt() {
   writestr("%s@platypusOS:# ", CONFIG_USERNAME);
 }
 
 void run_command(char input[], char args[]) {
-  cmd = input;
-
   if (strcmp(input, "version") == 0) {
     version();
   } else if (strcmp(input, "help") == 0) {

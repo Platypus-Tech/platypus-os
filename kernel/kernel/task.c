@@ -119,9 +119,9 @@ int fork() {
     new_task->eip = eip;
 
     irq_enable();
-
     return new_task->id;
   } else {
+    irq_enable();
     return 0;
   }
 }
