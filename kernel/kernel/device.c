@@ -2,6 +2,7 @@
 #include <kernel/kheap.h>
 #include <kernel/printm.h>
 #include <string.h>
+#include <vga/vga.h>
 
 #define MAX_DEVICES 10
 
@@ -41,7 +42,7 @@ int remove_device_by_id(int id) {
 
 int print_devices() {
   if (next_device_entry == 0) {
-    return;
+    return 1;
   }
 
   for (int i = 0; i < next_device_entry; i++) {
@@ -54,5 +55,5 @@ int print_devices() {
 
 void init_device_manager() {
   kmalloc(devices);
-  printm("[OK] Initialize Device Manager\n");
+  printm("Initialized Device Manager\n");
 }
