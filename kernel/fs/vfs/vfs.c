@@ -48,7 +48,7 @@ struct vfs_dirent *readdir_vfs(vfs_node_t *node, uint32_t index) {
 }
 
 vfs_node_t *finddir_vfs(vfs_node_t *node, char *name) {
-  if ((node->flags & 0x7) == VFS_DIR && node->readdir != 0) {
+  if ((node->flags & 0x7) == VFS_DIR && node->finddir != 0) {
     return node->finddir(node, name);
   }
 }
