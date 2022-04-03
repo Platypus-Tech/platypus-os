@@ -1,7 +1,7 @@
 #!/bin/sh
 
-GCC_VERSION=11.1.0
-BINUTILS_VERSION=2.36.1
+GCC_VERSION=11.2.0
+BINUTILS_VERSION=2.38
 
 if [ -d "compiler/" ]; then
     echo "Found i686-elf-gcc Toolchain"

@@ -26,7 +26,7 @@ typedef struct page_directory {
   uint32_t physicalAddr;
 } page_dir_t;
 
-void switch_page_directory(page_dir_t *new);
+void switch_page_directory(page_dir_t *dir);
 extern int copy_page_physical(uint32_t, uint32_t);
 page_t *get_page(uint32_t address, int make, page_dir_t *dir);
 page_dir_t *clone_directory(page_dir_t *src);
