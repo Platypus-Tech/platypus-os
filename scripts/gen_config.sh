@@ -1,8 +1,10 @@
 #!/bin/sh
 
+# --- Configuration start ---
 CONFIG_USERNAME=`whoami`
-CONFIG_ARCH=`arch`
+CONFIG_ARCH=`uname -m`
 CONFIG_USERMODE=n
+# --- Configuration end ---
 
 if [ ! -d kernel/include/generated/ ]; then
     mkdir kernel/include/generated/
