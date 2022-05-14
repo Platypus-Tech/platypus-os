@@ -1,5 +1,6 @@
 #include "keyboard.h"
 #include <cpu/irq.h>
+#include <kernel/device.h>
 #include <kernel/ports.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -68,6 +69,9 @@ int save_input_buf(uint8_t input) {
   }
 }
 
+struct device kb_dev = {.name = "keyboard", .id = 1, .path = "/dev/keyboard"};
+
 void init_keyboard() {
   install_irq_handler(1, handler_keyboard);
+  add_device(&kb_dev);
 }

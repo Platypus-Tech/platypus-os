@@ -10,6 +10,7 @@ void printm(const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
   vsprintf(buf, fmt, args);
+  writestr("[kernel] ");
   writestr(buf);
   va_end(args);
 }

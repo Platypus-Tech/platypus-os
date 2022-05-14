@@ -18,7 +18,6 @@
 #include <sound/pcspkr.h>
 #include <terminal/terminal.h>
 #include <vfs/vfs.h>
-#include <vga/framebuffer.h>
 #include <vga/vga.h>
 
 uint32_t initial_esp;
@@ -56,24 +55,20 @@ void welcome_screen() {
 void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   initial_esp = initial_stack;
 
-  // Initialize VGA and Framebuffer
   init_vga();
-  init_framebuffer();
 
-  // Load GDT, IDT, ISR, IRQ
   init_gdt();
   init_idt();
   init_isr();
   init_irq();
-  printm("[OK] Load GDT, IDT, ISR and IRQ\n");
+  printm("GDT, IDT, ISR and IRQ initialized\n");
 
-  // Load Drivers
   init_pit(100);
   init_keyboard();
   init_pcspkr();
   init_serial();
   init_rtc();
-  printm("[OK] Load Drivers\n");
+  printm("Drivers initialized\n");
 
   kernel_elf = elf_from_multiboot(mboot_info->u.elf_sec);
 
@@ -84,11 +79,9 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
 
   init_paging();
   init_tasking();
-  printm("[OK] Load Paging and Tasking\n");
+  printm("Paging and tasking initialized\n");
 
   init_device_manager();
-
-  irq_enable();
 
   cls();
   welcome_screen();

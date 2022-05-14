@@ -1,3 +1,5 @@
+#include <kernel/device.h>
+#include <string.h>
 #include <vfs/vfs.h>
 #include <vga/vga.h>
 
@@ -13,12 +15,12 @@ int ls() {
     vfs_node_t *__node = finddir_vfs(vfs_root, node->name);
     if ((__node->flags & 0x7) == VFS_DIR) {
       settextcolor(BLUE, BLACK);
-      writestr(node->name);
-      writestr("\n");
+      writestr("%s\n", node->name);
+      settextcolor(LIGHT_YELLOW, BLACK);
+      print_devices();
     } else {
       settextcolor(LIGHT_YELLOW, BLACK);
-      writestr(node->name);
-      writestr("\n");
+      writestr("%s\n", node->name);
     }
     i++;
   }

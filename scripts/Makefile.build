@@ -38,4 +38,4 @@ $(KERNEL_FILE): kernel/arch/$(ARCH)/boot.o $(OBJ_FILES)
 	@$(AS) $(ASFLAGS) $< -o $@
 
 clean:
-	@rm -rf isodir/ $(KERNEL_FILE) $(INITRD_FILE) $(ISO_FILE) $(FLOPPY_FILE) $(OBJ_FILES)
+	@rm -rf isodir/ kernel/include/generated/ $(KERNEL_FILE) $(INITRD_FILE) $(ISO_FILE) $(FLOPPY_FILE) $(OBJ_FILES)
