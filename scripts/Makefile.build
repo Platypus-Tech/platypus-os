@@ -1,5 +1,5 @@
 ARCH = i386
-CC = ~/Documents/GitHub/kinux-kernel/toolchain/compiler/bin/i686-elf-gcc
+CC = ./toolchain/compiler/bin/i686-elf-gcc
 LD = $(CC)
 AS = nasm
 ISO_FILE = PlatypusOS.iso
