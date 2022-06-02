@@ -10,15 +10,16 @@ INCLUDE = -I$(PWD) -I./kernel/ -I./kernel/drivers/ -I./kernel/fs/ -I./kernel/inc
 
 CFLAGS = -Wno-attributes -Wno-discarded-qualifiers -Wno-int-conversion -ffreestanding $(INCLUDE)
 ASFLAGS = -f elf32
-LDFLAGS = -T./kernel/arch/$(ARCH)/linker.ld -ffreestanding -O2 -nostdlib
+LDFLAGS = -T./kernel/arch/$(ARCH)/link.ld -ffreestanding -O2 -nostdlib
 
 C_SOURCES = $(shell find init/ initrd/ kernel/ lib/ user/ -name '*.c')
 ASM_SOURCES = $(shell find kernel/ -name '*.asm')
 OBJ_FILES = $(C_SOURCES:.c=.o) $(ASM_SOURCES:.asm=.o)
+INITRD_FILES = kernel/initrd/file.txt file.txt kernel/initrd/file2.txt file2.txt
 
 $(ISO_FILE): $(KERNEL_FILE)
 	@gcc -o ./scripts/gen_initrd ./scripts/gen_initrd.c
-	@./scripts/gen_initrd initrd/file.txt file.txt initrd/file2.txt file2.txt
+	@./scripts/gen_initrd $(INITRD_FILES)
 	@dd if=/dev/zero of=$(FLOPPY_FILE) bs=512 count=2880
 	@mkdir -p isodir/boot/grub/
 	@cp grub.cfg isodir/boot/grub/

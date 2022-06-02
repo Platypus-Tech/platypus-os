@@ -1,5 +1,5 @@
-#ifndef _FS_VFS_H
-#define _FS_VFS_H
+#ifndef _KERNEL_VFS_H
+#define _KERNEL_VFS_H
 
 #include <stdint.h>
 
@@ -58,4 +58,4 @@ int mount();
 struct vfs_dirent *readdir_vfs(vfs_node_t *node, uint32_t index);
 vfs_node_t *finddir_vfs(vfs_node_t *node, char *name);
 
-#endif //_FS_VFS_H
+#endif //_KERNEL_VFS_H

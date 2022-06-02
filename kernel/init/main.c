@@ -4,22 +4,22 @@
 #include <cpu/idt.h>
 #include <cpu/irq.h>
 #include <cpu/isr.h>
-#include <floppy/floppy.h>
 #include <initrd/initrd.h>
 #include <kernel/device.h>
 #include <kernel/elf.h>
+#include <kernel/floppy.h>
+#include <kernel/keyboard.h>
 #include <kernel/kheap.h>
 #include <kernel/paging.h>
+#include <kernel/pcspkr.h>
+#include <kernel/pit.h>
 #include <kernel/printm.h>
+#include <kernel/rtc.h>
+#include <kernel/serial.h>
 #include <kernel/task.h>
-#include <keyboard/keyboard.h>
-#include <pit/pit.h>
-#include <rtc/rtc.h>
-#include <serial/serial.h>
-#include <sound/pcspkr.h>
+#include <kernel/vfs.h>
+#include <kernel/vga.h>
 #include <terminal/terminal.h>
-#include <vfs/vfs.h>
-#include <vga/vga.h>
 
 uint32_t initial_esp;
 extern uint32_t placement_address;

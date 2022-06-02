@@ -1,8 +1,7 @@
 #include "commands.h"
 #include <generated/config.h>
-#include <vga/vga.h>
+#include <kernel/vga.h>
 
 void whoami() {
-  writestr(CONFIG_USERNAME);
-  writestr("\n");
+  writestr("%s\n", CONFIG_USERNAME);
 }

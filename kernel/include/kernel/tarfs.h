@@ -1,5 +1,5 @@
-#ifndef _FS_TARFS_H
-#define _FS_TARFS_H
+#ifndef _KERNEL_TARFS_H
+#define _KERNEL_TARFS_H
 
 #include <stdint.h>
 
@@ -18,4 +18,4 @@ unsigned int getsize_tarfs(const char *in);
 unsigned int parse_tarfs(unsigned int addr);
 int init_tarfs(uint32_t location);
 
-#endif //_FS_TARFS_H
+#endif //_KERNEL_TARFS_H

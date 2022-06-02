@@ -1,6 +1,6 @@
-#include "pit.h"
 #include <cpu/irq.h>
-#include <kernel/ports.h>
+#include <kernel/io.h>
+#include <kernel/pit.h>
 #include <kernel/task.h>
 
 int pit_ticks = 0;

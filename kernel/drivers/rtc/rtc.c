@@ -1,9 +1,22 @@
-#include "rtc.h"
 #include <cpu/irq.h>
-#include <kernel/ports.h>
-#include <kernel/rtc_io.h>
+#include <kernel/io.h>
+#include <kernel/rtc.h>
 #include <stdbool.h>
 #include <string.h>
+
+unsigned char read_reg(unsigned char reg) {
+  outp(0x70, reg);
+  return inp(0x71);
+}
+
+void write_reg(unsigned char reg, unsigned char val) {
+  outp(0x70, reg);
+  outp(0x71, val);
+}
+
+unsigned char bcd_to_bin(unsigned char bcd) {
+  return ((bcd >> 4) * 10) + (bcd & 0x0F);
+}
 
 time_t time_global;
 bool bcd;

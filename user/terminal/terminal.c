@@ -1,13 +1,13 @@
 #include "terminal.h"
 #include <commands/commands.h>
 #include <generated/config.h>
+#include <kernel/io.h>
 #include <kernel/panic.h>
-#include <kernel/ports.h>
+#include <kernel/pcspkr.h>
 #include <kernel/power.h>
-#include <sound/pcspkr.h>
+#include <kernel/vfs.h>
+#include <kernel/vga.h>
 #include <string.h>
-#include <vfs/vfs.h>
-#include <vga/vga.h>
 
 void put_prompt() {
   writestr("%s@platypusOS:# ", CONFIG_USERNAME);

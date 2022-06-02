@@ -1,6 +1,6 @@
-#include "vfs.h"
 #include <errno.h>
 #include <kernel/panic.h>
+#include <kernel/vfs.h>
 #include <stdint.h>
 
 /* A simple VFS, based on JamesM's kernel development tutorials */

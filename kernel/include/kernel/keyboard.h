@@ -1,5 +1,5 @@
-#ifndef _DRIVERS_KEYBOARD_H
-#define _DRIVERS_KEYBOARD_H
+#ifndef _KERNEL_KEYBOARD_H
+#define _KERNEL_KEYBOARD_H
 
 /* PS/2 Keyboard Driver */
 
@@ -17,4 +17,4 @@ void handler_keyboard();
 /* Save Input */
 int save_input_buf(uint8_t input);
 
-#endif //_DRIVERS_KEYBOARD_H
+#endif //_KERNEL_KEYBOARD_H

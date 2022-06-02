@@ -1,7 +1,7 @@
 #include "irq.h"
 #include "idt.h"
 #include "isr.h"
-#include <kernel/ports.h>
+#include <kernel/io.h>
 #include <stdint.h>
 
 void *kernel_routines_irq[16] = {0, 0, 0, 0, 0, 0, 0, 0,

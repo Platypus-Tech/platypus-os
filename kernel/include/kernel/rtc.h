@@ -1,5 +1,7 @@
-#ifndef _DRIVERS_RTC_H
-#define _DRIVERS_RTC_H
+#ifndef _KERNEL_RTC_H
+#define _KERNEL_RTC_H
+
+#include "io.h"
 
 typedef struct {
   unsigned char second;
@@ -13,4 +15,4 @@ void init_rtc();
 void handler_rtc();
 void gettime_rtc(time_t *time);
 
-#endif //_DRIVERS_RTC_H
+#endif //_KERNEL_RTC_H

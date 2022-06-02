@@ -1,9 +1,9 @@
-#include "floppy.h"
-#include <kernel/ports.h>
+#include <kernel/floppy.h>
+#include <kernel/io.h>
+#include <kernel/pit.h>
 #include <kernel/printm.h>
-#include <pit/pit.h>
+#include <kernel/vga.h>
 #include <stdint.h>
-#include <vga/vga.h>
 
 static const char *drive_types[7] = {"no drive",          "360 KB 5.25 Drive",
                                      "1.2 MB 5.25 Drive", "720 KB 3.5 Drive",

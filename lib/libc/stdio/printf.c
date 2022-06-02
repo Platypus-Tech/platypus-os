@@ -1,6 +1,6 @@
+#include <kernel/vga.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <vga/vga.h>
 
 int printf(const char *format, ...) {
   static char buf[1024];

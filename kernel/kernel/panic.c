@@ -4,10 +4,10 @@
 #include <kernel/panic.h>
 #include <kernel/printm.h>
 #include <kernel/task.h>
+#include <kernel/vga.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
-#include <vga/vga.h>
 
 bool assert_panic_in_progress;
 extern elf_t kernel_elf;

@@ -1,11 +1,11 @@
-#include "pcspkr.h"
-#include <kernel/ports.h>
+#include <kernel/io.h>
+#include <kernel/pcspkr.h>
 
 int is_registered = 0;
 
 void play_sound_pcspkr(uint32_t frequency) {
   if (is_registered != 1) {
-    // Do nothing
+    return;
   }
 
   uint32_t d;
