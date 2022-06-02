@@ -48,7 +48,7 @@ void welcome_screen() {
   settextcolor(BLUE, BLACK);
   writestr("Version: ");
   settextcolor(LIGHT_RED, BLACK);
-  writestr("0.11-rc2\n");
+  writestr("0.11-rc3\n");
   reset_text_color();
   writestr("\n");
 }

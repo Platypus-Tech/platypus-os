@@ -1,7 +1,7 @@
 # Makefile for Platypus OS
 
 VERSION = 0.11
-EXTRAVERSION = -rc2
+EXTRAVERSION = -rc3
 
 MAKEFILE_BUILD = ./scripts/Makefile.build
 
