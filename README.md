@@ -16,7 +16,7 @@ To build the OS, read the [build guide](docs/Building.md).
 
 # Screenshot
 Version 0.10 (GitHub Actions Build ISO)
-![Image](screenshots/Screenshot-0.10.png)
+![Image](screenshots/Screenshot-0.11-rc2.png)
 
 # Acknowledgments
 ## Projects
