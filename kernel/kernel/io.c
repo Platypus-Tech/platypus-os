@@ -1,4 +1,4 @@
-#include <kernel/ports.h>
+#include <kernel/io.h>
 #include <stdint.h>
 
 uint8_t inp(unsigned short port) {

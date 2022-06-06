@@ -1,7 +1,7 @@
 #include <kernel/device.h>
+#include <kernel/vfs.h>
+#include <kernel/vga.h>
 #include <string.h>
-#include <vfs/vfs.h>
-#include <vga/vga.h>
 
 int ls() {
   if (!vfs_root) {

@@ -1,5 +1,5 @@
-#ifndef _DRIVERS_FLOPPY_H
-#define _DRIVERS_FLOPPY_H
+#ifndef _KERNEL_FLOPPY_H
+#define _KERNEL_FLOPPY_H
 
 #include <stdint.h>
 
@@ -31,4 +31,4 @@ int calibrate_floppy(int base);
 int reset_floppy(int base);
 void motor_floppy(int base, int state);
 
-#endif //_DRIVERS_FLOPPY_H
+#endif //_KERNEL_FLOPPY_H

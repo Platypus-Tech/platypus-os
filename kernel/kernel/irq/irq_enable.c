@@ -1,5 +1,5 @@
 #include <cpu/irq.h>
-#include <vga/vga.h>
+#include <kernel/vga.h>
 
 int irq_is_enabled = 0;
 extern int irq_is_disabled;

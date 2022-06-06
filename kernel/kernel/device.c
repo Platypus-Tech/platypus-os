@@ -1,8 +1,8 @@
 #include <kernel/device.h>
 #include <kernel/kheap.h>
 #include <kernel/printm.h>
+#include <kernel/vga.h>
 #include <string.h>
-#include <vga/vga.h>
 
 #define MAX_DEVICES 10
 

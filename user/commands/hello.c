@@ -1,5 +1,5 @@
 #include "commands.h"
-#include <vga/vga.h>
+#include <kernel/vga.h>
 
 void hello() {
   writestr("Hello to you too?\n");

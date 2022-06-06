@@ -1,5 +1,5 @@
+#include <kernel/io.h>
 #include <kernel/nmi.h>
-#include <kernel/ports.h>
 
 void nmi_enable() {
   outp(0x70, inp(0x70) & 0x7F);

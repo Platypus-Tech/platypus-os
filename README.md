@@ -14,12 +14,9 @@ Seems like an odd combination, but that's what I like to do: program, pentest, a
 # Building
 To build the OS, read the [build guide](docs/Building.md).
 
-# Mailing patches
-See the [Mailing Patches](docs/Mailing-Patches.md) file.
-
 # Screenshot
-Version 0.10 (GitHub Actions Build ISO)
-![Image](screenshots/Screenshot-0.10.png)
+Version 0.11-rc2
+![Image](screenshots/Screenshot-0.11-rc2.png)
 
 # Acknowledgments
 ## Projects

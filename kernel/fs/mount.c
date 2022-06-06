@@ -1,5 +1,5 @@
-#include <vfs/vfs.h>
-#include <vga/vga.h>
+#include <kernel/vfs.h>
+#include <kernel/vga.h>
 
 /* mount - Print the mounted filesystems */
 

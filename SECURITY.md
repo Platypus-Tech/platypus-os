@@ -4,7 +4,7 @@
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.11-rc2 | :white_check_mark: |
+| 0.11-rc3 | :white_check_mark: |
 | 0.10    | :white_check_mark: |
 | 0.09    | :x:                |
 | 0.08    | :x:                |
@@ -24,5 +24,3 @@ Key:
 Please fix the issue and create a pull request.
 ### If you can't fix it:
 Please create an issue.
-### If it ain't broke
-Make it better but don't fix it.

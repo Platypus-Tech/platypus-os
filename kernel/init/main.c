@@ -7,18 +7,19 @@
 #include <initrd/initrd.h>
 #include <kernel/device.h>
 #include <kernel/elf.h>
+#include <kernel/floppy.h>
+#include <kernel/keyboard.h>
 #include <kernel/kheap.h>
 #include <kernel/paging.h>
+#include <kernel/pcspkr.h>
+#include <kernel/pit.h>
 #include <kernel/printm.h>
+#include <kernel/rtc.h>
+#include <kernel/serial.h>
 #include <kernel/task.h>
-#include <keyboard/keyboard.h>
-#include <pit/pit.h>
-#include <rtc/rtc.h>
-#include <serial/serial.h>
-#include <sound/pcspkr.h>
+#include <kernel/vfs.h>
+#include <kernel/vga.h>
 #include <terminal/terminal.h>
-#include <vfs/vfs.h>
-#include <vga/vga.h>
 
 uint32_t initial_esp;
 extern uint32_t placement_address;
@@ -47,7 +48,7 @@ void welcome_screen() {
   settextcolor(BLUE, BLACK);
   writestr("Version: ");
   settextcolor(LIGHT_RED, BLACK);
-  writestr("0.11-rc2\n");
+  writestr("0.11-rc3\n");
   reset_text_color();
   writestr("\n");
 }
@@ -90,6 +91,7 @@ void kernel_main(multiboot_info_t *mboot_info, uint32_t initial_stack) {
   uint32_t memsize = (mboot_info->mem_lower + mboot_info->mem_upper) / 1024;
   writestr("Total memory: %d MB\n", memsize);
   writestr("Initrd at address: %x\n", initrd);
+  detect_drives_floppy();
   writestr("\n");
 
   vfs_root = init_initrd(initrd);

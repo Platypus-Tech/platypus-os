@@ -1,11 +1,11 @@
-#include "keyboard.h"
 #include <cpu/irq.h>
 #include <kernel/device.h>
-#include <kernel/ports.h>
+#include <kernel/io.h>
+#include <kernel/keyboard.h>
+#include <kernel/vga.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <terminal/terminal.h>
-#include <vga/vga.h>
 
 uint8_t keyboard_layout[128] = {
     0,   27,   '1',  '2', '3',  '4', '5', '6', '7', '8', '9', '0', '-',

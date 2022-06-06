@@ -1,5 +1,5 @@
-#ifndef _DRIVERS_VGA_H
-#define _DRIVERS_VGA_H
+#ifndef _KERNEL_VGA_H
+#define _KERNEL_VGA_H
 
 #include <stdint.h>
 
@@ -32,4 +32,4 @@ void settextcolor(uint8_t forecolor, uint8_t backcolor);
 void reset_text_color();
 void init_vga();
 
-#endif //_DRIVERS_VGA_H
+#endif //_KERNEL_VGA_H

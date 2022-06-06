@@ -1,8 +1,8 @@
 #ifndef _INITRD_H
 #define _INITRD_H
 
+#include <kernel/vfs.h>
 #include <stdint.h>
-#include <vfs/vfs.h>
 
 typedef struct {
   uint32_t nfiles;

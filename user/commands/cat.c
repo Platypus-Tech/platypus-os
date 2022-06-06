@@ -1,7 +1,7 @@
 #include "commands.h"
+#include <kernel/vfs.h>
+#include <kernel/vga.h>
 #include <string.h>
-#include <vfs/vfs.h>
-#include <vga/vga.h>
 
 int cat(char args[]) {
   if (strlen(args) == 0) {

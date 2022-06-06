@@ -1,4 +1,4 @@
-#include <kernel/ports.h>
+#include <kernel/io.h>
 #include <kernel/power.h>
 #include <stdint.h>
 

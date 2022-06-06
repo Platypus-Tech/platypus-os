@@ -1,5 +1,5 @@
-#include "serial.h"
-#include <kernel/ports.h>
+#include <kernel/io.h>
+#include <kernel/serial.h>
 
 #define SERIAL_COM1 0x3f8
 
